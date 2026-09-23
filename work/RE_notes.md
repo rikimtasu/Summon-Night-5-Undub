@@ -147,4 +147,84 @@ Well-aligned regions (f2 narration, summoning, name scene incl. Folth/Arca
 branch pairs, late prologue) verified correct, untouched. Lesson: shape-only
 alignment jitters +-1 phrase in reflow zones; bilingual content audit is the
 ground truth for voice placement.
-New xdelta after voice audit fix (25 moves + 3 drops, 336 voices). Same big-window settings. Verified by decode, SHA-256 match. Final patch file 465959255 bytes.
+New xdelta after voice audit fix (25 moves + 3 drops, 336 voices). Same big-window settings. Verified by decode, SHA-256 match. Final patch file 465959255 bytes.Backlog voice replay: entries log voice id at +0x04 (pair ids seen live; -1 unvoiced). Replay fn 0xDE3E8 re-displays text with no voice call, so no restored voice replays (not even native pair lines). Fix: hook 0xDE430 (loader-clean, s2=entry live, t0/t1 proven free) -> 13-word cave stores entry+0x04 to voiceobj+0x1C when != -1, then displaced ops + return. Voiceobj via fixed global 0x08A27508 (loader-clean, chain verified live). EBOOT-only rebuild. Lesson: BEQ vs BNE polarity double-check by disasm.Backlog replay fix v2: added flight recorder to replay cave (count + ring of last 8 (entry,vid)) after catching systematic rs/rt hand-encoding slips (t1/t2 vs t3/t6) via disasm check. Rule: never hand-encode; use LW/SW/ORI/ADDIU/ANDI/SLL/ADDU helpers + mandatory capstone verification.Backlog voice slot divergence: USA logs voice id at entry+0x04 (+0x08 stays 0/-1); JP logs at +0x08. Replay reads +0x08, so USA voiced lines replay silent while JP voices. Fix: logger hook at 0xDDF7C copies pair-range +0x04 to +0x08 when +0x08 empty (const/f2 ids gated out until table logging verified). Cave in proven gap slack, EBOOT-only rebuild.Backlog replay diagnosis: flight recorder (count 0) proved 0xDE3E8 hook never fires usefully -> not the confirm path (or s2 wrong). Rebuilt replay cave with UNCONDITIONAL recorder (s2+vid ring) to distinguish never-fires vs fires-with-bad-entry on next test.Backlog replay gate STUBBED in USA: gate fn 0xDE5C0 always returns 0 (replay never runs); JP equivalent 0xC0ACC returns entry+0x08!=-1. Replay fn/caller/helpers otherwise identical. Fix: ported JP gate logic to cave (entry = obj+idx*200+0xE0, return +0x08!=-1), hooked 0xDE5C0. Combined with logger-copy (pair ids into +0x08) and replay-hook, pair replay should now voice. Lesson: / confusion in hand encoding - use helpers + disasm check every time.Backlog replay round 4: prior flight recorder was UNREADABLE - replay cave grew to 128B but RC sat at cave+96, so count field overlapped cave instructions (read 0x3C0908A2 = lui insn). Repacked gap 0x224868 (660/664B used): replay cave 33w@+228, log cave 27w@+360, gate cave 25w@+468, RC@+568, logRC@+636, gateRC@+648; make_eboot now asserts layout order + zeroes recorders. Also: gate cave read selected idx at -0x6920 (count word) instead of original -0x691C (imm 0x96E4) - fixed; RAM shows count=5 at obj+0x96DC, sel at +0x96E4=0, entry base obj+0xE0=0x8DE1C04, chain 5 entries with +0x08 all 0/-1 (log copy never landed, cause unknown -> log recorder now captures count + last (entry,vid-at-fire)). Replay cave now ALSO writes entry+0x08=vid (JP parity for stock readers) in addition to voiceobj+0x1C, before text re-display. Verify script caught SW(rs,rt) arg-order bug in gate recorder (sw t0,4(a0) vs sw a0,4(t0)) - always assert against capstone TEXT, not hand math. Lesson: keep instrument storage OUTSIDE grown caves; re-check layout after every cave growth.
+
+Backlog replay round 5 (CRASH + root cause of silent +0x08): PPSSPP crashed at PC 0x088E1F80, bad access 0x11bd63c5, ALL recorders read 0. Diagnosis: fault addr 0x11bd63c5 - 0x25 = the sb \,0x25(\) right after the log hook with a0 = s4+s1 = 0x11BD63A0 (stale s4), and PC = the branch-target JIT block start. Cause: full-text branch audit found 0xddf4c beqz -> 0xddf80 landing EXACTLY on the old log hook delay slot (first render: 0x14(s1)==0), skipping the j/cave -> displaced ori s4,zero,0 never executed -> a0 overflowed -> sb faulted. Same bypass explains history: the cave (recorder + 0x04->0x08 copy) NEVER ran on first render, so +0x08 stayed 0/-1 and replay stayed silent - the earlier hook-site scan was wrong (never did a whole-text incoming-branch audit). Fix: hook moved to 0xDDF80 (j replaces the ori), delay 0xDDF84 stays NATIVE stock (never zeroed), displaced = ori only, ret 0xDDF88; the 0xddfd8 bnez loop back-edge lands on 0xDDF88 (skips cave - correct, preserves char counter); every other logger path funnels through the cave. Cave rewritten to 25w: empty check now treats +0x08 in {0,-1} as empty (sltiu test; round-4 bnez would have skipped -1 entries), hi16 check dropped (unsigned upper-bound sltu already rejects any vid with hi16 != 0). verify_caves.py now runs a permanent full-text incoming-branch audit for ALL three hooks (log delay branch-free + single known beqz on the j; replay fully branch-free; gate jal-only on entry, delay branch-free) and asserts stock neighbour words. Audit also caught SLTIU encoded as slti (opcode 0x0B not 0x0A). ISO rebuilt EBOOT-only (v5 opening preserved), mtime 2026-09-23T20:52:19, SHA-256 8fa929ded606148ccc216d6eaeddf56b95d313443d45d96bff2cba6121d241e3. Lesson: NEVER trust a hook site until a whole-text incoming-branch audit proves no branch lands on the delay slot (or between hook and ret); prefer keeping the delay slot native stock code when any doubt - a skipped displaced state-mutating instruction corrupts everything downstream.
+
+Voice mapping round 6 (prologue recheck, Ghift globs line): screenshot line (key 126890) played vid53 whose clip = ちゃんと、あの紙きれに書かれてた… ("I did exactly what was on the paper…"). Full bilingual line-by-line alignment of ALL entries (JP CALL214-group first text vs USA attached line, full strings, unattached-line sweep) found: (a) vids 53-57 each attached ONE USA line late - correct keys 126792/126890/126984/126992/127062 (126792 sat UNATT = shift signature; "Ghift! You're all right!" 127098 correctly stays unvoiced under v57's clip); (b) 128/129 same one-late shift (UNATT 132350 "Well then, I shall be assisting you…" = v128 ナラバ、私ハ…; 132426 = v129); (c) 416/417 one-late (UNATT 153440 "priceless goal…working together as a team" = v416; 153514 "Are you…fine with that?" = v417 それでもいいか; 153540 is the unvoiced kids' answer); (d) branch A 151/152 content SWAPPED: JP order [apology, who-am-I] vs USA [topic, apology] - localizer reordered that branch only (other 3 aligned) -> keys swapped; (e) 349 sat on an inserted USA joke ("3,720 to 1") - true line is UNATT 149978 "immediate death" = 死亡シテイタ可能性モ; (f) v122 カッコつけた手前 merged into USA121's line -> dropped, its key 131992 reassigned to v123 ヤレヤレ ("Oh, dear. I was afraid you were headed in that direction."), v124 REINSTATED at 132050 ("Ghift and Folth are trusting me" = ギフトも、フォルス君も, exact); (g) round-4 drops of 30/118 were wrong: 30 -> 124914 ("…helping hand from my favorite Cross" = あいつを呼ぶか), 118 -> 131522 ("master of the backhanded compliment" = ド根性ってヤツさ). Kept after full-string review: loose-but-slot-correct localizations (45, 89-91, 103, 379, 387 - no better target line exists). Confirmed USA natively retains all 68 const CALL214 sites (monster roars 82/88/104/106/112, void-voice 130/135/139/143, etc.) - they play via stock path with clamp NOPed, correctly absent from the table. build_v6fix.py validated every target key+unit as a real USA text call BEFORE writing; 13 moves + 1 drop + 3 adds = 338 entries / 11 chunks; extent byte-verified (13 present + 10 absent packed triples); verify_caves.py ALL PASS; EBOOT-only rebuild (v5 opening preserved). ISO mtime 2026-09-23T21:39:37, SHA-256 0b3bee610fd9707683b36a885b4b9f0fc62f11e1119aa6695f87d00c6ae88d3e. Lessons: an UNATTACHED USA line between attached ones whose content matches an adjacent vid's JP group = the shift signature; watch for localizer-INSERTED lines (must stay unvoiced) and cross-version line-order swaps inside a response pair; round-4's "orphan drop" judgment needs the same full-string standard or valid voices get deleted.
+
+## Post-prologue completeness audit (2026-09-23)
+
+### 1. Captured context (c10=38381 USA / 43032 JP) is provably COMPLETE
+Multiset proof (Counter arithmetic, not set membership, so duplicate ids cannot hide):
+- JP const 392 = USA retained 68 + table 323 + 1 intentional round-6 drop (vid 122)
+- JP f2     15 = USA 0 + table 15
+- JP pair  505 = USA 505 (native, untouched)
+
+Only uncovered site is vid122, the deliberate DROP (line merged into USA 121).
+This catches the hole in build_v3_table.py's `uc.get(v,0)==0` id-absence filter:
+a JP site whose id also occurs elsewhere in USA would have been silently skipped.
+Also confirmed: "It was a great war..." narration IS prologue-block content
+(USA block contains b'great war'), so that scene is already covered.
+
+### 2. Script block header format (from RAM, both versions identical)
+- u32@+0  = 0x10000201   magic
+- u32@+4  = 0x10000002   magic
+- u32@+8  = total block size (even; = c10*2 + pool bytes)
+- u32@+16 = c10         token area = c10*2 bytes from byte 24; string pool after
+- tokens start at byte 24 (unit 12); clean landing = last token cursor + 1 == c10
+
+Used as a fast whole-RAM scan prefilter (the magic pair is extremely selective).
+NPJH_4 @0xD2D000: size=249596, c10=55506 -> a DIFFERENT story script (ch.1).
+
+### 3. op52 call targets are PER-BLOCK function ids (not global)
+Byte-pattern search for 195/214 only works on the prologue. Calibration-free rule:
+- text  function = call target with most op50 f1=5 (string-index) pushes
+- voice function = call target with most op50 f1=4 (pair-id) pushes
+
+Verified: prologue text=195 voice=214 (2404 f5 / 505 f4);
+         ch.1     text=234 voice=253 (3553 f5 / 516 f4).
+
+Also present in every state: non-story system blocks c10=7133 (size 14268) and
+c10=8711 (size 17436) - zero text calls, zero CALL214, identical JP vs USA.
+Lessons: op52 f1=1 token u16 = 52|(1<<6) = 0x0074 (0x0034 is f1=0); a wrong
+pattern silently reports 0 sites. The landing check must compare the unit index
+to c10, never to c10*2 (units != bytes) - that bug rejected every valid block.
+
+### 4. THE GAP IS REAL AND QUANTIFIED
+Const voice-id space is chapter-partitioned, with ZERO overlap:
+- prologue : 392 const sites, ids   15..435   (covered by our table)
+- ch.1     : 657 const sites, ids 2000..2664  (NOT covered)
+
+Pair-form ids 36000..36835 are shared across chapters (504 overlap) and USA
+retains them natively, so only const/f2 story ids are missing.
+USA const-call retention pattern (prologue): non-story (monster roars 82/88/
+104/106/112, void 130/135/139/143, ...) kept, story const deleted. The ch.1
+const ids 2000..2664 are all story range -> almost certainly deleted in USA too,
+but that needs a USA ch.1 RAM capture to confirm and to build the mapping.
+=> Current patch = prologue chapter only. Post-prologue chapters are silent.
+
+### 5. Why full static coverage is blocked (negative results)
+- 02.DAT (USA 140,421,120 B @ ISO 328826880, 24221 entries, table@70, u32[2]=
+  24221*32 -> entry size 32 not 56) and 10.DAT contain NO script text in utf-8 /
+  utf-16le / shift_jis, and the exact pool string is absent from the whole USA
+  ISO -> script entries are compressed.
+- 256x single-byte XOR and +k byte-add scans over 02.DAT: no hits.
+- The block-header magic is NEVER materialized in EBOOT code (lui 0x1000 +
+  ori $zero,0x201/0x202 scan: 0 hits) -> the 24-byte header is plaintext carried
+  inside the compressed blob, so the loader only consumes size/c10.
+- SN5 save files (ULUS10656SN5GAME46/47, NPJH50696SN5GAME00-05) are encrypted
+  and embed no script block (no magic, no pool strings).
+=> Full-game coverage needs either the 02.DAT decompressor (RE) or paired
+PPSSPP save states (RAM), the latter being the proven method.
+
+### 6. Extension mechanics (ready)
+Table entries are 12-byte (c10, key, vid) triples; the walker already matches
+entry[0] against the live context c10, so multi-context support is structural.
+Only build_v4.py load_entries() is prologue-specific: it hardcodes c10=38381
+and must instead read a per-entry c10 column.
+Procedure per chapter: (1) RAM states for USA+JP at the same scene, (2) locate
+blocks by magic, (3) classify text/voice funcs by the push-count rule, (4) map
+JP const/f2 sites to USA text-call keys (build_v3_table.py logic generalized,
+with the round-6 full-bilingual audit standard), (5) append entries with that
+chapter's USA c10, (6) rebuild EBOOT-only + verify_caves + xdelta.

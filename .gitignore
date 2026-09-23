@@ -1,6 +1,7 @@
 # Game ISOs and anything derived from them (provide your own)
 *.iso
 *.xdelta
+*.part
 *.bin
 *.DAT
 *.ppst
