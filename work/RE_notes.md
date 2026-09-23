@@ -268,3 +268,42 @@ the JP SV archives + opening were already in place).
 Lesson: per-block retention varies wildly - the prologue block lost 324 const
 triggers, chapter 1 lost 1. Never extrapolate the strip rate from one block;
 diff each block pair.
+
+## Debug-mode / chapter-jump investigation (2026-09-24)
+
+### No built-in debug mode exists in either build
+- USA EBOOT contains what looks like a cheat menu: `Debugging.`, `All
+  Accessories/Consumables/Recipes/Food/Illustrations/Sound/Fishing`,
+  `Cheat: Mission/Rematch/Fabrication/Save corruption` (file 0x21D360-0x21D454).
+  NOTHING references them: no lui+ori/addiu materialization, no u32 pointer
+  reference, and the pointer pool at file 0x2D3FE8 (sequential 4-byte stride
+  over that string block, i.e. a vestigial relocation table) is itself
+  unreferenced. Conclusion: leftover developer-build strings; the menu code was
+  never linked into the retail USA build.
+- JP EBOOT has no equivalents at all. JP strings are UTF-8 (NOT Shift-JIS -
+  1183 strings decode cleanly as UTF-8 vs 0 keyword hits as Shift-JIS), and
+  there is no `デモ` / `デバッグ` / `テスト` / `章` / `シーン` anywhere.
+- The USA EBOOT name table does expose the story data format: `rScene`
+  (vaddr 0x2128C4) and `SceneDecode` (vaddr 0x2130DB).
+
+### Script-block loader chain (partial, for future work)
+  script op52 call -> VM handler (ctx+0x38 state machine at 0x1E6D4)
+    -> "SceneDecode" wrapper 0x11F08   (only caller 0x1E75C; a0 = global 0x87E30)
+       -> 0x1A63B0 (stores params into a result struct, calls 0x1ABE3C)
+          -> 0x1ABE3C -> 0x1ABFF0 (opens a file: name at vaddr 0x224C8,
+             calls the I/O wrapper 0x2115C4 = sceIoOpen)
+  Also: 0x1A62F8 derives a 32-bit seed by XORing bytes at +0x10..+0x14 of a
+  struct against the two bytes of a 16-bit key (default 0x9831) - probably a
+  per-entry decode key, worth revisiting.
+  VM confirmed: ctx+0x1C = stream (block base), ctx+0x04 = cursor (u16 index),
+  fetch = stream[cursor*2] (0x1A9D68).
+- The story block buffer is heap-allocated (no constant address in code), so a
+  cheat cannot simply poke a fixed address; a jump cheat would need to call the
+  loader with a scene id, which still needs the scene-id -> entry mapping.
+
+### Save data is encrypted (blocks save editing)
+DATA.BIN (170144 B) entropy 7.999 bits/byte; 99.6% of bytes differ between two
+saves of the same game, so the cipher is re-keyed per save (not a fixed XOR).
+Save subsystem strings exist (`ms0:/PSP/SAVEDATA/%s%s/%s`, `DATA.BIN`,
+`comSvSaveLoad`) but the path strings are table-referenced, so the decrypt loop
+was not located in this pass.
