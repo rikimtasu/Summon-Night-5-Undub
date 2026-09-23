@@ -228,3 +228,43 @@ blocks by magic, (3) classify text/voice funcs by the push-count rule, (4) map
 JP const/f2 sites to USA text-call keys (build_v3_table.py logic generalized,
 with the round-6 full-bilingual audit standard), (5) append entries with that
 chapter's USA c10, (6) rebuild EBOOT-only + verify_caves + xdelta.
+
+## Chapter-1 coverage via paired RAM captures (2026-09-24)
+
+User supplied fresh save-states of the SAME scene in both builds (landlady
+scene), overwriting slot 0 (sizes ~7.2-7.3MB, distinct from the old 5.6MB
+prologue dumps). Both land on the chapter-1 story block:
+
+| | c10 | size | textfunc | lines | voicefunc | const | pair |
+|---|---|---|---|---|---|---|---|
+| JP  | 55506 | 249596 | 234 | 3553 | 253 | 657 (2000..2664) | 516 |
+| USA | 50098 | 222560 | 234 | 2198 | 253 | 656 (2000..2664) | 516 |
+
+Multiset diff: pair sites identical (516=516); const sites differ by exactly
+ONE - vid 2287 is present in JP, deleted in USA. So the chapter-1 block needs
+a single new table row, not 657. The whole earlier "657 missing" worry was an
+over-extrapolation from the JP-only count; the USA block RETAINS its const
+triggers (unlike the heavily-stripped prologue block), and they play natively
+once the clamp is NOPed. Only genuinely-deleted triggers need table rows.
+
+Bilingual target for the one deleted site (vids 2286/2288 retained, bracket it):
+  JP  unit 42597 vid 2287  line: 「それは、残念でしたね」
+  USA unit 38601 sidx 45655 key 191506  "T-That's a shame, I suppose..."
+Convention confirmed on retained anchor vid 2288: its preceding JP line
+「そろそろ次のところに行きましょ！」 matches USA "Okay, I think we're finished
+here for now. We need to go!" (voice fires after its line).
+=> new row (c10=50098, key=191506, vid=2287) in work/extra_entries.txt.
+
+### Multi-context table support
+The walker already matches each entry's c10 against the live context
+(lw 0(t5) vs ctx+0x10, `bne v0,t1,adv`), so per-chapter rows coexist with no
+code change. build_v4.py load_entries() now merges a new work/extra_entries.txt
+("c10 key vid" lines, UTF-8) with the audited prologue v3_entries.txt
+(c10=38381). CHUNK_HOMES hold 343 entries across 11 chunks; 339 used after
+this addition, layout still ends at gap+660/664, verify_caves.py ALL PASS.
+EBOOT extent re-swapped into the existing ISO (no full rebuild needed since
+the JP SV archives + opening were already in place).
+
+Lesson: per-block retention varies wildly - the prologue block lost 324 const
+triggers, chapter 1 lost 1. Never extrapolate the strip rate from one block;
+diff each block pair.

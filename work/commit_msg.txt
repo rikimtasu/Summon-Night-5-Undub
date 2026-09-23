@@ -1,0 +1,21 @@
+Add chapter-1 coverage via multi-context table
+
+Paired save-states (USA + JP) of the chapter-1 landlady scene show the USA
+block RETAINS 656 of 657 const triggers, unlike the prologue block which lost
+324. Chapter 1 therefore needs a single new row rather than a full re-map.
+
+The one deleted trigger is vid 2287, mapped by bilingual audit to USA key
+191506 ("T-That's a shame, I suppose..." / JP: it was a shame, wasn't it).
+The voice-follows-its-line convention was confirmed on the retained anchor
+vid 2288, whose preceding line matches across both versions.
+
+build_v4.py load_entries now merges work/extra_entries.txt ("c10 key vid",
+UTF-8) with the audited prologue table. The walker already matches each
+entry's c10 against the live context, so no hook change was needed.
+
+339 entries in 11 chunks, verify_caves ALL PASS, EBOOT extent re-swapped into
+the existing ISO without a full rebuild (ISO SHA-256 292e69eb...). Patch
+re-encoded and decode-verified (dbfcc426...).
+
+Retains the audit tooling: pair_report.py, pair_diff_voices.py,
+find_missing_site_target.py, pin_target_key.py.

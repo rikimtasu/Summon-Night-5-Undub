@@ -34,9 +34,9 @@ Details: `work/RE_notes.md`. Mapping table: `work/v3_entries.txt`.
 | | |
 |---|---|
 | Input | `Summon Night 5 (USA).iso` (SHA-256 `64977f15…f98c`, 897,253,376 B) |
-| Output | `Summon Night 5 (USA) Undub.iso` (SHA-256 `0b3bee61…d3e`, 1,369,059,328 B) |
-| Patch | `Summon Night 5 (USA) Undub.xdelta` (SHA-256 `52bcc89f…f9fa`, 466,051,109 B) |
-| Tool | xdelta3 3.0.11, encoded with `-B 1073741824 -W 16777216`, decode-verified |
+| Output | `Summon Night 5 (USA) Undub.iso` (SHA-256 `292e69eb…a10e`, 1,369,059,328 B) |
+| Patch | `Summon Night 5 (USA) Undub.xdelta` (SHA-256 `dbfcc426…f28ae`, 466,051,116 B, decode-verified) |
+| Tool | xdelta3 3.0.11, encoded with `-B 1073741824 -W 16777216` |
 
 ```
 xdelta3 -d "Summon Night 5 (USA).iso" "Summon Night 5 (USA) Undub.xdelta" out.iso
@@ -53,21 +53,28 @@ xdelta3 -d "Summon Night 5 (USA).iso" "Summon Night 5 (USA) Undub.xdelta" out.is
 
 ## Known limitations (audited 2026-09-23)
 
-- **Only the prologue context (`c10=38381`) is mapped.** A multiset proof over
-  every JP voice site in that context shows it is complete:
-  392 const = 68 retained by USA + 323 in our table + 1 deliberate drop (vid 122);
-  15 f2 all mapped; 505 pair-id sites untouched (they play natively).
-- **Later chapters are not covered.** Story scripts are per-chapter blocks with
-  chapter-partitioned voice-id ranges: the prologue uses ids `15..435`, while the
-  chapter-1 block uses `2000..2664` (657 const sites) — zero overlap. Those
-  lines stay silent until their chapter is added to the table.
-- Extending is mechanical: entries are `(context, text-offset, voice-id)`
-  triples and the walker already matches the live context. `build_v4.py`
-  currently hardcodes the prologue context and needs a per-entry context
-  column. The audit tooling for this (`work/scan_all_blocks.py`,
-  `work/classify_blocks.py`, `work/voice_func_resolve.py`) is ready; it needs
-  paired PPSSPP save states (USA + JP) at matching scenes, because 02.DAT holds
-  the script entries compressed.
+Coverage is per script context, and the amount of table needed varies by
+chapter. Measured so far:
+
+| context | chapter | JP const | USA const | deleted | table rows |
+|---|---|---|---|---|---|
+| `c10=38381` | prologue | 392 | 68 | 324 (+15 f2) | 338 |
+| `c10=50098` | chapter 1 | 657 | 656 | **1** (vid 2287) | 1 |
+
+- The **prologue is provably complete**: a multiset proof over every JP voice
+  site gives 392 const = 68 retained by USA + 323 mapped + 1 deliberate drop
+  (vid 122); 15 f2 all mapped; 505 pair-id sites untouched (they play natively).
+- **Chapter 1 needed only one row** — the USA build retained nearly all of its
+  const triggers, so they play natively once the clamp is NOPed. The single
+  deleted trigger (vid 2287) is restored via `work/extra_entries.txt`.
+- Chapters after chapter 1 have not been captured yet. `op52` call targets are
+  per-block function ids, so each chapter must be diffed on its own; the audit
+  tooling (`work/pair_report.py`, `work/pair_diff_voices.py`,
+  `work/find_missing_site_target.py`) is ready and needs only paired PPSSPP
+  save-states (USA + JP) at a matching scene.
+- Extending is mechanical: rows are `(context, text-offset, voice-id)` and the
+  walker already matches the live context, so `work/extra_entries.txt` can hold
+  any number of chapters.
 
 ## Rebuild prerequisites (NOT tracked; provide your own)
 

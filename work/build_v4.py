@@ -12,6 +12,7 @@ Built fresh from decrypted EBOOT (no canary/probe leftovers).
 import struct
 import pickle
 import sys
+import os
 
 sys.path.insert(0, r'D:\Documents\Default Project\work')
 import build_undub_v2 as v2
@@ -279,11 +280,27 @@ def BEQ(rs, rt, imm):
 
 
 def load_entries():
+    """Prologue rows plus any post-prologue contexts.
+
+    v3_entries.txt holds the audited prologue table (context c10=38381).
+    extra_entries.txt holds later chapters as "c10 key vid", so new chapters
+    can be added without touching the bilingual-audited prologue table. The
+    walker already compares each entry's c10 against the live context
+    (lw 0(t5) vs ctx+0x10), so mixed contexts need no code change.
+    """
     out = []
     with open(r'D:\Documents\Default Project\work\v3_entries.txt') as f:
         for line in f:
             key, vid, _ju, _uu = line.split()
             out.append((38381, int(key), int(vid)))
+    extra = r'D:\Documents\Default Project\work\extra_entries.txt'
+    if os.path.exists(extra):
+        with open(extra, encoding='utf-8') as f:
+            for line in f:
+                parts = line.split()
+                if len(parts) < 3 or not parts[0].isdigit():
+                    continue
+                out.append((int(parts[0]), int(parts[1]), int(parts[2])))
     out.sort()
     return out
 
