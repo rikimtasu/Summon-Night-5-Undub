@@ -1,0 +1,39 @@
+=== entry 156 ===
+vid=161 jpu=33149 -> usa=30000 key=141146
+   JP-2: ボクの名前はダイス‥‥‥
+   JP-1: アルカにつけてもらった
+   JP+1: とっても‥‥‥大切な名前‥‥‥！
+   JP+2: そんなことない！
+   USA-prev: [29992/141076] Arca, from this day forward I will go by the name you gave me - Dyth.
+   USA     : The name has a very important ring to it!
+   USA-next: [None/None] ?
+
+=== entry 160 ===
+vid=201 jpu=33241 -> usa=30070 key=141352
+   JP-2: おいらの名前はカゲロウ‥‥‥
+   JP-1: アルカにつけてもらった
+   JP+1: とっても‥‥‥大切な名前‥‥‥！
+   JP+2: そんなこと、ありません！
+   USA-prev: [30056/141288] Arca, I couldn't have picked a cooler name than Kagerou myself!
+   USA     : In fact, the name's already growing on me. It sounds important!
+   USA-next: [None/None] ?
+
+=== entry 164 ===
+vid=246 jpu=33338 -> usa=30139 key=141620
+   JP-2: わたしの名前はスピネル‥‥‥
+   JP-1: アルカにつけてもらった
+   JP+1: とっても‥‥‥大切な名前‥‥‥！
+   JP+2: そんなことない！
+   USA-prev: [30125/141560] Arca, I will always treasure the name you gave me - Spinel.
+   USA     : Such a beautiful name...and it sounds so important!
+   USA-next: [None/None] ?
+
+=== entry 168 ===
+vid=288 jpu=33434 -> usa=30201 key=141836
+   JP-2: ぺりえ‥‥‥
+   JP-1: あるかに、つけてもらった
+   JP+1: とっても‥‥‥たいせつな、なまえ‥‥‥！
+   JP+2: じゃあ、▲は本当に
+   USA-prev: [30193/141790] Pariet...yes...I like it! You did good, Arca!
+   USA     : How could I be unhappy with a name from such an epic story? It sounds 
+   USA-next: [None/None] ?

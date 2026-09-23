@@ -1,0 +1,11 @@
+# Game ISOs and anything derived from them (provide your own)
+*.iso
+*.xdelta
+*.bin
+*.DAT
+*.ppst
+JPSV/
+# Screenshots / local test artifacts
+*.png
+# Python
+__pycache__/

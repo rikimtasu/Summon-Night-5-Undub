@@ -1,0 +1,2712 @@
+vid=0 jpu=25150 -> usa=23435 key=120702
+   JP-2: -
+   JP-1: -
+   JP+1: むかし、むかし‥‥‥
+   JP+2: この世界[【リィンバウム】]と、それを取り巻く
+   USA-prev: [None/None] ?
+   USA     : Long, long ago...
+   USA-next: [23441/120720] ...war broke out here in the world of Lyndbaum, and spread to the Othe
+vid=1 jpu=25159 -> usa=23441 key=120720
+   JP-2: むかし、むかし‥‥‥
+   JP-1: -
+   JP+1: この世界[【リィンバウム】]と、それを取り巻く
+   JP+2: [【異世界】]のすべてを巻き込んだ、
+   USA-prev: [23435/120702] Long, long ago...
+   USA     : ...war broke out here in the world of Lyndbaum, and spread to the Othe
+   USA-next: [23447/120800] It was a great war...
+vid=2 jpu=25172 -> usa=23447 key=120800
+   JP-2: この世界[【リィンバウム】]と、それを取り巻く
+   JP-1: [【異世界】]のすべてを巻き込んだ、
+   JP+1: 大きな戦争がありました
+   JP+2: それはとても愚かで、悲しい争いでした
+   USA-prev: [23441/120720] ...war broke out here in the world of Lyndbaum, and spread to the Othe
+   USA     : It was a great war...
+   USA-next: [23453/120822] ...both foolish and lamentable, like most.
+vid=3 jpu=25181 -> usa=23453 key=120822
+   JP-2: [【異世界】]のすべてを巻き込んだ、
+   JP-1: 大きな戦争がありました
+   JP+1: それはとても愚かで、悲しい争いでした
+   JP+2: たくさんの涙とたくさんの血が流れた末
+   USA-prev: [23447/120800] It was a great war...
+   USA     : ...both foolish and lamentable, like most.
+   USA-next: [23459/120866] When tears, and loss, and bloodshed grew too great, people realized th
+vid=4 jpu=25190 -> usa=23459 key=120866
+   JP-2: 大きな戦争がありました
+   JP-1: それはとても愚かで、悲しい争いでした
+   JP+1: たくさんの涙とたくさんの血が流れた末
+   JP+2: 人々はようやく、あやまちに気づき
+   USA-prev: [23453/120822] ...both foolish and lamentable, like most.
+   USA     : When tears, and loss, and bloodshed grew too great, people realized th
+   USA-next: [23465/120960] They pieced together the damaged worlds and swore to forge new, peacef
+vid=5 jpu=25203 -> usa=23465 key=120960
+   JP-2: たくさんの涙とたくさんの血が流れた末
+   JP-1: 人々はようやく、あやまちに気づき
+   JP+1: 壊れてしまった世界をひとつにつなぎ
+   JP+2: 新たなる絆を育むことを誓いあいました
+   USA-prev: [23459/120866] When tears, and loss, and bloodshed grew too great, people realized th
+   USA     : They pieced together the damaged worlds and swore to forge new, peacef
+   USA-next: [23471/121054] And the tenuous tranquility of a new era, bought with the blood of the
+vid=6 jpu=25216 -> usa=23471 key=121054
+   JP-2: 壊れてしまった世界をひとつにつなぎ
+   JP-1: 新たなる絆を育むことを誓いあいました
+   JP+1: そして、ようやく―――リィンバウムに
+   JP+2: 新たなる平和の時代が訪れたのです‥‥‥
+   USA-prev: [23465/120960] They pieced together the damaged worlds and swore to forge new, peacef
+   USA     : And the tenuous tranquility of a new era, bought with the blood of the
+   USA-next: [None/None] ?
+vid=7 jpu=25265 -> usa=23513 key=121158
+   JP-2: -
+   JP-1: -
+   JP+1: ううむ‥‥‥
+   JP+2: さすがにこの時間の森は、真っ暗だな
+   USA-prev: [None/None] ?
+   USA     : The forest here is darker than I thought it would be at night. I don't
+   USA-next: [None/None] ?
+vid=8 jpu=25296 -> usa=23537 key=121260
+   JP-2: -
+   JP-1: -
+   JP+1: なあ、フォルス君
+   JP+2: なあ、アルカちゃん
+   USA-prev: [None/None] ?
+   USA     : ...but I'm sure you knew better. Right, Folth?
+   USA-next: [23547/121308] ...but it is, isn't it, Arca?
+vid=9 jpu=25309 -> usa=23547 key=121308
+   JP-2: なあ、フォルス君
+   JP-1: -
+   JP+1: なあ、アルカちゃん
+   JP+2: 本当にギフトは、こんな森の中に
+   USA-prev: [23537/121260] ...but I'm sure you knew better. Right, Folth?
+   USA     : ...but it is, isn't it, Arca?
+   USA-next: [23555/121338] Are you really certain Ghift is here?
+vid=10 jpu=25320 -> usa=23555 key=121338
+   JP-2: なあ、フォルス君
+   JP-1: なあ、アルカちゃん
+   JP+1: 本当にギフトは、こんな森の中に
+   JP+2: 入っていったのかい？
+   USA-prev: [23547/121308] ...but it is, isn't it, Arca?
+   USA     : Are you really certain Ghift is here?
+   USA-next: [None/None] ?
+vid=11 jpu=25371 -> usa=23604 key=121442
+   JP-2: うん‥‥‥
+   JP-1: うん‥‥‥
+   JP+1: まったく、あいつはまた
+   JP+2: なんでそんなことを
+   USA-prev: [23591/121420] He's here. I know it.
+   USA     : But it doesn't make any sense. Why would he run off at night into thes
+   USA-next: [None/None] ?
+vid=12 jpu=25457 -> usa=23668 key=121838
+   JP-2: 「今日こそ兄さんに認めさせるんだ」
+   JP-1: って言ってたから‥‥‥
+   JP+1: 認めさせる？　俺を？
+   JP+2: 森の中で？　どうやって？
+   USA-prev: [23654/121774] He kept babbling about showing you he was ready...or something.
+   USA     : What could he possibly have to prove to ME in the middle of a forest? 
+   USA-next: [None/None] ?
+vid=13 jpu=25522 -> usa=23718 key=122018
+   JP-2: わかんないけど
+   JP-1: そう言ってたの
+   JP+1: ったく、やっとのことで休暇がとれて
+   JP+2: 故郷に戻ってきたっていうのに‥‥‥
+   USA-prev: [23704/121968] It does seem strange, but he did say that, so...
+   USA     : Great. I finally get some time off to come home for a little rest, and
+   USA-next: [23726/122104] Honestly, I have no idea how that mind works in my dear little bother.
+vid=14 jpu=25543 -> usa=23726 key=122104
+   JP-2: ったく、やっとのことで休暇がとれて
+   JP-1: 故郷に戻ってきたっていうのに‥‥‥
+   JP+1: 相変わらず、うちの弟の考えてることは
+   JP+2: よくわからないな
+   USA-prev: [23718/122018] Great. I finally get some time off to come home for a little rest, and
+   USA     : Honestly, I have no idea how that mind works in my dear little bother.
+   USA-next: [None/None] ?
+vid=15 jpu=25622 -> usa=23789 key=122408
+   JP-2: エルストさんは、ギフトの自慢の
+   JP-1: お兄ちゃんなんだから！
+   JP+1: そうなのか？
+   JP+2: そうだよ　ギフトは、いつもぼくに
+   USA-prev: [23781/122306] I believe that Ghift is proud of having you as his big brother. That's
+   USA     : You really think so?
+   USA-next: [None/None] ?
+vid=16 jpu=25676 -> usa=23808 key=122430
+   JP-2: そうだよ　ギフトは、いつもわたしに
+   JP-1: そうやって自慢してるんだから
+   JP+1: ふぅん‥‥‥そっか‥‥‥
+   JP+2: あいつは、元気にしてるか？
+   USA-prev: [None/None] ?
+   USA     : Sure! Ghift is always bragging about you. Always. I'm not kidding. Alm
+   USA-next: [23823/122514] I KNOW so. Ghift is always talking about the adventures of his big bro
+vid=17 jpu=25693 -> usa=23823 key=122514
+   JP-2: ふぅん‥‥‥そっか‥‥‥
+   JP-1: -
+   JP+1: あいつは、元気にしてるか？
+   JP+2: 君の家族に迷惑かけてたりしないか？
+   USA-prev: [23808/122430] Sure! Ghift is always bragging about you. Always. I'm not kidding. Alm
+   USA     : I KNOW so. Ghift is always talking about the adventures of his big bro
+   USA-next: [23836/122610] Hrmph. Maybe I'm just too close to see it. He just seems like such an 
+vid=18 jpu=25849 -> usa=23836 key=122610
+   JP-2: 直したほうがいいと思う
+   JP-1: -
+   JP+1: わははは、よかった、
+   JP+2: フォルス君にあいつを頼んで正解だったよ
+   USA-prev: [23823/122514] I KNOW so. Ghift is always talking about the adventures of his big bro
+   USA     : Hrmph. Maybe I'm just too close to see it. He just seems like such an 
+   USA-next: [23844/122702] How's he been while I've been gone? He's not making trouble for you or
+vid=19 jpu=25867 -> usa=23844 key=122702
+   JP-2: わははは、よかった、
+   JP-1: フォルス君にあいつを頼んで正解だったよ
+   JP+1: わははは、よかった、
+   JP+2: アルカちゃんにあいつを頼んで正解だったよ
+   USA-prev: [23836/122610] Hrmph. Maybe I'm just too close to see it. He just seems like such an 
+   USA     : How's he been while I've been gone? He's not making trouble for you or
+   USA-next: [None/None] ?
+vid=20 jpu=25883 -> usa=23863 key=122794
+   JP-2: わははは、よかった、
+   JP-1: アルカちゃんにあいつを頼んで正解だったよ
+   JP+1: うちの両親は‥‥‥子どもの教育には、
+   JP+2: どちらかというと無関心だからな‥‥‥
+   USA-prev: [None/None] ?
+   USA     : No, no, nothing like that...exactly...
+   USA-next: [23876/122834] He's just a little hard to deal with sometimes. But he's a kid, too, s
+vid=21 jpu=25932 -> usa=23876 key=122834
+   JP-2: ？？？
+   JP-1: -
+   JP+1: すまん、フォルス君には
+   JP+2: 関係ない話だな
+   USA-prev: [23863/122794] No, no, nothing like that...exactly...
+   USA     : He's just a little hard to deal with sometimes. But he's a kid, too, s
+   USA-next: [23884/122916] But, I will say one thing. He doesn't give up. The other day he couldn
+vid=22 jpu=25950 -> usa=23884 key=122916
+   JP-2: すまん、フォルス君には
+   JP-1: 関係ない話だな
+   JP+1: すまん、アルカちゃんには
+   JP+2: 関係ない話だな
+   USA-prev: [23876/122834] He's just a little hard to deal with sometimes. But he's a kid, too, s
+   USA     : But, I will say one thing. He doesn't give up. The other day he couldn
+   USA-next: [23897/123018] ...and he kept asking for rematches. Over and over. Maybe you could tr
+vid=23 jpu=25998 -> usa=23897 key=123018
+   JP-2: ねぇ、エルストさん
+   JP-1: [【召喚師】]のお仕事って、やっぱり大変？
+   JP+1: そりゃあ、まあ楽ではないかな
+   JP+2: 特に、俺の働いている―――
+   USA-prev: [23884/122916] But, I will say one thing. He doesn't give up. The other day he couldn
+   USA     : ...and he kept asking for rematches. Over and over. Maybe you could tr
+   USA-next: [23907/123126] Oh, no...no, I wouldn't say that. Well, there is one thing...
+vid=24 jpu=26014 -> usa=23907 key=123126
+   JP-2: そりゃあ、まあ楽ではないかな
+   JP-1: 特に、俺の働いている―――
+   JP+1: [【界境都市・セイヴァール】]では
+   JP+2: 召喚師のやるべき仕事が多いんだ
+   USA-prev: [23897/123018] ...and he kept asking for rematches. Over and over. Maybe you could tr
+   USA     : Oh, no...no, I wouldn't say that. Well, there is one thing...
+   USA-next: [23920/123188] He's just a little stubborn and hot-headed at times.
+vid=25 jpu=26064 -> usa=23920 key=123188
+   JP-2: そうなの？
+   JP-1: そうなの？
+   JP+1: セイヴァールは、この世界でも特に
+   JP+2: 異世界との交流が盛んなところでさ
+   USA-prev: [23907/123126] Oh, no...no, I wouldn't say that. Well, there is one thing...
+   USA     : He's just a little stubborn and hot-headed at times.
+   USA-next: [23928/123242] Like yesterday - he couldn't win his sword duel, so he kept asking for
+vid=26 jpu=26080 -> usa=23928 key=123242
+   JP-2: セイヴァールは、この世界でも特に
+   JP-1: 異世界との交流が盛んなところでさ
+   JP+1: 大勢の異世界人が普通に街中に住んでるし、
+   JP+2: そのぶん、もめたりすることも多い
+   USA-prev: [23920/123188] He's just a little stubborn and hot-headed at times.
+   USA     : Like yesterday - he couldn't win his sword duel, so he kept asking for
+   USA-next: [23941/123336] At first it was cute, then it turned irritating. He should probably wo
+vid=27 jpu=26101 -> usa=23941 key=123336
+   JP-2: 大勢の異世界人が普通に街中に住んでるし、
+   JP-1: そのぶん、もめたりすることも多い
+   JP+1: そのトラブルをひとつひとつ解決するのが
+   JP+2: 俺たちの仕事ってわけなのさ
+   USA-prev: [23928/123242] Like yesterday - he couldn't win his sword duel, so he kept asking for
+   USA     : At first it was cute, then it turned irritating. He should probably wo
+   USA-next: [None/None] ?
+vid=28 jpu=26151 -> usa=23960 key=123440
+   JP-2: へぇぇ‥‥‥
+   JP-1: そうなんだ‥‥‥
+   JP+1: さて、いくら屋敷の近所だからといって、
+   JP+2: 夜の森は子どもには危険すぎる
+   USA-prev: [None/None] ?
+   USA     : Ha ha ha ha! I definitely made the right choice having you keep an eye
+   USA-next: [23970/123534] Ha! It sounds very much like I made the right choice to have you watch
+vid=29 jpu=26172 -> usa=23970 key=123534
+   JP-2: さて、いくら屋敷の近所だからといって、
+   JP-1: 夜の森は子どもには危険すぎる
+   JP+1: さっさと見つけて連れ戻したい
+   JP+2: ところなんだが‥‥‥
+   USA-prev: [23960/123440] Ha ha ha ha! I definitely made the right choice having you keep an eye
+   USA     : Ha! It sounds very much like I made the right choice to have you watch
+   USA-next: [23984/123624] Our parents were too indifferent and distant when raising us, so your 
+vid=30 jpu=26188 -> usa=23984 key=123624
+   JP-2: さっさと見つけて連れ戻したい
+   JP-1: ところなんだが‥‥‥
+   JP+1: こいつはちょいと、暗すぎるな
+   JP+2: よし、じゃあ、あいつを呼ぶか‥‥‥
+   USA-prev: [23970/123534] Ha! It sounds very much like I made the right choice to have you watch
+   USA     : Our parents were too indifferent and distant when raising us, so your 
+   USA-next: [None/None] ?
+vid=31 jpu=26215 -> usa=24000 key=123724
+   JP-2: こいつはちょいと、暗すぎるな
+   JP-1: よし、じゃあ、あいつを呼ぶか‥‥‥
+   JP+1: フォルス君、危ないから
+   JP+2: ちょっと離れていてくれ
+   USA-prev: [None/None] ?
+   USA     : ? ? ?
+   USA-next: [None/None] ?
+vid=32 jpu=26233 -> usa=24019 key=123730
+   JP-2: フォルス君、危ないから
+   JP-1: ちょっと離れていてくれ
+   JP+1: アルカちゃん、危ないから
+   JP+2: ちょっと離れていてくれ
+   USA-prev: [None/None] ?
+   USA     : Sorry...I shouldn't have said that out loud. I meant what I said, but 
+   USA-next: [24029/123836] Erm..maybe I was being a little TOO open there. Sorry if I embarrassed
+vid=33 jpu=26287 -> usa=24275 key=125224
+   JP-2: う、うんっ！
+   JP-1: -
+   JP+1: 困ったときには[【響友（クロス）】]に頼る！
+   JP+2: なんせ苦難を分かちあう間柄なんだしな♪
+   USA-prev: [None/None] ?
+   USA     : A Cross will be there in hardship and need. Count on its strength and 
+   USA-next: [None/None] ?
+vid=34 jpu=26393 -> usa=24374 key=125314
+   JP-2: -
+   JP-1: -
+   JP+1: 新しき英知の術と、千眼の導きによりて
+   JP+2: 今ここに召喚の扉を開かん‥‥‥！
+   USA-prev: [None/None] ?
+   USA     : By the guidance of the new art of wisdom and the Thousand Eyes, open t
+   USA-next: [24387/125402] By the blessed Pledge, Summoner Erst entreats...
+vid=35 jpu=26420 -> usa=24387 key=125402
+   JP-2: 新しき英知の術と、千眼の導きによりて
+   JP-1: 今ここに召喚の扉を開かん‥‥‥！
+   JP+1: 祝福されし誓約の名の下に
+   JP+2: 召喚師エルストが求める‥‥‥！
+   USA-prev: [24374/125314] By the guidance of the new art of wisdom and the Thousand Eyes, open t
+   USA     : By the blessed Pledge, Summoner Erst entreats...
+   USA-next: [None/None] ?
+vid=36 jpu=26441 -> usa=24406 key=125452
+   JP-2: 祝福されし誓約の名の下に
+   JP-1: 召喚師エルストが求める‥‥‥！
+   JP+1: 来い、俺の相棒！
+   JP+2: ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Come forth!
+   USA-next: [None/None] ?
+vid=37 jpu=26650 -> usa=24605 key=125470
+   JP-2: ‥‥‥
+   JP-1: -
+   JP+1: 呼ビマシタカ、えるすと
+   JP+2: おう、呼んだ呼んだ
+   USA-prev: [24597/125464] . . .
+   USA     : You rang, Erst?
+   USA-next: [24613/125486] I sure did, buddy!
+vid=38 jpu=26662 -> usa=24613 key=125486
+   JP-2: ‥‥‥
+   JP-1: 呼ビマシタカ、えるすと
+   JP+1: おう、呼んだ呼んだ
+   JP+2: ここまで森に入ったんだけど、
+   USA-prev: [24605/125470] You rang, Erst?
+   USA     : I sure did, buddy!
+   USA-next: [24626/125506] We were having problems with the darkness here. The ground feels very 
+vid=39 jpu=26674 -> usa=24626 key=125506
+   JP-2: 呼ビマシタカ、えるすと
+   JP-1: おう、呼んだ呼んだ
+   JP+1: ここまで森に入ったんだけど、
+   JP+2: どうにも足元が心もとなくてさ
+   USA-prev: [24613/125486] I sure did, buddy!
+   USA     : We were having problems with the darkness here. The ground feels very 
+   USA-next: [24634/125592] Can you provide some light?
+vid=40 jpu=26695 -> usa=24642 key=125620
+   JP-2: ここまで森に入ったんだけど、
+   JP-1: どうにも足元が心もとなくてさ
+   JP+1: ライト、つけてくんない？
+   JP+2: ‥‥‥ソレダケ、デスカ？
+   USA-prev: [24634/125592] Can you provide some light?
+   USA     : Light. You wish to have some...light. Is that...all?
+   USA-next: [24655/125674] Erm...yeah. Yeah, that will do it.
+vid=41 jpu=26707 -> usa=24655 key=125674
+   JP-2: どうにも足元が心もとなくてさ
+   JP-1: ライト、つけてくんない？
+   JP+1: ‥‥‥ソレダケ、デスカ？
+   JP+2: あ、うん
+   USA-prev: [24642/125620] Light. You wish to have some...light. Is that...all?
+   USA     : Erm...yeah. Yeah, that will do it.
+   USA-next: [24663/125710] . . .
+vid=42 jpu=26719 -> usa=24663 key=125710
+   JP-2: ライト、つけてくんない？
+   JP-1: ‥‥‥ソレダケ、デスカ？
+   JP+1: あ、うん
+   JP+2: ‥‥‥
+   USA-prev: [24655/125674] Erm...yeah. Yeah, that will do it.
+   USA     : . . .
+   USA-next: [24671/125716] Very well, then. Light is what you need. So, light is what you shall h
+vid=43 jpu=26744 -> usa=24671 key=125716
+   JP-2: あ、うん
+   JP-1: ‥‥‥
+   JP+1: ‥‥‥マァ、イイデス
+   JP+2: イツモノコトデスカラネ
+   USA-prev: [24663/125710] . . .
+   USA     : Very well, then. Light is what you need. So, light is what you shall h
+   USA-next: [None/None] ?
+vid=44 jpu=26806 -> usa=24730 key=125792
+   JP-2: -
+   JP-1: -
+   JP+1: おお、明るい明るい
+   JP+2: お前が響友でほんとよかったぜ
+   USA-prev: [None/None] ?
+   USA     : Whoa! Now THAT is what I'm talking about. Buddy, you're the best Cross
+   USA-next: [24738/125870] Why yes, I am. It's quite generous of you to say so, though. Huz...zah
+vid=45 jpu=26827 -> usa=24738 key=125870
+   JP-2: おお、明るい明るい
+   JP-1: お前が響友でほんとよかったぜ
+   JP+1: ソレハドウモ
+   JP+2: これが‥‥‥本物の[【召喚術】]‥‥‥
+   USA-prev: [24730/125792] Whoa! Now THAT is what I'm talking about. Buddy, you're the best Cross
+   USA     : Why yes, I am. It's quite generous of you to say so, though. Huz...zah
+   USA-next: [None/None] ?
+vid=46 jpu=26894 -> usa=24798 key=126132
+   JP-2: これが‥‥‥本物の[【召喚術】]‥‥‥
+   JP-1: 絵本で読んだのより、ずっとすごい！
+   JP+1: おう、どうだかっこいいだろ？
+   JP+2: う、うんうんうん！
+   USA-prev: [24785/126034] I must say that seeing Summon Arts in person is so much more impressiv
+   USA     : Yes. I have to remind myself of that at times so I don't take them for
+   USA-next: [None/None] ?
+vid=47 jpu=26940 -> usa=24835 key=126344
+   JP-2: う、うんうんうん！
+   JP-1: う、うんうんうん！
+   JP+1: そうだろそうだろ、わはははは
+   JP+2: マッタク、スグ調子ニ乗ッテ‥‥‥
+   USA-prev: [24827/126280] It's hard to imagine ever getting tired of that kind of power!
+   USA     : Ha ha ha ha ha! I need to have you around more often to keep my perspe
+   USA-next: [None/None] ?
+vid=48 jpu=26969 -> usa=24860 key=126430
+   JP-2: -
+   JP-1: -
+   JP+1: マッタク、スグ調子ニ乗ッテ‥‥‥
+   JP+2: デ、本当ニらんぷニスルタメダケニ
+   USA-prev: [None/None] ?
+   USA     : Not to break up the party, but perhaps you forgot I was here, still do
+   USA-next: [24868/126518] I don't really want to believe that you summoned me as your mobile lam
+vid=49 jpu=26981 -> usa=24868 key=126518
+   JP-2: マッタク、スグ調子ニ乗ッテ‥‥‥
+   JP-1: -
+   JP+1: デ、本当ニらんぷニスルタメダケニ
+   JP+2: 私ノコトヲ召喚シタノデスカ？
+   USA-prev: [24860/126430] Not to break up the party, but perhaps you forgot I was here, still do
+   USA     : I don't really want to believe that you summoned me as your mobile lam
+   USA-next: [24881/126602] Oh, right! Sorry about that, buddy. Back to the task at hand...
+vid=50 jpu=26997 -> usa=24881 key=126602
+   JP-2: デ、本当ニらんぷニスルタメダケニ
+   JP-1: 私ノコトヲ召喚シタノデスカ？
+   JP+1: おっと、そうだった！
+   JP+2: いや、実はな‥‥‥
+   USA-prev: [24868/126518] I don't really want to believe that you summoned me as your mobile lam
+   USA     : Oh, right! Sorry about that, buddy. Back to the task at hand...
+   USA-next: [None/None] ?
+vid=51 jpu=27065 -> usa=24936 key=126666
+   JP-2: -
+   JP-1: -
+   JP+1: はぁ、はぁ、はぁ‥‥‥
+   JP+2: くそっ、なんで、どうして
+   USA-prev: [None/None] ?
+   USA     : <Huff>...<huff>...<huff>...
+   USA-next: [24950/126694] What's happening?! What's going on? I don't...I don't get it...it's no
+vid=52 jpu=27077 -> usa=24950 key=126694
+   JP-2: はぁ、はぁ、はぁ‥‥‥
+   JP-1: -
+   JP+1: くそっ、なんで、どうして
+   JP+2: こんなことになるんだよ！
+   USA-prev: [24936/126666] <Huff>...<huff>...<huff>...
+   USA     : What's happening?! What's going on? I don't...I don't get it...it's no
+   USA-next: [24958/126792] I did exactly what was on the paper in that old book, but...oh, I don'
+vid=53 jpu=27099 -> usa=24972 key=126890
+   JP-2: くそっ、なんで、どうして
+   JP-1: こんなことになるんだよ！
+   JP+1: ちゃんと、あの紙切れに書かれてた
+   JP+2: 通りに、間違いなくやったのに‥‥‥
+   USA-prev: [24958/126792] I did exactly what was on the paper in that old book, but...oh, I don'
+   USA     : I mean, all those weird globs started appearing! This is wrong. This i
+   USA-next: [None/None] ?
+vid=54 jpu=27115 -> usa=24995 key=126984
+   JP-2: ちゃんと、あの紙切れに書かれてた
+   JP-1: 通りに、間違いなくやったのに‥‥‥
+   JP+1: なんで、あんな変なものが湧いて
+   JP+2: 出てきちゃったんだよ！？
+   USA-prev: [None/None] ?
+   USA     : . . .?!
+   USA-next: [None/None] ?
+vid=55 jpu=27152 -> usa=25030 key=126992
+   JP-2: 出てきちゃったんだよ！？
+   JP-1: -
+   JP+1: ‥‥‥！？
+   JP+2: オ探シノ弟君トヤラハ、コノ方デ
+   USA-prev: [None/None] ?
+   USA     : Perhaps this is the troublesome younger sibling you were looking for?
+   USA-next: [25038/127062] You're the best, Gaudi. I mean it.
+vid=56 jpu=27191 -> usa=25038 key=127062
+   JP-2: -
+   JP-1: -
+   JP+1: オ探シノ弟君トヤラハ、コノ方デ
+   JP+2: 間違イナイデスカネ？
+   USA-prev: [25030/126992] Perhaps this is the troublesome younger sibling you were looking for?
+   USA     : You're the best, Gaudi. I mean it.
+   USA-next: [None/None] ?
+vid=57 jpu=27207 -> usa=25078 key=127098
+   JP-2: オ探シノ弟君トヤラハ、コノ方デ
+   JP-1: 間違イナイデスカネ？
+   JP+1: ああ、間違いない
+   JP+2: ありがとな、ガウディ
+   USA-prev: [None/None] ?
+   USA     : Ghift! You're all right!
+   USA-next: [25088/127124] Oh Ghift! Thank goodness you're all right!
+vid=58 jpu=27287 -> usa=25102 key=127168
+   JP-2: ギフト！
+   JP-1: よかった、無事だったんだね！
+   JP+1: フォルス！？
+   JP+2: それに、兄さん！？
+   USA-prev: [25088/127124] Oh Ghift! Thank goodness you're all right!
+   USA     : Folth?! And Erst! ERST!
+   USA-next: [25112/127192] Arca?! And Erst! ERST!
+vid=59 jpu=27305 -> usa=25112 key=127192
+   JP-2: フォルス！？
+   JP-1: それに、兄さん！？
+   JP+1: アルカ！？
+   JP+2: それに、兄さん！？
+   USA-prev: [25102/127168] Folth?! And Erst! ERST!
+   USA     : Arca?! And Erst! ERST!
+   USA-next: [None/None] ?
+vid=60 jpu=27342 -> usa=25141 key=127216
+   JP-2: -
+   JP-1: -
+   JP+1: 久しぶりだな、ギフト
+   JP+2: いきなり心配かけさせやがって
+   USA-prev: [None/None] ?
+   USA     : I don't know why I expected you to suspend your troublemaking while I 
+   USA-next: [25155/127296] . . .!
+vid=61 jpu=27358 -> usa=25155 key=127296
+   JP-2: 久しぶりだな、ギフト
+   JP-1: いきなり心配かけさせやがって
+   JP+1: ‥‥‥‥‥‥っ
+   JP+2: ま、無事でなによりだ
+   USA-prev: [25141/127216] I don't know why I expected you to suspend your troublemaking while I 
+   USA     : . . .!
+   USA-next: [25163/127304] Bah! Don't look at me like that, kiddo. I'm just glad you're in one pi
+vid=62 jpu=27376 -> usa=25163 key=127304
+   JP-2: ‥‥‥‥‥‥っ
+   JP-1: -
+   JP+1: ま、無事でなによりだ
+   JP+2: ん‥‥‥少し、背も伸びたか？
+   USA-prev: [25155/127296] . . .!
+   USA     : Bah! Don't look at me like that, kiddo. I'm just glad you're in one pi
+   USA-next: [25176/127404] Yeah, I've been growing and getting better at everything!
+vid=63 jpu=27392 -> usa=25176 key=127404
+   JP-2: ま、無事でなによりだ
+   JP-1: ん‥‥‥少し、背も伸びたか？
+   JP+1: う、うんっ！
+   JP+2: ごめんなさい、兄さん
+   USA-prev: [25163/127304] Bah! Don't look at me like that, kiddo. I'm just glad you're in one pi
+   USA     : Yeah, I've been growing and getting better at everything!
+   USA-next: [25184/127462] It's nice you came to get me, but you didn't have to.
+vid=64 jpu=27413 -> usa=25184 key=127462
+   JP-2: う、うんっ！
+   JP-1: ごめんなさい、兄さん
+   JP+1: ぼくのこと心配して来てくれて
+   JP+2: ありがとう
+   USA-prev: [25176/127404] Yeah, I've been growing and getting better at everything!
+   USA     : It's nice you came to get me, but you didn't have to.
+   USA-next: [None/None] ?
+vid=65 jpu=27440 -> usa=25203 key=127516
+   JP-2: ありがとう
+   JP-1: -
+   JP+1: 礼をいうなら、俺よりも
+   JP+2: フォルス君にな
+   USA-prev: [None/None] ?
+   USA     : Don't kind of thank me. You should be giving props to Folth - he's the
+   USA-next: [25213/127622] Give that kind-of-thank-you to Arca. She's the one who told me you wer
+vid=66 jpu=27458 -> usa=25213 key=127622
+   JP-2: 礼をいうなら、俺よりも
+   JP-1: フォルス君にな
+   JP+1: 礼をいうなら、俺よりも
+   JP+2: アルカちゃんにな
+   USA-prev: [25203/127516] Don't kind of thank me. You should be giving props to Folth - he's the
+   USA     : Give that kind-of-thank-you to Arca. She's the one who told me you wer
+   USA-next: [25221/127704] If I hadn't been clued in, I wouldn't have known where to come looking
+vid=67 jpu=27474 -> usa=25221 key=127704
+   JP-2: 礼をいうなら、俺よりも
+   JP-1: アルカちゃんにな
+   JP+1: わざわざ報せにきてくれたから
+   JP+2: お前を探しにきてやれたんだ
+   USA-prev: [25213/127622] Give that kind-of-thank-you to Arca. She's the one who told me you wer
+   USA     : If I hadn't been clued in, I wouldn't have known where to come looking
+   USA-next: [None/None] ?
+vid=68 jpu=27523 -> usa=25262 key=127784
+   JP-2: -
+   JP-1: -
+   JP+1: フォルス‥‥‥
+   JP+2: アルカ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Folth...
+   USA-next: [None/None] ?
+vid=69 jpu=27546 -> usa=25281 key=127794
+   JP-2: フォルス‥‥‥
+   JP-1: -
+   JP+1: アルカ‥‥‥
+   JP+2: 内緒にするって約束
+   USA-prev: [None/None] ?
+   USA     : Arca...
+   USA-next: [None/None] ?
+vid=70 jpu=27626 -> usa=25346 key=128122
+   JP-2: でも、わたし‥‥‥
+   JP-1: ギフトのことが心配で‥‥‥
+   JP+1: わかってるよ
+   JP+2: 別に怒ってなんてないから
+   USA-prev: [25333/128032] But you were gone so long I had no choice but to worry. I had to make 
+   USA     : Oh, I know. I'm not angry or anything.
+   USA-next: [25360/128162] Folth, I know you had the right intentions. No harm, no foul.
+vid=71 jpu=27653 -> usa=25360 key=128162
+   JP-2: わかってるよ
+   JP-1: 別に怒ってなんてないから
+   JP+1: ありがとう、フォルス
+   JP+2: 兄さんに報せてくれて
+   USA-prev: [25346/128122] Oh, I know. I'm not angry or anything.
+   USA     : Folth, I know you had the right intentions. No harm, no foul.
+   USA-next: [25370/128224] Arca, I know you wanted to keep me safe by telling my brother. Thank y
+vid=72 jpu=27671 -> usa=25370 key=128224
+   JP-2: ありがとう、フォルス
+   JP-1: 兄さんに報せてくれて
+   JP+1: ありがとう、アルカ
+   JP+2: 兄さんに報せてくれて
+   USA-prev: [25360/128162] Folth, I know you had the right intentions. No harm, no foul.
+   USA     : Arca, I know you wanted to keep me safe by telling my brother. Thank y
+   USA-next: [None/None] ?
+vid=73 jpu=27716 -> usa=25412 key=128348
+   JP-2: う、うんっ♪
+   JP-1: う、うんっ♪
+   JP+1: ‥‥‥‥‥‥
+   JP+2: ‥‥‥警告シマス！
+   USA-prev: [25399/128322] Thanks are all I need!♪
+   USA     : . . .
+   USA-next: [None/None] ?
+vid=74 jpu=27752 -> usa=25439 key=128354
+   JP-2: -
+   JP-1: -
+   JP+1: ‥‥‥警告シマス！
+   JP+2: どうした、ガウディ？
+   USA-prev: [None/None] ?
+   USA     : WARNING!
+   USA-next: [None/None] ?
+vid=75 jpu=27774 -> usa=25457 key=128364
+   JP-2: ‥‥‥警告シマス！
+   JP-1: -
+   JP+1: どうした、ガウディ？
+   JP+2: 距離１４０、数ハ７
+   USA-prev: [None/None] ?
+   USA     : Whoa, Gaudi. We're outside, but how about using your inside voice?
+   USA-next: [25465/128432] Seven targets approaching, 140 meters away. Unable to identify class o
+vid=76 jpu=27786 -> usa=25465 key=128432
+   JP-2: どうした、ガウディ？
+   JP-1: -
+   JP+1: 距離１４０、数ハ７
+   JP+2: 種別ト脅威れべるハ特定デキマセンガ‥‥‥
+   USA-prev: [25457/128364] Whoa, Gaudi. We're outside, but how about using your inside voice?
+   USA     : Seven targets approaching, 140 meters away. Unable to identify class o
+   USA-next: [25473/128522] ...whatever they are, they are rapidly approaching and will be upon us
+vid=77 jpu=27802 -> usa=25473 key=128522
+   JP-2: 距離１４０、数ハ７
+   JP-1: 種別ト脅威れべるハ特定デキマセンガ‥‥‥
+   JP+1: 複数ノナニカガ、急速ニ
+   JP+2: コチラニ向カッテキマス！
+   USA-prev: [25465/128432] Seven targets approaching, 140 meters away. Unable to identify class o
+   USA     : ...whatever they are, they are rapidly approaching and will be upon us
+   USA-next: [25487/128600] 'Whatever they are'? Is that an official class? What does that even ME
+vid=78 jpu=27818 -> usa=25487 key=128600
+   JP-2: 複数ノナニカガ、急速ニ
+   JP-1: コチラニ向カッテキマス！
+   JP+1: なにか、って‥‥‥
+   JP+2: なんなんだよ、そりゃ！？
+   USA-prev: [25473/128522] ...whatever they are, they are rapidly approaching and will be upon us
+   USA     : 'Whatever they are'? Is that an official class? What does that even ME
+   USA-next: [None/None] ?
+vid=79 jpu=27858 -> usa=25513 key=128674
+   JP-2: -
+   JP-1: -
+   JP+1: あいつらだ‥‥‥
+   JP+2: え？
+   USA-prev: [None/None] ?
+   USA     : Oh no. No, no, NO! It's...it's THEM.
+   USA-next: [None/None] ?
+vid=80 jpu=27904 -> usa=25561 key=128778
+   JP-2: え？
+   JP-1: え？
+   JP+1: 逃げよう、兄さん！
+   JP+2: あいつらが‥‥‥
+   USA-prev: [25547/128746] You know what's coming? What...
+   USA     : No time to talk. RUN! We need to RUN! It's them...
+   USA-next: [25569/128830] Those...those globs are coming! The...the...Mudmires! They're coming!!
+vid=81 jpu=27926 -> usa=25569 key=128830
+   JP-2: 逃げよう、兄さん！
+   JP-1: あいつらが‥‥‥
+   JP+1: [【泥】]がやってくる！！
+   JP+2: え‥‥‥？　どろ‥‥‥？
+   USA-prev: [25561/128778] No time to talk. RUN! We need to RUN! It's them...
+   USA     : Those...those globs are coming! The...the...Mudmires! They're coming!!
+   USA-next: [None/None] ?
+vid=83 jpu=28169 -> usa=25808 key=129000
+   JP-2: -
+   JP-1: -
+   JP+1: なんだ‥‥‥こいつらは？
+   JP+2: さーちシマシタガ、でーたべーすニハ
+   USA-prev: [None/None] ?
+   USA     : What the hell are these...things?
+   USA-next: [None/None] ?
+vid=84 jpu=28191 -> usa=25826 key=129034
+   JP-2: なんだ‥‥‥こいつらは？
+   JP-1: -
+   JP+1: さーちシマシタガ、でーたべーすニハ
+   JP+2: ナイたいぷノ生物デス
+   USA-prev: [None/None] ?
+   USA     : Search results provide nothing. This creature doesn't exist in our dat
+   USA-next: [25834/129112] It's clear that these globs...or Mudmires, or whatever...are not nativ
+vid=85 jpu=28207 -> usa=25834 key=129112
+   JP-2: さーちシマシタガ、でーたべーすニハ
+   JP-1: ナイたいぷノ生物デス
+   JP+1: 少ナクトモ、既存ノりぃんばうむノ生物
+   JP+2: デハナイト判断イタシマス
+   USA-prev: [25826/129034] Search results provide nothing. This creature doesn't exist in our dat
+   USA     : It's clear that these globs...or Mudmires, or whatever...are not nativ
+   USA-next: [25842/129198] I'm thinking they may be some kind of spirit creature from Sapureth.
+vid=86 jpu=28223 -> usa=25842 key=129198
+   JP-2: 少ナクトモ、既存ノりぃんばうむノ生物
+   JP-1: デハナイト判断イタシマス
+   JP+1: となると‥‥‥[【霊界サプレスの悪魔】]か
+   JP+2: その影響を受けた眷属ってところか？
+   USA-prev: [25834/129112] It's clear that these globs...or Mudmires, or whatever...are not nativ
+   USA     : I'm thinking they may be some kind of spirit creature from Sapureth.
+   USA-next: [25850/129268] Your supposition is surprisingly valid, but I cannot confirm without m
+vid=87 jpu=28239 -> usa=25850 key=129268
+   JP-2: となると‥‥‥[【霊界サプレスの悪魔】]か
+   JP-1: その影響を受けた眷属ってところか？
+   JP+1: 断定ハデキマセンガ
+   JP+2: オソラクハ‥‥‥
+   USA-prev: [25842/129198] I'm thinking they may be some kind of spirit creature from Sapureth.
+   USA     : Your supposition is surprisingly valid, but I cannot confirm without m
+   USA-next: [None/None] ?
+vid=89 jpu=28300 -> usa=25908 key=129364
+   JP-2: -
+   JP-1: -
+   JP+1: おっと！
+   JP+2: 出身はどうあれ、戦る気らしいって
+   USA-prev: [None/None] ?
+   USA     : They're loud buggers, whatever they are.
+   USA-next: [None/None] ?
+vid=90 jpu=28330 -> usa=25934 key=129406
+   JP-2: おっと！
+   JP-1: -
+   JP+1: 出身はどうあれ、戦る気らしいって
+   JP+2: ことだけは間違いなさそうだな
+   USA-prev: [None/None] ?
+   USA     : Giving daddy a headache and making him cranky is not a recipe for peac
+   USA-next: [None/None] ?
+vid=91 jpu=28361 -> usa=25952 key=129492
+   JP-2: 出身はどうあれ、戦る気らしいって
+   JP-1: ことだけは間違いなさそうだな
+   JP+1: ドウヤラ、らいと以外ニモ
+   JP+2: 私ノ出番ガアッタヨウデスネ
+   USA-prev: [None/None] ?
+   USA     : Oh, don't I know it! This thing is about to learn that the hard way, I
+   USA-next: [25965/129572] What do you say, buddy? Think we can take 'em?
+vid=92 jpu=28377 -> usa=25965 key=129572
+   JP-2: ドウヤラ、らいと以外ニモ
+   JP-1: 私ノ出番ガアッタヨウデスネ
+   JP+1: 結構、ハードな戦いになりそうだぜ？
+   JP+2: 問題アリマセン、ソレガ私ノ
+   USA-prev: [25952/129492] Oh, don't I know it! This thing is about to learn that the hard way, I
+   USA     : What do you say, buddy? Think we can take 'em?
+   USA-next: [25973/129620] Statistically, the odds are in our favor. Besides, difficult conflicts
+vid=93 jpu=28394 -> usa=25973 key=129620
+   JP-2: 結構、ハードな戦いになりそうだぜ？
+   JP-1: -
+   JP+1: 問題アリマセン、ソレガ私ノ
+   JP+2: 専門ノ分野デスカラ‥‥‥！
+   USA-prev: [25965/129572] What do you say, buddy? Think we can take 'em?
+   USA     : Statistically, the odds are in our favor. Besides, difficult conflicts
+   USA-next: [None/None] ?
+vid=94 jpu=28419 -> usa=25995 key=129720
+   JP-2: 問題アリマセン、ソレガ私ノ
+   JP-1: 専門ノ分野デスカラ‥‥‥！
+   JP+1: そいつは頼もしいことで！
+   JP+2: エルストさん‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Then let's bust some alien, er, uh...spongy glowing material...open.
+   USA-next: [None/None] ?
+vid=95 jpu=28512 -> usa=26079 key=129806
+   JP-2: -
+   JP-1: -
+   JP+1: ‥‥‥兄さん
+   JP+2: 逃げるんだ、二人とも
+   USA-prev: [None/None] ?
+   USA     : Brother!!
+   USA-next: [26087/129816] Things are about to get real serious real quick. Beat it while you can
+vid=96 jpu=28524 -> usa=26087 key=129816
+   JP-2: ‥‥‥兄さん
+   JP-1: -
+   JP+1: 逃げるんだ、二人とも
+   JP+2: で、でもっ！？
+   USA-prev: [26079/129806] Brother!!
+   USA     : Things are about to get real serious real quick. Beat it while you can
+   USA-next: [26101/129896] B-But!
+vid=97 jpu=28536 -> usa=26101 key=129896
+   JP-2: ‥‥‥兄さん
+   JP-1: 逃げるんだ、二人とも
+   JP+1: で、でもっ！？
+   JP+2: 大丈夫、何も怖いことなんてない
+   USA-prev: [26087/129816] Things are about to get real serious real quick. Beat it while you can
+   USA     : B-But!
+   USA-next: [26114/129904] I don't have time to argue, Ghift. I just gotta take this threat out, 
+vid=98 jpu=28554 -> usa=26114 key=129904
+   JP-2: で、でもっ！？
+   JP-1: -
+   JP+1: 大丈夫、何も怖いことなんてない
+   JP+2: あいつらは、俺たちがやっつける
+   USA-prev: [26101/129896] B-But!
+   USA     : I don't have time to argue, Ghift. I just gotta take this threat out, 
+   USA-next: [None/None] ?
+vid=99 jpu=28596 -> usa=26143 key=130002
+   JP-2: -
+   JP-1: -
+   JP+1: 万ガ一ノ用心デス、えるすとガ安心シテ
+   JP+2: 戦エルヨウニ‥‥‥ワカリマスネ？
+   USA-prev: [None/None] ?
+   USA     : We need both of you out of the area so we can battle without thought o
+   USA-next: [None/None] ?
+vid=100 jpu=28691 -> usa=26230 key=130112
+   JP-2: -
+   JP-1: -
+   JP+1: 俺を信じろよ、フォルス君
+   JP+2: 俺を信じろよ、アルカちゃん
+   USA-prev: [None/None] ?
+   USA     : Ya gotta trust me on this one, Folth.
+   USA-next: [26240/130150] Arca, please! Just trust me on this one...
+vid=101 jpu=28705 -> usa=26240 key=130150
+   JP-2: 俺を信じろよ、フォルス君
+   JP-1: -
+   JP+1: 俺を信じろよ、アルカちゃん
+   JP+2: 君が信じてくれれば、俺は負けない
+   USA-prev: [26230/130112] Ya gotta trust me on this one, Folth.
+   USA     : Arca, please! Just trust me on this one...
+   USA-next: [26253/130194] Even if you're not here, as long as I know you have faith in me, it's 
+vid=102 jpu=28717 -> usa=26253 key=130194
+   JP-2: 俺を信じろよ、フォルス君
+   JP-1: 俺を信じろよ、アルカちゃん
+   JP+1: 君が信じてくれれば、俺は負けない
+   JP+2: こんなやつら、簡単に蹴散らしてやれる
+   USA-prev: [26240/130150] Arca, please! Just trust me on this one...
+   USA     : Even if you're not here, as long as I know you have faith in me, it's 
+   USA-next: [None/None] ?
+vid=103 jpu=28775 -> usa=26295 key=130402
+   JP-2: エルストさん‥‥‥
+   JP-1: ‥‥‥わかった、わたし、信じるね
+   JP+1: よし、いい子だ
+   JP+2: グロロオオォォォ‥‥‥ッ！！
+   USA-prev: [26282/130366] Yes...YES. I trust you, Erst. I do!
+   USA     : Music to my ego, erm...uh, my ears!
+   USA-next: [None/None] ?
+vid=105 jpu=28832 -> usa=26343 key=130454
+   JP-2: グロロオオォォォ‥‥‥ッ！！
+   JP-1: -
+   JP+1: さあ、急げ！
+   JP+2: ゲプオオオォォッ！！
+   USA-prev: [None/None] ?
+   USA     : Looks like puddle puss is about to make a run at us. Get out of here s
+   USA-next: [26356/130552] Gaaaarroph!
+vid=107 jpu=28886 -> usa=26393 key=130564
+   JP-2: -
+   JP-1: -
+   JP+1: 兄さんっ！？
+   JP+2: 行こう、ギフト！
+   USA-prev: [None/None] ?
+   USA     : Erst! Watch out!
+   USA-next: [None/None] ?
+vid=108 jpu=28940 -> usa=26441 key=130746
+   JP-2: 行こう、ギフト！
+   JP-1: エルストさんの言いつけを守らなきゃ！
+   JP+1: イヤだっ！　兄さんっ！？
+   JP+2: 兄さぁーんっ！？
+   USA-prev: [26427/130656] Ghift, we're going to distract him. We have to leave before the battle
+   USA     : No! Erst! ERRRSSSTT!
+   USA-next: [None/None] ?
+vid=109 jpu=28990 -> usa=26477 key=130768
+   JP-2: -
+   JP-1: -
+   JP+1: ぼくのせいだ‥‥‥
+   JP+2: ぼくが、あんなことしたから‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Oh, this is all my fault! I never should have tried those old Summons 
+   USA-next: [26483/130862] Now my brother is going to be swallowed up by that Mudmire, and it's A
+vid=110 jpu=29004 -> usa=26483 key=130862
+   JP-2: ぼくのせいだ‥‥‥
+   JP-1: ぼくが、あんなことしたから‥‥‥
+   JP+1: 呑みこまれちゃう‥‥‥
+   JP+2: エルスト兄さんも、きっと‥‥‥
+   USA-prev: [26477/130768] Oh, this is all my fault! I never should have tried those old Summons 
+   USA     : Now my brother is going to be swallowed up by that Mudmire, and it's A
+   USA-next: [26489/130946] I don't want that to happen! Waaaahh!
+vid=111 jpu=29018 -> usa=26489 key=130946
+   JP-2: 呑みこまれちゃう‥‥‥
+   JP-1: エルスト兄さんも、きっと‥‥‥
+   JP+1: そんなのはイヤだ！！
+   JP+2: はぁ、はぁ、はぁ‥‥‥っ
+   USA-prev: [26483/130862] Now my brother is going to be swallowed up by that Mudmire, and it's A
+   USA     : I don't want that to happen! Waaaahh!
+   USA-next: [None/None] ?
+vid=113 jpu=29254 -> usa=26697 key=131310
+   JP-2: -
+   JP-1: -
+   JP+1: ぐあっ！？
+   JP+2: えるすと、大丈夫デスカ！？
+   USA-prev: [None/None] ?
+   USA     : Aggh!
+   USA-next: [None/None] ?
+vid=114 jpu=29288 -> usa=26727 key=131316
+   JP-2: -
+   JP-1: -
+   JP+1: えるすと、大丈夫デスカ！？
+   JP+2: くっ‥‥‥だいじょうぶだ
+   USA-prev: [None/None] ?
+   USA     : Erst, you aren't damaged, are you?
+   USA-next: [26741/131352] Uh...no...no, it's, uh...just a scratch. I'm fine...
+vid=115 jpu=29300 -> usa=26741 key=131352
+   JP-2: えるすと、大丈夫デスカ！？
+   JP-1: -
+   JP+1: くっ‥‥‥だいじょうぶだ
+   JP+2: 少し、やられちまったが‥‥‥
+   USA-prev: [26727/131316] Erst, you aren't damaged, are you?
+   USA     : Uh...no...no, it's, uh...just a scratch. I'm fine...
+   USA-next: [26749/131406] What kind of Summoner would I be if I let a scratch stop me?
+vid=116 jpu=29322 -> usa=26757 key=131468
+   JP-2: くっ‥‥‥だいじょうぶだ
+   JP-1: 少し、やられちまったが‥‥‥
+   JP+1: これくらい、問題ない！
+   JP+2: 相変ワラズ、ソノ強ガリダケハ
+   USA-prev: [26749/131406] What kind of Summoner would I be if I let a scratch stop me?
+   USA     : Such bravado is, although trivial, quite commendable.
+   USA-next: [26770/131522] Aw Gaudi, you're the master of the backhanded compliment, that's for s
+vid=117 jpu=29334 -> usa=26770 key=131522
+   JP-2: 少し、やられちまったが‥‥‥
+   JP-1: これくらい、問題ない！
+   JP+1: 相変ワラズ、ソノ強ガリダケハ
+   JP+2: 流石ト褒メタクナルれべるデスネ
+   USA-prev: [26757/131468] Such bravado is, although trivial, quite commendable.
+   USA     : Aw Gaudi, you're the master of the backhanded compliment, that's for s
+   USA-next: [26778/131604] Well, as much as I would like to wallow in your charms, we should cons
+vid=118 jpu=29350 -> usa=26778 key=131604
+   JP-2: 相変ワラズ、ソノ強ガリダケハ
+   JP-1: 流石ト褒メタクナルれべるデスネ
+   JP+1: へへっ、ド根性ってヤツさ
+   JP+2: 撤退ヲ勧メタイトコロデスガ‥‥‥
+   USA-prev: [26770/131522] Aw Gaudi, you're the master of the backhanded compliment, that's for s
+   USA     : Well, as much as I would like to wallow in your charms, we should cons
+   USA-next: [26786/131700] Annnd...I'm sensing you are not interested in that salient bit of care
+vid=119 jpu=29367 -> usa=26786 key=131700
+   JP-2: へへっ、ド根性ってヤツさ
+   JP-1: -
+   JP+1: 撤退ヲ勧メタイトコロデスガ‥‥‥
+   JP+2: 弟君トソノ友達ノタメニモ、ココハ
+   USA-prev: [26778/131604] Well, as much as I would like to wallow in your charms, we should cons
+   USA     : Annnd...I'm sensing you are not interested in that salient bit of care
+   USA-next: [26794/131796] Yeah...well, it's like this. I have to meet this head on so the kids c
+vid=120 jpu=29379 -> usa=26794 key=131796
+   JP-2: へへっ、ド根性ってヤツさ
+   JP-1: 撤退ヲ勧メタイトコロデスガ‥‥‥
+   JP+1: 弟君トソノ友達ノタメニモ、ココハ
+   JP+2: 引ケナイ―――デスヨネ？
+   USA-prev: [26786/131700] Annnd...I'm sensing you are not interested in that salient bit of care
+   USA     : Yeah...well, it's like this. I have to meet this head on so the kids c
+   USA-next: [26802/131892] Of course, my stock will go up in their hearts and minds when I pull o
+vid=121 jpu=29395 -> usa=26802 key=131892
+   JP-2: 弟君トソノ友達ノタメニモ、ココハ
+   JP-1: 引ケナイ―――デスヨネ？
+   JP+1: ああ、あいつらが安心できるように
+   JP+2: きちっと始末をつけとかなくちゃな
+   USA-prev: [26794/131796] Yeah...well, it's like this. I have to meet this head on so the kids c
+   USA     : Of course, my stock will go up in their hearts and minds when I pull o
+   USA-next: [26810/131992] Oh, dear. I was afraid you were headed in that direction.
+vid=122 jpu=29411 -> usa=26810 key=131992
+   JP-2: ああ、あいつらが安心できるように
+   JP-1: きちっと始末をつけとかなくちゃな
+   JP+1: カッコつけた手前もあるし、さ
+   JP+2: ヤレヤレ‥‥‥
+   USA-prev: [26802/131892] Of course, my stock will go up in their hearts and minds when I pull o
+   USA     : Oh, dear. I was afraid you were headed in that direction.
+   USA-next: [None/None] ?
+vid=123 jpu=29423 -> usa=26829 key=132050
+   JP-2: きちっと始末をつけとかなくちゃな
+   JP-1: カッコつけた手前もあるし、さ
+   JP+1: ヤレヤレ‥‥‥
+   JP+2: ギフトも、フォルス君も
+   USA-prev: [None/None] ?
+   USA     : C'mon, Gaudi!, Ghift and Folth are trusting me to handle this. I told 
+   USA-next: [26839/132134] Both Ghift and Arca have put their full trust in me.
+vid=124 jpu=29446 -> usa=26839 key=132134
+   JP-2: ヤレヤレ‥‥‥
+   JP-1: -
+   JP+1: ギフトも、フォルス君も
+   JP+2: 俺のことを信じてくれている
+   USA-prev: [26829/132050] C'mon, Gaudi!, Ghift and Folth are trusting me to handle this. I told 
+   USA     : Both Ghift and Arca have put their full trust in me.
+   USA-next: [26847/132188] Their trust becomes the shield that protects me from the fear and pain
+vid=125 jpu=29464 -> usa=26847 key=132188
+   JP-2: ギフトも、フォルス君も
+   JP-1: 俺のことを信じてくれている
+   JP+1: ギフトも、アルカちゃんも
+   JP+2: 俺のことを信じてくれている
+   USA-prev: [26839/132134] Both Ghift and Arca have put their full trust in me.
+   USA     : Their trust becomes the shield that protects me from the fear and pain
+   USA-next: [26855/132272] I have to live up to the trust they've put in me. That's all there is 
+vid=126 jpu=29480 -> usa=26855 key=132272
+   JP-2: ギフトも、アルカちゃんも
+   JP-1: 俺のことを信じてくれている
+   JP+1: その信頼が、戦いの恐怖や痛みから
+   JP+2: 俺を守ってくれる力になるんだ
+   USA-prev: [26847/132188] Their trust becomes the shield that protects me from the fear and pain
+   USA     : I have to live up to the trust they've put in me. That's all there is 
+   USA-next: [26863/132350] Well then, I shall be assisting you to the best of my considerable abi
+vid=127 jpu=29496 -> usa=26863 key=132350
+   JP-2: その信頼が、戦いの恐怖や痛みから
+   JP-1: 俺を守ってくれる力になるんだ
+   JP+1: だったら、俺はそれに応えてみせる
+   JP+2: それだけのことだ！
+   USA-prev: [26855/132272] I have to live up to the trust they've put in me. That's all there is 
+   USA     : Well then, I shall be assisting you to the best of my considerable abi
+   USA-next: [26871/132426] One of the perpetual benefits to being your Cross, I'm afraid.
+vid=128 jpu=29512 -> usa=26871 key=132426
+   JP-2: だったら、俺はそれに応えてみせる
+   JP-1: それだけのことだ！
+   JP+1: ナラバ、私ハ‥‥‥ソンナ貴方ノコトヲ
+   JP+2: 最善ヲ尽クシテ、さぽーとシマショウ
+   USA-prev: [26863/132350] Well then, I shall be assisting you to the best of my considerable abi
+   USA     : One of the perpetual benefits to being your Cross, I'm afraid.
+   USA-next: [None/None] ?
+vid=129 jpu=29528 -> usa=26938 key=132490
+   JP-2: ナラバ、私ハ‥‥‥ソンナ貴方ノコトヲ
+   JP-1: 最善ヲ尽クシテ、さぽーとシマショウ
+   JP+1: 貴方ノ―――[【響友】]トシテ！
+   JP+2: どこいっちゃったんだよ、ギフト
+   USA-prev: [None/None] ?
+   USA     : Great! I take my eyes off him for one minute and Ghift takes off.
+   USA-next: [26951/132556] We promised Erst we'd run away, but it was supposed to be TOGETHER.
+vid=150 jpu=31617 -> usa=28733 key=137214
+   JP-2: すごい！　カッコイイなあ‥‥‥
+   JP-1: -
+   JP+1: ろれいらる？
+   JP+2: しるたーん？
+   USA-prev: [None/None] ?
+   USA     : Loreilal?
+   USA-next: [None/None] ?
+vid=191 jpu=31646 -> usa=28758 key=137224
+   JP-2: ろれいらる？
+   JP-1: -
+   JP+1: しるたーん？
+   JP+2: さぷれす？
+   USA-prev: [None/None] ?
+   USA     : Silturn?
+   USA-next: [None/None] ?
+vid=235 jpu=31675 -> usa=28783 key=137234
+   JP-2: しるたーん？
+   JP-1: -
+   JP+1: さぷれす？
+   JP+2: めいとるぱ？
+   USA-prev: [None/None] ?
+   USA     : Sapureth?
+   USA-next: [None/None] ?
+vid=276 jpu=31704 -> usa=28808 key=137244
+   JP-2: さぷれす？
+   JP-1: -
+   JP+1: めいとるぱ？
+   JP+2: うん、[【機界・ロレイラル】]
+   USA-prev: [None/None] ?
+   USA     : Maetropa?
+   USA-next: [None/None] ?
+vid=151 jpu=32016 -> usa=29085 key=138522
+   JP-2: ‥‥‥ちがうの？
+   JP-1: -
+   JP+1: ごめんなさい‥‥‥
+   JP+2: 質問に、うまく答えられません
+   USA-prev: [None/None] ?
+   USA     : Well, as to the questions about who I am and...why I am here...
+   USA-next: [29095/138586] I'm quite sorry, but I don't really know how to respond in a satisfact
+vid=152 jpu=32040 -> usa=29095 key=138586
+   JP-2: ごめんなさい‥‥‥
+   JP-1: 質問に、うまく答えられません
+   JP+1: ボクは‥‥‥何者なんだろう？
+   JP+2: どうして、ここにいるんだろう？
+   USA-prev: [29085/138522] Well, as to the questions about who I am and...why I am here...
+   USA     : I'm quite sorry, but I don't really know how to respond in a satisfact
+   USA-next: [None/None] ?
+vid=192 jpu=32068 -> usa=29121 key=138668
+   JP-2: どうして、ここにいるんだろう？
+   JP-1: -
+   JP+1: わりぃ‥‥‥
+   JP+2: よく、わかんねえや‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Look, it sounds like you have the pulse of this situation way more tha
+   USA-next: [29131/138746] I'm having trouble with the basics...like who I am and why I'm here.
+vid=193 jpu=32092 -> usa=29131 key=138746
+   JP-2: わりぃ‥‥‥
+   JP-1: よく、わかんねえや‥‥‥
+   JP+1: おいらは‥‥‥何者なんだ？
+   JP+2: どうして、ここにいるんだ？
+   USA-prev: [29121/138668] Look, it sounds like you have the pulse of this situation way more tha
+   USA     : I'm having trouble with the basics...like who I am and why I'm here.
+   USA-next: [None/None] ?
+vid=236 jpu=32120 -> usa=29157 key=138816
+   JP-2: どうして、ここにいるんだ？
+   JP-1: -
+   JP+1: ごめんなさい‥‥‥
+   JP+2: よく、わかりません‥‥‥
+   USA-prev: [None/None] ?
+   USA     : This...this is all very confusing to me...
+   USA-next: [29167/138860] Maybe you can tell me who I am and what I'm doing here? I really don't
+vid=237 jpu=32144 -> usa=29167 key=138860
+   JP-2: ごめんなさい‥‥‥
+   JP-1: よく、わかりません‥‥‥
+   JP+1: わたしは‥‥‥何者なんでしょう？
+   JP+2: どうして、ここにいるんでしょう？
+   USA-prev: [29157/138816] This...this is all very confusing to me...
+   USA     : Maybe you can tell me who I am and what I'm doing here? I really don't
+   USA-next: [None/None] ?
+vid=277 jpu=32172 -> usa=29193 key=138940
+   JP-2: どうして、ここにいるんでしょう？
+   JP-1: -
+   JP+1: ごめん‥‥‥
+   JP+2: よく、わからない‥‥‥
+   USA-prev: [None/None] ?
+   USA     : You sound like you know a LOT. Way more than I do right now.
+   USA-next: [29203/139002] I-I don't even know what I am or why I'm here.
+vid=278 jpu=32196 -> usa=29203 key=139002
+   JP-2: ごめん‥‥‥
+   JP-1: よく、わからない‥‥‥
+   JP+1: わたしは‥‥‥なに？
+   JP+2: どうして、ここにいるの？
+   USA-prev: [29193/138940] You sound like you know a LOT. Way more than I do right now.
+   USA     : I-I don't even know what I am or why I'm here.
+   USA-next: [None/None] ?
+vid=153 jpu=32251 -> usa=29250 key=139154
+   JP-2: もしかして、忘れちゃったの？
+   JP-1: -
+   JP+1: なのかもしれません‥‥‥
+   JP+2: ‥‥‥‥‥‥‥‥‥
+   USA-prev: [None/None] ?
+   USA     : I'm afraid that seems to be the case.
+   USA-next: [None/None] ?
+vid=154 jpu=32265 -> usa=29266 key=139192
+   JP-2: なのかもしれません‥‥‥
+   JP-1: -
+   JP+1: ‥‥‥‥‥‥‥‥‥
+   JP+2: そう、みてえだ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : . . . . . .
+   USA-next: [None/None] ?
+vid=194 jpu=32300 -> usa=29291 key=139204
+   JP-2: -
+   JP-1: -
+   JP+1: そう、みてえだ‥‥‥
+   JP+2: 何も思い出せねえ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Seems about right. My memory's clean as a baby's right now.
+   USA-next: [None/None] ?
+vid=195 jpu=32318 -> usa=29307 key=139264
+   JP-2: そう、みてえだ‥‥‥
+   JP-1: 何も思い出せねえ‥‥‥
+   JP+1: ‥‥‥‥‥‥‥‥‥
+   JP+2: なのかもしれません‥‥‥
+   USA-prev: [None/None] ?
+   USA     : . . . . . . 
+   USA-next: [None/None] ?
+vid=238 jpu=32354 -> usa=29333 key=139278
+   JP-2: -
+   JP-1: -
+   JP+1: なのかもしれません‥‥‥
+   JP+2: ‥‥‥‥‥‥‥‥‥
+   USA-prev: [None/None] ?
+   USA     : I don't know any other way to describe it. So, yes, I've probably lost
+   USA-next: [None/None] ?
+vid=239 jpu=32368 -> usa=29349 key=139360
+   JP-2: なのかもしれません‥‥‥
+   JP-1: -
+   JP+1: ‥‥‥‥‥‥‥‥‥
+   JP+2: ‥‥‥ん、たぶん‥‥‥
+   USA-prev: [None/None] ?
+   USA     : . . . . . . 
+   USA-next: [None/None] ?
+vid=279 jpu=32404 -> usa=29375 key=139374
+   JP-2: -
+   JP-1: -
+   JP+1: ‥‥‥ん、たぶん‥‥‥
+   JP+2: ‥‥‥‥‥‥‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Yeah...yeah, that's it! Well...maybe...
+   USA-next: [None/None] ?
+vid=280 jpu=32418 -> usa=29391 key=139414
+   JP-2: ‥‥‥ん、たぶん‥‥‥
+   JP-1: -
+   JP+1: ‥‥‥‥‥‥‥‥‥
+   JP+2: だいじょうぶだよ！
+   USA-prev: [None/None] ?
+   USA     : . . . . . . 
+   USA-next: [None/None] ?
+vid=155 jpu=32522 -> usa=29482 key=139712
+   JP-2: だから、元気出して！
+   JP-1: -
+   JP+1: ありがとう‥‥‥ええと‥‥‥
+   JP+2: ありがとう‥‥‥ええと‥‥‥
+   USA-prev: [None/None] ?
+   USA     : I thank you for your advice and concern.
+   USA-next: [None/None] ?
+vid=196 jpu=32551 -> usa=29507 key=139754
+   JP-2: ありがとう‥‥‥ええと‥‥‥
+   JP-1: -
+   JP+1: ありがとう‥‥‥ええと‥‥‥
+   JP+2: ありがとう‥‥‥ええと‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Well, that's something, I guess. Thanks...I think.
+   USA-next: [None/None] ?
+vid=240 jpu=32580 -> usa=29532 key=139806
+   JP-2: ありがとう‥‥‥ええと‥‥‥
+   JP-1: -
+   JP+1: ありがとう‥‥‥ええと‥‥‥
+   JP+2: ありがと‥‥‥えと‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Well, thank you for your concern. I'll try to do that.
+   USA-next: [None/None] ?
+vid=281 jpu=32609 -> usa=29557 key=139862
+   JP-2: ありがとう‥‥‥ええと‥‥‥
+   JP-1: -
+   JP+1: ありがと‥‥‥えと‥‥‥
+   JP+2: ぼくの名前はフォルスだよ
+   USA-prev: [None/None] ?
+   USA     : Um...er, thanks...I think.
+   USA-next: [None/None] ?
+vid=156 jpu=32673 -> usa=29610 key=140000
+   JP-2: わたしの名前はアルカだよ
+   JP-1: ねえ、あなたの名前は‥‥‥
+   JP+1: ‥‥‥‥‥‥‥‥‥
+   JP+2: ‥‥‥‥‥‥‥‥‥
+   USA-prev: [None/None] ?
+   USA     : . . .
+   USA-next: [None/None] ?
+vid=197 jpu=32703 -> usa=29636 key=140006
+   JP-2: ‥‥‥‥‥‥‥‥‥
+   JP-1: -
+   JP+1: ‥‥‥‥‥‥‥‥‥
+   JP+2: ‥‥‥‥‥‥‥‥‥
+   USA-prev: [None/None] ?
+   USA     : . . .
+   USA-next: [None/None] ?
+vid=241 jpu=32733 -> usa=29662 key=140012
+   JP-2: ‥‥‥‥‥‥‥‥‥
+   JP-1: -
+   JP+1: ‥‥‥‥‥‥‥‥‥
+   JP+2: ‥‥‥‥‥‥‥‥‥
+   USA-prev: [None/None] ?
+   USA     : . . .
+   USA-next: [None/None] ?
+vid=282 jpu=32763 -> usa=29688 key=140018
+   JP-2: ‥‥‥‥‥‥‥‥‥
+   JP-1: -
+   JP+1: ‥‥‥‥‥‥‥‥‥
+   JP+2: えっと‥‥‥
+   USA-prev: [None/None] ?
+   USA     : . . .
+   USA-next: [None/None] ?
+vid=158 jpu=33079 -> usa=29960 key=140948
+   JP-2: ‥‥‥ダメかな？
+   JP-1: -
+   JP+1: そんなことない！
+   JP+2: なんだか、とってもうれしい！
+   USA-prev: [None/None] ?
+   USA     : It is nothing of the sort. I am quite happy with it.
+   USA-next: [None/None] ?
+vid=159 jpu=33115 -> usa=29982 key=141002
+   JP-2: -
+   JP-1: -
+   JP+1: ボクの名前はダイス‥‥‥
+   JP+2: フォルスにつけてもらった
+   USA-prev: [None/None] ?
+   USA     : From this point forth, I will be known by the name Folth gave me - Dyt
+   USA-next: [29992/141076] Arca, from this day forward I will go by the name you gave me - Dyth.
+vid=160 jpu=33133 -> usa=29992 key=141076
+   JP-2: ボクの名前はダイス‥‥‥
+   JP-1: フォルスにつけてもらった
+   JP+1: ボクの名前はダイス‥‥‥
+   JP+2: アルカにつけてもらった
+   USA-prev: [29982/141002] From this point forth, I will be known by the name Folth gave me - Dyt
+   USA     : Arca, from this day forward I will go by the name you gave me - Dyth.
+   USA-next: [30000/141146] The name has a very important ring to it!
+vid=161 jpu=33149 -> usa=30000 key=141146
+   JP-2: ボクの名前はダイス‥‥‥
+   JP-1: アルカにつけてもらった
+   JP+1: とっても‥‥‥大切な名前‥‥‥！
+   JP+2: そんなことない！
+   USA-prev: [29992/141076] Arca, from this day forward I will go by the name you gave me - Dyth.
+   USA     : The name has a very important ring to it!
+   USA-next: [None/None] ?
+vid=199 jpu=33171 -> usa=30024 key=141188
+   JP-2: とっても‥‥‥大切な名前‥‥‥！
+   JP-1: -
+   JP+1: そんなことない！
+   JP+2: なんか、すっげえうれしい！
+   USA-prev: [None/None] ?
+   USA     : Nah! Don't worry so much! I'm happy to have it!
+   USA-next: [None/None] ?
+vid=200 jpu=33207 -> usa=30046 key=141236
+   JP-2: -
+   JP-1: -
+   JP+1: おいらの名前はカゲロウ‥‥‥
+   JP+2: フォルスにつけてもらった
+   USA-prev: [None/None] ?
+   USA     : Folth, you gave me a great-sounding name - Kagerou.
+   USA-next: [30056/141288] Arca, I couldn't have picked a cooler name than Kagerou myself!
+vid=202 jpu=33225 -> usa=30056 key=141288
+   JP-2: おいらの名前はカゲロウ‥‥‥
+   JP-1: フォルスにつけてもらった
+   JP+1: おいらの名前はカゲロウ‥‥‥
+   JP+2: アルカにつけてもらった
+   USA-prev: [30046/141236] Folth, you gave me a great-sounding name - Kagerou.
+   USA     : Arca, I couldn't have picked a cooler name than Kagerou myself!
+   USA-next: [30070/141352] In fact, the name's already growing on me. It sounds important!
+vid=201 jpu=33241 -> usa=30070 key=141352
+   JP-2: おいらの名前はカゲロウ‥‥‥
+   JP-1: アルカにつけてもらった
+   JP+1: とっても‥‥‥大切な名前‥‥‥！
+   JP+2: そんなこと、ありません！
+   USA-prev: [30056/141288] Arca, I couldn't have picked a cooler name than Kagerou myself!
+   USA     : In fact, the name's already growing on me. It sounds important!
+   USA-next: [None/None] ?
+vid=243 jpu=33269 -> usa=30094 key=141416
+   JP-2: とっても‥‥‥大切な名前‥‥‥！
+   JP-1: -
+   JP+1: そんなこと、ありません！
+   JP+2: なんだか、とってもうれしいです！
+   USA-prev: [None/None] ?
+   USA     : Oh, no...no! It's nothing of the sort. I'm just happy to have a name n
+   USA-next: [None/None] ?
+vid=244 jpu=33304 -> usa=30115 key=141490
+   JP-2: -
+   JP-1: -
+   JP+1: わたしの名前はスピネル‥‥‥
+   JP+2: フォルスにつけてもらった
+   USA-prev: [None/None] ?
+   USA     : My name shall be Spinel, named from the epic story you loved, Folth!
+   USA-next: [30125/141560] Arca, I will always treasure the name you gave me - Spinel.
+vid=245 jpu=33322 -> usa=30125 key=141560
+   JP-2: わたしの名前はスピネル‥‥‥
+   JP-1: フォルスにつけてもらった
+   JP+1: わたしの名前はスピネル‥‥‥
+   JP+2: アルカにつけてもらった
+   USA-prev: [30115/141490] My name shall be Spinel, named from the epic story you loved, Folth!
+   USA     : Arca, I will always treasure the name you gave me - Spinel.
+   USA-next: [30139/141620] Such a beautiful name...and it sounds so important!
+vid=246 jpu=33338 -> usa=30139 key=141620
+   JP-2: わたしの名前はスピネル‥‥‥
+   JP-1: アルカにつけてもらった
+   JP+1: とっても‥‥‥大切な名前‥‥‥！
+   JP+2: そんなことない！
+   USA-prev: [30125/141560] Arca, I will always treasure the name you gave me - Spinel.
+   USA     : Such a beautiful name...and it sounds so important!
+   USA-next: [None/None] ?
+vid=285 jpu=33366 -> usa=30162 key=141672
+   JP-2: とっても‥‥‥大切な名前‥‥‥！
+   JP-1: -
+   JP+1: そんなことない！
+   JP+2: なんだか‥‥‥とってもうれしい！
+   USA-prev: [None/None] ?
+   USA     : Nah! You worry too much! I kinda like the name!
+   USA-next: [None/None] ?
+vid=286 jpu=33400 -> usa=30183 key=141720
+   JP-2: -
+   JP-1: -
+   JP+1: ぺりえ‥‥‥
+   JP+2: ふぉるすに、つけてもらった
+   USA-prev: [None/None] ?
+   USA     : Folth, I'm actually kind of honored that you chose to call me Pariet.
+   USA-next: [30193/141790] Pariet...yes...I like it! You did good, Arca!
+vid=287 jpu=33418 -> usa=30193 key=141790
+   JP-2: ぺりえ‥‥‥
+   JP-1: ふぉるすに、つけてもらった
+   JP+1: ぺりえ‥‥‥
+   JP+2: あるかに、つけてもらった
+   USA-prev: [30183/141720] Folth, I'm actually kind of honored that you chose to call me Pariet.
+   USA     : Pariet...yes...I like it! You did good, Arca!
+   USA-next: [30201/141836] How could I be unhappy with a name from such an epic story? It sounds 
+vid=288 jpu=33434 -> usa=30201 key=141836
+   JP-2: ぺりえ‥‥‥
+   JP-1: あるかに、つけてもらった
+   JP+1: とっても‥‥‥たいせつな、なまえ‥‥‥！
+   JP+2: じゃあ、▲は本当に
+   USA-prev: [30193/141790] Pariet...yes...I like it! You did good, Arca!
+   USA     : How could I be unhappy with a name from such an epic story? It sounds 
+   USA-next: [None/None] ?
+vid=162 jpu=33589 -> usa=30350 key=142146
+   JP-2: なんにもおぼえていないんだ
+   JP-1: -
+   JP+1: うん、ごめんなさい
+   JP+2: ごめん‥‥‥
+   USA-prev: [None/None] ?
+   USA     : I do apologize, but I have no memories prior to just minutes ago.
+   USA-next: [None/None] ?
+vid=203 jpu=33623 -> usa=30380 key=142212
+   JP-2: -
+   JP-1: -
+   JP+1: ごめん‥‥‥
+   JP+2: はい‥‥‥すみません‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Nope. Sorry. Memory's blankety blank blank when I go back more than a 
+   USA-next: [None/None] ?
+vid=247 jpu=33657 -> usa=30410 key=142296
+   JP-2: -
+   JP-1: -
+   JP+1: はい‥‥‥すみません‥‥‥
+   JP+2: ん‥‥‥ごめん‥‥‥
+   USA-prev: [None/None] ?
+   USA     : It's troublesome to me, but I have no memories more than a few minutes
+   USA-next: [None/None] ?
+vid=289 jpu=33685 -> usa=30434 key=142374
+   JP-2: はい‥‥‥すみません‥‥‥
+   JP-1: -
+   JP+1: ん‥‥‥ごめん‥‥‥
+   JP+2: あやまることないよ
+   USA-prev: [None/None] ?
+   USA     : It's totally weird, but I don't remember anything until just before I 
+   USA-next: [None/None] ?
+vid=163 jpu=33783 -> usa=30511 key=142702
+   JP-2: それに▲は、わたしのこと
+   JP-1: 助けてくれたじゃない
+   JP+1: 正直にいえば、それも
+   JP+2: あやふやなんです
+   USA-prev: [None/None] ?
+   USA     : Well, to be entirely candid, I'm not even certain about that.
+   USA-next: [30519/142764] I just had a strange feeling that someone was calling out to me, and I
+vid=164 jpu=33804 -> usa=30519 key=142764
+   JP-2: 正直にいえば、それも
+   JP-1: あやふやなんです
+   JP+1: 誰かがボクのことを呼んだ気がして
+   JP+2: 必死にそれに応えようとしたら
+   USA-prev: [30511/142702] Well, to be entirely candid, I'm not even certain about that.
+   USA     : I just had a strange feeling that someone was calling out to me, and I
+   USA-next: [None/None] ?
+vid=165 jpu=33831 -> usa=30538 key=142846
+   JP-2: 必死にそれに応えようとしたら
+   JP-1: -
+   JP+1: いつのまにか、フォルスが目の前にいた
+   JP+2: それしか思い出せない‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Then as soon as I had the thought to respond, I was standing before yo
+   USA-next: [30548/142926] Then before I even realized it, I was standing before you, Arca.
+vid=166 jpu=33849 -> usa=30548 key=142926
+   JP-2: いつのまにか、フォルスが目の前にいた
+   JP-1: それしか思い出せない‥‥‥
+   JP+1: いつのまにか、アルカが目の前にいた
+   JP+2: それしか思い出せない‥‥‥
+   USA-prev: [30538/142846] Then as soon as I had the thought to respond, I was standing before yo
+   USA     : Then before I even realized it, I was standing before you, Arca.
+   USA-next: [None/None] ?
+vid=204 jpu=33875 -> usa=30566 key=142992
+   JP-2: いつのまにか、アルカが目の前にいた
+   JP-1: それしか思い出せない‥‥‥
+   JP+1: 正直にいえば、それも
+   JP+2: よくわかんねえんだ
+   USA-prev: [None/None] ?
+   USA     : I'm really not so sure that's what happened at all.
+   USA-next: [30574/143044] I just got this weird feeling someone was calling me, and I responded.
+vid=205 jpu=33891 -> usa=30574 key=143044
+   JP-2: 正直にいえば、それも
+   JP-1: よくわかんねえんだ
+   JP+1: 誰かがおいらのことを呼んだ気がして
+   JP+2: 必死にそれに応えようとしたら
+   USA-prev: [30566/142992] I'm really not so sure that's what happened at all.
+   USA     : I just got this weird feeling someone was calling me, and I responded.
+   USA-next: [None/None] ?
+vid=206 jpu=33918 -> usa=30593 key=143116
+   JP-2: 必死にそれに応えようとしたら
+   JP-1: -
+   JP+1: いつのまにか、フォルスが目の前にいた
+   JP+2: ‥‥‥それしか、思い出せねえ
+   USA-prev: [None/None] ?
+   USA     : Next thing I know, I'm standing in front of you, Folth, wondering what
+   USA-next: [30603/143202] And then BAM, I'm standing in front of you, Arca, all confusified and 
+vid=207 jpu=33936 -> usa=30603 key=143202
+   JP-2: いつのまにか、フォルスが目の前にいた
+   JP-1: ‥‥‥それしか、思い出せねえ
+   JP+1: いつのまにか、アルカが目の前にいた
+   JP+2: ‥‥‥それしか、思い出せねえ
+   USA-prev: [30593/143116] Next thing I know, I'm standing in front of you, Folth, wondering what
+   USA     : And then BAM, I'm standing in front of you, Arca, all confusified and 
+   USA-next: [None/None] ?
+vid=248 jpu=33962 -> usa=30626 key=143280
+   JP-2: いつのまにか、アルカが目の前にいた
+   JP-1: ‥‥‥それしか、思い出せねえ
+   JP+1: 正直にいえば、それも
+   JP+2: あやふやなんです
+   USA-prev: [None/None] ?
+   USA     : If I'm being completely honest, I'm not even sure that's what happened
+   USA-next: [30634/143352] I just felt I was being called, and I responded to the call.
+vid=249 jpu=33983 -> usa=30634 key=143352
+   JP-2: 正直にいえば、それも
+   JP-1: あやふやなんです
+   JP+1: 誰かがわたしのことを呼んだ気がして
+   JP+2: 必死にそれに応えようとしたら
+   USA-prev: [30626/143280] If I'm being completely honest, I'm not even sure that's what happened
+   USA     : I just felt I was being called, and I responded to the call.
+   USA-next: [30648/143414] And before I even realized what had happened, I was standing before yo
+vid=250 jpu=34005 -> usa=30648 key=143414
+   JP-2: 誰かがわたしのことを呼んだ気がして
+   JP-1: 必死にそれに応えようとしたら
+   JP+1: いつのまにか、フォルスが目の前にいた
+   JP+2: それしか思い出せない‥‥‥
+   USA-prev: [30634/143352] I just felt I was being called, and I responded to the call.
+   USA     : And before I even realized what had happened, I was standing before yo
+   USA-next: [30658/143494] And then suddenly, I was standing before you, Arca!
+vid=251 jpu=34023 -> usa=30658 key=143494
+   JP-2: いつのまにか、フォルスが目の前にいた
+   JP-1: それしか思い出せない‥‥‥
+   JP+1: いつのまにか、アルカが目の前にいた
+   JP+2: それしか思い出せない‥‥‥
+   USA-prev: [30648/143414] And before I even realized what had happened, I was standing before yo
+   USA     : And then suddenly, I was standing before you, Arca!
+   USA-next: [None/None] ?
+vid=290 jpu=34049 -> usa=30681 key=143546
+   JP-2: いつのまにか、アルカが目の前にいた
+   JP-1: それしか思い出せない‥‥‥
+   JP+1: ‥‥‥よく、わかんない
+   JP+2: だれかに、よばれたきがした
+   USA-prev: [None/None] ?
+   USA     : Awww, I don't know about that. It was all a jumble for me.
+   USA-next: [30689/143606] I got the weird feeling I was being called, and I moved to come toward
+vid=291 jpu=34066 -> usa=30689 key=143606
+   JP-2: ‥‥‥よく、わかんない
+   JP-1: -
+   JP+1: だれかに、よばれたきがした
+   JP+2: それに、こたえようとしたら、
+   USA-prev: [30681/143546] Awww, I don't know about that. It was all a jumble for me.
+   USA     : I got the weird feeling I was being called, and I moved to come toward
+   USA-next: [None/None] ?
+vid=293 jpu=34093 -> usa=30708 key=143688
+   JP-2: それに、こたえようとしたら、
+   JP-1: -
+   JP+1: ふぉるすがめのまえにいた
+   JP+2: ‥‥‥それしか、おもいだせない
+   USA-prev: [None/None] ?
+   USA     : And the next thing I know, you're right in front of me, Folth! It was 
+   USA-next: [30718/143766] Then I was instantly in front of you, Arca. I didn't even know what ha
+vid=294 jpu=34111 -> usa=30718 key=143766
+   JP-2: ふぉるすがめのまえにいた
+   JP-1: ‥‥‥それしか、おもいだせない
+   JP+1: あるかがめのまえにいた
+   JP+2: ‥‥‥それしか、おもいだせない
+   USA-prev: [30708/143688] And the next thing I know, you're right in front of me, Folth! It was 
+   USA     : Then I was instantly in front of you, Arca. I didn't even know what ha
+   USA-next: [None/None] ?
+vid=167 jpu=34237 -> usa=30826 key=144256
+   JP-2: 本当にありがとね、▲
+   JP-1: -
+   JP+1: なんか、くすぐったい‥‥‥です
+   JP+2: なんか、こそばゆいな
+   USA-prev: [None/None] ?
+   USA     : The shower of gratitude is somewhat embarrassing. I did as I should ha
+   USA-next: [None/None] ?
+vid=208 jpu=34265 -> usa=30850 key=144330
+   JP-2: なんか、くすぐったい‥‥‥です
+   JP-1: -
+   JP+1: なんか、こそばゆいな
+   JP+2: あ、いえ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Um, you're...welcome? I...guess?
+   USA-next: [None/None] ?
+vid=252 jpu=34293 -> usa=30874 key=144364
+   JP-2: なんか、こそばゆいな
+   JP-1: -
+   JP+1: あ、いえ‥‥‥
+   JP+2: その、どう、いたしまして‥‥‥
+   USA-prev: [None/None] ?
+   USA     : I certainly did what I could. You're welcome.
+   USA-next: [None/None] ?
+vid=295 jpu=34325 -> usa=30898 key=144410
+   JP-2: あ、いえ‥‥‥
+   JP-1: その、どう、いたしまして‥‥‥
+   JP+1: ん‥‥‥えへへ
+   JP+2: ちょっとはずかしい
+   USA-prev: [None/None] ?
+   USA     : Bah! Now you're embarrassin' me!
+   USA-next: [None/None] ?
+vid=168 jpu=34400 -> usa=30959 key=144476
+   JP-2: -
+   JP-1: -
+   JP+1: フォルスは、これから
+   JP+2: どうするの？
+   USA-prev: [None/None] ?
+   USA     : So, Folth, what is the next course of action?
+   USA-next: [30969/144522] If I might inquire, Arca, what is the next course of action?
+vid=169 jpu=34418 -> usa=30969 key=144522
+   JP-2: フォルスは、これから
+   JP-1: どうするの？
+   JP+1: アルカは、これから
+   JP+2: どうするの？
+   USA-prev: [30959/144476] So, Folth, what is the next course of action?
+   USA     : If I might inquire, Arca, what is the next course of action?
+   USA-next: [None/None] ?
+vid=209 jpu=34455 -> usa=30998 key=144584
+   JP-2: -
+   JP-1: -
+   JP+1: それで、フォルスはこれから
+   JP+2: どうするんだ？
+   USA-prev: [None/None] ?
+   USA     : So what're you gonna do now, Folth?
+   USA-next: [31008/144620] So what's the plan now, Arca?
+vid=210 jpu=34473 -> usa=31008 key=144620
+   JP-2: それで、フォルスはこれから
+   JP-1: どうするんだ？
+   JP+1: それで、アルカはこれから
+   JP+2: どうするんだ？
+   USA-prev: [30998/144584] So what're you gonna do now, Folth?
+   USA     : So what's the plan now, Arca?
+   USA-next: [None/None] ?
+vid=253 jpu=34510 -> usa=31037 key=144650
+   JP-2: -
+   JP-1: -
+   JP+1: フォルスは、これから
+   JP+2: どうするんですか？
+   USA-prev: [None/None] ?
+   USA     : What do you intend to do now, Folth?
+   USA-next: [31047/144688] Arca, what do you intend to do now?
+vid=254 jpu=34528 -> usa=31047 key=144688
+   JP-2: フォルスは、これから
+   JP-1: どうするんですか？
+   JP+1: アルカは、これから
+   JP+2: どうするんですか？
+   USA-prev: [31037/144650] What do you intend to do now, Folth?
+   USA     : Arca, what do you intend to do now?
+   USA-next: [None/None] ?
+vid=296 jpu=34565 -> usa=31076 key=144724
+   JP-2: -
+   JP-1: -
+   JP+1: ふぉるす、これから
+   JP+2: どうするの？
+   USA-prev: [None/None] ?
+   USA     : So what's next, Folth? Can we go somewhere less...globby?
+   USA-next: [31086/144782] So whatcha got in mind next, Arca?
+vid=297 jpu=34583 -> usa=31086 key=144782
+   JP-2: ふぉるす、これから
+   JP-1: どうするの？
+   JP+1: あるか、これから
+   JP+2: どうするの？
+   USA-prev: [31076/144724] So what's next, Folth? Can we go somewhere less...globby?
+   USA     : So whatcha got in mind next, Arca?
+   USA-next: [None/None] ?
+vid=170 jpu=34644 -> usa=31137 key=144984
+   JP-2: なんとか元の世界に帰りたいな
+   JP-1: おかあさんたちも心配してるだろうし
+   JP+1: そうだよね‥‥‥
+   JP+2: そうだよな‥‥‥
+   USA-prev: [None/None] ?
+   USA     : That sounds like a good course of action.
+   USA-next: [None/None] ?
+vid=211 jpu=34677 -> usa=31166 key=145026
+   JP-2: -
+   JP-1: -
+   JP+1: そうだよな‥‥‥
+   JP+2: そうですよね‥‥‥
+   USA-prev: [None/None] ?
+   USA     : That does sound alot like a plan.
+   USA-next: [None/None] ?
+vid=255 jpu=34710 -> usa=31195 key=145060
+   JP-2: -
+   JP-1: -
+   JP+1: そうですよね‥‥‥
+   JP+2: んむ‥‥‥やっぱり
+   USA-prev: [None/None] ?
+   USA     : Seems like that's a good place to start.
+   USA-next: [None/None] ?
+vid=298 jpu=34738 -> usa=31219 key=145102
+   JP-2: そうですよね‥‥‥
+   JP-1: -
+   JP+1: んむ‥‥‥やっぱり
+   JP+2: なあ、▲
+   USA-prev: [None/None] ?
+   USA     : Yeah, I think you're right.
+   USA-next: [None/None] ?
+vid=171 jpu=34822 -> usa=31291 key=145286
+   JP-2: わたしと一緒に来ない？
+   JP-1: -
+   JP+1: え！？
+   JP+2: へ！？
+   USA-prev: [None/None] ?
+   USA     : Pardon?
+   USA-next: [None/None] ?
+vid=212 jpu=34850 -> usa=31315 key=145294
+   JP-2: え！？
+   JP-1: -
+   JP+1: へ！？
+   JP+2: え！？
+   USA-prev: [None/None] ?
+   USA     : Huh?!
+   USA-next: [None/None] ?
+vid=256 jpu=34878 -> usa=31339 key=145300
+   JP-2: へ！？
+   JP-1: -
+   JP+1: え！？
+   JP+2: んむ？
+   USA-prev: [None/None] ?
+   USA     : Hm?!
+   USA-next: [None/None] ?
+vid=299 jpu=34906 -> usa=31362 key=145306
+   JP-2: え！？
+   JP-1: -
+   JP+1: んむ？
+   JP+2: こんなところにひとりぼっちでいても
+   USA-prev: [None/None] ?
+   USA     : WHAT?!
+   USA-next: [None/None] ?
+vid=172 jpu=34997 -> usa=31433 key=145604
+   JP-2: ▲さえよかったら、わたしと一緒に
+   JP-1: リィンバウムにおいでよ！
+   JP+1: リィンバウム‥‥‥
+   JP+2: リィンバウム‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Lyndbaum...
+   USA-next: [None/None] ?
+vid=213 jpu=35024 -> usa=31451 key=145616
+   JP-2: リィンバウム‥‥‥
+   JP-1: -
+   JP+1: リィンバウム‥‥‥
+   JP+2: リィンバウム‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Lyndbaum...
+   USA-next: [None/None] ?
+vid=257 jpu=35046 -> usa=31474 key=145628
+   JP-2: リィンバウム‥‥‥
+   JP-1: -
+   JP+1: リィンバウム‥‥‥
+   JP+2: りぃんばうむ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Lyndbaum...
+   USA-next: [None/None] ?
+vid=300 jpu=35073 -> usa=31498 key=145640
+   JP-2: リィンバウム‥‥‥
+   JP-1: -
+   JP+1: りぃんばうむ‥‥‥
+   JP+2: せっかく友達になれたんだもん
+   USA-prev: [None/None] ?
+   USA     : Lyndbaum...
+   USA-next: [None/None] ?
+vid=173 jpu=35189 -> usa=31580 key=146038
+   JP-2: ずーっと、仲良しでいようよ？
+   JP-1: きっと絶対、楽しいに決まってる！
+   JP+1: トモダチ‥‥‥
+   JP+2: ずっと‥‥‥いっしょ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Well, I must admit that is an alluring proposition.
+   USA-next: [None/None] ?
+vid=214 jpu=35215 -> usa=31603 key=146090
+   JP-2: トモダチ‥‥‥
+   JP-1: ずっと‥‥‥いっしょ‥‥‥
+   JP+1: トモダチ‥‥‥
+   JP+2: ずっと‥‥‥いっしょ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Your plan's just getting better and better!
+   USA-next: [None/None] ?
+vid=258 jpu=35246 -> usa=31627 key=146134
+   JP-2: トモダチ‥‥‥
+   JP-1: ずっと‥‥‥いっしょ‥‥‥
+   JP+1: トモダチ‥‥‥
+   JP+2: ずっと‥‥‥いっしょ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Hmm, 'friends' sounds like a lovely thing.
+   USA-next: [None/None] ?
+vid=301 jpu=35278 -> usa=31651 key=146178
+   JP-2: トモダチ‥‥‥
+   JP-1: ずっと‥‥‥いっしょ‥‥‥
+   JP+1: ともだち‥‥‥
+   JP+2: ずっと‥‥‥いっしょ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : It would be great to be friends forever!
+   USA-next: [None/None] ?
+vid=174 jpu=35332 -> usa=31691 key=146220
+   JP-2: -
+   JP-1: -
+   JP+1: ！？
+   JP+2: ！？
+   USA-prev: [None/None] ?
+   USA     : Oh dear!
+   USA-next: [None/None] ?
+vid=215 jpu=35355 -> usa=31716 key=146230
+   JP-2: ！？
+   JP-1: -
+   JP+1: ！？
+   JP+2: ！？
+   USA-prev: [None/None] ?
+   USA     : What the?!
+   USA-next: [None/None] ?
+vid=259 jpu=35384 -> usa=31741 key=146242
+   JP-2: ！？
+   JP-1: -
+   JP+1: ！？
+   JP+2: ！？
+   USA-prev: [None/None] ?
+   USA     : Ahhh?!
+   USA-next: [None/None] ?
+vid=302 jpu=35413 -> usa=31766 key=146250
+   JP-2: ！？
+   JP-1: -
+   JP+1: ！？
+   JP+2: ゲプォオオォォッ！！
+   USA-prev: [None/None] ?
+   USA     : Whaaaaa?!
+   USA-next: [None/None] ?
+vid=176 jpu=35524 -> usa=31859 key=146434
+   JP-2: （さっき森の中で見た黒い獣‥‥‥
+   JP-1: 　どうして、ここに！？）
+   JP+1: 危ないッ！
+   JP+2: 危ねえッ！
+   USA-prev: [None/None] ?
+   USA     : Watch out!
+   USA-next: [None/None] ?
+vid=217 jpu=35547 -> usa=31878 key=146446
+   JP-2: 危ないッ！
+   JP-1: -
+   JP+1: 危ねえッ！
+   JP+2: 危ないッ！
+   USA-prev: [None/None] ?
+   USA     : Heads up!
+   USA-next: [None/None] ?
+vid=261 jpu=35570 -> usa=31897 key=146456
+   JP-2: 危ねえッ！
+   JP-1: -
+   JP+1: 危ないッ！
+   JP+2: あぶないっ！
+   USA-prev: [None/None] ?
+   USA     : Look out!
+   USA-next: [None/None] ?
+vid=304 jpu=35593 -> usa=31916 key=146466
+   JP-2: 危ないッ！
+   JP-1: -
+   JP+1: あぶないっ！
+   JP+2: ‥‥‥あうッ！？
+   USA-prev: [None/None] ?
+   USA     : Watch out!
+   USA-next: [None/None] ?
+vid=177 jpu=35623 -> usa=31948 key=146478
+   JP-2: -
+   JP-1: -
+   JP+1: ‥‥‥あうッ！？
+   JP+2: ‥‥‥ぐッ！？
+   USA-prev: [None/None] ?
+   USA     : ...Augh?!
+   USA-next: [None/None] ?
+vid=218 jpu=35652 -> usa=31973 key=146488
+   JP-2: ‥‥‥あうッ！？
+   JP-1: -
+   JP+1: ‥‥‥ぐッ！？
+   JP+2: ‥‥‥あうッ！？
+   USA-prev: [None/None] ?
+   USA     : ...Guh?!
+   USA-next: [None/None] ?
+vid=262 jpu=35681 -> usa=31998 key=146498
+   JP-2: ‥‥‥ぐッ！？
+   JP-1: -
+   JP+1: ‥‥‥あうッ！？
+   JP+2: ‥‥‥あうっ！？
+   USA-prev: [None/None] ?
+   USA     : ...Ahhh?!
+   USA-next: [None/None] ?
+vid=305 jpu=35710 -> usa=32023 key=146508
+   JP-2: ‥‥‥あうッ！？
+   JP-1: -
+   JP+1: ‥‥‥あうっ！？
+   JP+2: ▲っ！？
+   USA-prev: [None/None] ?
+   USA     : ...Unghh?!
+   USA-next: [None/None] ?
+vid=178 jpu=35816 -> usa=32111 key=146594
+   JP-2: -
+   JP-1: -
+   JP+1: 逃げて‥‥‥フォルス‥‥‥
+   JP+2: 逃げて‥‥‥アルカ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Folth...RUN!
+   USA-next: [32121/146608] Arca...you must run away...NOW!
+vid=179 jpu=35830 -> usa=32121 key=146608
+   JP-2: 逃げて‥‥‥フォルス‥‥‥
+   JP-1: -
+   JP+1: 逃げて‥‥‥アルカ‥‥‥
+   JP+2: 逃げろ‥‥‥フォルス‥‥‥
+   USA-prev: [32111/146594] Folth...RUN!
+   USA     : Arca...you must run away...NOW!
+   USA-next: [None/None] ?
+vid=219 jpu=35867 -> usa=32154 key=146640
+   JP-2: -
+   JP-1: -
+   JP+1: 逃げろ‥‥‥フォルス‥‥‥
+   JP+2: 逃げろ‥‥‥アルカ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Run...Folth...RUN!
+   USA-next: [32164/146660] Arca...RUN AWAY!
+vid=220 jpu=35881 -> usa=32164 key=146660
+   JP-2: 逃げろ‥‥‥フォルス‥‥‥
+   JP-1: -
+   JP+1: 逃げろ‥‥‥アルカ‥‥‥
+   JP+2: 逃げて‥‥‥フォルス‥‥‥
+   USA-prev: [32154/146640] Run...Folth...RUN!
+   USA     : Arca...RUN AWAY!
+   USA-next: [None/None] ?
+vid=263 jpu=35924 -> usa=32203 key=146678
+   JP-2: -
+   JP-1: -
+   JP+1: 逃げて‥‥‥フォルス‥‥‥
+   JP+2: 逃げて‥‥‥アルカ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Folth...RUN!
+   USA-next: [32213/146692] Arca...run away!
+vid=264 jpu=35938 -> usa=32213 key=146692
+   JP-2: 逃げて‥‥‥フォルス‥‥‥
+   JP-1: -
+   JP+1: 逃げて‥‥‥アルカ‥‥‥
+   JP+2: にげて‥‥‥ふぉるす‥‥‥
+   USA-prev: [32203/146678] Folth...RUN!
+   USA     : Arca...run away!
+   USA-next: [None/None] ?
+vid=306 jpu=35975 -> usa=32246 key=146710
+   JP-2: -
+   JP-1: -
+   JP+1: にげて‥‥‥ふぉるす‥‥‥
+   JP+2: にげて‥‥‥あるか‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Run, Folth...RUN!
+   USA-next: [32256/146728] Run, Arca! Get out of here!
+vid=307 jpu=35989 -> usa=32256 key=146728
+   JP-2: にげて‥‥‥ふぉるす‥‥‥
+   JP-1: -
+   JP+1: にげて‥‥‥あるか‥‥‥
+   JP+2: イヤだっ！　▲のこと
+   USA-prev: [32246/146710] Run, Folth...RUN!
+   USA     : Run, Arca! Get out of here!
+   USA-next: [None/None] ?
+vid=180 jpu=36080 -> usa=32332 key=146960
+   JP-2: ずーっと仲良しでいよう、って！！
+   JP-1: -
+   JP+1: あ‥‥‥
+   JP+2: あ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : But, the danger...
+   USA-next: [None/None] ?
+vid=221 jpu=36107 -> usa=32356 key=146980
+   JP-2: あ‥‥‥
+   JP-1: -
+   JP+1: あ‥‥‥
+   JP+2: あ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : That's a nice thought, but this is reality, and it's about to get HARD
+   USA-next: [None/None] ?
+vid=265 jpu=36135 -> usa=32380 key=147052
+   JP-2: あ‥‥‥
+   JP-1: -
+   JP+1: あ‥‥‥
+   JP+2: あ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Oh, that's the most beautiful thing I've ever heard...
+   USA-next: [None/None] ?
+vid=308 jpu=36163 -> usa=32404 key=147108
+   JP-2: あ‥‥‥
+   JP-1: -
+   JP+1: あ‥‥‥
+   JP+2: ぼくのことを信じて、▲！
+   USA-prev: [None/None] ?
+   USA     : Well, that's unexpected...
+   USA-next: [None/None] ?
+vid=322 jpu=36543 -> usa=32758 key=147544
+   JP-2: ‥‥‥‥‥‥
+   JP-1: ‥‥‥‥‥‥
+   JP+1: 意識ははっきりしてるか？
+   JP+2: 痛いところとかはないか？
+   USA-prev: [32750/147538] . . .
+   USA     : Hello? Are you back with us? Can you understand me?
+   USA-next: [32772/147596] Unghh...I-I'm fine...I think. Just kinda groggy...
+vid=323 jpu=36607 -> usa=32812 key=147736
+   JP-2: まだ少し、ぼーっとしてるけど‥‥‥
+   JP-1: わたし、どうしちゃってたの？
+   JP+1: そいつは俺のほうが聞きたいよ
+   JP+2: あれからもう、三日が経ってるんだぞ
+   USA-prev: [32798/147716] What just happened?
+   USA     : I was hoping you could tell me. You've been missing for three days.
+   USA-next: [None/None] ?
+vid=324 jpu=36666 -> usa=32854 key=147894
+   JP-2: み、三日！？
+   JP-1: どうして！？
+   JP+1: 村のみんなと一緒に、ずっと君を
+   JP+2: 探し続けてたんだ
+   USA-prev: [32841/147854] Three? DAYS?! I...I don't understand...
+   USA     : We don't know what happened, but you've been missing for three days.
+   USA-next: [32867/147964] The villagers were almost ready to call in reinforcements in the searc
+vid=325 jpu=36692 -> usa=32867 key=147964
+   JP-2: 村のみんなと一緒に、ずっと君を
+   JP-1: 探し続けてたんだ
+   JP+1: そろそろ、他の街からも応援を呼ばないと
+   JP+2: いけないかって話になり始めたところで
+   USA-prev: [32854/147894] We don't know what happened, but you've been missing for three days.
+   USA     : The villagers were almost ready to call in reinforcements in the searc
+   USA-next: [32875/148046] ...my buddy here sensed a strong magical force spreading here.
+vid=326 jpu=36708 -> usa=32875 key=148046
+   JP-2: そろそろ、他の街からも応援を呼ばないと
+   JP-1: いけないかって話になり始めたところで
+   JP+1: こいつがいきなり
+   JP+2: すごい魔力を感知してさ
+   USA-prev: [32867/147964] The villagers were almost ready to call in reinforcements in the searc
+   USA     : ...my buddy here sensed a strong magical force spreading here.
+   USA-next: [None/None] ?
+vid=327 jpu=36741 -> usa=32900 key=148110
+   JP-2: -
+   JP-1: -
+   JP+1: 慌テテ、駆ケツケテミタトコロ
+   JP+2: 貴方ト―――
+   USA-prev: [None/None] ?
+   USA     : Yes, I was able to triangulate the position of this area with my senso
+   USA-next: [None/None] ?
+vid=328 jpu=36778 -> usa=32929 key=148184
+   JP-2: -
+   JP-1: -
+   JP+1: その隣に、このちっこいのが
+   JP+2: 倒れていたんだ
+   USA-prev: [None/None] ?
+   USA     : And we found you...BOTH of you, actually. You were out cold.
+   USA-next: [32943/148246] Both?
+vid=329 jpu=36849 -> usa=32992 key=148264
+   JP-2: -
+   JP-1: -
+   JP+1: ‥‥‥
+   JP+2: ‥‥‥へへっ
+   USA-prev: [None/None] ?
+   USA     : . . .
+   USA-next: [None/None] ?
+vid=331 jpu=36879 -> usa=33018 key=148270
+   JP-2: -
+   JP-1: -
+   JP+1: ‥‥‥へへっ
+   JP+2: ど、どうも‥‥‥
+   USA-prev: [None/None] ?
+   USA     : ...heh heh!
+   USA-next: [None/None] ?
+vid=333 jpu=36910 -> usa=33045 key=148282
+   JP-2: -
+   JP-1: -
+   JP+1: ど、どうも‥‥‥
+   JP+2: ‥‥‥
+   USA-prev: [None/None] ?
+   USA     : H-Hello there...
+   USA-next: [None/None] ?
+vid=335 jpu=36941 -> usa=33072 key=148300
+   JP-2: -
+   JP-1: -
+   JP+1: ‥‥‥
+   JP+2: ▲！？
+   USA-prev: [None/None] ?
+   USA     : . . .
+   USA-next: [None/None] ?
+vid=330 jpu=37011 -> usa=33144 key=148394
+   JP-2: 夢じゃ‥‥‥なかったんだ‥‥‥
+   JP-1: -
+   JP+1: 無事でよかった‥‥‥
+   JP+2: お互いに‥‥‥ね
+   USA-prev: [None/None] ?
+   USA     : I just have to say I am relieved we're both in one piece after that no
+   USA-next: [None/None] ?
+vid=332 jpu=37043 -> usa=33167 key=148472
+   JP-2: 無事でよかった‥‥‥
+   JP-1: お互いに‥‥‥ね
+   JP+1: 何が何だか、さっぱりだけどさ
+   JP+2: とにかく助かったみたいだぜ
+   USA-prev: [None/None] ?
+   USA     : I don't pretend to understand it, but somehow we're all right!
+   USA-next: [None/None] ?
+vid=334 jpu=37074 -> usa=33190 key=148536
+   JP-2: 何が何だか、さっぱりだけどさ
+   JP-1: とにかく助かったみたいだぜ
+   JP+1: 気がついたら、わたしもここに
+   JP+2: ともかく、無事でよかったです
+   USA-prev: [None/None] ?
+   USA     : Whatever happened to get us here, I'm just glad we're all right.
+   USA-next: [None/None] ?
+vid=336 jpu=37117 -> usa=33220 key=148602
+   JP-2: -
+   JP-1: -
+   JP+1: ねぼすけふぉるす
+   JP+2: ‥‥‥ぺりえ、いっぱい、しんぱいした
+   USA-prev: [None/None] ?
+   USA     : Oh, Folth! When you were a sleepyhead, Pariet was so worried about you
+   USA-next: [33230/148674] When you were a sleepyhead and wouldn't wake up, Arca, Pariet was so w
+vid=337 jpu=37135 -> usa=33230 key=148674
+   JP-2: ねぼすけふぉるす
+   JP-1: ‥‥‥ぺりえ、いっぱい、しんぱいした
+   JP+1: ねぼすけあるか
+   JP+2: ‥‥‥ぺりえ、いっぱい、しんぱいした
+   USA-prev: [33220/148602] Oh, Folth! When you were a sleepyhead, Pariet was so worried about you
+   USA     : When you were a sleepyhead and wouldn't wake up, Arca, Pariet was so w
+   USA-next: [None/None] ?
+vid=338 jpu=37250 -> usa=33329 key=148938
+   JP-2: -
+   JP-1: -
+   JP+1: 君の口から、説明してくれるかい？
+   JP+2: いったい何が起こったのかを‥‥‥
+   USA-prev: [None/None] ?
+   USA     : I need you to tell me everything you can remember. Think hard...
+   USA-next: [None/None] ?
+vid=339 jpu=37334 -> usa=33402 key=149136
+   JP-2: -
+   JP-1: -
+   JP+1: どう思う、相棒？
+   JP+2: 状況ヲミルニ、彼ハ、オソラク
+   USA-prev: [None/None] ?
+   USA     : What do you make of it, buddy?
+   USA-next: [33416/149168] Considering the circumstances, it's most likely that he fell into a Ga
+vid=340 jpu=37357 -> usa=33416 key=149168
+   JP-2: どう思う、相棒？
+   JP-1: -
+   JP+1: 状況ヲミルニ、彼ハ、オソラク
+   JP+2: [【門（ゲート）】]ニ落チタノデショウネ
+   USA-prev: [33402/149136] What do you make of it, buddy?
+   USA     : Considering the circumstances, it's most likely that he fell into a Ga
+   USA-next: [33426/149242] Given the circumstances, I believe she fell into a Gate.
+vid=341 jpu=37375 -> usa=33426 key=149242
+   JP-2: 状況ヲミルニ、彼ハ、オソラク
+   JP-1: [【門（ゲート）】]ニ落チタノデショウネ
+   JP+1: 状況ヲミルニ、オソラク
+   JP+2: [【門（ゲート）】]ニ落チタノデショウネ
+   USA-prev: [33416/149168] Considering the circumstances, it's most likely that he fell into a Ga
+   USA     : Given the circumstances, I believe she fell into a Gate.
+   USA-next: [None/None] ?
+vid=342 jpu=37436 -> usa=33484 key=149312
+   JP-2: げーと？
+   JP-1: げーと？
+   JP+1: 異世界につながる門のことだよ
+   JP+2: たいていは決まった場所にあるんだが
+   USA-prev: [33471/149306] Gate?
+   USA     : A space-time Gate that connects to the Otherworlds. They are usually a
+   USA-next: [33498/149402] However, some Gates appear randomly from time to time in unstable area
+vid=343 jpu=37463 -> usa=33498 key=149402
+   JP-2: 異世界につながる門のことだよ
+   JP-1: たいていは決まった場所にあるんだが
+   JP+1: たまに、前触れなく現れたりもする
+   JP+2: フォルス君は、そこに落ちたんだ
+   USA-prev: [33484/149312] A space-time Gate that connects to the Otherworlds. They are usually a
+   USA     : However, some Gates appear randomly from time to time in unstable area
+   USA-next: [33508/149476] But in unstable areas, they have been known to open and close randomly
+vid=344 jpu=37481 -> usa=33508 key=149476
+   JP-2: たまに、前触れなく現れたりもする
+   JP-1: フォルス君は、そこに落ちたんだ
+   JP+1: たまに、前触れなく現れたりもする
+   JP+2: アルカちゃんは、そこに落ちたんだ
+   USA-prev: [33498/149402] However, some Gates appear randomly from time to time in unstable area
+   USA     : But in unstable areas, they have been known to open and close randomly
+   USA-next: [None/None] ?
+vid=345 jpu=37514 -> usa=33533 key=149548
+   JP-2: -
+   JP-1: -
+   JP+1: 不安定ナ[【門】]ヲ抜ケル際ハ、
+   JP+2: 時ノ流レモ不安定ニナルコトガ稀ニアリマス
+   USA-prev: [None/None] ?
+   USA     : When an unstable Gate is breached, it isn't unusual for time to become
+   USA-next: [33547/149638] That best explains why he was gone for three days here, but it seemed 
+vid=346 jpu=37536 -> usa=33547 key=149638
+   JP-2: 不安定ナ[【門】]ヲ抜ケル際ハ、
+   JP-1: 時ノ流レモ不安定ニナルコトガ稀ニアリマス
+   JP+1: 彼ニトッテハ短イ時間ダッタハズナノニ
+   JP+2: コチラデ三日経ッテイタノハソノセイデショウ
+   USA-prev: [33533/149548] When an unstable Gate is breached, it isn't unusual for time to become
+   USA     : That best explains why he was gone for three days here, but it seemed 
+   USA-next: [33557/149730] That best explains why she was gone for three days here, but it seemed
+vid=347 jpu=37554 -> usa=33557 key=149730
+   JP-2: 彼ニトッテハ短イ時間ダッタハズナノニ
+   JP-1: コチラデ三日経ッテイタノハソノセイデショウ
+   JP+1: 彼女ニトッテハ短イ時間ダッタハズナノニ
+   JP+2: コチラデ三日経ッテイタノハソノセイデショウ
+   USA-prev: [33547/149638] That best explains why he was gone for three days here, but it seemed 
+   USA     : That best explains why she was gone for three days here, but it seemed
+   USA-next: [33565/149822] I must say that the fact that you made it back in one piece is quite i
+vid=348 jpu=37570 -> usa=33565 key=149822
+   JP-2: 彼女ニトッテハ短イ時間ダッタハズナノニ
+   JP-1: コチラデ三日経ッテイタノハソノセイデショウ
+   JP+1: ヨク無事ニ帰ッテコレタモノデス
+   JP+2: 場合ニヨッテハ、落チタ時点デ
+   USA-prev: [33557/149730] That best explains why she was gone for three days here, but it seemed
+   USA     : I must say that the fact that you made it back in one piece is quite i
+   USA-next: [33573/149904] Certainly not '3,720 to 1' impressive, but quite impressive nonetheles
+vid=349 jpu=37582 -> usa=33573 key=149904
+   JP-2: コチラデ三日経ッテイタノハソノセイデショウ
+   JP-1: ヨク無事ニ帰ッテコレタモノデス
+   JP+1: 場合ニヨッテハ、落チタ時点デ
+   JP+2: 死亡シテイタ可能性モ‥‥‥
+   USA-prev: [33565/149822] I must say that the fact that you made it back in one piece is quite i
+   USA     : Certainly not '3,720 to 1' impressive, but quite impressive nonetheles
+   USA-next: [33583/149978] An unstable Gate breach can mean immediate death more often than not.
+vid=350 jpu=37616 -> usa=33609 key=150048
+   JP-2: -
+   JP-1: -
+   JP+1: こらバカ！　おどかして
+   JP+2: どーするんだよっ！？
+   USA-prev: [None/None] ?
+   USA     : Hey! I know you're a computer, but you might want to cool it with scar
+   USA-next: [33617/150138] I'm sorry if I've been rude. I was simply marveling at the impressive 
+vid=351 jpu=37632 -> usa=33617 key=150138
+   JP-2: こらバカ！　おどかして
+   JP-1: どーするんだよっ！？
+   JP+1: 失敬ナ！　私ハ事実ヲ
+   JP+2: アリノママニ‥‥‥
+   USA-prev: [33609/150048] Hey! I know you're a computer, but you might want to cool it with scar
+   USA     : I'm sorry if I've been rude. I was simply marveling at the impressive 
+   USA-next: [None/None] ?
+vid=352 jpu=37752 -> usa=33713 key=150508
+   JP-2: -
+   JP-1: -
+   JP+1: ‥‥‥‥‥‥
+   JP+2: ツマリ、彼ハ
+   USA-prev: [None/None] ?
+   USA     : . . .
+   USA-next: [None/None] ?
+vid=353 jpu=37796 -> usa=33753 key=150514
+   JP-2: -
+   JP-1: -
+   JP+1: ツマリ、彼ハ
+   JP+2: 貴方ニトッテ恩人ナノデスネ
+   USA-prev: [None/None] ?
+   USA     : I believe that would put him into the category of 'lifesaver' then.
+   USA-next: [33763/150582] Then I am certain you're grateful she was your lifesaver, correct?
+vid=356 jpu=37814 -> usa=33763 key=150582
+   JP-2: ツマリ、彼ハ
+   JP-1: 貴方ニトッテ恩人ナノデスネ
+   JP+1: ツマリ、彼女ハ
+   JP+2: 貴方ニトッテ恩人ナノデスネ
+   USA-prev: [33753/150514] I believe that would put him into the category of 'lifesaver' then.
+   USA     : Then I am certain you're grateful she was your lifesaver, correct?
+   USA-next: [None/None] ?
+vid=355 jpu=37862 -> usa=33803 key=150650
+   JP-2: -
+   JP-1: -
+   JP+1: へへっ、まあね‥‥‥
+   JP+2: そんな‥‥‥照れちゃいます‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Sounds about right to me...
+   USA-next: [None/None] ?
+vid=357 jpu=37893 -> usa=33830 key=150678
+   JP-2: -
+   JP-1: -
+   JP+1: そんな‥‥‥照れちゃいます‥‥‥
+   JP+2: んむ！
+   USA-prev: [None/None] ?
+   USA     : You're flattering, but...
+   USA-next: [None/None] ?
+vid=359 jpu=37923 -> usa=33856 key=150704
+   JP-2: -
+   JP-1: -
+   JP+1: んむ！
+   JP+2: ‥‥‥で、おんじんって、なに？
+   USA-prev: [None/None] ?
+   USA     : What's a lifesaver?
+   USA-next: [None/None] ?
+vid=360 jpu=37962 -> usa=33887 key=150724
+   JP-2: -
+   JP-1: -
+   JP+1: よくわかってるさ
+   JP+2: だが、それはそれだ
+   USA-prev: [None/None] ?
+   USA     : Lifesaver or not, I can't ignore what's happened here.
+   USA-next: [33895/150780] As a Eucross Summoner, I have a duty to the security of this world.
+vid=361 jpu=37978 -> usa=33895 key=150780
+   JP-2: よくわかってるさ
+   JP-1: だが、それはそれだ
+   JP+1: [【異世界調停機構（ユクロス）】]の
+   JP+2: 召喚師としては、
+   USA-prev: [33887/150724] Lifesaver or not, I can't ignore what's happened here.
+   USA     : As a Eucross Summoner, I have a duty to the security of this world.
+   USA-next: [33903/150848] I can't just ignore the mysterious arrival of someone or something fro
+vid=362 jpu=37994 -> usa=33903 key=150848
+   JP-2: [【異世界調停機構（ユクロス）】]の
+   JP-1: 召喚師としては、
+   JP+1: 素性の知れぬ異界の住人を
+   JP+2: このまま見過ごすことはできないな
+   USA-prev: [33895/150780] As a Eucross Summoner, I have a duty to the security of this world.
+   USA     : I can't just ignore the mysterious arrival of someone or something fro
+   USA-next: [None/None] ?
+vid=363 jpu=38037 -> usa=33938 key=150938
+   JP-2: -
+   JP-1: -
+   JP+1: ‥‥‥！？
+   JP+2: な、なんだよっ！？
+   USA-prev: [None/None] ?
+   USA     : . . .?!
+   USA-next: [None/None] ?
+vid=364 jpu=38068 -> usa=33965 key=150946
+   JP-2: -
+   JP-1: -
+   JP+1: な、なんだよっ！？
+   JP+2: あう、あわわわ‥‥‥っ
+   USA-prev: [None/None] ?
+   USA     : W-What's that supposed to mean?!
+   USA-next: [None/None] ?
+vid=365 jpu=38099 -> usa=33992 key=150980
+   JP-2: -
+   JP-1: -
+   JP+1: あう、あわわわ‥‥‥っ
+   JP+2: むむっ！？
+   USA-prev: [None/None] ?
+   USA     : Oh...dear...that sounds a bit ominous.
+   USA-next: [None/None] ?
+vid=366 jpu=38130 -> usa=34019 key=151020
+   JP-2: -
+   JP-1: -
+   JP+1: むむっ！？
+   JP+2: やめてよ、エルストさんっ！？
+   USA-prev: [None/None] ?
+   USA     : Wha-wha-WHAT?!
+   USA-next: [None/None] ?
+vid=371 jpu=38425 -> usa=34294 key=151398
+   JP-2: -
+   JP-1: -
+   JP+1: こいつは、まさか‥‥‥
+   JP+2: エエ、間違イアリマセン
+   USA-prev: [None/None] ?
+   USA     : Wait, isn't this a...
+   USA-next: [None/None] ?
+vid=372 jpu=38447 -> usa=34312 key=151420
+   JP-2: こいつは、まさか‥‥‥
+   JP-1: -
+   JP+1: エエ、間違イアリマセン
+   JP+2: コレハ[【響命石】]、ソシテ[【誓約】]ノ輝キ
+   USA-prev: [None/None] ?
+   USA     : There is no mistake. It is the aura of a Life Resonance Stone, and a P
+   USA-next: [34320/151498] This is most certainly the same magical energy I detected earlier.
+vid=373 jpu=38463 -> usa=34320 key=151498
+   JP-2: エエ、間違イアリマセン
+   JP-1: コレハ[【響命石】]、ソシテ[【誓約】]ノ輝キ
+   JP+1: 先程、私ガ感知ヲシタ
+   JP+2: アノ魔力ト同質ノモノデス
+   USA-prev: [34312/151420] There is no mistake. It is the aura of a Life Resonance Stone, and a P
+   USA     : This is most certainly the same magical energy I detected earlier.
+   USA-next: [None/None] ?
+vid=374 jpu=38491 -> usa=34340 key=151566
+   JP-2: アノ魔力ト同質ノモノデス
+   JP-1: -
+   JP+1: じゃあ、フォルス君とこいつが
+   JP+2: [【響友】]になったっていうのかよ！？
+   USA-prev: [None/None] ?
+   USA     : So Folth and his buddy have become each other's Cross?!
+   USA-next: [34350/151622] But that has to mean that Arca and her friend here have become each ot
+vid=375 jpu=38509 -> usa=34350 key=151622
+   JP-2: じゃあ、フォルス君とこいつが
+   JP-1: [【響友】]になったっていうのかよ！？
+   JP+1: じゃあ、アルカちゃんとこいつが
+   JP+2: [【響友】]になったっていうのかよ！？
+   USA-prev: [34340/151566] So Folth and his buddy have become each other's Cross?!
+   USA     : But that has to mean that Arca and her friend here have become each ot
+   USA-next: [None/None] ?
+vid=376 jpu=38587 -> usa=34420 key=151722
+   JP-2: -
+   JP-1: -
+   JP+1: 楽シイコトモ、ツライコトモ、ナニモカモ
+   JP+2: 分カチ合エル、最高ノ[【友達】]ノコトデス
+   USA-prev: [None/None] ?
+   USA     : Yes, it's a special kind of friendship that intertwines the lifeforce 
+   USA-next: [34428/151808] Once a Cross is formed, the participants share thought and emotion...j
+vid=377 jpu=38603 -> usa=34428 key=151808
+   JP-2: 楽シイコトモ、ツライコトモ、ナニモカモ
+   JP-1: 分カチ合エル、最高ノ[【友達】]ノコトデス
+   JP+1: 私ト―――えるすとノヨウニ、ネ
+   JP+2: 最高の‥‥‥トモダチ‥‥‥
+   USA-prev: [34420/151722] Yes, it's a special kind of friendship that intertwines the lifeforce 
+   USA     : Once a Cross is formed, the participants share thought and emotion...j
+   USA-next: [None/None] ?
+vid=378 jpu=38645 -> usa=34466 key=151904
+   JP-2: -
+   JP-1: -
+   JP+1: 最高の‥‥‥トモダチ‥‥‥
+   JP+2: へっ、そんなの当たり前だっての！
+   USA-prev: [None/None] ?
+   USA     : So that is what you call...Best...friends, right?
+   USA-next: [None/None] ?
+vid=379 jpu=38675 -> usa=34492 key=151954
+   JP-2: -
+   JP-1: -
+   JP+1: へっ、そんなの当たり前だっての！
+   JP+2: どんな時でも、ずっと一緒‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Hey, I won't judge, man...
+   USA-next: [None/None] ?
+vid=380 jpu=38705 -> usa=34518 key=151982
+   JP-2: -
+   JP-1: -
+   JP+1: どんな時でも、ずっと一緒‥‥‥
+   JP+2: 永遠に、ずっと‥‥‥
+   USA-prev: [None/None] ?
+   USA     : We'll always be together...always...forever...
+   USA-next: [None/None] ?
+vid=381 jpu=38739 -> usa=34544 key=152030
+   JP-2: -
+   JP-1: -
+   JP+1: んむ、ずっといっしょ！
+   JP+2: ガウディ、お前‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Yay! Together...forever!
+   USA-next: [None/None] ?
+vid=382 jpu=38776 -> usa=34577 key=152056
+   JP-2: -
+   JP-1: -
+   JP+1: ガウディ、お前‥‥‥
+   JP+2: 貴方ノ懸念ハ充分ニ理解シテイマス
+   USA-prev: [None/None] ?
+   USA     : But Gaudi...
+   USA-next: [34585/152070] I fully understand your apprehension, Erst...
+vid=383 jpu=38788 -> usa=34585 key=152070
+   JP-2: ガウディ、お前‥‥‥
+   JP-1: -
+   JP+1: 貴方ノ懸念ハ充分ニ理解シテイマス
+   JP+2: えるすと‥‥‥
+   USA-prev: [34577/152056] But Gaudi...
+   USA     : I fully understand your apprehension, Erst...
+   USA-next: [None/None] ?
+vid=384 jpu=38815 -> usa=34604 key=152116
+   JP-2: えるすと‥‥‥
+   JP-1: -
+   JP+1: 彼ハ、でーたべーすト
+   JP+2: 一致シナカッタ、正体不明ノ存在
+   USA-prev: [None/None] ?
+   USA     : This new 'friend' is unknown and completely inconsistent with the data
+   USA-next: [34614/152192] Her 'friend' is an unknown and completely inconsistent with the databa
+vid=385 jpu=38833 -> usa=34614 key=152192
+   JP-2: 彼ハ、でーたべーすト
+   JP-1: 一致シナカッタ、正体不明ノ存在
+   JP+1: 彼女ハ、でーたべーすト
+   JP+2: 一致シナカッタ、正体不明ノ存在
+   USA-prev: [34604/152116] This new 'friend' is unknown and completely inconsistent with the data
+   USA     : Her 'friend' is an unknown and completely inconsistent with the databa
+   USA-next: [34622/152266] Precisely like the beasts Ghift called Mudmires.
+vid=386 jpu=38849 -> usa=34622 key=152266
+   JP-2: 彼女ハ、でーたべーすト
+   JP-1: 一致シナカッタ、正体不明ノ存在
+   JP+1: アノ黒イ獣タチト同様ニ
+   JP+2: だったら！？
+   USA-prev: [34614/152192] Her 'friend' is an unknown and completely inconsistent with the databa
+   USA     : Precisely like the beasts Ghift called Mudmires.
+   USA-next: [34636/152316] . . .
+vid=387 jpu=38861 -> usa=34636 key=152316
+   JP-2: 一致シナカッタ、正体不明ノ存在
+   JP-1: アノ黒イ獣タチト同様ニ
+   JP+1: だったら！？
+   JP+2: えるすと‥‥‥
+   USA-prev: [34622/152266] Precisely like the beasts Ghift called Mudmires.
+   USA     : . . .
+   USA-next: [None/None] ?
+vid=398 jpu=39009 -> usa=34774 key=152322
+   JP-2: -
+   JP-1: -
+   JP+1: えるすと‥‥‥
+   JP+2: フォルス君、ダイス
+   USA-prev: [None/None] ?
+   USA     : Erst...
+   USA-next: [None/None] ?
+vid=399 jpu=39073 -> usa=34834 key=152330
+   JP-2: -
+   JP-1: -
+   JP+1: フォルス君、ダイス
+   JP+2: 君たちは、これからも
+   USA-prev: [None/None] ?
+   USA     : Folth and Dyth, I need you to consider this carefully...
+   USA-next: [None/None] ?
+vid=401 jpu=39099 -> usa=34852 key=152388
+   JP-2: フォルス君、ダイス
+   JP-1: 君たちは、これからも
+   JP+1: フォルス君、カゲロウ
+   JP+2: 君たちは、これからも
+   USA-prev: [None/None] ?
+   USA     : Folth and Kagerou, I need you to think about this carefully...
+   USA-next: [None/None] ?
+vid=403 jpu=39125 -> usa=34870 key=152452
+   JP-2: フォルス君、カゲロウ
+   JP-1: 君たちは、これからも
+   JP+1: フォルス君、スピネル
+   JP+2: 君たちは、これからも
+   USA-prev: [None/None] ?
+   USA     : Folth and Spinel, you need to really think about this...
+   USA-next: [None/None] ?
+vid=405 jpu=39151 -> usa=34888 key=152510
+   JP-2: フォルス君、スピネル
+   JP-1: 君たちは、これからも
+   JP+1: フォルス君、ペリエ
+   JP+2: 君たちは、これからも
+   USA-prev: [None/None] ?
+   USA     : Folth and Pariet, I want you to consider this thoughtfully...
+   USA-next: [None/None] ?
+vid=400 jpu=39182 -> usa=34911 key=152572
+   JP-2: -
+   JP-1: -
+   JP+1: アルカちゃん、ダイス
+   JP+2: 君たちは、これからも
+   USA-prev: [None/None] ?
+   USA     : Arca and Dyth, you need to carefully consider this...
+   USA-next: [None/None] ?
+vid=402 jpu=39208 -> usa=34929 key=152626
+   JP-2: アルカちゃん、ダイス
+   JP-1: 君たちは、これからも
+   JP+1: アルカちゃん、カゲロウ
+   JP+2: 君たちは、これからも
+   USA-prev: [None/None] ?
+   USA     : Arca and Kagerou, this will have to be thoughtfully considered...
+   USA-next: [None/None] ?
+vid=404 jpu=39234 -> usa=34947 key=152692
+   JP-2: アルカちゃん、カゲロウ
+   JP-1: 君たちは、これからも
+   JP+1: アルカちゃん、スピネル
+   JP+2: 君たちは、これからも
+   USA-prev: [None/None] ?
+   USA     : Arca and Spinel, you need to think about this carefully.
+   USA-next: [None/None] ?
+vid=406 jpu=39260 -> usa=34965 key=152750
+   JP-2: アルカちゃん、スピネル
+   JP-1: 君たちは、これからも
+   JP+1: アルカちゃん、ペリエ
+   JP+2: 君たちは、これからも
+   USA-prev: [None/None] ?
+   USA     : Arca and Pariet, you need to really think about this...
+   USA-next: [34977/152806] ...do you want to stay bound by this Cross that has happened to you?
+vid=407 jpu=39280 -> usa=34977 key=152806
+   JP-2: アルカちゃん、ペリエ
+   JP-1: 君たちは、これからも
+   JP+1: ずっと、一緒にいたいかい？
+   JP+2: うんっ！
+   USA-prev: [34965/152750] Arca and Pariet, you need to really think about this...
+   USA     : ...do you want to stay bound by this Cross that has happened to you?
+   USA-next: [None/None] ?
+vid=408 jpu=39352 -> usa=35045 key=152894
+   JP-2: -
+   JP-1: -
+   JP+1: はいっ！
+   JP+2: 当然だろ！
+   USA-prev: [None/None] ?
+   USA     : I have no objection.
+   USA-next: [None/None] ?
+vid=409 jpu=39382 -> usa=35071 key=152916
+   JP-2: -
+   JP-1: -
+   JP+1: 当然だろ！
+   JP+2: 側にいたいですっ！
+   USA-prev: [None/None] ?
+   USA     : Yeah, why not?
+   USA-next: [None/None] ?
+vid=410 jpu=39412 -> usa=35097 key=152932
+   JP-2: -
+   JP-1: -
+   JP+1: 側にいたいですっ！
+   JP+2: ‥‥‥だめっていっても
+   USA-prev: [None/None] ?
+   USA     : I most certainly do!
+   USA-next: [None/None] ?
+vid=411 jpu=39443 -> usa=35124 key=152954
+   JP-2: -
+   JP-1: -
+   JP+1: ‥‥‥だめっていっても
+   JP+2: くっついてく！
+   USA-prev: [None/None] ?
+   USA     : Yes, yes, YES! I'm not letting go of my friend! Never...ever!
+   USA-next: [None/None] ?
+vid=412 jpu=39484 -> usa=35157 key=153016
+   JP-2: -
+   JP-1: -
+   JP+1: なら、君たちは今すぐにでも
+   JP+2: セイヴァールに行かなくちゃいけない
+   USA-prev: [None/None] ?
+   USA     : Then the both of you must go to Savorle at once.
+   USA-next: [35165/153066] You'll have to study in the school there and formally become Summoners
+vid=413 jpu=39500 -> usa=35165 key=153066
+   JP-2: なら、君たちは今すぐにでも
+   JP-1: セイヴァールに行かなくちゃいけない
+   JP+1: そこの学園で勉強して―――
+   JP+2: 正式な召喚師になるんだ
+   USA-prev: [35157/153016] Then the both of you must go to Savorle at once.
+   USA     : You'll have to study in the school there and formally become Summoners
+   USA-next: [35173/153138] If you complete that course of action, the Cross will bind you permane
+vid=414 jpu=39516 -> usa=35173 key=153138
+   JP-2: そこの学園で勉強して―――
+   JP-1: 正式な召喚師になるんだ
+   JP+1: そうすれば、きみたちはずっと
+   JP+2: 一緒にいることができる
+   USA-prev: [35165/153066] You'll have to study in the school there and formally become Summoners
+   USA     : If you complete that course of action, the Cross will bind you permane
+   USA-next: [None/None] ?
+vid=415 jpu=39569 -> usa=35215 key=153348
+   JP-2: エルストさんと同じ召喚師に
+   JP-1: わたしが‥‥‥！？
+   JP+1: 無論、簡単なことじゃない
+   JP+2: 君だけじゃなく君の響友も
+   USA-prev: [35202/153300] So I can officially become a Summoner like you?
+   USA     : I don't want you to think this path will be easy...for you OR your Cro
+   USA-next: [35223/153440] But it's a priceless goal you can attain by working together...as a te
+vid=416 jpu=39590 -> usa=35236 key=153514
+   JP-2: 無論、簡単なことじゃない
+   JP-1: 君だけじゃなく君の響友も
+   JP+1: 互いに力を合わせてがんばら
+   JP+2: なくちゃいけないことだ
+   USA-prev: [35223/153440] But it's a priceless goal you can attain by working together...as a te
+   USA     : Are you...fine with that?
+   USA-next: [None/None] ?
+vid=417 jpu=39606 -> usa=35255 key=153540
+   JP-2: 互いに力を合わせてがんばら
+   JP-1: なくちゃいけないことだ
+   JP+1: それでも―――いいか？
+   JP+2: うんっ、なるよ！
+   USA-prev: [None/None] ?
+   USA     : Shyeah! Did you have to even ask?! Summoner, here I come!
+   USA-next: [35264/153598] And, if I'm half the Summoner you are, Erst, I'll be amazing!
+vid=418 jpu=39688 -> usa=35299 key=153798
+   JP-2: エルストさんみたいに、すごい
+   JP-1: 召喚師に絶対なってみせる！
+   JP+1: ‥‥‥‥‥‥
+   JP+2: 一緒にがんばろうね？
+   USA-prev: [35284/153732] I'll work hard to make you proud, Erst, and be a great Summoner!
+   USA     : Aw, kid! Why'd ya have to go and bust my eyes? They're gonna start lea
+   USA-next: [None/None] ?
+vid=419 jpu=39836 -> usa=35429 key=154034
+   JP-2: 一緒にがんばろうね？
+   JP-1: ▲！
+   JP+1: うんっ、任せて！
+   JP+2: おうっ！
+   USA-prev: [None/None] ?
+   USA     : I certainly feel as if I have the ability to succeed. So, yes!
+   USA-next: [None/None] ?
+vid=420 jpu=39858 -> usa=35452 key=154098
+   JP-2: うんっ、任せて！
+   JP-1: -
+   JP+1: おうっ！
+   JP+2: 精一杯、お手伝いします！
+   USA-prev: [None/None] ?
+   USA     : Can't wait! Let's do this!
+   USA-next: [None/None] ?
+vid=421 jpu=39885 -> usa=35475 key=154126
+   JP-2: おうっ！
+   JP-1: -
+   JP+1: 精一杯、お手伝いします！
+   JP+2: めんどくさいけど‥‥‥
+   USA-prev: [None/None] ?
+   USA     : Yes! I'll help you in whatever way I can!
+   USA-next: [None/None] ?
+vid=422 jpu=39924 -> usa=35505 key=154168
+   JP-2: -
+   JP-1: -
+   JP+1: めんどくさいけど‥‥‥
+   JP+2: ふぉるすのためなら、がんばる！
+   USA-prev: [None/None] ?
+   USA     : It sounds like a lot of hard work, but I'll do it for you, Folth.
+   USA-next: [35515/154234] It sounds like not so much fun, but I'll do it for you, Arca!
+vid=423 jpu=39942 -> usa=35515 key=154234
+   JP-2: めんどくさいけど‥‥‥
+   JP-1: ふぉるすのためなら、がんばる！
+   JP+1: めんどくさいけど‥‥‥
+   JP+2: あるかのためなら、がんばる！
+   USA-prev: [35505/154168] It sounds like a lot of hard work, but I'll do it for you, Folth.
+   USA     : It sounds like not so much fun, but I'll do it for you, Arca!
+   USA-next: [None/None] ?
+vid=424 jpu=39981 -> usa=35546 key=154296
+   JP-2: -
+   JP-1: -
+   JP+1: よし！　そうと決まれば
+   JP+2: 早速、準備をしなくちゃな
+   USA-prev: [None/None] ?
+   USA     : Good! Now that that's decided, we have to get ready immediately.
+   USA-next: [None/None] ?
+vid=425 jpu=40007 -> usa=35569 key=154362
+   JP-2: よし！　そうと決まれば
+   JP-1: 早速、準備をしなくちゃな
+   JP+1: ガウディ、本部へ‥‥‥
+   JP+2: いや、ジンゼルア総帥に直接連絡を頼む
+   USA-prev: [None/None] ?
+   USA     : Gaudi, I need you to contact HQ. No...contact Commander Zinzelah direc
+   USA-next: [35577/154438] These kids have special circumstances, so I don't want too much inform
+vid=426 jpu=40028 -> usa=35585 key=154526
+   JP-2: ガウディ、本部へ‥‥‥
+   JP-1: いや、ジンゼルア総帥に直接連絡を頼む
+   JP+1: 特別な事情のある子たちだ、
+   JP+2: あまり情報が漏れる形にはしたくない
+   USA-prev: [35577/154438] These kids have special circumstances, so I don't want too much inform
+   USA     : Understood.
+   USA-next: [None/None] ?
+vid=427 jpu=40044 -> usa=35619 key=154538
+   JP-2: 特別な事情のある子たちだ、
+   JP-1: あまり情報が漏れる形にはしたくない
+   JP+1: 承知シマシタ
+   JP+2: お父さんとお母さんには
+   USA-prev: [None/None] ?
+   USA     : I'll talk to your parents for you.
+   USA-next: [35627/154574] I have to apologize properly for your three-days absence as well...
+vid=428 jpu=40077 -> usa=35627 key=154574
+   JP-2: -
+   JP-1: -
+   JP+1: お父さんとお母さんには
+   JP+2: 俺から説明してやるよ
+   USA-prev: [35619/154538] I'll talk to your parents for you.
+   USA     : I have to apologize properly for your three-days absence as well...
+   USA-next: [None/None] ?
+vid=429 jpu=40098 -> usa=35652 key=154642
+   JP-2: お父さんとお母さんには
+   JP-1: 俺から説明してやるよ
+   JP+1: 三日の間、留守にしたことについても
+   JP+2: ちゃんと謝らないといけないしな
+   USA-prev: [None/None] ?
+   USA     : Wait! What about Ghift?!
+   USA-next: [35660/154668] Is he all right?!
+vid=430 jpu=40181 -> usa=35700 key=154726
+   JP-2: そういえば、ギフトは？
+   JP-1: ギフトは無事なの！？
+   JP+1: ああ‥‥‥そのことならもう
+   JP+2: 気にしなくていいんだ
+   USA-prev: [35685/154708] Is he all right?!
+   USA     : Ah...yes...you don't have to worry about him anymore.
+   USA-next: [None/None] ?
+vid=431 jpu=40232 -> usa=35743 key=154792
+   JP-2: え？
+   JP-1: え？
+   JP+1: ギフトはもう、この村にはいないんだ
+   JP+2: ほら、今回の件もあったしさ
+   USA-prev: [35729/154786] What?
+   USA     : Ghift isn't here anymore. After the event happened, well...
+   USA-next: [35751/154852] ...my family decided to move away. I'll be going to check on him once 
+vid=432 jpu=40254 -> usa=35751 key=154852
+   JP-2: ギフトはもう、この村にはいないんだ
+   JP-1: ほら、今回の件もあったしさ
+   JP+1: 家族そろって、別の街に引っ越したんだ
+   JP+2: 俺もこの後、そっちに行くつもりだよ
+   USA-prev: [35743/154792] Ghift isn't here anymore. After the event happened, well...
+   USA     : ...my family decided to move away. I'll be going to check on him once 
+   USA-next: [None/None] ?
+vid=433 jpu=40308 -> usa=35794 key=155110
+   JP-2: そんな‥‥‥
+   JP-1: わたし、お別れもしてないのに‥‥‥
+   JP+1: なに、すぐにまた会えるさ
+   JP+2: あいつも、君のこと心配してたし
+   USA-prev: [35781/155030] It's hard to believe that happened so fast! I didn't even get to say g
+   USA     : Don't worry, I'm sure you'll see him again soon enough.
+   USA-next: [35802/155166] Once things settle down, I'm sure he'll probably write you a letter or
+vid=434 jpu=40329 -> usa=35802 key=155166
+   JP-2: なに、すぐにまた会えるさ
+   JP-1: あいつも、君のこと心配してたし
+   JP+1: 落ち着いたら手紙でも書くだろう
+   JP+2: だから、なにも心配しなくていい
+   USA-prev: [35794/155110] Don't worry, I'm sure you'll see him again soon enough.
+   USA     : Once things settle down, I'm sure he'll probably write you a letter or
+   USA-next: [None/None] ?
+vid=435 jpu=40374 -> usa=35844 key=155320
+   JP-2: う、うん‥‥‥
+   JP-1: う、うん‥‥‥
+   JP+1: さあ、行こう！
+   JP+2: ‥‥‥‥‥‥‥‥‥
+   USA-prev: [35831/155268] Well...I have that to look forward to, I suppose...
+   USA     : Okay, there's no more time to waste. Let's go!
+   USA-next: [None/None] ?
