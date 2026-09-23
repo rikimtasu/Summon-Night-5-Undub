@@ -35,7 +35,8 @@ Details: `work/RE_notes.md`. Mapping table: `work/v3_entries.txt`.
 |---|---|
 | Input | `Summon Night 5 (USA).iso` (SHA-256 `64977f15…f98c`, 897,253,376 B) |
 | Output | `Summon Night 5 (USA) Undub.iso` (SHA-256 `0b3bee61…d3e`, 1,369,059,328 B) |
-| Tool | xdelta3 3.0.11, encoded with `-B 1073741824 -W 16777216` |
+| Patch | `Summon Night 5 (USA) Undub.xdelta` (SHA-256 `52bcc89f…f9fa`, 466,051,109 B) |
+| Tool | xdelta3 3.0.11, encoded with `-B 1073741824 -W 16777216`, decode-verified |
 
 ```
 xdelta3 -d "Summon Night 5 (USA).iso" "Summon Night 5 (USA) Undub.xdelta" out.iso
