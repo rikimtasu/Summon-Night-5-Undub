@@ -1,8 +1,0 @@
-vid=123 jpu=29423 -> usa=26829 key=132050
-   JP-2: きちっと始末をつけとかなくちゃな
-   JP-1: カッコつけた手前もあるし、さ
-   JP+1: ヤレヤレ‥‥‥
-   JP+2: ギフトも、フォルス君も
-   USA-prev: [None/None] ?
-   USA     : C'mon, Gaudi!, Ghift and Folth are trusting me to handle this. I told 
-   USA-next: [26839/132134] Both Ghift and Arca have put their full trust in me.
