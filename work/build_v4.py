@@ -58,7 +58,9 @@ REPLAY_HOOK_EXPECT = {0xDE430: 0x00808025, 0xDE434: 0x8E050010}
 #   636..648 log recorder (12B)| 648..660 gate recorder (12B)
 REPLAY_CAVE_FVA = CODE_FVA + 228  # 33 words -> ends +360
 REPLAY_RC_FVA = CODE_FVA + 568  # flight recorder: count + 8x(entry,vid)
-GLOBAL_VAR_RT = 0x08A27508  # engine-obj-ptr variable (loader-clean)
+GLOBAL_VAR_RT = 0x08A27508  # engine-obj-ptr variable; file off 0x223508 IS a
+# loader fixup (word is 0 on disc, loader fills it) - the cave only READS it
+# at runtime, i.e. after the loader applied it, so this is fine
 # logger copy hook: backlog logger 0xDDD20 snapshots entries (voice at +0x04)
 # but replay reads +0x08 (0/-1 in USA, vid in JP). Copy pair-range +0x04
 # into +0x08 so replay voices pair lines. s1=entry live; a0/a1/t0 dead
@@ -435,7 +437,11 @@ def make_eboot():
         cur = struct.unpack('<I', d[off:off + 4])[0]
         assert cur == exp, f'replay hook word at {fva:#x} = {cur:#x}'
     assert REPLAY_HOOK_FVA not in diff and (REPLAY_HOOK_FVA + 4) not in diff, 'hook hits fixups!'
-    assert (0x227508) not in diff, 'global var hits fixups!'
+    # GLOBAL_VAR (file off 0x223508 = GLOBAL_VAR_RT - RT) IS a loader fixup;
+    # harmless, because the cave only READS it at runtime, after the loader
+    # applied it.  The old assert here checked a typo'd 0x227508 (absent from
+    # the diff) and so proved nothing; only patch WRITES must dodge fixups,
+    # and those (chunks, hook, caves, recorders) are asserted individually.
     rcave = replay_cave()
     rblob = struct.pack('<%dI' % len(rcave), *rcave)
     roff = SEG + REPLAY_CAVE_FVA

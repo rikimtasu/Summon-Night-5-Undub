@@ -12,9 +12,14 @@ because it verifies the MECHANISM rather than one chapter's script:
   4. chunk descriptors sane  (13 x {runtime addr, count}, inside chunk homes)
   5. table contents EXACTLY equal the reviewed source tables
      (v3_entries.txt + extra_entries.txt), with unique (c10,key) and (c10,vid)
-  6. backlog-replay hooks    (0xDE430, 0xDDF80, 0xDE5C0) and stock neighbours
+  6. backlog-replay hooks    (0xDE430, 0xDDF80, 0xDE5C0), their delay slots,
+     and stock neighbours
   7. no patched word collides with an EBOOT loader fixup
-     (usa_loader_diff.pkl) - the failure that bricked v3
+     (usa_loader_diff.pkl) - the failure that bricked v3.  The written set
+     covers walker, descriptors, table chunks, hooks + delay slots, the
+     three cave bodies and the three flight recorders
+  8. shipped cave bodies (replay/log/gate) compared word-for-word against
+     a re-derivation, flight recorders zeroed
 
 Every constant is re-derived here from the documented semantics instead of being
 imported from the builder, so a builder bug cannot hide behind a shared helper.
@@ -31,6 +36,7 @@ import argparse
 import hashlib
 import os
 import pickle
+import shutil
 import struct
 import subprocess
 import sys
@@ -38,6 +44,8 @@ import tempfile
 
 WORK = r'D:\Documents\Default Project\work'
 ROOT = os.path.dirname(WORK)
+# shipped undub ISO, RE_notes.md "CURRENT shipped artifact hashes"
+UNDUB_ISO_SHA256 = ('e71415a3b6ec2dd0f5975f7c0e8d27f0b4ec885b2574791fb354064a1d1a3348')
 SEG = 0xC0
 RT = 0x08804000
 
@@ -59,6 +67,14 @@ LOG_HOOK_FVA, LOG_HOOK_STOCK = 0xDDF80, {0xDDF80: 0x34140000}
 LOG_NATIVE = {0xDDF7C: 0xAE340014, 0xDDF84: 0x0220A825, 0xDDF88: 0x02912021}
 GATE_HOOK_FVA, GATE_HOOK_STOCK = 0xDE5C0, {0xDE5C0: 0x03E00008,
                                           0xDE5C4: 0x00001025}
+REPLAY_RET_FVA, LOG_RET_FVA = 0xDE438, 0xDDF88
+# gap layout after the walker+descriptors (228B): caves then recorders
+REPLAY_CAVE_FVA = CODE_FVA + 228    # 33 words -> +360
+LOG_CAVE_FVA = CODE_FVA + 360       # 25 words -> +460 (slot to +468)
+GATE_CAVE_FVA = CODE_FVA + 468      # 25 words -> +568
+REPLAY_RC_FVA = CODE_FVA + 568      # recorder: count + 8x(entry,vid) = 68B
+LOG_RC_FVA = CODE_FVA + 636         # recorder: count + entry + vid = 12B
+GATE_RC_FVA = CODE_FVA + 648        # recorder: count + entry + val = 12B
 QUEUE_FN_RT = 0x820C + RT
 PROLOGUE_C10 = 38381
 KNOWN_C10 = (38381, 50098)
@@ -94,6 +110,56 @@ def lui_ori(rd, value):
     """(lui, ori) pair materialising `value` in register rd."""
     return (0x3C000000 | (rd << 16) | ((value >> 16) & 0xFFFF),
             0x34000000 | (rd << 21) | (rd << 16) | (value & 0xFFFF))
+
+
+# generic MIPS encoders used by the cave re-derivations below (opcode forms
+# match the documented semantics; build_v4 uses equivalents)
+def BEQ(rs, rt, imm):
+    return 0x10000000 | (rs << 21) | (rt << 16) | (imm & 0xFFFF)
+
+
+def LUI(rt, imm):
+    return 0x3C000000 | (rt << 16) | (imm & 0xFFFF)
+
+
+def ORI(rs, rt, imm):
+    return 0x34000000 | (rs << 21) | (rt << 16) | (imm & 0xFFFF)
+
+
+def LW(rs, rt, imm):
+    return 0x8C000000 | (rs << 21) | (rt << 16) | (imm & 0xFFFF)
+
+
+def SW(rs, rt, imm):
+    return 0xAC000000 | (rs << 21) | (rt << 16) | (imm & 0xFFFF)
+
+
+def ADDIU(rs, rt, imm):
+    return 0x24000000 | (rs << 21) | (rt << 16) | (imm & 0xFFFF)
+
+
+def ANDI(rs, rt, imm):
+    return 0x30000000 | (rs << 21) | (rt << 16) | (imm & 0xFFFF)
+
+
+def SLTIU(rs, rt, imm):
+    return 0x2C000000 | (rs << 21) | (rt << 16) | (imm & 0xFFFF)
+
+
+def SLL(rt, rd, sh):
+    return (rt << 16) | (rd << 11) | (sh << 6)
+
+
+def ADDU(rs, rt, rd):
+    return (rs << 21) | (rt << 16) | (rd << 11) | 0x21
+
+
+def SUBU(rs, rt, rd):
+    return (rs << 21) | (rt << 16) | (rd << 11) | 0x23
+
+
+def SLTU(rs, rt, rd):
+    return (rs << 21) | (rt << 16) | (rd << 11) | 0x2B
 
 
 def branch_target(word, pc_rt):
@@ -168,6 +234,141 @@ def expected_chunks(entries):
     return chunks
 
 
+def expected_replay_cave():
+    """Re-derive the 33-word backlog-replay cave (semantics per RE_notes).
+
+    Independent SEMANTIC audit of this code (disasm of branch targets,
+    register liveness) lives in work/verify_caves.py; this port exists so
+    the SHIPPED bytes can be compared against the intended words here.
+    """
+    rt = REPLAY_CAVE_FVA + RT
+    rc = REPLAY_RC_FVA + RT
+    ret = REPLAY_RET_FVA + RT
+    code = [
+        0x00808025,                              # 0  move s0, a0 (displaced)
+        0x3C090000 | ((rc >> 16) & 0xFFFF),      # 1  lui  t1, HI(recorder)
+        ORI(9, 9, rc & 0xFFFF),                  # 2  ori  t1, LO(recorder)
+        LW(9, 10, 0),                            # 3  lw   t2, 0(t1) count
+        ANDI(10, 10, 7),                         # 4  andi t2, 7 (ring)
+        SLL(10, 10, 3),                          # 5  sll  t2, 3
+        ADDU(9, 10, 10),                         # 6  addu t2, t1, t2
+        SW(10, 18, 4),                           # 7  sw   s2, 4(t2) entry
+        LW(18, 8, 4),                            # 8  lw   t0, 4(s2) vid
+        SW(10, 8, 8),                            # 9  sw   t0, 8(t2) vid
+        LW(9, 10, 0),                            # 10 lw   t2, 0(t1)
+        ADDIU(10, 10, 1),                        # 11 addiu t2, 1
+        SW(9, 10, 0),                            # 12 sw   t2, 0(t1)
+        ADDIU(0, 9, 0xFFFF),                     # 13 addiu t1, -1
+        0,                                       # 14 beq t0,-1 -> SKIP
+        0x00000000,                              # 15 nop
+        ORI(0, 9, 0x8C00),                       # 16 ori  t1, 0x8C00 pair lo
+        0,                                       # 17 sltu t1, t0, t1
+        0,                                       # 18 bnez t1 -> SKIP
+        0x00000000,                              # 19 nop
+        ORI(0, 9, 0x8FE3),                       # 20 ori  t1, 0x8FE3 pair hi
+        0,                                       # 21 sltu t1, t1, t0
+        0,                                       # 22 bnez t1 -> SKIP
+        0x00000000,                              # 23 nop
+        0x3C0908A2,                              # 24 lui  t1, 0x8A2
+        0x8D297508,                              # 25 lw   t1, 0x7508(t1)
+        0x25296DA0,                              # 26 addiu t1, 0x6DA0
+        0x8D290030,                              # 27 lw   t1, 0x30(t1)
+        0xAD28001C,                              # 28 sw   t0, 0x1C(t1)
+        SW(18, 8, 8),                            # 29 sw   t0, 8(s2) JP parity
+        0x8E050010,                              # 30 SKIP: lw a1, 0x10(s0)
+        0,                                       # 31 j    RET
+        0x00000000,                              # 32 nop
+    ]
+    assert len(code) == 33
+    A = lambda i: rt + i * 4
+    code[14] = BEQ(8, 9, (A(30) - A(14) - 4) // 4)
+    code[17] = SLTU(8, 9, 9)
+    code[18] = BNE(9, 0, (A(30) - A(18) - 4) // 4)
+    code[21] = SLTU(9, 8, 9)
+    code[22] = BNE(9, 0, (A(30) - A(22) - 4) // 4)
+    code[31] = J(ret)
+    return code
+
+
+def expected_log_cave():
+    """Re-derive the 25-word logger copy cave (see verify_caves.py for the
+    independent semantic audit)."""
+    rt = LOG_CAVE_FVA + RT
+    lrc = LOG_RC_FVA + RT
+    ret = LOG_RET_FVA + RT
+    code = [
+        ORI(0, 20, 0),                           # 0  ori s4, zero, 0 (displaced)
+        LUI(8, (lrc >> 16) & 0xFFFF),            # 1  lui  t0, HI(recorder)
+        ORI(8, 8, lrc & 0xFFFF),                 # 2  ori  t0, LO(recorder)
+        SW(8, 17, 4),                            # 3  sw   s1, 4(t0) entry
+        LW(17, 4, 4),                            # 4  lw   a0, 4(s1) vid
+        SW(8, 4, 8),                             # 5  sw   a0, 8(t0) vid
+        LW(8, 5, 0),                             # 6  lw   a1, 0(t0) count
+        ADDIU(5, 5, 1),                          # 7  addiu a1, 1
+        SW(8, 5, 0),                             # 8  sw   a1, 0(t0)
+        LW(17, 5, 8),                            # 9  lw   a1, 8(s1) cur
+        ADDIU(5, 5, 1),                          # 10 addiu a1, 1
+        SLTIU(5, 5, 2),                          # 11 sltiu a1, 2 empty?
+        0,                                       # 12 beqz a1 -> SKIP
+        0x00000000,                              # 13 nop
+        ORI(0, 5, 0x8C00),                       # 14 ori  a1, 0x8C00 pair lo
+        SLTU(4, 5, 5),                           # 15 sltu a1, a0, a1
+        0,                                       # 16 bnez a1 -> SKIP
+        0x00000000,                              # 17 nop
+        ORI(0, 5, 0x8FE3),                       # 18 ori  a1, 0x8FE3 pair hi
+        SLTU(5, 4, 5),                           # 19 sltu a1, a1, a0
+        0,                                       # 20 bnez a1 -> SKIP
+        0x00000000,                              # 21 nop
+        SW(17, 4, 8),                            # 22 sw   a0, 8(s1) copy
+        0,                                       # 23 SKIP: j RET
+        0x00000000,                              # 24 nop
+    ]
+    assert len(code) == 25
+    A = lambda i: rt + i * 4
+    code[12] = BEQ(5, 0, (A(23) - A(12) - 4) // 4)
+    code[16] = BNE(5, 0, (A(23) - A(16) - 4) // 4)
+    code[20] = BNE(5, 0, (A(23) - A(20) - 4) // 4)
+    code[23] = J(ret)
+    return code
+
+
+def expected_gate_cave():
+    """Re-derive the 25-word replay-gate restore cave (JP logic port)."""
+    rt = GATE_CAVE_FVA + RT
+    grc = GATE_RC_FVA + RT
+    code = [
+        LUI(8, (grc >> 16) & 0xFFFF),            # 0  lui  t0, HI(recorder)
+        ORI(8, 8, grc & 0xFFFF),                 # 1  ori  t0, LO(recorder)
+        LW(8, 5, 0),                             # 2  lw   a1, 0(t0) count
+        ADDIU(5, 5, 1),                          # 3  addiu a1, 1
+        SW(8, 5, 0),                             # 4  sw   a1, 0(t0)
+        0x3C050001,                              # 5  lui  a1, 1
+        ADDU(4, 5, 5),                           # 6  addu a1, a0, a1
+        LW(5, 5, 0x96E4),                        # 7  lw   a1, -0x691C(a1)
+        SLL(5, 6, 6),                            # 8  sll  a2, a1, 6
+        ADDU(5, 5, 5),                           # 9  addu a1, a1, a1
+        ADDU(6, 5, 5),                           # 10 addu a1, a2, a1
+        SLL(5, 5, 2),                            # 11 sll  a1, a1, 2
+        SUBU(5, 6, 5),                           # 12 subu a1, a1, a2
+        ADDU(4, 5, 4),                           # 13 addu a0, a0, a1
+        ADDIU(4, 4, 0xE0),                       # 14 addiu a0, 0xE0 entry
+        SW(8, 4, 4),                             # 15 sw   a0, 4(t0) rec
+        LW(4, 4, 8),                             # 16 lw   a0, 8(a0) +0x08
+        SW(8, 4, 8),                             # 17 sw   a0, 8(t0) rec
+        ADDIU(0, 5, 0xFFFF),                     # 18 addiu a1, -1
+        0,                                       # 19 beq  a0, a1 -> SKIP
+        0x00000000,                              # 20 nop
+        0x03E00008,                              # 21 jr   ra (return 1)
+        ORI(0, 2, 1),                            # 22 ori  v0, 1 (delay)
+        0x03E00008,                              # 23 SKIP: jr ra (return 0)
+        0x00001025,                              # 24 move v0, zero (delay)
+    ]
+    assert len(code) == 25
+    A = lambda i: rt + i * 4
+    code[19] = BEQ(4, 5, (A(23) - A(19) - 4) // 4)
+    return code
+
+
 # ------------------------------------------------------------------ sources
 def read_expected_entries():
     """{(c10, key): vid} from the reviewed source tables."""
@@ -231,19 +432,42 @@ def eboot_from_iso(path):
 SCRATCH = r'C:\Users\User\AppData\Local\Temp\opencode'
 
 
+def find_xdelta3():
+    """Locate an xdelta3 binary: $XDELTA3, work/bin/, then PATH.
+
+    The decode is only provenance; correctness comes from the SHA-256 of
+    the decoded ISO, so any xdelta3 build works here.  work/bin/ is the
+    durable location (the old temp dir got wiped once already) and is
+    gitignored - provision: xdelta3 3.2.0 windows-x86_64 release, see
+    RE_notes.md.
+    """
+    cands = []
+    env = os.environ.get('XDELTA3')
+    if env:
+        cands.append(env)
+    cands.append(os.path.join(WORK, 'bin', 'xdelta3.exe'))
+    for c in cands:
+        if c and os.path.isfile(c):
+            return c
+    return shutil.which('xdelta3')
+
+
 def eboot_from_xdelta(xd, src_iso):
-    exe = (r'C:\Users\User\AppData\Local\Temp\opencode\xd\bin'
-           r'\xdelta3-3.0.11-x86_64.exe')
-    if not os.path.isfile(exe):
-        raise SystemExit('xdelta3 not found at %s' % exe)
+    exe = find_xdelta3()
+    if not exe:
+        raise SystemExit(
+            'xdelta3 not found; searched $XDELTA3, %s, PATH - see the '
+            'xdelta section in work/RE_notes.md'
+            % os.path.join(WORK, 'bin', 'xdelta3.exe'))
+    print('using xdelta3: %s' % exe, flush=True)
     os.makedirs(SCRATCH, exist_ok=True)
     out = os.path.join(SCRATCH, 'verify_undub_decode.iso')
     if os.path.isfile(out):
         os.remove(out)
     print('decoding xdelta -> %s (writes ~1.3 GB, please wait)...' % out,
           flush=True)
-    # NOTE: this xdelta3 build requires the "-d" FLAG form.  The "d"
-    # subcommand form parses "-s" as a filename and dies with
+    # NOTE: xdelta3 requires the "-d" FLAG form here.  The "d" subcommand
+    # form parses "-s" as a filename and dies with
     # "too many filenames: -s".
     subprocess.run([exe, '-d', '-f', '-s', src_iso, xd, out], check=True)
     print('decoded %d bytes' % os.path.getsize(out), flush=True)
@@ -302,6 +526,18 @@ def main(argv):
     rep = Report()
     u32 = lambda fva: struct.unpack_from('<I', blob, SEG + fva)[0]
 
+    # 0a. decode provenance: a --xdelta run must produce the shipped undub
+    # ISO byte-identically.  The EBOOT checks below alone would miss damage
+    # in other ISO regions (e.g. the swapped 04.DAT).
+    if tmp_iso:
+        h = hashlib.sha256()
+        with open(tmp_iso, 'rb') as f:
+            for b in iter(lambda: f.read(1 << 20), b''):
+                h.update(b)
+        got = h.hexdigest()
+        rep.check('decoded ISO SHA-256 == shipped undub ISO',
+                  got == UNDUB_ISO_SHA256, got)
+
     # 0. ELF sanity
     rep.check('EBOOT is a plain ELF of the expected size',
               blob[:4] == b'\x7fELF' and len(blob) == EBOOT_SIZE,
@@ -329,7 +565,7 @@ def main(argv):
     rep.check('story hook is j -> walker',
               u32(HOOK_FVA) == J(CODE_FVA + RT),
               '0x%08X -> 0x%08X (want 0x%08X)'
-              % (u32(HOOK_FVA), u32(HOOK_FVA) << 2 & 0x0FFFFFFF | RT,
+              % (u32(HOOK_FVA), (u32(HOOK_FVA) << 2) & 0x0FFFFFFF,
                  J(CODE_FVA + RT)))
     rep.check('story hook delay slot holds displaced sw v0,8(sp)',
               u32(HOOK_FVA + 4) == 0xAFA20008, '0x%08X' % u32(HOOK_FVA + 4))
@@ -405,15 +641,21 @@ def main(argv):
               'unknown: %s' % unknown if unknown else
               'c10 in %s' % sorted({c for c, _ in packed}))
 
-    # 6. backlog-replay hooks
-    for name, fva, stockmap, cave in (
-            ('replay', REPLAY_HOOK_FVA, REPLAY_HOOK_STOCK, CODE_FVA + 228),
-            ('log', LOG_HOOK_FVA, LOG_HOOK_STOCK, CODE_FVA + 360),
-            ('gate', GATE_HOOK_FVA, GATE_HOOK_STOCK, CODE_FVA + 468)):
+    # 6. backlog-replay hooks: j -> the EXACT cave, delay slot as designed
+    #    (replay/gate delay slots are zeroed by the builder, the log delay
+    #    stays native - see LOG_NATIVE)
+    for name, fva, stockmap, cave, delay in (
+            ('replay', REPLAY_HOOK_FVA, REPLAY_HOOK_STOCK, REPLAY_CAVE_FVA, 0),
+            ('log', LOG_HOOK_FVA, LOG_HOOK_STOCK, LOG_CAVE_FVA, 0x0220A825),
+            ('gate', GATE_HOOK_FVA, GATE_HOOK_STOCK, GATE_CAVE_FVA, 0)):
         w = u32(fva)
-        rep.check('backlog %s hook is j -> its cave' % name,
-                  (w & 0xFC000000) == 0x08000000,
-                  '0x%08X (cave target 0x%08X)' % (w, cave + RT))
+        want = J(cave + RT)
+        rep.check('backlog %s hook is j -> its cave' % name, w == want,
+                  '0x%08X -> 0x%08X (want 0x%08X)'
+                  % (w, (w << 2) & 0x0FFFFFFF, want))
+        d = u32(fva + 4)
+        rep.check('backlog %s hook delay slot word as designed' % name,
+                  d == delay, '0x%08X (want 0x%08X)' % (d, delay))
         if stock:
             bad = [hex(f) for f, exp in stockmap.items()
                    if struct.unpack_from('<I', stock, SEG + f)[0] != exp]
@@ -423,6 +665,28 @@ def main(argv):
     rep.check('stock logger neighbour words still native', not bad,
               'bad: %s' % bad if bad else '3/3 intact')
 
+    # 6b. shipped cave bodies + flight recorders (the generator audit in
+    #     verify_caves.py never looks at the shipped bytes)
+    caves = (('replay', REPLAY_CAVE_FVA, expected_replay_cave),
+             ('log', LOG_CAVE_FVA, expected_log_cave),
+             ('gate', GATE_CAVE_FVA, expected_gate_cave))
+    cave_words = []
+    for name, fva, gen in caves:
+        want = gen()
+        cave_words.append((fva, len(want)))
+        gotw = list(struct.unpack_from('<%dI' % len(want), blob, SEG + fva))
+        mism = [i for i in range(len(want)) if gotw[i] != want[i]]
+        rep.check('shipped %s cave matches re-derivation' % name, not mism,
+                  'mismatch at word %s' % mism if mism else
+                  '%d/%d words exact' % (len(want), len(want)))
+    for name, fva, ln in (('replay', REPLAY_RC_FVA, 68),
+                          ('log', LOG_RC_FVA, 12),
+                          ('gate', GATE_RC_FVA, 12)):
+        raw = blob[SEG + fva:SEG + fva + ln]
+        rep.check('shipped %s flight recorder zeroed' % name,
+                  len(raw) == ln and not any(raw),
+                  '%d bytes at 0x%X' % (ln, fva))
+
     # 7. loader fixup collisions
     pkl = os.path.join(WORK, 'usa_loader_diff.pkl')
     if os.path.isfile(pkl):
@@ -431,9 +695,15 @@ def main(argv):
         written.update(range(CODE_FVA, CODE_FVA + 35 * 4, 4))
         written.update(range(dbase, dbase + len(descr) * 4, 4))
         written.update([HOOK_FVA, HOOK_FVA + 4, REPLAY_HOOK_FVA,
-                        REPLAY_HOOK_FVA + 4, LOG_HOOK_FVA, GATE_HOOK_FVA])
+                        REPLAY_HOOK_FVA + 4, LOG_HOOK_FVA, GATE_HOOK_FVA,
+                        GATE_HOOK_FVA + 4])       # log delay stays native
         for (addr, cnt), (fva, _ents) in zip(pairs, chunks):
             written.update(range(fva, fva + cnt * 12, 4))
+        for fva, nwords in cave_words:            # cave bodies (6b)
+            written.update(range(fva, fva + nwords * 4, 4))
+        for fva, ln in ((REPLAY_RC_FVA, 68), (LOG_RC_FVA, 12),
+                        (GATE_RC_FVA, 12)):       # flight recorders
+            written.update(range(fva, fva + ln, 4))
         clash = sorted(written & set(diffset))
         rep.check('no patched word collides with an EBOOT loader fixup',
                   not clash, 'clash: %s' % [hex(c) for c in clash[:4]]

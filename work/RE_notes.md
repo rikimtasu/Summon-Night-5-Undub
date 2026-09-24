@@ -129,7 +129,9 @@ build_v5.py: full rebuild (SVs + JP 04.DAT) + EBOOT extent overwrite + verify
 
 ## xdelta patch v5 for users
 
-xdelta3 3.0.11 official binary, checksum-verified.
+xdelta3 3.0.11 official binary, checksum-verified (historical ENCODE fact -
+the shipped patch stays 3.0.11-encoded; the current local decode tool is
+3.2.0, see the verification section).
 Patch USA ISO to Undub v5 ISO. Default encode 736MB; re-encode with
 1GB source window plus max input window gives 466MB, because the pycdlib
 rebuild shifts file sectors and the small default window misses distant
@@ -173,6 +175,14 @@ NOTE: this xdelta3 build needs the `-d` / `-e` FLAG forms. The `d`/`e`
 subcommand form parses `-s` as a filename ("too many filenames: -s"), and for
 ENCODE the source goes through `-s` too: `-e -s SOURCE INPUT OUTPUT`, not three
 positional paths.
+
+The verifier locates xdelta3 via `$XDELTA3`, then `work/bin/xdelta3.exe`
+(gitignored - we use it, we do not redistribute it), then PATH. The local
+provision is xdelta3 3.2.0 from the official GitHub release (hashes and repair
+record in the verification section below). 3.0.11 no longer has an official
+Windows binary (the GitHub tags carry source only; xdelta.org now serves
+unrelated spam), and decode compatibility is proven empirically, not assumed:
+the `--xdelta` run SHA-256-checks the decoded ISO.
 
 ## DANGER: the build scripts overwrite the live ISO in place (accident 2026-09-24)
 
@@ -245,20 +255,37 @@ made - and raises unless `OUT_ISO` carries the JP opening. It distinguishes JP
 / stock USA / neither, and has a `strict=False` report-only mode. Negative
 tested: it fires on an ISO with the USA opening.
 
+VERDICT HARDENING (2026-09-25): `review_xdelta_patch.py`'s intent check used to
+enforce only "no UNEXPECTED changes/additions" (the subset direction), so a
+stock `EBOOT.BIN` - or any deleted stock file - still printed VERDICT CURRENT.
+It now also requires every expected change to be present (`missing changes`)
+and no deletions (`deleted stock files`), i.e. exact-set equality in both
+directions. Negative probe: stock USA ISO passed as `--undub` reports both
+expected changes missing and exits 1.
+
 LESSON: static code verification and file-content verification answer
 different questions. All 30 EBOOT checks passed while the patch was wrong.
 Run both.
 
-## Shipped-patch static verification (2026-09-24)
+## Shipped-patch static verification (2026-09-24; hardened 2026-09-25)
 
 `verify_shipped_patch.py` validates the patch mechanism for EVERY chapter at
 once, with no emulator, save files or network: engine clamp NOPed
 (0x17904/08/0C), story hook `j` + displaced `sw`, all 35 walker words, all six
 branch/jump targets, the 11 chunk descriptors, the packed table against the
 reviewed sources, duplicate/uniqueness rules, the three backlog-replay hooks
-plus stock neighbours, and loader-fixup collisions (1080 words). Result: 30/30
+(each `j` to its EXACT cave address, delay-slot word as designed) plus stock
+neighbours, the three cave bodies word-for-word against a re-derivation, the
+three flight recorders zeroed, and loader-fixup collisions. Result: 30/30
 PASS on the local EBOOT, on the ISO, and on the xdelta decoded from the stock
-USA ISO.
+USA ISO (2026-09-24 runs).
+
+Hardening (2026-09-25, code-review findings 4-5): the backlog-hook check had
+only tested "is a `j`" - the cave target was never compared (the story-hook
+check did compare); `verify_caves.py` audits the cave GENERATOR and never the
+shipped bytes; and the loader-fixup `written` set omitted the cave bodies, the
+three recorders and the gate hook delay slot (1080 -> 1187 words). All three
+closed: **39/39 PASS** on the shipped ISO (2026-09-25).
 
 Design point: every MIPS immediate is **re-derived from semantics**, not
 imported from `build_v4.py`, so a builder bug cannot hide behind a shared
@@ -267,8 +294,46 @@ TARGET index where the branch's OWN index belonged, yielding `imm = -1`. Caught
 because the word-comparison and branch-target checks disagreed.
 
 Negative-tested (all CAUGHT, exit 1): clamp restored, one voice id altered,
-walker branch shifted by one, one table entry zeroed, story hook removed. A
-verifier that cannot fail is worthless, so keep adding tamper cases.
+walker branch shifted by one, one table entry zeroed, story hook removed
+(2026-09-24); replay hook retargeted, gate delay slot dirtied, one log-cave
+word flipped, replay recorder count written (2026-09-25). A verifier that
+cannot fail is worthless, so keep adding tamper cases.
+
+Repair record (2026-09-25, code-review findings 7-10):
+
+1. (7) xdelta3 gone: the 3.0.11 exe lived under the opencode TEMP dir and was
+   wiped with it, so the `--xdelta` repro could not run. Re-provisioned
+   **xdelta3 3.2.0** from the official GitHub release:
+   `xdelta3-3.2.0-windows-x86_64.zip`, published SHA-256
+   `af8ef036cb077a48df080c9a8ac1be4a6e7511c32d11f8bec89b6803a9e52576`
+   (locally verified), exe SHA-256
+   `53d90226615f217d3380c39892833311b4e24acd863e1ca01f14b5e772e2e6d0`,
+   installed at `work/bin/xdelta3.exe` (gitignored). Verifier lookup is now
+   `$XDELTA3` -> `work/bin/xdelta3.exe` -> PATH. The `--xdelta` path gained
+   the 40th check: the DECODED ISO is SHA-256'd against
+   `e71415a3...a3348` (previously only its EBOOT was checked, so damage
+   outside the EBOOT could have passed). Result: **40/40** via the command
+   above (2026-09-25); default ISO mode remains 39/39. Negtest: passing the
+   undub ISO as `--source-iso` is rejected by xdelta3's own window checksum
+   (XD3_INVALID_INPUT, exit 1).
+2. (8) `chapter_voice_census.py --selftest` called `run()` with the TRACKED
+   report/TSV paths, so every selftest rewrote them - a run without the save
+   states could degrade the tracked files. `run()` gained `write=True`;
+   selftest passes `write=False` and prints that it wrote nothing. Result:
+   9/9 checks, tracked hashes unchanged. Plain runs still write.
+3. (9) `build_v6fix.py` copied `v3_entries.txt.pre_round6` before its
+   row-level asserts, so a re-run clobbered the pristine backup and then died
+   on the add-collision assert. It now refuses to overwrite an existing
+   backup (SystemExit before any write). Script compiled, never run.
+4. (10) `build_v4.py` asserted `(0x227508) not in diff` - wrong address: the
+   global's file offset is 0x223508 (= 0x08A27508 - RT) and IS a loader
+   fixup, while 0x227508 is not in the diff at all - so the check proved
+   nothing, and the `(loader-clean)` comment on `GLOBAL_VAR_RT` was false
+   (this document's backlog-replay entry carried the same false claim; both
+   corrected). The premise was backwards anyway: the cave only READS the
+   global at runtime, after the loader has applied it - only patch WRITES
+   must dodge fixups. Assert removed, comment corrected; script compiled,
+   never run.
 
 ## Chapter dialect map (2026-09-24) - do NOT hardcode call targets
 
@@ -339,7 +404,7 @@ ground truth for voice placement.
 
 New xdelta after voice audit fix (25 moves + 3 drops, 336 voices). Same big-window settings. Verified by decode, SHA-256 match. Final patch file 465959255 bytes.
 
-**Backlog voice replay:** entries log voice id at +0x04 (pair ids seen live; -1 unvoiced). Replay fn 0xDE3E8 re-displays text with no voice call, so no restored voice replays (not even native pair lines). Fix: hook 0xDE430 (loader-clean, s2=entry live, t0/t1 proven free) -> 13-word cave stores entry+0x04 to voiceobj+0x1C when != -1, then displaced ops + return. Voiceobj via fixed global 0x08A27508 (loader-clean, chain verified live). EBOOT-only rebuild. Lesson: BEQ vs BNE polarity double-check by disasm.
+**Backlog voice replay:** entries log voice id at +0x04 (pair ids seen live; -1 unvoiced). Replay fn 0xDE3E8 re-displays text with no voice call, so no restored voice replays (not even native pair lines). Fix: hook 0xDE430 (loader-clean, s2=entry live, t0/t1 proven free) -> 13-word cave stores entry+0x04 to voiceobj+0x1C when != -1, then displaced ops + return. Voiceobj via fixed global 0x08A27508 (file off 0x223508 IS a loader fixup - not loader-clean as once claimed; the cave only reads it post-load, chain verified live). EBOOT-only rebuild. Lesson: BEQ vs BNE polarity double-check by disasm.
 
 **Backlog replay fix v2:** added flight recorder to replay cave (count + ring of last 8 (entry,vid)) after catching systematic rs/rt hand-encoding slips (t1/t2 vs t3/t6) via disasm check. Rule: never hand-encode; use LW/SW/ORI/ADDIU/ANDI/SLL/ADDU helpers + mandatory capstone verification.
 

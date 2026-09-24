@@ -14,3 +14,6 @@ work/capture_backups/
 *.png
 # Python
 __pycache__/
+# local xdelta3 binary for verify_shipped_patch.py --xdelta (provisioned,
+# not redistributed - see work/RE_notes.md)
+work/bin/

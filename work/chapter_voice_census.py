@@ -391,7 +391,13 @@ def pair_blocks(jp, usa, overrides):
 
 
 def run(ram_jp, ram_usa, states_dir, overrides, out_report, out_tsv,
-        use_dat=True):
+        use_dat=True, write=True):
+    """Scan + census; write out_report/out_tsv only when write is True.
+
+    --selftest passes write=False so it can never clobber the tracked
+    report/TSV with a partial (state-less) run; it checks in-memory
+    results only.
+    """
     log = []
     seen, blocks = set(), []
     log.append('== inputs ==')
@@ -547,23 +553,24 @@ def run(ram_jp, ram_usa, states_dir, overrides, out_report, out_tsv,
     log.append('  delpair>0 = USA deleted native pair triggers: silent too, '
                'and not fixable by the table alone.')
 
-    with open(out_report, 'w', encoding='utf-8') as f:
-        f.write('\n'.join(log) + '\n')
-    with open(out_tsv, 'w', encoding='utf-8', newline='') as f:
-        f.write('\t'.join(['chapter', 'jp_c10', 'usa_c10', 'kind', 'vid',
-                           'jp_unit', 'jp_prev_unit', 'jp_prev_text',
-                           'jp_next_unit', 'jp_next_text', 'usa_key',
-                           'usa_text', 'status']) + '\n')
-        for row in tsv_rows:
-            f.write('\t'.join(c.replace('\t', ' ').replace('\n', ' ')
-                              for c in row) + '\n')
+    if write:
+        with open(out_report, 'w', encoding='utf-8') as f:
+            f.write('\n'.join(log) + '\n')
+        with open(out_tsv, 'w', encoding='utf-8', newline='') as f:
+            f.write('\t'.join(['chapter', 'jp_c10', 'usa_c10', 'kind', 'vid',
+                               'jp_unit', 'jp_prev_unit', 'jp_prev_text',
+                               'jp_next_unit', 'jp_next_text', 'usa_key',
+                               'usa_text', 'status']) + '\n')
+            for row in tsv_rows:
+                f.write('\t'.join(c.replace('\t', ' ').replace('\n', ' ')
+                                  for c in row) + '\n')
     return log, summary, pairs
 
 
 # ----------------------------------------------------------------- selftest
 def selftest(ram_jp, ram_usa, states_dir, use_dat=True):
     log, summary, pairs = run(ram_jp, ram_usa, states_dir, [], REPORT, TSV,
-                              use_dat)
+                              use_dat, write=False)
     by_c10 = {(j['c10'], u['c10']): (j, u) for j, u in pairs}
     checks, failed, skipped = [], 0, 0
 
@@ -633,8 +640,8 @@ def selftest(ram_jp, ram_usa, states_dir, use_dat=True):
         print('%-46s %s  %s' % (name, 'PASS' if ok else 'FAIL', detail))
     print('\n%d check(s), %d failed, %d chapter(s) skipped'
           % (len(checks), failed, skipped))
-    print('report: %s' % REPORT)
-    print('tsv   : %s' % TSV)
+    print('--selftest wrote nothing; report/TSV stay as committed:')
+    print('  regenerate with a plain run: %s' % REPORT)
     return 1 if failed else 0
 
 

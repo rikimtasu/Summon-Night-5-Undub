@@ -152,14 +152,21 @@ def main(argv):
     changed_expected = set(EXPECTED_EBOOT) | {'/PSP_GAME/USRDIR/04.DAT'}
     got_changed = {p for p, *_ in changed}
     unexpected = sorted(got_changed - changed_expected)
+    # the inverse direction matters too: a stock EBOOT.BIN (or stock 04.DAT)
+    # would otherwise sail through as "nothing unexpected changed"
+    missing_changed = sorted(changed_expected - got_changed)
     extra_added = sorted(set(only_u) - added_expected)
     missing_added = sorted(added_expected - set(only_u))
+    deleted = sorted(only_s)
     print('  changed files expected : %s' % sorted(changed_expected))
     print('  added files expected   : %d (SV00..SV17)' % len(added_expected))
     print('  unexpected changes     : %s' % (unexpected or 'none'))
+    print('  missing changes        : %s' % (missing_changed or 'none'))
     print('  unexpected added files : %s' % (extra_added or 'none'))
     print('  expected files missing : %s' % (missing_added or 'none'))
-    ok = not unexpected and not extra_added and not missing_added
+    print('  deleted stock files    : %s' % (deleted or 'none'))
+    ok = (not unexpected and not missing_changed and not extra_added
+          and not missing_added and not deleted)
     print()
 
     print('=== JP-sourced files: identical to the JP ISO? ===')

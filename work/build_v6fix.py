@@ -8,6 +8,7 @@ call with the expected unit before touching the table.
   DROPS: vids whose JP line has no standalone USA counterpart
   ADDS : vid -> (key, jp_unit, usa_unit)  (round-4 drops 30/118/124 reinstated)
 """
+import os
 import shutil
 import struct
 import sys
@@ -85,7 +86,15 @@ def main():
     print(f'validated {len(MOVES)} move + {len(ADDS)} add targets against USA script')
 
     # 2. transform the table
-    shutil.copy(ENTRIES, ENTRIES + '.pre_round6')
+    backup = ENTRIES + '.pre_round6'
+    if os.path.exists(backup):
+        # Never clobber a pristine backup: on a re-run the row-level
+        # asserts below (add collision) fire AFTER this point, so an
+        # unconditional copy would destroy the backup and then die.
+        raise SystemExit(f'{backup} already exists - table already has '
+                         'round-6 applied? remove it only if you really '
+                         'want a fresh backup of the current table')
+    shutil.copy(ENTRIES, backup)
     rows = [l.split() for l in open(ENTRIES)]
     print('entries before:', len(rows))
     out, seen_keys, seen_vids = [], set(), set()
