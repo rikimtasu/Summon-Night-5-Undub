@@ -1,15 +1,28 @@
 == inputs ==
+  psp_ram_1014.bin                   1 new block(s)
+  psp_ram_backlog.bin                0 new block(s)
+  psp_ram_crash.bin                  1 new block(s)
   psp_ram_jp.bin                     1 new block(s)
   psp_ram_jp2.bin                    0 new block(s)
-  psp_ram_jp_replay.bin              0 new block(s)
+  psp_ram_jp_replay.bin              1 new block(s)
+  psp_ram_probe.bin                  0 new block(s)
+  psp_ram_probe2.bin                 0 new block(s)
+  psp_ram_replay.bin                 0 new block(s)
+  psp_ram_replay3.bin                0 new block(s)
+  psp_ram_replay4.bin                0 new block(s)
+  psp_ram_title.bin                  0 new block(s)
+  psp_ram_title2.bin                 0 new block(s)
   psp_ram_usa.bin                    0 new block(s)
-  psp_ram_usa2.bin                   1 new block(s)
+  psp_ram_usa2.bin                   0 new block(s)
   psp_ram_usa3.bin                   0 new block(s)
   psp_ram_usa_replay2.bin            0 new block(s)
+  psp_ram_xreplay.bin                0 new block(s)
 
 == blocks found ==
-  jp c10=43032  lines=2404  const=392  f2=15  pair=505   (first from psp_ram_jp.bin)
-  usa c10=38381  lines=1569  const=68   f2=0   pair=505   (first from psp_ram_usa2.bin)
+  jp c10=43032  lines=2404  const=392  f2=15  pair=505   textCALL=195  voiceCALL=214   (first from psp_ram_jp.bin)
+  jp c10=55506  lines=3553  const=657  f2=0   pair=516   textCALL=234  voiceCALL=253   (first from psp_ram_jp_replay.bin)
+  usa c10=38381  lines=1569  const=68   f2=0   pair=505   textCALL=195  voiceCALL=214   (first from psp_ram_crash.bin)
+  usa c10=50098  lines=2198  const=656  f2=0   pair=516   textCALL=234  voiceCALL=253   (first from psp_ram_1014.bin)
 
 == per-chapter coverage ==
   deleted = JP multiset - USA multiset (Counter arithmetic)
@@ -24,9 +37,18 @@
     ok  intentional drop vid 122 (JP line merged into USA 121 (round-6 drop))
     verdict: COMPLETE
 
+  [ch.1 (shipped: 1 row)]
+    jp c10=55506  usa c10=50098 
+    JP   const=657 f2=0 pair=516 lines=3553
+    USA  const=656 f2=0 pair=516 lines=2198
+    deleted: const=1 f2=0 pair=0   rows needed=1
+    shipped rows for usa c10=50098: 1
+    verdict: COMPLETE
+
 == summary ==
   chapter                       need    ship    gaps  badkey delpair jp_c10    usa
   prologue (shipped: 338 row     339     338       0       0      0  43032  38381
+  ch.1 (shipped: 1 row)            1       1       0       0      0  55506  50098
 
   A row is needed only for JP voice sites the USA script deleted.
   GAP = line will be silent. badkey = row points at a non-existent line.

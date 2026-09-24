@@ -62,6 +62,13 @@ EXTRA_ENTRIES = os.path.join(WORK, 'extra_entries.txt')
 REPORT = os.path.join(WORK, 'voice_census_report.txt')
 TSV = os.path.join(WORK, 'voice_bilingual.tsv')
 
+# 11.DAT stores every story script block expanded, header included
+# (136 header pairs per version), so a RAM capture is NOT required per chapter.
+SCRIPT_DAT = {
+    'jp': os.path.join(WORK, 'JP', 'PSP_GAME', 'USRDIR', '11.DAT'),
+    'usa': os.path.join(WORK, 'USA', 'PSP_GAME', 'USRDIR', '11.DAT'),
+}
+
 # vid 122 is the one intentional round-6 DROP (its JP line was merged into
 # USA 121's line).  It is expected to be "missing" from the table forever.
 KNOWN_DROPS = {122: 'JP line merged into USA 121 (round-6 drop)'}
@@ -90,20 +97,55 @@ def extract_ram(path):
 
 
 # ------------------------------------------------------------ block parsing
-def census_voice(toks):
-    """{(kind, id): count} for CALL214 voice sites. Same rule as
-    scan_all_blocks.census: the classifying push is the token before CALL214."""
+def dialect(toks):
+    """Find this block's text-call and voice-call targets.
+
+    Call targets are NOT stable across chapters: the prologue uses CALL195
+    (text) / CALL214 (voice), chapter 1 onwards uses CALL234 / CALL253.  The
+    push idioms in front of them are stable, so pick the targets by shape:
+
+      text call  = target preceded by the most op50 f1=5 string-address pushes
+      voice call = target preceded by the most op50 f1=4 pair-id pushes
+                   (the rule already established for the prologue)
+
+    Hardcoding 195/214 silently rejects every later chapter; keying on the push
+    alone without the target over-counts, because other handlers share pushes.
+    """
+    counts = collections.defaultdict(collections.Counter)
+    for k, t in enumerate(toks):
+        if t[1] == 52 and t[2] == 1 and t[4] and k >= 1:
+            p = toks[k - 1]
+            if p[1] != 50:
+                continue
+            if p[2] == 5 and p[4]:
+                counts[t[4][0]]['f5'] += 1
+            elif p[2] == 4 and p[4]:
+                counts[t[4][0]]['f4'] += 1
+            elif p[2] == 10 and p[4]:
+                counts[t[4][0]]['f10'] += 1
+            elif p[2] == 11:
+                counts[t[4][0]]['f11'] += 1
+    if not counts:
+        return 0, 0, counts
+    text_call = max(counts, key=lambda c: (counts[c]['f5'], counts[c]['f4']))
+    voice_call = max(counts, key=lambda c: (counts[c]['f4'], counts[c]['f10']))
+    return text_call, voice_call, counts
+
+
+def census_voice(toks, voice_call):
+    """{(kind, id): count} for voice sites in this block's dialect."""
     c = collections.Counter()
     for k, t in enumerate(toks):
-        if t[1] == 52 and t[2] == 1 and t[4]:
-            if t[4][0] != 214 or k < 1:
-                continue
+        if t[1] == 52 and t[2] == 1 and t[4] and k >= 1 \
+                and t[4][0] == voice_call:
             p = toks[k - 1]
-            if p[1] == 50 and p[2] == 10 and p[4]:
+            if p[1] != 50:
+                continue
+            if p[2] == 10 and p[4]:
                 c[('const', p[4][0])] += 1
-            elif p[1] == 50 and p[2] == 11:
+            elif p[2] == 11:
                 c[('f2', p[3] - 1)] += 1
-            elif p[1] == 50 and p[2] == 4 and p[4]:
+            elif p[2] == 4 and p[4]:
                 c[('pair', p[4][0])] += 1
     return c
 
@@ -125,30 +167,46 @@ def parse_block(ram, off):
     if not toks or not (c10 - 4 <= toks[-1][0] + 1 <= c10):
         return None
 
-    lines, voices = [], []          # (unit, key) / (unit, kind, id)
+    text_call, voice_call, _counts = dialect(toks)
+    lines, voices = [], []          # (unit, key) / (unit, kind, id, calltgt)
     for k, t in enumerate(toks):
-        if t[1] == 52 and t[2] == 1 and t[4]:
-            if t[4][0] == 195 and k >= 1:
-                p = toks[k - 1]
-                if p[1] == 50 and p[2] == 5 and p[4]:
-                    lines.append((t[0], 2 * (c10 + p[4][0])))
-            elif t[4][0] == 214 and k >= 1:
-                p = toks[k - 1]
-                if p[1] == 50 and p[2] == 10 and p[4]:
-                    voices.append((t[0], 'const', p[4][0]))
-                elif p[1] == 50 and p[2] == 11:
-                    voices.append((t[0], 'f2', p[3] - 1))
-                elif p[1] == 50 and p[2] == 4 and p[4]:
-                    voices.append((t[0], 'pair', p[4][0]))
+        if t[1] != 52 or t[2] != 1 or not t[4] or k < 1:
+            continue
+        tgt = t[4][0]
+        p = toks[k - 1]
+        if p[1] != 50:
+            continue
+        # text line: string-address push (op50 f1=5) then the text call
+        if tgt == text_call and p[2] == 5 and p[4]:
+            lines.append((t[0], 2 * (c10 + p[4][0])))
+        elif tgt == voice_call and p[2] == 10 and p[4]:
+            voices.append((t[0], 'const', p[4][0], tgt))
+        elif tgt == voice_call and p[2] == 11:
+            voices.append((t[0], 'f2', p[3] - 1, tgt))
+        elif tgt == voice_call and p[2] == 4 and p[4]:
+            voices.append((t[0], 'pair', p[4][0], tgt))
     if len(lines) < 5:
         return None
     return {
         'c10': c10, 'size': size, 'off': off,
         'data': ram[off:off + size],
         'lines': lines, 'voices': voices,
-        'census': census_voice(toks),
+        'census': census_voice(toks, voice_call),
+        'text_call': text_call, 'voice_call': voice_call,
         'tag': None, 'src': None,
     }
+
+
+def block_lang(blk):
+    """Guess the script's language from its string pool: JP dialogue is mostly
+    multi-byte UTF-8, USA dialogue is ASCII.  Lets us tag blocks by CONTENT so
+    every psp_ram_*.bin can be used regardless of what it was named."""
+    pool = blk['data'][blk['c10'] * 2: blk['c10'] * 2 + 8192]
+    if not pool:
+        return 'jp'
+    high = sum(1 for b in pool if b >= 0x80)
+    low = sum(1 for b in pool if 0x20 <= b < 0x7F)
+    return 'jp' if high * 3 > low else 'usa'
 
 
 def scan_ram(ram, tag, src, seen, found):
@@ -162,13 +220,45 @@ def scan_ram(ram, tag, src, seen, found):
         blk = parse_block(ram, o)
         if blk is None:
             continue
-        tagkey = (tag, blk['c10'], blk['size'],
+        blk['tag'] = tag or block_lang(blk)
+        tagkey = (blk['tag'], blk['c10'], blk['size'],
                   hash(blk['data'][:4096]) & 0xFFFFFFFF)
         if tagkey in seen:
             continue
         seen.add(tagkey)
-        blk['tag'], blk['src'] = tag, src
+        blk['src'] = src
         found.append(blk)
+
+
+def load_generic(paths, seen, found, log):
+    """Scan RAM dumps and tag each block by CONTENT (jp/usa), so oddly named
+    dumps (replay/crash/backlog/xreplay/1014/title/probe) still contribute."""
+    for path in paths:
+        try:
+            ram = extract_ram(path)
+        except Exception as exc:                       # noqa: BLE001
+            log.append('  %-34s LOAD FAIL: %s' % (os.path.basename(path), exc))
+            continue
+        before = len(found)
+        scan_ram(ram, None, path, seen, found)
+        log.append('  %-34s %d new block(s)' % (os.path.basename(path),
+                                                len(found) - before))
+        del ram
+
+
+def load_raw(paths, tag, seen, found, log):
+    """Scan a container file (e.g. 11.DAT) for expanded script blocks."""
+    for path in paths:
+        try:
+            blob = open(path, 'rb').read()
+        except (IOError, OSError) as exc:
+            log.append('  %-34s LOAD FAIL: %s' % (os.path.basename(path), exc))
+            continue
+        before = len(found)
+        scan_ram(blob, tag, path, seen, found)
+        log.append('  %-34s %d block(s)  [%s]'
+                   % (os.path.basename(path), len(found) - before, tag))
+        del blob
 
 
 def load_blocks(paths, tag, seen, found, log):
@@ -207,12 +297,12 @@ def load_table():
 
 # ------------------------------------------------------------------ helpers
 def min_voice_id(blk):
-    ids = [v for (_u, _k, v) in blk['voices']]
+    ids = [v for (_u, _k, v, _t) in blk['voices']]
     return min(ids) if ids else 1 << 30
 
 
 def kind_of(blk, vid):
-    for _u, kind, v in blk['voices']:
+    for _u, kind, v, _t in blk['voices']:
         if v == vid:
             return kind
     return '?'
@@ -271,10 +361,17 @@ def pair_blocks(jp, usa, overrides):
     return pairs, jp[len(pairs):], usa[len(pairs):]
 
 
-def run(ram_jp, ram_usa, states_dir, overrides, out_report, out_tsv):
+def run(ram_jp, ram_usa, states_dir, overrides, out_report, out_tsv,
+        use_dat=True):
     log = []
     seen, blocks = set(), []
     log.append('== inputs ==')
+    for tag, path in sorted(SCRIPT_DAT.items()):
+        if use_dat and os.path.isfile(path):
+            load_raw([path], tag, seen, blocks, log)
+    # every psp_ram_*.bin, tagged by content, so no dump is excluded by its name
+    load_generic(sorted(glob.glob(os.path.join(WORK, 'psp_ram_*.bin'))),
+                 seen, blocks, log)
     load_blocks(ram_jp, 'jp', seen, blocks, log)
     load_blocks(ram_usa, 'usa', seen, blocks, log)
     if states_dir:
@@ -290,11 +387,13 @@ def run(ram_jp, ram_usa, states_dir, overrides, out_report, out_tsv):
         for b in sorted(group, key=lambda b: b['c10']):
             c = b['census']
             log.append('  %s c10=%-6d lines=%-5d const=%-4d f2=%-3d pair=%-4d'
+                       '  textCALL=%-4d voiceCALL=%-4d'
                        '  (first from %s)'
                        % (tag, b['c10'], len(b['lines']),
                           sum(v for (k, _), v in c.items() if k == 'const'),
                           sum(v for (k, _), v in c.items() if k == 'f2'),
                           sum(v for (k, _), v in c.items() if k == 'pair'),
+                          b['text_call'], b['voice_call'],
                           os.path.basename(b['src'] or '?')))
 
     pairs, jp_left, usa_left = pair_blocks(jp, usa, overrides)
@@ -374,7 +473,7 @@ def run(ram_jp, ram_usa, states_dir, overrides, out_report, out_tsv):
 
         # bilingual rows: every vid the chapter needs, plus everything shipped
         jp_by_vid = {}
-        for unit, kind, vid in jb['voices']:
+        for unit, kind, vid, _tgt in jb['voices']:
             jp_by_vid.setdefault(vid, (unit, kind))
         for vid in sorted(set(needed) | set(present)):
             unit, kind = jp_by_vid.get(vid, (-1, kind_of(jb, vid)))
@@ -428,8 +527,9 @@ def run(ram_jp, ram_usa, states_dir, overrides, out_report, out_tsv):
 
 
 # ----------------------------------------------------------------- selftest
-def selftest(ram_jp, ram_usa, states_dir):
-    log, summary, pairs = run(ram_jp, ram_usa, states_dir, [], REPORT, TSV)
+def selftest(ram_jp, ram_usa, states_dir, use_dat=True):
+    log, summary, pairs = run(ram_jp, ram_usa, states_dir, [], REPORT, TSV,
+                              use_dat)
     by_c10 = {(j['c10'], u['c10']): (j, u) for j, u in pairs}
     checks, failed, skipped = [], 0, 0
 
@@ -510,11 +610,14 @@ def main(argv):
     ram_jp = ram_usa = None
     states_dir = None
     do_self = False
+    use_dat = True
     i = 0
     while i < len(argv):
         a = argv[i]
         if a == '--selftest':
             do_self = True
+        elif a == '--no-dat':
+            use_dat = False
         elif a == '--pair':
             i += 1
             for item in argv[i].split(','):
@@ -538,15 +641,15 @@ def main(argv):
         i += 1
 
     if ram_jp is None:
-        ram_jp = sorted(glob.glob(os.path.join(WORK, 'psp_ram_jp*.bin')))
+        ram_jp = []
     if ram_usa is None:
-        ram_usa = sorted(glob.glob(os.path.join(WORK, 'psp_ram_usa*.bin')))
+        ram_usa = []
 
     if do_self:
-        return selftest(ram_jp, ram_usa, states_dir)
+        return selftest(ram_jp, ram_usa, states_dir, use_dat)
 
     log, _summary, _pairs = run(ram_jp, ram_usa, states_dir, overrides,
-                                REPORT, TSV)
+                                REPORT, TSV, use_dat)
     for line in log:
         print(safe(line, 200))
     print('\nreport: %s' % REPORT)
