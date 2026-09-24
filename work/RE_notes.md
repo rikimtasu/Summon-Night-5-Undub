@@ -138,22 +138,62 @@ Final file: Summon Night 5 Undub xdelta, 465959276 bytes.
 
 | artifact | SHA-256 |
 |---|---|
-| `Summon Night 5 (USA) Undub.iso` | `5eb13a782b1ca3e2d4c1e17c9b37827527e4e612cf7b77709b4aef361f78dba8` |
-| `Summon Night 5 (USA) Undub.xdelta` | decodes to the ISO above **byte-identically** (1369055232 B) |
+| `Summon Night 5 (USA) Undub.iso` | `e71415a3b6ec2dd0f5975f7c0e8d27f0b4ec885b2574791fb354064a1d1a3348` |
+| `Summon Night 5 (USA) Undub.xdelta` | decodes to the ISO above **byte-identically** (1369059328 B) |
 | EBOOT inside the ISO | `3b9c48ce72657de2ea2d5a56ef721b14170a00dcdead75b8b5b75070f1bf96ac` |
+| JP ISO `04.DAT` (opening) | `97feeed3059f2baf...` (14790656 B) |
+| stock USA `04.DAT` | `b063121c47f10c56...` (14786560 B) |
+
+The xdelta is 466051384 bytes, encoded with `-e -f -B 1073741824 -W 16777216`
+(the 1 GB source window matters: the pycdlib rebuild shifts file sectors, so
+the default window misses distant matches).
 
 The `292e69eb...a10e` ISO hash recorded in earlier notes is **stale** - it
 matches no artifact on disk. Cause: a later pycdlib rebuild rewrote the ISO
 volume-descriptor timestamps, which changes the file hash without changing a
 single byte of game data (the EBOOT hash is unchanged across those rebuilds).
 So do not treat an ISO file-hash change as a content change; compare the
-EBOOT hash, or re-decode the xdelta. Reproduce with:
+EBOOT hash, or re-decode the xdelta.
+
+Reproduce the full check with:
 
     python verify_shipped_patch.py --xdelta "Summon Night 5 (USA) Undub.xdelta" \
         --source-iso "Summon Night 5 (USA).iso"
+    python review_xdelta_patch.py
 
-NOTE: this xdelta3 build needs the `-d` FLAG form. The `d` subcommand form
-parses `-s` as a filename and fails with "too many filenames: -s".
+NOTE: this xdelta3 build needs the `-d` / `-e` FLAG forms. The `d`/`e`
+subcommand form parses `-s` as a filename ("too many filenames: -s"), and for
+ENCODE the source goes through `-s` too: `-e -s SOURCE INPUT OUTPUT`, not three
+positional paths.
+
+## The JP opening was MISSING from the shipped patch (found 2026-09-24)
+
+`review_xdelta_patch.py` exists because `verify_shipped_patch.py` was not
+enough. The EBOOT passed 30/30 on a patch that was still WRONG: it had JP voice
+banks and a correct EBOOT, but its `04.DAT` was byte-identical to the **stock
+USA** opening. v5 had swapped it and verified it; then a full rebuild
+regenerated `OUT_ISO` from stock, and the round-6 "EBOOT-only rebuild" step
+(`v2.patch_eboot_extent()`) only rewrites the EBOOT extent, so it silently
+INHERITED the USA `04.DAT`. The round-6 note said "v5 opening preserved" -
+assumed, never checked. Same failure class as the recorded v5r1 `add_fp`
+no-op: a change that silently does not happen.
+
+Fixed with `apply_jp_opening.py` (staged rebuild, verify 04.DAT == JP + EBOOT
+unchanged + all other members byte-identical, then install). Note the pycdlib
+trap it avoids: `add_fp` only RECORDS the handle and reads the bytes during
+`write()`, so the handle must stay open until after the write - `build_v5.py`
+keeps its handles in an `fps` list for exactly this reason, and closing early
+fails with "ValueError: seek of closed file".
+
+GUARD: `build_undub_v2.assert_jp_opening_present()` now runs at the end of
+`patch_eboot_extent()` - i.e. at the exact step where the assumption used to be
+made - and raises unless `OUT_ISO` carries the JP opening. It distinguishes JP
+/ stock USA / neither, and has a `strict=False` report-only mode. Negative
+tested: it fires on an ISO with the USA opening.
+
+LESSON: static code verification and file-content verification answer
+different questions. All 30 EBOOT checks passed while the patch was wrong.
+Run both.
 
 ## Shipped-patch static verification (2026-09-24)
 

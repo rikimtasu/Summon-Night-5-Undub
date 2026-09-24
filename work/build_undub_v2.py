@@ -95,6 +95,75 @@ def patch_eboot_extent():
     assert head == b'\x7fELF', f'EBOOT extent head = {head!r}'
     assert words == (0, 0, 0), f'patch words = {tuple(hex(w) for w in words)}'
     print('EBOOT extent verified: plain ELF, clamp instructions NOPed')
+    assert_jp_opening_present()
+
+
+# The EBOOT-only rebuild path (build_v4fix / build_v6fix -> patch_eboot_extent)
+# rewrites just the EBOOT extent, so it silently INHERITS whatever 04.DAT the
+# current OUT_ISO happens to hold.  A full rebuild regenerates OUT_ISO from the
+# stock USA ISO, which drops the JP opening; nothing noticed, and the shipped
+# patch ended up with JP voices but the USA opening.  So assert it here, at the
+# exact step where the assumption used to be made.  v5 verified this once; an
+# EBOOT-only rebuild never re-checked it.
+JP04_SHA = '97feeed3059f2baf'          # JP ISO 04.DAT, first 8 bytes of sha256
+USA04_SHA = 'b063121c47f10c56'          # stock USA 04.DAT
+
+
+def assert_jp_opening_present(strict=True):
+    """Confirm OUT_ISO carries the JP opening, not the stock USA one."""
+    import hashlib
+    try:
+        from pycdlib import PyCdlib
+    except ImportError:
+        print('SKIP opening check: pycdlib unavailable')
+        return None
+    iso = PyCdlib()
+    try:
+        iso.open(OUT_ISO)
+        sink = _HashSink()
+        iso.get_file_from_iso_fp(sink, iso_path='/PSP_GAME/USRDIR/04.DAT')
+        h = sink.hexdigest()
+    finally:
+        try:
+            iso.close()
+        except Exception:
+            pass
+    jp = h.startswith(JP04_SHA)
+    usa = h.startswith(USA04_SHA)
+    if jp:
+        print('opening check: 04.DAT == JP OK')
+    elif usa:
+        msg = ('opening check FAILED: 04.DAT is the STOCK USA opening, not JP.\n'
+               '    A full rebuild regenerated OUT_ISO and dropped the v5 JP\n'
+               '    opening swap. Re-apply it (see apply_jp_opening.py) or run\n'
+               '    build_v5.rebuild_iso() before shipping.')
+        if strict:
+            raise AssertionError(msg)
+        print(msg)
+    else:
+        msg = 'opening check FAILED: 04.DAT matches neither JP nor stock USA'
+        if strict:
+            raise AssertionError(msg)
+        print(msg)
+    return jp
+
+
+class _HashSink(object):
+    def __init__(self):
+        import hashlib
+        self.h = hashlib.sha256()
+        self.n = 0
+
+    def write(self, b):
+        self.h.update(b)
+        self.n += len(b)
+        return len(b)
+
+    def tell(self):
+        return self.n
+
+    def hexdigest(self):
+        return self.h.hexdigest()
 
 
 if __name__ == '__main__':
