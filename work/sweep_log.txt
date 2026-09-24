@@ -1,0 +1,50 @@
+[20:32:07] === sweep start: chapters [3, 4] (EncryptSave=False) ===
+[20:32:07] slot backup: NPJH50696SN5GAME00
+[20:32:07] slot backup: NPJH50696SN5GAME01
+[20:32:07] slot backup: NPJH50696SN5GAME02
+[20:32:07] slot backup: NPJH50696SN5GAME03
+[20:32:07] slot backup: NPJH50696SN5GAME04
+[20:32:07] slot backup: NPJH50696SN5GAME05
+[20:32:07] slot backup: NPJH50696SN5GAME06
+[20:32:07] slot backup: ULUS10656SN5GAME41
+[20:32:07] slot backup: ULUS10656SN5GAME42
+[20:32:07] slot backup: ULUS10656SN5GAME43
+[20:32:07] slot backup: ULUS10656SN5GAME44
+[20:32:07] slot backup: ULUS10656SN5GAME45
+[20:32:07] slot backup: ULUS10656SN5GAME46
+[20:32:07] slot backup: ULUS10656SN5GAME47
+[20:32:07] parked non-plaintext slot: NPJH50696SN5GAME00
+[20:32:07] parked non-plaintext slot: NPJH50696SN5GAME01
+[20:32:07] parked non-plaintext slot: NPJH50696SN5GAME02
+[20:32:07] parked non-plaintext slot: NPJH50696SN5GAME03
+[20:32:07] parked non-plaintext slot: NPJH50696SN5GAME04
+[20:32:07] parked non-plaintext slot: NPJH50696SN5GAME05
+[20:32:07] parked non-plaintext slot: ULUS10656SN5GAME47
+[20:32:07] --- chapter 3 ---
+[20:32:07] patched 7 slot(s) to chapter 3 (scene 0)
+[20:33:36] [usa] ch3: state ULUS10656_1.01_4.ppst (6393088 bytes) blocks=[(44794, 6000, 6617, 1827, 558, 608)]
+[20:34:45] [jp] ch3: state NPJH50696_1.01_4.ppst (6676226 bytes) blocks=[(49220, 6000, 6617, 2942, 558, 608)]
+[20:34:47] --- chapter 4 ---
+[20:34:47] patched 7 slot(s) to chapter 4 (scene 0)
+[20:35:54] [usa] ch4: state ULUS10656_1.01_4.ppst (6510906 bytes) blocks=[(41244, 8000, 8587, 1763, 579, 504)]
+[20:37:13] unparked NPJH50696SN5GAME00
+[20:37:13] unparked NPJH50696SN5GAME01
+[20:37:13] unparked NPJH50696SN5GAME02
+[20:37:13] unparked NPJH50696SN5GAME03
+[20:37:13] unparked NPJH50696SN5GAME04
+[20:37:13] unparked NPJH50696SN5GAME05
+[20:37:13] unparked ULUS10656SN5GAME47
+[20:37:13] restored NPJH50696SN5GAME00
+[20:37:13] restored NPJH50696SN5GAME01
+[20:37:13] restored NPJH50696SN5GAME02
+[20:37:13] restored NPJH50696SN5GAME03
+[20:37:13] restored NPJH50696SN5GAME04
+[20:37:13] restored NPJH50696SN5GAME05
+[20:37:13] restored NPJH50696SN5GAME06
+[20:37:13] restored ULUS10656SN5GAME41
+[20:37:13] restored ULUS10656SN5GAME42
+[20:37:13] restored ULUS10656SN5GAME43
+[20:37:13] restored ULUS10656SN5GAME44
+[20:37:13] restored ULUS10656SN5GAME45
+[20:37:13] restored ULUS10656SN5GAME46
+[20:37:13] restored ULUS10656SN5GAME47

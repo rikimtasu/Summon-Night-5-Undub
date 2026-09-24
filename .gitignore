@@ -6,6 +6,10 @@
 *.DAT
 *.ppst
 JPSV/
+# Save slots parked aside by the chapter sweep (game data)
+work/savedata_parked/
+work/sweep_backups/
+work/capture_backups/
 # Screenshots / local test artifacts
 *.png
 # Python

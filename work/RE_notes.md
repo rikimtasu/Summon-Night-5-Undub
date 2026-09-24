@@ -133,6 +133,100 @@ Patch USA ISO to Undub v5 ISO. Default encode 736MB; re-encode with
 rebuild shifts file sectors and the small default window misses distant
 matches. Verified by decode plus SHA-256 match.
 Final file: Summon Night 5 Undub xdelta, 465959276 bytes.
+
+### CURRENT shipped artifact hashes (verified 2026-09-24)
+
+| artifact | SHA-256 |
+|---|---|
+| `Summon Night 5 (USA) Undub.iso` | `5eb13a782b1ca3e2d4c1e17c9b37827527e4e612cf7b77709b4aef361f78dba8` |
+| `Summon Night 5 (USA) Undub.xdelta` | decodes to the ISO above **byte-identically** (1369055232 B) |
+| EBOOT inside the ISO | `3b9c48ce72657de2ea2d5a56ef721b14170a00dcdead75b8b5b75070f1bf96ac` |
+
+The `292e69eb...a10e` ISO hash recorded in earlier notes is **stale** - it
+matches no artifact on disk. Cause: a later pycdlib rebuild rewrote the ISO
+volume-descriptor timestamps, which changes the file hash without changing a
+single byte of game data (the EBOOT hash is unchanged across those rebuilds).
+So do not treat an ISO file-hash change as a content change; compare the
+EBOOT hash, or re-decode the xdelta. Reproduce with:
+
+    python verify_shipped_patch.py --xdelta "Summon Night 5 (USA) Undub.xdelta" \
+        --source-iso "Summon Night 5 (USA).iso"
+
+NOTE: this xdelta3 build needs the `-d` FLAG form. The `d` subcommand form
+parses `-s` as a filename and fails with "too many filenames: -s".
+
+## Shipped-patch static verification (2026-09-24)
+
+`verify_shipped_patch.py` validates the patch mechanism for EVERY chapter at
+once, with no emulator, save files or network: engine clamp NOPed
+(0x17904/08/0C), story hook `j` + displaced `sw`, all 35 walker words, all six
+branch/jump targets, the 11 chunk descriptors, the packed table against the
+reviewed sources, duplicate/uniqueness rules, the three backlog-replay hooks
+plus stock neighbours, and loader-fixup collisions (1080 words). Result: 30/30
+PASS on the local EBOOT, on the ISO, and on the xdelta decoded from the stock
+USA ISO.
+
+Design point: every MIPS immediate is **re-derived from semantics**, not
+imported from `build_v4.py`, so a builder bug cannot hide behind a shared
+helper. This immediately paid off - the first verifier draft passed the branch
+TARGET index where the branch's OWN index belonged, yielding `imm = -1`. Caught
+because the word-comparison and branch-target checks disagreed.
+
+Negative-tested (all CAUGHT, exit 1): clamp restored, one voice id altered,
+walker branch shifted by one, one table entry zeroed, story hook removed. A
+verifier that cannot fail is worthless, so keep adding tamper cases.
+
+## Chapter dialect map (2026-09-24) - do NOT hardcode call targets
+
+Story blocks are NOT all one opcode dialect. Classify by the PUSH SHAPE in
+front of the call, never by target:
+
+| block | text call | voice call | notes |
+|---|---|---|---|
+| prologue (jp 43032 / usa 38381) | 195 | 214 | + f2 ids 0..14 |
+| ch.1 (jp 55506 / usa 50098) | 234 | 253 | |
+| ids 4000-4999 (jp 60668 / usa 54606) | 208 | 227 | |
+| ids 6000-6617 (jp 49220) | 208 | 227 | |
+
+`scan_all_blocks.py` hardcodes 195/214 and therefore silently rejects every
+post-prologue block. Push shape alone over-counts (other handlers share the
+pushes), so pick the target per block: text = target with the most op50 f1=5
+string pushes, voice = target with the most op50 f1=4 pair pushes.
+
+## Chapter jump: what +0x60 does and does NOT do (2026-09-24)
+
+`+0x60` (property id 20) controls what the game REPORTS and which chapter
+script it loads, and the game prints the chapter title from it correctly
+(verified on screen: a save patched to 2 displayed "[CHAPTER] What Have You
+Forgotten?" and "Ch. 2, Arca, Lv. 3, Times Cleared: 8" - exactly the string the
+description function at 0x146D00..0x147600 builds from chapter id, protagonist
+id 60, Times Cleared id 64 and playtime).
+
+It does NOT move you into a story EVENT. Patching chapter alone, or chapter +
+id 50 (scenario index, 0xD8, whose label table indexes '1-1','1-2','2','3-1'...),
+still lands in the hub with no enterable event - the "event is active" state
+lives in the 0x984-stride records, not the property array. For census purposes
+this does not matter: coverage needs JP/USA pairs of the SAME block, not story
+dialogue.
+
+Empirically the game ignores an invalid save slot NAME: a slot invented as
+`GAME90` simply does not appear in the load menu (the game lists GAME41..GAME47),
+so "no Continue" was a slot-range problem, not a patch problem.
+
+## Per-chapter voice coverage measured so far
+
+| chapter block | JP const | USA const | deleted | rows needed |
+|---|---|---|---|---|
+| prologue | 392 (+15 f2) | 68 | 324 + 15 | 339 (338 shipped, 1 intentional drop) |
+| ch.1 | 657 | 656 | 1 | 1 |
+| ids 4000-4999 | 917 | 918 | 0 | 0 |
+| ids 6000-6617 (ch.3) | 558 | 558 | 0 | 0 (inferred: the USA block was overwritten before a direct id-set comparison; equal counts + equal id range) |
+
+The prologue is the outlier by ~100x in const-site density (0.043 const sites
+per text line vs 0.30-0.39 elsewhere), so later chapters appear to need no
+table rows at all. That density ratio is also a cheap USA-only screen for a
+stripped block, needing no JP twin.
+
 Apply with xdelta3 decode using the USA ISO as source.
 
 ## v4 table audit fix (misplaced voices)

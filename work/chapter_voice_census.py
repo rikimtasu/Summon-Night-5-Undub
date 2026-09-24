@@ -343,8 +343,19 @@ def safe(text, limit=60):
 
 
 # ------------------------------------------------------------------- census
+def const_ids(blk):
+    return set(v for (kind, v) in blk['census'] if kind == 'const')
+
+
 def pair_blocks(jp, usa, overrides):
-    """Pair JP and USA story blocks into chapters."""
+    """Pair JP and USA story blocks into chapters.
+
+    Pair by CONST-ID OVERLAP, never by position: the two versions can have a
+    different number of blocks on hand at any time (one USA chapter captured,
+    its JP partner not yet), and a positional zip silently pairs a JP block
+    with the wrong USA block the moment the counts differ.  Const-id spaces are
+    chapter-partitioned with zero overlap, so overlap is the reliable signal.
+    """
     if overrides:
         by_c10 = {b['c10']: b for b in jp + usa}
         pairs, used = [], set()
@@ -352,13 +363,31 @@ def pair_blocks(jp, usa, overrides):
             if jc in by_c10 and uc in by_c10:
                 pairs.append((by_c10[jc], by_c10[uc]))
                 used.update((jc, uc))
-        return pairs, [b for b in jp if b['c10'] not in used], \
-            [b for b in usa if b['c10'] not in used]
+        return (pairs,
+                [b for b in jp if b['c10'] not in used],
+                [b for b in usa if b['c10'] not in used])
 
-    jp = sorted(jp, key=lambda b: (min_voice_id(b), b['c10']))
-    usa = sorted(usa, key=lambda b: (min_voice_id(b), b['c10']))
-    pairs = [(j, u) for j, u in zip(jp, usa)]
-    return pairs, jp[len(pairs):], usa[len(pairs):]
+    scored = []
+    for i, j in enumerate(jp):
+        js = const_ids(j)
+        for k, u in enumerate(usa):
+            us = const_ids(u)
+            if js and us:
+                overlap = len(js & us)
+                if overlap:
+                    scored.append((overlap, i, k))
+    scored.sort(key=lambda t: (-t[0], t[1], t[2]))
+    pairs, used_j, used_u = [], set(), set()
+    for _score, i, k in scored:
+        if i in used_j or k in used_u:
+            continue
+        used_j.add(i)
+        used_u.add(k)
+        pairs.append((jp[i], usa[k]))
+    pairs.sort(key=lambda p: min_voice_id(p[0]))
+    return (pairs,
+            [b for b in jp if b['c10'] not in {x['c10'] for x, _ in pairs}],
+            [b for b in usa if b['c10'] not in {y['c10'] for _, y in pairs}])
 
 
 def run(ram_jp, ram_usa, states_dir, overrides, out_report, out_tsv,
@@ -375,9 +404,9 @@ def run(ram_jp, ram_usa, states_dir, overrides, out_report, out_tsv,
     load_blocks(ram_jp, 'jp', seen, blocks, log)
     load_blocks(ram_usa, 'usa', seen, blocks, log)
     if states_dir:
-        for path in sorted(glob.glob(os.path.join(states_dir, '*.ppst'))):
-            tag = 'jp' if 'NPJH' in os.path.basename(path) else 'usa'
-            load_blocks([path], tag, seen, blocks, log)
+        # tag by CONTENT (block_lang), not by filename
+        load_generic(sorted(glob.glob(os.path.join(states_dir, '*.ppst'))),
+                     seen, blocks, log)
 
     jp = [b for b in blocks if b['tag'] == 'jp']
     usa = [b for b in blocks if b['tag'] == 'usa']
@@ -427,8 +456,13 @@ def run(ram_jp, ram_usa, states_dir, overrides, out_report, out_tsv,
         usa_keys = {key for _u, key in ub['lines']}
         bad_keys = sorted(v for v, key in present.items() if key not in usa_keys)
 
+        # label by voice-id RANGE, not by discovery order: the ordinal is just
+        # the Nth block we happened to capture, not the in-game chapter number
+        cmin = min(const_ids(jb)) if const_ids(jb) else 0
+        cmax = max(const_ids(jb)) if const_ids(jb) else 0
         label = KNOWN.get((jb['c10'], ub['c10']),
-                          'chapter %d (by voice-id order)' % idx)
+                          'chapter ? (ids %d-%d, #%d seen)'
+                          % (cmin, cmax, idx))
         log.append('')
         log.append('  [%s]' % label)
         log.append('    jp c10=%-6d usa c10=%-6d' % (jb['c10'], ub['c10']))

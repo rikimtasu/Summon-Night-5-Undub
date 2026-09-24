@@ -1,4 +1,6 @@
 == inputs ==
+  11.DAT                             0 block(s)  [jp]
+  11.DAT                             0 block(s)  [usa]
   psp_ram_1014.bin                   1 new block(s)
   psp_ram_backlog.bin                0 new block(s)
   psp_ram_crash.bin                  1 new block(s)
@@ -17,11 +19,25 @@
   psp_ram_usa3.bin                   0 new block(s)
   psp_ram_usa_replay2.bin            0 new block(s)
   psp_ram_xreplay.bin                0 new block(s)
+  NPJH50380_2.00_0.ppst              LOAD FAIL: not a PPSSPP memory state
+  NPJH50380_2.00_1.ppst              LOAD FAIL: not a PPSSPP memory state
+  NPJH50410_2.00_1.ppst              LOAD FAIL: not a PPSSPP memory state
+  NPJH50696_1.01_0.ppst              0 new block(s)
+  NPJH50696_1.01_1.ppst              0 new block(s)
+  NPJH50696_1.01_4.ppst              1 new block(s)
+  ULJS00460_1.01_0.ppst              LOAD FAIL: not a PPSSPP memory state
+  ULUS10656_1.01_0.ppst              0 new block(s)
+  ULUS10656_1.01_1.ppst              0 new block(s)
+  ULUS10656_1.01_2.ppst              0 new block(s)
+  ULUS10656_1.01_3.ppst              0 new block(s)
+  ULUS10656_1.01_4.ppst              1 new block(s)
 
 == blocks found ==
   jp c10=43032  lines=2404  const=392  f2=15  pair=505   textCALL=195  voiceCALL=214   (first from psp_ram_jp.bin)
+  jp c10=49220  lines=2942  const=558  f2=0   pair=609   textCALL=208  voiceCALL=227   (first from NPJH50696_1.01_4.ppst)
   jp c10=55506  lines=3553  const=657  f2=0   pair=516   textCALL=234  voiceCALL=253   (first from psp_ram_jp_replay.bin)
   usa c10=38381  lines=1569  const=68   f2=0   pair=505   textCALL=195  voiceCALL=214   (first from psp_ram_crash.bin)
+  usa c10=41244  lines=1763  const=579  f2=0   pair=506   textCALL=208  voiceCALL=227   (first from ULUS10656_1.01_4.ppst)
   usa c10=50098  lines=2198  const=656  f2=0   pair=516   textCALL=234  voiceCALL=253   (first from psp_ram_1014.bin)
 
 == per-chapter coverage ==
@@ -44,6 +60,10 @@
     deleted: const=1 f2=0 pair=0   rows needed=1
     shipped rows for usa c10=50098: 1
     verdict: COMPLETE
+
+  [UNPAIRED jp] c10=49220 lines=2942 voices=1167 - no partner block found; dump RAM with that chapter loaded
+
+  [UNPAIRED usa] c10=41244 lines=1763 voices=1085 - no partner block found; dump RAM with that chapter loaded
 
 == summary ==
   chapter                       need    ship    gaps  badkey delpair jp_c10    usa
