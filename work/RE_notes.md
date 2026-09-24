@@ -301,9 +301,315 @@ diff each block pair.
   cheat cannot simply poke a fixed address; a jump cheat would need to call the
   loader with a scene id, which still needs the scene-id -> entry mapping.
 
-### Save data is encrypted (blocks save editing)
-DATA.BIN (170144 B) entropy 7.999 bits/byte; 99.6% of bytes differ between two
-saves of the same game, so the cipher is re-keyed per save (not a fixed XOR).
-Save subsystem strings exist (`ms0:/PSP/SAVEDATA/%s%s/%s`, `DATA.BIN`,
-`comSvSaveLoad`) but the path strings are table-referenced, so the decrypt loop
-was not located in this pass.
+### Save format RESOLVED — encryption was PPSSPP, not the game (2026-09-24)
+
+**The old "save data is encrypted" conclusion was wrong, and the reason it was
+wrong explains every negative result in this investigation.** PPSSPP's own
+`EncryptSave` option wraps the game-data save on write. The game has no cipher:
+the EBOOT's entire save path contains no transform loop.
+
+Setting `[Savedata] EncryptSave = False` in `memstick\PSP\SYSTEM\ppsspp.ini`
+and saving again produced plaintext DATA.BIN files.
+
+#### Proof
+
+| file | size | entropy | chi² z | verdict |
+|---|---|---|---|---|
+| `ULUS10656SN5GAME45` (new) | 170128 = `0x29890` | 0.360 | +1,789,926 | **plaintext** |
+| `NPJH50696SN5GAME06` (new) | 170128 = `0x29890` | 0.324 | +1,801,056 | **plaintext** |
+| `ULUS10656SN5GAME46/47` (old) | 170144 = `0x298A0` | 7.9989 | +0.07 | encrypted |
+| `NPJH50696SN5GAME00..05` (old) | 170144 = `0x298A0` | 7.9988 | +1.00 | encrypted |
+| `ULUS10656SN5SYSTEM` | 22736 = `0x58D0` | 1.060 | +195,792 | **never encrypted** |
+
+Three independent confirmations:
+
+1. **`0x29890` is exactly the literal `SaveLoadGame` writes at `0x14640C`** into
+   `param+0x78` / `param+0x7C`. The encrypted file was `0x298A0` =
+   `0x29890 + 16` → **PPSSPP adds a 16-byte IV header**. A random per-save IV
+   is exactly why the old files measured as a fresh per-save keystream, and why
+   no cryptanalytic shortcut existed — it was PPSSPP's AES, not a weak game
+   cipher.
+2. 94.9% of aligned words are zero — a sparse struct, not ciphertext.
+3. The SYSTEM save was never encrypted even on 9/22 (written the same second as
+   the encrypted `GAME47`), so only the game-data save is wrapped.
+
+#### Header + property array — **PROVEN**, end to end (2026-09-24)
+
+```
++0x00  u32 magic 0x00021001        US/JP same  (SYSTEM: 0x00022001)
++0x04  u32  2  ->  1               differs with progress, semantics unknown
++0x08  u32  playtime in FRAMES (60/s)   ← ONLY word that moved in the control diff
++0x0C  u32  = filesize - 0x1C = 0x29874  CONFIRMED both game saves
++0x10  property[0]   ┐
+                     ├  property[i] at 0x10 + i*4, i = 0..229
++0x14  property[1]   │  (230 words = 920 bytes, ends at 0x3A8)
++0x18  property[2]   ┘  ← the header's last 3 words ARE properties 0..2
++0x1C  property[3]
+  …    property[i]
++0x3A4 property[229]
++0x3AC …   separate structs / the 0x984-stride record arrays
+```
+
+So the "28-byte header" and the property array overlap: the header is
+`0x00..0x1B`, and `0x10..0x1B` doubles as `property[0..2]`. That is why
+`+0x0C` counts from `0x1C` while the property array starts at `0x10`.
+
+**There is no checksum anywhere in the file.** Control saves A and B have
+byte-identical payloads except `+0x08`, yet `+0x04`, `+0x0C`, `+0x10`,
+`+0x14`, `+0x18` are all identical between them — so none of those is derived
+from the payload either.
+
+##### The property accessor
+
+`0x1A996C(obj, id)` (getter) and `0x1A9958(obj, id, val)` (setter) are the
+same three-instruction primitive:
+
+```
+001A996C  lw   $a0, 8($a0)     ; base = obj->array
+001A9970  sll  $a1, $a1, 2     ; id * 4
+001A9974  addu $a0, $a0, $a1
+001A997C  lw   $v0, ($a0)      ; return *(base + id*4)
+001A9968  sw   $a2, ($a0)      ; setter writes the same slot
+```
+
+##### The loader fills that array straight out of the file
+
+```
+00141534  lw    $s1, 0x322c($s2)   ; s_pLoadGameData   (global @ 0x23322C)
+0014153C  addiu $s3, $s0, 0x664    ; $s0 = 0x87E30 → wrapper 0x88494
+00141540  move  $s4, $s1
+00141544  lw    $a2, 0x10($s4)     ; property[i] = *(buf + 0x10 + i*4)
+0014154C  jal   0x1A9958           ; set(0x88494, i, property[i])
+00141558  slti  $a0, $s5, 0xe6     ; 230 iterations
+00141560  addiu $s4, $s4, 4        ; delay slot → stride 4
+```
+
+`s_pLoadGameData` **is the raw file buffer**. It is written only at `0x141CBC`
+and `0x141CC8`, and immediately used as the destination of
+
+```
+00141CD0  ori   $a1, $zero, 0xc680
+00141CD8  addu  $a1, $s0, $a1      ; src = param + 0xC680  (the savedata buf)
+00141CDC  move  $a0, $s1           ; dst = s_pLoadGameData
+00141CE0  jal   0x16eb28           ; memcpy
+00141CE4  addiu $a2, $a2, -0x6770  ; len = 0x00029890  = the whole file
+```
+
+`0x16EB28` was verified as `memcpy(dst, src, len)` with standard MIPS argument
+order — its loop body is `lb $t0,($a1); addiu $a1,1; sb $t0,($a3)` with
+`$a3 = $a0`. Length `0x29890` = the entire file, therefore **base = file
+offset 0**, and `property[i] = DATA.BIN[0x10 + i*4]`.
+
+##### ★ CHAPTER = DATA.BIN `+0x60` (property id 20)
+
+The chapter-name table is at fva `0x23311C`, stride 8 (name ptr, title ptr),
+34 entries:
+
+```
+Ch. 0, First Dream             Ch. 8,  Academy Defense
+Ch. 1, Border City Savorle     Ch. 9,  The Price of Aspiration
+Ch. 2, What Have You Forgotten? Ch. 10, Ribbons of Chain
+Ch. 3, Another Sunny Day …     Ch. 11, Festering Darkness
+Ch. 4, Nostalgic Schoolhouse   Ch. 12, Shades of Grey
+Ch. 5, Connected Hearts …      Ch. 13, Myriad Black Tentacles
+Ch. 6, Bizarre Summon Arts     Ch. 14, Dreaming of Tomorrow Today
+Ch. 7, Doubt and Guidance      Ch. 15, Just Once More, Like Before
+then: 'Ending,'  'Karma,'  'Clear Data,'  and scene ids 1-1,1-2,2,3-1,…
+```
+
+The save-slot description builder reads the chapter with the **same wrapper**
+the loader filled (`$s4 = 0x87E30 + 0x664 = 0x88494`) and indexes that table:
+
+```
+001470F8  addiu $s4, $a3, 0x7e30   ; 0x00087E30
+001470FC  addiu $s4, $s4, 0x664    ; 0x00088494   ← identical to 0x14153C
+00147368  move  $a0, $s4
+0014736C  jal   0x1a996c
+00147370  ori   $a1, $zero, 0x14   ; id 20
+00147374  move  $s5, $v0
+…
+00147418  lui   $a1, 0x23
+0014741C  sll   $a0, $s5, 3
+00147420  addiu $a1, $a1, 0x311c   ; 0x0023311C
+00147424  addu  $a0, $a0, $a1
+00147428  lw    $a1, 4($a0)        ; chapter_table[ch].title
+```
+
+Chain: `get(0x88494, 20)` → `*(*(0x8849C) + 80)` → `s_pLoadGameData[0x60]` →
+`DATA.BIN[0x60]`. **Confirmed by the data: `+0x60` = 1 in A/B (before chapter
+2) and 2 in C (start of chapter 2).**
+
+The SYSTEM save uses a **different layout**: `+0x04 = 0x58C8` = filesize − 8,
+`+0x0C = 0xFFFFFFFE`.
+
+#### Record arrays (measured, both regions agree)
+
+* **GAME save — stride `0x984` = 2436 bytes.** Span-start histogram: 14
+  occurrences in `GAME45`, 9 in `GAME06`; all other deltas are integer
+  multiples (`0x2610` = 4×2436). Record shape at `0xC730` / `0xD0B4` /
+  `0xDA38`:
+
+  ```
+  01 00 00 00 | 35 00 35 00 | FF FF 00 00 | 0B 00 00 00
+                              └ -1 sentinel   └ INDEX: 11, 12, 13 …
+  ```
+  Working base for index 0: `0xC730 − 11×0x984` = `0x5E84`.
+* **SYSTEM save — stride `0x21C` = 540 bytes**, two arrays (second array's
+  records carry `flag=1` where the first carries `0`). Span starts
+  `0x278, 0x494, 0x6B0, 0x8CC, 0xAE8, 0xD04, 0xF20, 0x113C, 0x1358, 0x1574,
+  0x1790, 0x19AC, 0x1DE4` — every step exactly `0x21C`, with `0x1DE4` =
+  `0x19AC + 2×0x21C` (one empty slot skipped). Record shape:
+
+  ```
+  01 00 | f2 | 04 00 00 00 | 14 00 | index | 3C 00 | flag
+  ```
+  `index` runs 1,2,3…14; `f2` runs 0,1,1,1,1,2,3,4,5,6,7,8,10.
+
+#### In-memory layout cross-check (from `SaveLoadGame` disassembly)
+
+`memset($s0, 0, 0x7E4)` = 2020 bytes, and **`0x28 + 99×20` = 40 + 1980 = 2020
+exactly** — a 40-byte header followed by 99 records of 20 bytes. Its loop walks
+`i = 0..98` (`slti …, 0x63`), tests bit `i` of a flag array (`i>>5` word index,
+`1<<(i&31)` mask) and, for each set bit, processes a 20-byte record
+(`s1 += 0x14`). So the save carries a **99-bit flag array** — the likely home
+of chapter/progress flags — plus a 99 × 20-byte record table.
+
+#### Controlled 3-save diff — the decisive experiment (2026-09-24)
+
+Design: **A** = `ULUS10656SN5GAME44` (08:11:55) → **B** = `ULUS10656SN5GAME43`
+(08:12:02, *nothing done, 7 s later* = control) → **C** =
+`ULUS10656SN5GAME42` (16:42:03, *right at the start of chapter 2*).
+
+```
+A vs B  (control, 7 s apart)   :   1 word   ← only +0x08, playtime
+A vs C  (progress + noise)     : 213 words
+B vs C  (progress + noise)     : 213 words
+intersection A∩C and B∩C       : 213 words
+UNSTABLE (A∩C xor B∩C)−noise   :   0 words  ← perfect control
+NOISE    = A^B                 :   1 word
+PROGRESS = (A∩C ∩ B∩C) − noise : 212 words in 114 regions
+```
+
+Classification rule that matters: progress is **not** "differs in every pair" —
+it is *C moved away from **both** controls while the controls agreed with each
+other*. `+0x08` is excluded by construction because A and B differ there.
+
+`+0x08` sanity: A→B = +410 over 7 s = **58.6 units/s ≈ 60 fps** → playtime in
+frames. A→C = +357262 frames = 99.2 min of real play.
+
+##### Progress fields found
+
+| off | property id | A / B | C | note |
+|---|---|---|---|---|
+| `+0x04` | — | 2 | 1 | header |
+| **`+0x60`** | **20** | **1** | **2** | **★ CHAPTER** |
+| `+0x64` | 21 | `0x1E` (30) | `0xC8` (200) | |
+| `+0x6C` | 23 | 0 | 3 | |
+| `+0x7C` | 27 | 4 | `0x10` (16) | |
+| `+0x8C` | 31 | 1 | 7 | |
+| `+0x90` | 32 | `0x11C` | `0x18` | |
+| `+0xA8`/`+0xAC` | 34/35 | `0x4086` (16518) | `0x4E86` (20102) | duplicated pair |
+| `+0xB0` | 36 | 3 | 1 | |
+| `+0xB4` | 37 | `0xFFFFFFFF` | `0x10` | sentinel `-1` → 16 |
+| `+0xD8` | **50** | 0 | 2 | `get(s4,0x32)`, bucketed vs 40/80/100/200 |
+| `+0xDC` | 51 | 0 | 1 | |
+| `+0xF4`/`+0xF8` | 58/59 | 0 | 2 / 1 | |
+| `+0x10`/`+0x14`/`+0x18` | 0/1/2 | 19 / 18 / 220 | 8 / 0 / 0 | header ∧ properties |
+| `+0x290`/`+0x294`/`+0x298` | 164/165/166 | 0 | 4 / 0 / `0x65` (101) | |
+| `+0x330` | 196 | 0 | 1 | |
+| `+0x3AC`..`+0x3CF` | >229 | 19,0,18,220,0,18 | 8,0,0,220,0,0 | past the property array |
+
+Other families in the diff:
+
+* `+0x920` inside records **#14…#19, #23…#25**: `0 → 0x270F (9999)` and
+  `0 → 0xC8 (200)` — a repeated per-record default being initialised.
+* A stride-`0xC4` family at record-relative `+0x78, +0x13C, +0x200, +0x2C4,
+  +0x388, +0x44C, +0x510, +0x7A0` where **only bit 18 (`0x00040000`)** flips —
+  set in rec #14/#53/#54, cleared in rec #46…#49. That is flag-bit behaviour.
+* `+0x610`: `0x35CAF9 → 0x361789`, `+0x614`: `0xD27 → …`.
+
+Known `get()` call sites (id → file offset = `0x10 + id*4`), useful as future
+anchors: **id 20 → `0x60` chapter**, id 50 → `0xD8`, id 60 → `0x100`,
+id 64 → `0x110`, id 214 → `0x368`.
+
+**Still not located:** the 99-bit flag array that `SaveLoadGame` walks
+(`0x7E4 = 0x28 + 99×20`). No run of ~13 dense bit-words changed between A and
+C, so either it lives in the SYSTEM save, or chapter-unlock state did not move
+when going ch.1 → ch.2.
+
+#### VERIFIED (2026-09-24): `+0x60` is the chapter field, and there is no checksum
+
+`patch_chapter.py` backed up slot C's `DATA.BIN` to `DATA.BIN.chapbak`, set
+`+0x60` from `2` to `7`, and reported `bytes changed: 0x60` — exactly one byte.
+The load screen switched from *"Ch. 2, What Have You Forgotten?"* to
+*"Ch. 7, Doubt and Guidance"*, so:
+
+* **`+0x60` = chapter, confirmed by behaviour, not just by inference.**
+* **The file carries no checksum** — a single-byte edit survived intact, so
+  `+0x04`, `+0x0C`, `+0x10`, `+0x14`, `+0x18` are all payload-independent and
+  nothing validates the file on load. Editing is free-form.
+* The label follows the byte.
+
+Slot C was then restored from the backup (`--restore`), chapter back to `2`,
+playtime `570305` = `0x8B3C1` unchanged.
+
+#### VERIFIED (2026-09-24): the chapter jump actually works
+
+Test bed was `GAME45`, which the diff proved to be a **byte-for-byte duplicate
+of slot A apart from `+0x08`** — a free thing to burn.
+
+**Attempt 1** — `+0x60`: 1 → 7. The label followed, but the game wrote the
+slot back at 17:15:26 with `chapter=1`, `playtime=214266` = `212896 + 1370`
+(22.8 s of play) and every other byte identical to the original. Conclusion
+was ambiguous: original and patch *both* had playtime `212896`, so nothing on
+disk could say which file the game had read. Most consistent explanation is a
+stale read — the game had already listed the slot before the patch — but it
+could not be proven.
+
+**Attempt 2** — `+0x60`: 1 → 7 **plus a playtime marker** `+0x08 = 0x12345`
+(74565 frames = 000:20:42, against the original 000:59:08). `patch_chapter.py`
+gained a `--playtime` option for exactly this: the game continues its play
+timer *from whatever the slot holds*, so the next write proves which file was
+read.
+
+Result:
+
+| check | value |
+|---|---|
+| on-disk after the test | `chapter=7`, `playtime=0x12345`, mtime unchanged since the patch |
+| bytes vs original | **2** — only `+0x08` and `+0x60` |
+| load-screen `Play Time` | `000:20:58` = `0x12345` + ~15 s session, vs old `000:59:31` |
+| slot label | `Ch. 7` / `Doubt and Guidance` |
+| where it drops you | **My Room, Chapter 7** |
+| saving to a fresh slot | records `Ch. 7` |
+
+⇒ **`+0x60` drives the actual resume point, not merely the display label.**
+The first attempt failed on a stale read, not on the field being wrong.
+
+**Playtest result:** *real chapter-7 content played out of a chapter-1 save.*
+No companion property had to be patched — the game consults `+0x60` for the
+resume point and runs the chapter from there. Reference snapshot of the
+jumped-but-unplayed state: `work/snap_game45_ch7_unplayed.bin`.
+
+⇒ **A save editor needs exactly one field: `+0x60`.**
+
+#### Next steps
+
+1. Build the editor around `patch_chapter.py` — set chapter, dump/edit any of
+   the 230 properties, automatic backups. No decrypt/re-encrypt step at all
+   while `EncryptSave = False` stays set.
+2. Optional — **locate the 99-bit chapter-unlock array** (`0x7E4 = 0x28 +
+   99×20` in `SaveLoadGame`). Only needed for a full chapter *select* list,
+   not for jumping. It did not move in the A→C diff, so check the SYSTEM save
+   and re-diff across a chapter that unlocks something new.
+3. Optional — map the remaining property ids from the A→C diff for finer
+   edits (`+0x64` 30→200, `+0x7C` 4→16, property[50]@`+0xD8` 0→2 …): money,
+   party, inventory.
+
+Scripts: `patch_chapter.py` (set/restore chapter, writes `DATA.BIN.chapbak`
+beside the save), `diff3.py` (controlled 3-way diff, noise/progress
+partition), `disasm_range.py` (range disassembler with resolved lui+addiu and
+jal targets), `scan_addr.py` (every access to a given link-time address) —
+plus `check_new_saves.py`, `map_plaintext_save.py`, `header_checksum.py`,
+`analyze_records.py`. Outputs: `diff3.txt`, `chap_consumer.txt`, `fn_desc.txt`,
+`sload.txt`, `new_saves.txt`, `plaintext_map.txt`, `cksum.txt`, `records.txt`.
