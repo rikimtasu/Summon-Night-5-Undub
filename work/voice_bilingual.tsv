@@ -1,0 +1,340 @@
+chapter	jp_c10	usa_c10	kind	vid	jp_unit	jp_prev_unit	jp_prev_text	jp_next_unit	jp_next_text	usa_key	usa_text	status
+prologue	43032	38381	f2	0	25150	24978	うん、とってもうれしいよ♪	25154	むかし、むかし‥‥‥	120702	Long, long ago...	present
+prologue	43032	38381	f2	1	25159	25154	むかし、むかし‥‥‥	25163	この世界[【リィンバウム】]と、それを取り巻く	120720	...war broke out here in the world of Lyndbaum, and spread to the Otherworlds.	present
+prologue	43032	38381	f2	2	25172	25167	[【異世界】]のすべてを巻き込んだ、	25176	大きな戦争がありました	120800	It was a great war...	present
+prologue	43032	38381	f2	3	25181	25176	大きな戦争がありました	25185	それはとても愚かで、悲しい争いでした	120822	...both foolish and lamentable, like most.	present
+prologue	43032	38381	f2	4	25190	25185	それはとても愚かで、悲しい争いでした	25194	たくさんの涙とたくさんの血が流れた末	120866	When tears, and loss, and bloodshed grew too great, people realized the error of their ways.	present
+prologue	43032	38381	f2	5	25203	25198	人々はようやく、あやまちに気づき	25207	壊れてしまった世界をひとつにつなぎ	120960	They pieced together the damaged worlds and swore to forge new, peaceful bonds between them.	present
+prologue	43032	38381	f2	6	25216	25211	新たなる絆を育むことを誓いあいました	25220	そして、ようやく―――リィンバウムに	121054	And the tenuous tranquility of a new era, bought with the blood of the masses, descended on Lyndbaum...	present
+prologue	43032	38381	f2	7	25265	25224	新たなる平和の時代が訪れたのです‥‥‥	25269	ううむ‥‥‥	121158	The forest here is darker than I thought it would be at night. I don't know why that's surprising...	present
+prologue	43032	38381	f2	8	25296	25273	さすがにこの時間の森は、真っ暗だな	25300	なあ、フォルス君	121260	...but I'm sure you knew better. Right, Folth?	present
+prologue	43032	38381	f2	9	25309	25300	なあ、フォルス君	25313	なあ、アルカちゃん	121308	...but it is, isn't it, Arca?	present
+prologue	43032	38381	f2	10	25320	25313	なあ、アルカちゃん	25324	本当にギフトは、こんな森の中に	121338	Are you really certain Ghift is here?	present
+prologue	43032	38381	f2	11	25371	25364	うん‥‥‥	25380	まったく、あいつはまた	121442	But it doesn't make any sense. Why would he run off at night into these woods?	present
+prologue	43032	38381	f2	12	25457	25450	って言ってたから‥‥‥	25467	認めさせる？　俺を？	121838	What could he possibly have to prove to ME in the middle of a forest? It makes no sense.	present
+prologue	43032	38381	f2	13	25522	25515	そう言ってたの	25532	ったく、やっとのことで休暇がとれて	122018	Great. I finally get some time off to come home for a little rest, and THIS happens.	present
+prologue	43032	38381	f2	14	25543	25536	故郷に戻ってきたっていうのに‥‥‥	25547	相変わらず、うちの弟の考えてることは	122104	Honestly, I have no idea how that mind works in my dear little bother...I mean brother.	present
+prologue	43032	38381	const	15	25622	25614	お兄ちゃんなんだから！	25626	そうなのか？	122408	You really think so?	present
+prologue	43032	38381	const	16	25676	25668	そうやって自慢してるんだから	25685	ふぅん‥‥‥そっか‥‥‥	122610	Hrmph. Maybe I'm just too close to see it. He just seems like such an annoyance sometimes.	present
+prologue	43032	38381	const	17	25693	25685	ふぅん‥‥‥そっか‥‥‥	25697	あいつは、元気にしてるか？	122702	How's he been while I've been gone? He's not making trouble for you or your family, is he?	present
+prologue	43032	38381	const	18	25849	25830	直したほうがいいと思う	25853	わははは、よかった、	123440	Ha ha ha ha! I definitely made the right choice having you keep an eye on him for me, Folth!	present
+prologue	43032	38381	const	19	25867	25857	フォルス君にあいつを頼んで正解だったよ	25871	わははは、よかった、	123534	Ha! It sounds very much like I made the right choice to have you watch him for me, Arca!	present
+prologue	43032	38381	const	20	25883	25875	アルカちゃんにあいつを頼んで正解だったよ	25893	うちの両親は‥‥‥子どもの教育には、	123624	Our parents were too indifferent and distant when raising us, so your influence is an improvement.	present
+prologue	43032	38381	const	21	25932	25913	？？？	25936	すまん、フォルス君には	123730	Sorry...I shouldn't have said that out loud. I meant what I said, but it's a little strange to verbalize.	present
+prologue	43032	38381	const	22	25950	25940	関係ない話だな	25954	すまん、アルカちゃんには	123836	Erm..maybe I was being a little TOO open there. Sorry if I embarrassed you, Arca.	present
+prologue	43032	38381	const	23	25998	25990	[【召喚師】]のお仕事って、やっぱり大変？	26002	そりゃあ、まあ楽ではないかな	124076	It's no cakewalk, that's for sure. Especially where I work.	present
+prologue	43032	38381	const	24	26014	26006	特に、俺の働いている―――	26023	[【界境都市・セイヴァール】]では	124136	Because it's a multi-dimensional crossroad of sorts, Savorle City is loaded with work for Summoners.	present
+prologue	43032	38381	const	25	26064	26056	そうなの？	26068	セイヴァールは、この世界でも特に	124350	The Otherworlds all connect at Savorle, so it's busy, even by Lyndbaum's standards!	present
+prologue	43032	38381	const	26	26080	26072	異世界との交流が盛んなところでさ	26089	大勢の異世界人が普通に街中に住んでるし、	124434	When you have so many Otherworlders in one place, scuffles and all kinds of weird things happen!	present
+prologue	43032	38381	const	27	26101	26093	そのぶん、もめたりすることも多い	26105	そのトラブルをひとつひとつ解決するのが	124532	It's our job to resolve those disturbances, one by one, but it does seem like a never-ending task.	present
+prologue	43032	38381	const	28	26151	26143	そうなんだ‥‥‥	26160	さて、いくら屋敷の近所だからといって、	124750	Yeah. Whelp, we'd better find Ghift. It's dangerous for a kid at night out here.	present
+prologue	43032	38381	const	29	26172	26164	夜の森は子どもには危険すぎる	26176	さっさと見つけて連れ戻したい	124832	And we can increase our odds of finding the little runt in this inky blackness...	present
+prologue	43032	38381	const	30	26188	26180	ところなんだが‥‥‥	26197	こいつはちょいと、暗すぎるな	124914	...with a helping hand from my favorite Cross.	present
+prologue	43032	38381	const	31	26215	26201	よし、じゃあ、あいつを呼ぶか‥‥‥	26219	フォルス君、危ないから	124962	Folth, you might want to step back a little so there aren't any accidents.	present
+prologue	43032	38381	const	32	26233	26223	ちょっと離れていてくれ	26237	アルカちゃん、危ないから	125038	Arca, Summons are always a little dangerous, so please step back a little, okay?	present
+prologue	43032	38381	const	33	26287	26270	う、うんっ！	26296	困ったときには[【響友（クロス）】]に頼る！	125224	A Cross will be there in hardship and need. Count on its strength and always believe.♪	present
+prologue	43032	38381	const	34	26393	26300	なんせ苦難を分かちあう間柄なんだしな♪	26403	新しき英知の術と、千眼の導きによりて	125314	By the guidance of the new art of wisdom and the Thousand Eyes, open the Summon Gates!	present
+prologue	43032	38381	const	35	26420	26407	今ここに召喚の扉を開かん‥‥‥！	26424	祝福されし誓約の名の下に	125402	By the blessed Pledge, Summoner Erst entreats...	present
+prologue	43032	38381	const	36	26441	26428	召喚師エルストが求める‥‥‥！	26451	来い、俺の相棒！	125452	Come forth!	present
+prologue	43032	38381	const	37	26650	26642	‥‥‥	26654	呼ビマシタカ、えるすと	125470	You rang, Erst?	present
+prologue	43032	38381	const	38	26662	26654	呼ビマシタカ、えるすと	26666	おう、呼んだ呼んだ	125486	I sure did, buddy!	present
+prologue	43032	38381	const	39	26674	26666	おう、呼んだ呼んだ	26683	ここまで森に入ったんだけど、	125506	We were having problems with the darkness here. The ground feels very unstable, too.	present
+prologue	43032	38381	const	40	26695	26687	どうにも足元が心もとなくてさ	26699	ライト、つけてくんない？	125592	Can you provide some light?	present
+prologue	43032	38381	const	41	26707	26699	ライト、つけてくんない？	26711	‥‥‥ソレダケ、デスカ？	125620	Light. You wish to have some...light. Is that...all?	present
+prologue	43032	38381	const	42	26719	26711	‥‥‥ソレダケ、デスカ？	26728	あ、うん	125674	Erm...yeah. Yeah, that will do it.	present
+prologue	43032	38381	const	43	26744	26736	‥‥‥	26748	‥‥‥マァ、イイデス	125716	Very well, then. Light is what you need. So, light is what you shall have.	present
+prologue	43032	38381	const	44	26806	26752	イツモノコトデスカラネ	26815	おお、明るい明るい	125792	Whoa! Now THAT is what I'm talking about. Buddy, you're the best Cross ever!	present
+prologue	43032	38381	const	45	26827	26819	お前が響友でほんとよかったぜ	26831	ソレハドウモ	125870	Why yes, I am. It's quite generous of you to say so, though. Huz...zah...	present
+prologue	43032	38381	const	46	26894	26886	絵本で読んだのより、ずっとすごい！	26903	おう、どうだかっこいいだろ？	126132	Yes. I have to remind myself of that at times so I don't take them for granted.	present
+prologue	43032	38381	const	47	26940	26932	う、うんうんうん！	26944	そうだろそうだろ、わはははは	126344	Ha ha ha ha ha! I need to have you around more often to keep my perspective in check!	present
+prologue	43032	38381	const	48	26969	26944	そうだろそうだろ、わはははは	26973	マッタク、スグ調子ニ乗ッテ‥‥‥	126430	Not to break up the party, but perhaps you forgot I was here, still doing your bidding?	present
+prologue	43032	38381	const	49	26981	26973	マッタク、スグ調子ニ乗ッテ‥‥‥	26985	デ、本当ニらんぷニスルタメダケニ	126518	I don't really want to believe that you summoned me as your mobile lamppost, but...	present
+prologue	43032	38381	const	50	26997	26989	私ノコトヲ召喚シタノデスカ？	27006	おっと、そうだった！	126602	Oh, right! Sorry about that, buddy. Back to the task at hand...	present
+prologue	43032	38381	const	51	27065	27010	いや、実はな‥‥‥	27069	はぁ、はぁ、はぁ‥‥‥	126666	<Huff>...<huff>...<huff>...	present
+prologue	43032	38381	const	52	27077	27069	はぁ、はぁ、はぁ‥‥‥	27087	くそっ、なんで、どうして	126694	What's happening?! What's going on? I don't...I don't get it...it's not supposed to be like this!	present
+prologue	43032	38381	const	53	27099	27091	こんなことになるんだよ！	27103	ちゃんと、あの紙切れに書かれてた	126792	I did exactly what was on the paper in that old book, but...oh, I don't KNOW. Something's wrong!	present
+prologue	43032	38381	const	54	27115	27107	通りに、間違いなくやったのに‥‥‥	27125	なんで、あんな変なものが湧いて	126890	I mean, all those weird globs started appearing! This is wrong. This is way, way, way WRONG.	present
+prologue	43032	38381	const	55	27152	27129	出てきちゃったんだよ！？	27156	‥‥‥！？	126984	. . .?!	present
+prologue	43032	38381	const	56	27191	27156	‥‥‥！？	27195	オ探シノ弟君トヤラハ、コノ方デ	126992	Perhaps this is the troublesome younger sibling you were looking for?	present
+prologue	43032	38381	const	57	27207	27199	間違イナイデスカネ？	27211	ああ、間違いない	127062	You're the best, Gaudi. I mean it.	present
+prologue	43032	38381	const	58	27287	27273	よかった、無事だったんだね！	27291	フォルス！？	127168	Folth?! And Erst! ERST!	present
+prologue	43032	38381	const	59	27305	27295	それに、兄さん！？	27309	アルカ！？	127192	Arca?! And Erst! ERST!	present
+prologue	43032	38381	const	60	27342	27313	それに、兄さん！？	27346	久しぶりだな、ギフト	127216	I don't know why I expected you to suspend your troublemaking while I was back!	present
+prologue	43032	38381	const	61	27358	27350	いきなり心配かけさせやがって	27368	‥‥‥‥‥‥っ	127296	. . .!	present
+prologue	43032	38381	const	62	27376	27368	‥‥‥‥‥‥っ	27380	ま、無事でなによりだ	127304	Bah! Don't look at me like that, kiddo. I'm just glad you're in one piece. Are you...taller, too?!	present
+prologue	43032	38381	const	63	27392	27384	ん‥‥‥少し、背も伸びたか？	27401	う、うんっ！	127404	Yeah, I've been growing and getting better at everything!	present
+prologue	43032	38381	const	64	27413	27405	ごめんなさい、兄さん	27417	ぼくのこと心配して来てくれて	127462	It's nice you came to get me, but you didn't have to.	present
+prologue	43032	38381	const	65	27440	27421	ありがとう	27444	礼をいうなら、俺よりも	127516	Don't kind of thank me. You should be giving props to Folth - he's the one who told me you were missing.	present
+prologue	43032	38381	const	66	27458	27448	フォルス君にな	27462	礼をいうなら、俺よりも	127622	Give that kind-of-thank-you to Arca. She's the one who told me you were missing.	present
+prologue	43032	38381	const	67	27474	27466	アルカちゃんにな	27478	わざわざ報せにきてくれたから	127704	If I hadn't been clued in, I wouldn't have known where to come looking for you.	present
+prologue	43032	38381	const	68	27523	27482	お前を探しにきてやれたんだ	27527	フォルス‥‥‥	127784	Folth...	present
+prologue	43032	38381	const	69	27546	27527	フォルス‥‥‥	27550	アルカ‥‥‥	127794	Arca...	present
+prologue	43032	38381	const	70	27626	27618	ギフトのことが心配で‥‥‥	27635	わかってるよ	128122	Oh, I know. I'm not angry or anything.	present
+prologue	43032	38381	const	71	27653	27639	別に怒ってなんてないから	27657	ありがとう、フォルス	128162	Folth, I know you had the right intentions. No harm, no foul.	present
+prologue	43032	38381	const	72	27671	27661	兄さんに報せてくれて	27675	ありがとう、アルカ	128224	Arca, I know you wanted to keep me safe by telling my brother. Thank you.	present
+prologue	43032	38381	const	73	27716	27708	う、うんっ♪	27725	‥‥‥‥‥‥	128348	. . .	present
+prologue	43032	38381	const	74	27752	27725	‥‥‥‥‥‥	27756	‥‥‥警告シマス！	128354	WARNING!	present
+prologue	43032	38381	const	75	27774	27756	‥‥‥警告シマス！	27778	どうした、ガウディ？	128364	Whoa, Gaudi. We're outside, but how about using your inside voice?	present
+prologue	43032	38381	const	76	27786	27778	どうした、ガウディ？	27790	距離１４０、数ハ７	128432	Seven targets approaching, 140 meters away. Unable to identify class or hostility, but...	present
+prologue	43032	38381	const	77	27802	27794	種別ト脅威れべるハ特定デキマセンガ‥‥‥	27806	複数ノナニカガ、急速ニ	128522	...whatever they are, they are rapidly approaching and will be upon us soon.	present
+prologue	43032	38381	const	78	27818	27810	コチラニ向カッテキマス！	27828	なにか、って‥‥‥	128600	'Whatever they are'? Is that an official class? What does that even MEAN?	present
+prologue	43032	38381	const	79	27858	27832	なんなんだよ、そりゃ！？	27862	あいつらだ‥‥‥	128674	Oh no. No, no, NO! It's...it's THEM.	present
+prologue	43032	38381	const	80	27904	27896	え？	27914	逃げよう、兄さん！	128778	No time to talk. RUN! We need to RUN! It's them...	present
+prologue	43032	38381	const	81	27926	27918	あいつらが‥‥‥	27930	[【泥】]がやってくる！！	128830	Those...those globs are coming! The...the...Mudmires! They're coming!!	present
+prologue	43032	38381	const	83	28169	28142	ゲプオオオォォォッ！	28173	なんだ‥‥‥こいつらは？	129000	What the hell are these...things?	present
+prologue	43032	38381	const	84	28191	28173	なんだ‥‥‥こいつらは？	28195	さーちシマシタガ、でーたべーすニハ	129034	Search results provide nothing. This creature doesn't exist in our database.	present
+prologue	43032	38381	const	85	28207	28199	ナイたいぷノ生物デス	28211	少ナクトモ、既存ノりぃんばうむノ生物	129112	It's clear that these globs...or Mudmires, or whatever...are not native to Lyndbaum.	present
+prologue	43032	38381	const	86	28223	28215	デハナイト判断イタシマス	28227	となると‥‥‥[【霊界サプレスの悪魔】]か	129198	I'm thinking they may be some kind of spirit creature from Sapureth.	present
+prologue	43032	38381	const	87	28239	28231	その影響を受けた眷属ってところか？	28243	断定ハデキマセンガ	129268	Your supposition is surprisingly valid, but I cannot confirm without more data.	present
+prologue	43032	38381	const	89	28300	28274	ゲプオオオォォッ！！	28309	おっと！	129364	They're loud buggers, whatever they are.	present
+prologue	43032	38381	const	90	28330	28309	おっと！	28339	出身はどうあれ、戦る気らしいって	129406	Giving daddy a headache and making him cranky is not a recipe for peaceful relations!	present
+prologue	43032	38381	const	91	28361	28343	ことだけは間違いなさそうだな	28365	ドウヤラ、らいと以外ニモ	129492	Oh, don't I know it! This thing is about to learn that the hard way, I believe!	present
+prologue	43032	38381	const	92	28377	28369	私ノ出番ガアッタヨウデスネ	28386	結構、ハードな戦いになりそうだぜ？	129572	What do you say, buddy? Think we can take 'em?	present
+prologue	43032	38381	const	93	28394	28386	結構、ハードな戦いになりそうだぜ？	28398	問題アリマセン、ソレガ私ノ	129620	Statistically, the odds are in our favor. Besides, difficult conflicts are my specialty, remember?	present
+prologue	43032	38381	const	94	28419	28402	専門ノ分野デスカラ‥‥‥！	28428	そいつは頼もしいことで！	129720	Then let's bust some alien, er, uh...spongy glowing material...open.	present
+prologue	43032	38381	const	95	28512	28486	エルストさん‥‥‥	28516	‥‥‥兄さん	129806	Brother!!	present
+prologue	43032	38381	const	96	28524	28516	‥‥‥兄さん	28528	逃げるんだ、二人とも	129816	Things are about to get real serious real quick. Beat it while you can! Scram!	present
+prologue	43032	38381	const	97	28536	28528	逃げるんだ、二人とも	28546	で、でもっ！？	129896	B-But!	present
+prologue	43032	38381	const	98	28554	28546	で、でもっ！？	28563	大丈夫、何も怖いことなんてない	129904	I don't have time to argue, Ghift. I just gotta take this threat out, and I don't want you hurt.	present
+prologue	43032	38381	const	99	28596	28567	あいつらは、俺たちがやっつける	28600	万ガ一ノ用心デス、えるすとガ安心シテ	130002	We need both of you out of the area so we can battle without thought of collateral damage.	present
+prologue	43032	38381	const	100	28691	28650	でも！	28695	俺を信じろよ、フォルス君	130112	Ya gotta trust me on this one, Folth.	present
+prologue	43032	38381	const	101	28705	28695	俺を信じろよ、フォルス君	28709	俺を信じろよ、アルカちゃん	130150	Arca, please! Just trust me on this one...	present
+prologue	43032	38381	const	102	28717	28709	俺を信じろよ、アルカちゃん	28726	君が信じてくれれば、俺は負けない	130194	Even if you're not here, as long as I know you have faith in me, it's all I need to take these things out!	present
+prologue	43032	38381	const	103	28775	28767	‥‥‥わかった、わたし、信じるね	28784	よし、いい子だ	130402	Music to my ego, erm...uh, my ears!	present
+prologue	43032	38381	const	105	28832	28811	グロロオオォォォ‥‥‥ッ！！	28836	さあ、急げ！	130454	Looks like puddle puss is about to make a run at us. Get out of here so I can put this one down!	present
+prologue	43032	38381	const	107	28886	28849	ゲプオオオォォッ！！	28890	兄さんっ！？	130564	Erst! Watch out!	present
+prologue	43032	38381	const	108	28940	28932	エルストさんの言いつけを守らなきゃ！	28950	イヤだっ！　兄さんっ！？	130746	No! Erst! ERRRSSSTT!	present
+prologue	43032	38381	const	109	28990	28954	兄さぁーんっ！？	28994	ぼくのせいだ‥‥‥	130768	Oh, this is all my fault! I never should have tried those old Summons in the book I found...	present
+prologue	43032	38381	const	110	29004	28998	ぼくが、あんなことしたから‥‥‥	29008	呑みこまれちゃう‥‥‥	130862	Now my brother is going to be swallowed up by that Mudmire, and it's ALL MY FAULT!	present
+prologue	43032	38381	const	111	29018	29012	エルスト兄さんも、きっと‥‥‥	29022	そんなのはイヤだ！！	130946	I don't want that to happen! Waaaahh!	present
+prologue	43032	38381	const	113	29254	29229	ゲプオオオォォッ！！	29258	ぐあっ！？	131310	Aggh!	present
+prologue	43032	38381	const	114	29288	29258	ぐあっ！？	29292	えるすと、大丈夫デスカ！？	131316	Erst, you aren't damaged, are you?	present
+prologue	43032	38381	const	115	29300	29292	えるすと、大丈夫デスカ！？	29310	くっ‥‥‥だいじょうぶだ	131352	Uh...no...no, it's, uh...just a scratch. I'm fine...	present
+prologue	43032	38381	const	116	29322	29314	少し、やられちまったが‥‥‥	29326	これくらい、問題ない！	131406	What kind of Summoner would I be if I let a scratch stop me?	present
+prologue	43032	38381	const	117	29334	29326	これくらい、問題ない！	29338	相変ワラズ、ソノ強ガリダケハ	131468	Such bravado is, although trivial, quite commendable.	present
+prologue	43032	38381	const	118	29350	29342	流石ト褒メタクナルれべるデスネ	29359	へへっ、ド根性ってヤツさ	131522	Aw Gaudi, you're the master of the backhanded compliment, that's for sure, buddy!	present
+prologue	43032	38381	const	119	29367	29359	へへっ、ド根性ってヤツさ	29371	撤退ヲ勧メタイトコロデスガ‥‥‥	131604	Well, as much as I would like to wallow in your charms, we should consider a strategic retreat.	present
+prologue	43032	38381	const	120	29379	29371	撤退ヲ勧メタイトコロデスガ‥‥‥	29383	弟君トソノ友達ノタメニモ、ココハ	131796	Yeah...well, it's like this. I have to meet this head on so the kids can feel safe and secure.	present
+prologue	43032	38381	const	121	29395	29387	引ケナイ―――デスヨネ？	29399	ああ、あいつらが安心できるように	131892	Of course, my stock will go up in their hearts and minds when I pull out the hurt on these freaks.	present
+prologue	43032	38381	const	122	29411	29403	きちっと始末をつけとかなくちゃな	29415	カッコつけた手前もあるし、さ	-1		MISSING
+prologue	43032	38381	const	123	29423	29415	カッコつけた手前もあるし、さ	29427	ヤレヤレ‥‥‥	131992	Oh, dear. I was afraid you were headed in that direction.	present
+prologue	43032	38381	const	124	29446	29427	ヤレヤレ‥‥‥	29450	ギフトも、フォルス君も	132050	C'mon, Gaudi!, Ghift and Folth are trusting me to handle this. I told them I would!	present
+prologue	43032	38381	const	125	29464	29454	俺のことを信じてくれている	29468	ギフトも、アルカちゃんも	132134	Both Ghift and Arca have put their full trust in me.	present
+prologue	43032	38381	const	126	29480	29472	俺のことを信じてくれている	29484	その信頼が、戦いの恐怖や痛みから	132188	Their trust becomes the shield that protects me from the fear and pain of battle...	present
+prologue	43032	38381	const	127	29496	29488	俺を守ってくれる力になるんだ	29500	だったら、俺はそれに応えてみせる	132272	I have to live up to the trust they've put in me. That's all there is to it.	present
+prologue	43032	38381	const	128	29512	29504	それだけのことだ！	29516	ナラバ、私ハ‥‥‥ソンナ貴方ノコトヲ	132350	Well then, I shall be assisting you to the best of my considerable ability.	present
+prologue	43032	38381	const	129	29528	29520	最善ヲ尽クシテ、さぽーとシマショウ	29532	貴方ノ―――[【響友】]トシテ！	132426	One of the perpetual benefits to being your Cross, I'm afraid.	present
+prologue	43032	38381	const	150	31617	31596	すごい！　カッコイイなあ‥‥‥	31626	ろれいらる？	137214	Loreilal?	present
+prologue	43032	38381	const	151	32016	31999	‥‥‥ちがうの？	32026	ごめんなさい‥‥‥	138586	I'm quite sorry, but I don't really know how to respond in a satisfactory manner.	present
+prologue	43032	38381	const	152	32040	32030	質問に、うまく答えられません	32044	ボクは‥‥‥何者なんだろう？	138522	Well, as to the questions about who I am and...why I am here...	present
+prologue	43032	38381	const	153	32251	32234	もしかして、忘れちゃったの？	32255	なのかもしれません‥‥‥	139154	I'm afraid that seems to be the case.	present
+prologue	43032	38381	const	154	32265	32255	なのかもしれません‥‥‥	32275	‥‥‥‥‥‥‥‥‥	139192	. . . . . .	present
+prologue	43032	38381	const	155	32522	32505	だから、元気出して！	32531	ありがとう‥‥‥ええと‥‥‥	139712	I thank you for your advice and concern.	present
+prologue	43032	38381	const	156	32673	32656	ねえ、あなたの名前は‥‥‥	32683	‥‥‥‥‥‥‥‥‥	140000	. . .	present
+prologue	43032	38381	const	158	33079	33062	‥‥‥ダメかな？	33089	そんなことない！	140948	It is nothing of the sort. I am quite happy with it.	present
+prologue	43032	38381	const	159	33115	33093	なんだか、とってもうれしい！	33119	ボクの名前はダイス‥‥‥	141002	From this point forth, I will be known by the name Folth gave me - Dyth.	present
+prologue	43032	38381	const	160	33133	33123	フォルスにつけてもらった	33137	ボクの名前はダイス‥‥‥	141076	Arca, from this day forward I will go by the name you gave me - Dyth.	present
+prologue	43032	38381	const	161	33149	33141	アルカにつけてもらった	33153	とっても‥‥‥大切な名前‥‥‥！	141146	The name has a very important ring to it!	present
+prologue	43032	38381	const	162	33589	33572	なんにもおぼえていないんだ	33599	うん、ごめんなさい	142146	I do apologize, but I have no memories prior to just minutes ago.	present
+prologue	43032	38381	const	163	33783	33766	助けてくれたじゃない	33792	正直にいえば、それも	142702	Well, to be entirely candid, I'm not even certain about that.	present
+prologue	43032	38381	const	164	33804	33796	あやふやなんです	33808	誰かがボクのことを呼んだ気がして	142764	I just had a strange feeling that someone was calling out to me, and I responded.	present
+prologue	43032	38381	const	165	33831	33812	必死にそれに応えようとしたら	33835	いつのまにか、フォルスが目の前にいた	142846	Then as soon as I had the thought to respond, I was standing before you, Folth.	present
+prologue	43032	38381	const	166	33849	33839	それしか思い出せない‥‥‥	33853	いつのまにか、アルカが目の前にいた	142926	Then before I even realized it, I was standing before you, Arca.	present
+prologue	43032	38381	const	167	34237	34220	本当にありがとね、▲	34247	なんか、くすぐったい‥‥‥です	144256	The shower of gratitude is somewhat embarrassing. I did as I should have.	present
+prologue	43032	38381	const	168	34400	34367	あはははっ	34404	フォルスは、これから	144476	So, Folth, what is the next course of action?	present
+prologue	43032	38381	const	169	34418	34408	どうするの？	34422	アルカは、これから	144522	If I might inquire, Arca, what is the next course of action?	present
+prologue	43032	38381	const	170	34644	34627	おかあさんたちも心配してるだろうし	34654	そうだよね‥‥‥	144984	That sounds like a good course of action.	present
+prologue	43032	38381	const	171	34822	34805	わたしと一緒に来ない？	34832	え！？	145286	Pardon?	present
+prologue	43032	38381	const	172	34997	34980	リィンバウムにおいでよ！	35006	リィンバウム‥‥‥	145604	Lyndbaum...	present
+prologue	43032	38381	const	173	35189	35172	きっと絶対、楽しいに決まってる！	35193	トモダチ‥‥‥	146038	Well, I must admit that is an alluring proposition.	present
+prologue	43032	38381	const	174	35332	35292	ずっと‥‥‥いっしょ‥‥‥	35336	！？	146220	Oh dear!	present
+prologue	43032	38381	const	176	35524	35507	　どうして、ここに！？）	35528	危ないッ！	146434	Watch out!	present
+prologue	43032	38381	const	177	35623	35597	あぶないっ！	35633	‥‥‥あうッ！？	146478	...Augh?!	present
+prologue	43032	38381	const	178	35816	35782	しっかりしてっ、▲！？	35820	逃げて‥‥‥フォルス‥‥‥	146594	Folth...RUN!	present
+prologue	43032	38381	const	179	35830	35820	逃げて‥‥‥フォルス‥‥‥	35834	逃げて‥‥‥アルカ‥‥‥	146608	Arca...you must run away...NOW!	present
+prologue	43032	38381	const	180	36080	36062	ずーっと仲良しでいよう、って！！	36089	あ‥‥‥	146960	But, the danger...	present
+prologue	43032	38381	const	191	31646	31626	ろれいらる？	31655	しるたーん？	137224	Silturn?	present
+prologue	43032	38381	const	192	32068	32048	どうして、ここにいるんだろう？	32078	わりぃ‥‥‥	138668	Look, it sounds like you have the pulse of this situation way more than I do.	present
+prologue	43032	38381	const	193	32092	32082	よく、わかんねえや‥‥‥	32096	おいらは‥‥‥何者なんだ？	138746	I'm having trouble with the basics...like who I am and why I'm here.	present
+prologue	43032	38381	const	194	32300	32275	‥‥‥‥‥‥‥‥‥	32304	そう、みてえだ‥‥‥	139204	Seems about right. My memory's clean as a baby's right now.	present
+prologue	43032	38381	const	195	32318	32308	何も思い出せねえ‥‥‥	32328	‥‥‥‥‥‥‥‥‥	139264	. . . . . . 	present
+prologue	43032	38381	const	196	32551	32531	ありがとう‥‥‥ええと‥‥‥	32560	ありがとう‥‥‥ええと‥‥‥	139754	Well, that's something, I guess. Thanks...I think.	present
+prologue	43032	38381	const	197	32703	32683	‥‥‥‥‥‥‥‥‥	32713	‥‥‥‥‥‥‥‥‥	140006	. . .	present
+prologue	43032	38381	const	199	33171	33153	とっても‥‥‥大切な名前‥‥‥！	33181	そんなことない！	141188	Nah! Don't worry so much! I'm happy to have it!	present
+prologue	43032	38381	const	200	33207	33185	なんか、すっげえうれしい！	33211	おいらの名前はカゲロウ‥‥‥	141236	Folth, you gave me a great-sounding name - Kagerou.	present
+prologue	43032	38381	const	201	33241	33233	アルカにつけてもらった	33251	とっても‥‥‥大切な名前‥‥‥！	141352	In fact, the name's already growing on me. It sounds important!	present
+prologue	43032	38381	const	202	33225	33215	フォルスにつけてもらった	33229	おいらの名前はカゲロウ‥‥‥	141288	Arca, I couldn't have picked a cooler name than Kagerou myself!	present
+prologue	43032	38381	const	203	33623	33599	うん、ごめんなさい	33633	ごめん‥‥‥	142212	Nope. Sorry. Memory's blankety blank blank when I go back more than a few minutes.	present
+prologue	43032	38381	const	204	33875	33857	それしか思い出せない‥‥‥	33879	正直にいえば、それも	142992	I'm really not so sure that's what happened at all.	present
+prologue	43032	38381	const	205	33891	33883	よくわかんねえんだ	33895	誰かがおいらのことを呼んだ気がして	143044	I just got this weird feeling someone was calling me, and I responded.	present
+prologue	43032	38381	const	206	33918	33899	必死にそれに応えようとしたら	33922	いつのまにか、フォルスが目の前にいた	143116	Next thing I know, I'm standing in front of you, Folth, wondering what just happened.	present
+prologue	43032	38381	const	207	33936	33926	‥‥‥それしか、思い出せねえ	33940	いつのまにか、アルカが目の前にいた	143202	And then BAM, I'm standing in front of you, Arca, all confusified and stuff.	present
+prologue	43032	38381	const	208	34265	34247	なんか、くすぐったい‥‥‥です	34275	なんか、こそばゆいな	144330	Um, you're...welcome? I...guess?	present
+prologue	43032	38381	const	209	34455	34426	どうするの？	34459	それで、フォルスはこれから	144584	So what're you gonna do now, Folth?	present
+prologue	43032	38381	const	210	34473	34463	どうするんだ？	34477	それで、アルカはこれから	144620	So what's the plan now, Arca?	present
+prologue	43032	38381	const	211	34677	34654	そうだよね‥‥‥	34687	そうだよな‥‥‥	145026	That does sound alot like a plan.	present
+prologue	43032	38381	const	212	34850	34832	え！？	34860	へ！？	145294	Huh?!	present
+prologue	43032	38381	const	213	35024	35006	リィンバウム‥‥‥	35028	リィンバウム‥‥‥	145616	Lyndbaum...	present
+prologue	43032	38381	const	214	35215	35197	ずっと‥‥‥いっしょ‥‥‥	35224	トモダチ‥‥‥	146090	Your plan's just getting better and better!	present
+prologue	43032	38381	const	215	35355	35336	！？	35365	！？	146230	What the?!	present
+prologue	43032	38381	const	217	35547	35528	危ないッ！	35551	危ねえッ！	146446	Heads up!	present
+prologue	43032	38381	const	218	35652	35633	‥‥‥あうッ！？	35662	‥‥‥ぐッ！？	146488	...Guh?!	present
+prologue	43032	38381	const	219	35867	35834	逃げて‥‥‥アルカ‥‥‥	35871	逃げろ‥‥‥フォルス‥‥‥	146640	Run...Folth...RUN!	present
+prologue	43032	38381	const	220	35881	35871	逃げろ‥‥‥フォルス‥‥‥	35885	逃げろ‥‥‥アルカ‥‥‥	146660	Arca...RUN AWAY!	present
+prologue	43032	38381	const	221	36107	36089	あ‥‥‥	36117	あ‥‥‥	146980	That's a nice thought, but this is reality, and it's about to get HARD!	present
+prologue	43032	38381	const	235	31675	31655	しるたーん？	31684	さぷれす？	137234	Sapureth?	present
+prologue	43032	38381	const	236	32120	32100	どうして、ここにいるんだ？	32130	ごめんなさい‥‥‥	138816	This...this is all very confusing to me...	present
+prologue	43032	38381	const	237	32144	32134	よく、わかりません‥‥‥	32148	わたしは‥‥‥何者なんでしょう？	138860	Maybe you can tell me who I am and what I'm doing here? I really don't know...	present
+prologue	43032	38381	const	238	32354	32328	‥‥‥‥‥‥‥‥‥	32358	なのかもしれません‥‥‥	139278	I don't know any other way to describe it. So, yes, I've probably lost my memory.	present
+prologue	43032	38381	const	239	32368	32358	なのかもしれません‥‥‥	32378	‥‥‥‥‥‥‥‥‥	139360	. . . . . . 	present
+prologue	43032	38381	const	240	32580	32560	ありがとう‥‥‥ええと‥‥‥	32589	ありがとう‥‥‥ええと‥‥‥	139806	Well, thank you for your concern. I'll try to do that.	present
+prologue	43032	38381	const	241	32733	32713	‥‥‥‥‥‥‥‥‥	32743	‥‥‥‥‥‥‥‥‥	140012	. . .	present
+prologue	43032	38381	const	243	33269	33251	とっても‥‥‥大切な名前‥‥‥！	33279	そんなこと、ありません！	141416	Oh, no...no! It's nothing of the sort. I'm just happy to have a name now!	present
+prologue	43032	38381	const	244	33304	33283	なんだか、とってもうれしいです！	33308	わたしの名前はスピネル‥‥‥	141490	My name shall be Spinel, named from the epic story you loved, Folth!	present
+prologue	43032	38381	const	245	33322	33312	フォルスにつけてもらった	33326	わたしの名前はスピネル‥‥‥	141560	Arca, I will always treasure the name you gave me - Spinel.	present
+prologue	43032	38381	const	246	33338	33330	アルカにつけてもらった	33348	とっても‥‥‥大切な名前‥‥‥！	141620	Such a beautiful name...and it sounds so important!	present
+prologue	43032	38381	const	247	33657	33633	ごめん‥‥‥	33667	はい‥‥‥すみません‥‥‥	142296	It's troublesome to me, but I have no memories more than a few minutes back.	present
+prologue	43032	38381	const	248	33962	33944	‥‥‥それしか、思い出せねえ	33971	正直にいえば、それも	143280	If I'm being completely honest, I'm not even sure that's what happened.	present
+prologue	43032	38381	const	249	33983	33975	あやふやなんです	33987	誰かがわたしのことを呼んだ気がして	143352	I just felt I was being called, and I responded to the call.	present
+prologue	43032	38381	const	250	34005	33991	必死にそれに応えようとしたら	34009	いつのまにか、フォルスが目の前にいた	143414	And before I even realized what had happened, I was standing before you, Folth.	present
+prologue	43032	38381	const	251	34023	34013	それしか思い出せない‥‥‥	34027	いつのまにか、アルカが目の前にいた	143494	And then suddenly, I was standing before you, Arca!	present
+prologue	43032	38381	const	252	34293	34275	なんか、こそばゆいな	34303	あ、いえ‥‥‥	144364	I certainly did what I could. You're welcome.	present
+prologue	43032	38381	const	253	34510	34481	どうするんだ？	34514	フォルスは、これから	144650	What do you intend to do now, Folth?	present
+prologue	43032	38381	const	254	34528	34518	どうするんですか？	34532	アルカは、これから	144688	Arca, what do you intend to do now?	present
+prologue	43032	38381	const	255	34710	34687	そうだよな‥‥‥	34720	そうですよね‥‥‥	145060	Seems like that's a good place to start.	present
+prologue	43032	38381	const	256	34878	34860	へ！？	34888	え！？	145300	Hm?!	present
+prologue	43032	38381	const	257	35046	35028	リィンバウム‥‥‥	35055	リィンバウム‥‥‥	145628	Lyndbaum...	present
+prologue	43032	38381	const	258	35246	35228	ずっと‥‥‥いっしょ‥‥‥	35256	トモダチ‥‥‥	146134	Hmm, 'friends' sounds like a lovely thing.	present
+prologue	43032	38381	const	259	35384	35365	！？	35394	！？	146242	Ahhh?!	present
+prologue	43032	38381	const	261	35570	35551	危ねえッ！	35574	危ないッ！	146456	Look out!	present
+prologue	43032	38381	const	262	35681	35662	‥‥‥ぐッ！？	35691	‥‥‥あうッ！？	146498	...Ahhh?!	present
+prologue	43032	38381	const	263	35924	35885	逃げろ‥‥‥アルカ‥‥‥	35928	逃げて‥‥‥フォルス‥‥‥	146678	Folth...RUN!	present
+prologue	43032	38381	const	264	35938	35928	逃げて‥‥‥フォルス‥‥‥	35942	逃げて‥‥‥アルカ‥‥‥	146692	Arca...run away!	present
+prologue	43032	38381	const	265	36135	36117	あ‥‥‥	36145	あ‥‥‥	147052	Oh, that's the most beautiful thing I've ever heard...	present
+prologue	43032	38381	const	276	31704	31684	さぷれす？	31713	めいとるぱ？	137244	Maetropa?	present
+prologue	43032	38381	const	277	32172	32152	どうして、ここにいるんでしょう？	32182	ごめん‥‥‥	138940	You sound like you know a LOT. Way more than I do right now.	present
+prologue	43032	38381	const	278	32196	32186	よく、わからない‥‥‥	32200	わたしは‥‥‥なに？	139002	I-I don't even know what I am or why I'm here.	present
+prologue	43032	38381	const	279	32404	32378	‥‥‥‥‥‥‥‥‥	32408	‥‥‥ん、たぶん‥‥‥	139374	Yeah...yeah, that's it! Well...maybe...	present
+prologue	43032	38381	const	280	32418	32408	‥‥‥ん、たぶん‥‥‥	32428	‥‥‥‥‥‥‥‥‥	139414	. . . . . . 	present
+prologue	43032	38381	const	281	32609	32589	ありがとう‥‥‥ええと‥‥‥	32618	ありがと‥‥‥えと‥‥‥	139862	Um...er, thanks...I think.	present
+prologue	43032	38381	const	282	32763	32743	‥‥‥‥‥‥‥‥‥	32773	‥‥‥‥‥‥‥‥‥	140018	. . .	present
+prologue	43032	38381	const	285	33366	33348	とっても‥‥‥大切な名前‥‥‥！	33375	そんなことない！	141672	Nah! You worry too much! I kinda like the name!	present
+prologue	43032	38381	const	286	33400	33379	なんだか‥‥‥とってもうれしい！	33404	ぺりえ‥‥‥	141720	Folth, I'm actually kind of honored that you chose to call me Pariet.	present
+prologue	43032	38381	const	287	33418	33408	ふぉるすに、つけてもらった	33422	ぺりえ‥‥‥	141790	Pariet...yes...I like it! You did good, Arca!	present
+prologue	43032	38381	const	288	33434	33426	あるかに、つけてもらった	33438	とっても‥‥‥たいせつな、なまえ‥‥‥！	141836	How could I be unhappy with a name from such an epic story? It sounds so important!	present
+prologue	43032	38381	const	289	33685	33667	はい‥‥‥すみません‥‥‥	33695	ん‥‥‥ごめん‥‥‥	142374	It's totally weird, but I don't remember anything until just before I met you!	present
+prologue	43032	38381	const	290	34049	34031	それしか思い出せない‥‥‥	34058	‥‥‥よく、わかんない	143546	Awww, I don't know about that. It was all a jumble for me.	present
+prologue	43032	38381	const	291	34066	34058	‥‥‥よく、わかんない	34070	だれかに、よばれたきがした	143606	I got the weird feeling I was being called, and I moved to come toward the voice.	present
+prologue	43032	38381	const	293	34093	34074	それに、こたえようとしたら、	34097	ふぉるすがめのまえにいた	143688	And the next thing I know, you're right in front of me, Folth! It was weird!	present
+prologue	43032	38381	const	294	34111	34101	‥‥‥それしか、おもいだせない	34115	あるかがめのまえにいた	143766	Then I was instantly in front of you, Arca. I didn't even know what happened!	present
+prologue	43032	38381	const	295	34325	34307	その、どう、いたしまして‥‥‥	34335	ん‥‥‥えへへ	144410	Bah! Now you're embarrassin' me!	present
+prologue	43032	38381	const	296	34565	34536	どうするんですか？	34569	ふぉるす、これから	144724	So what's next, Folth? Can we go somewhere less...globby?	present
+prologue	43032	38381	const	297	34583	34573	どうするの？	34587	あるか、これから	144782	So whatcha got in mind next, Arca?	present
+prologue	43032	38381	const	298	34738	34720	そうですよね‥‥‥	34748	んむ‥‥‥やっぱり	145102	Yeah, I think you're right.	present
+prologue	43032	38381	const	299	34906	34888	え！？	34915	んむ？	145306	WHAT?!	present
+prologue	43032	38381	const	300	35073	35055	リィンバウム‥‥‥	35083	りぃんばうむ‥‥‥	145640	Lyndbaum...	present
+prologue	43032	38381	const	301	35278	35260	ずっと‥‥‥いっしょ‥‥‥	35288	ともだち‥‥‥	146178	It would be great to be friends forever!	present
+prologue	43032	38381	const	302	35413	35394	！？	35423	！？	146250	Whaaaaa?!	present
+prologue	43032	38381	const	304	35593	35574	危ないッ！	35597	あぶないっ！	146466	Watch out!	present
+prologue	43032	38381	const	305	35710	35691	‥‥‥あうッ！？	35720	‥‥‥あうっ！？	146508	...Unghh?!	present
+prologue	43032	38381	const	306	35975	35942	逃げて‥‥‥アルカ‥‥‥	35979	にげて‥‥‥ふぉるす‥‥‥	146710	Run, Folth...RUN!	present
+prologue	43032	38381	const	307	35989	35979	にげて‥‥‥ふぉるす‥‥‥	35993	にげて‥‥‥あるか‥‥‥	146728	Run, Arca! Get out of here!	present
+prologue	43032	38381	const	308	36163	36145	あ‥‥‥	36173	あ‥‥‥	147108	Well, that's unexpected...	present
+prologue	43032	38381	const	322	36543	36535	‥‥‥‥‥‥	36547	意識ははっきりしてるか？	147544	Hello? Are you back with us? Can you understand me?	present
+prologue	43032	38381	const	323	36607	36599	わたし、どうしちゃってたの？	36617	そいつは俺のほうが聞きたいよ	147736	I was hoping you could tell me. You've been missing for three days.	present
+prologue	43032	38381	const	324	36666	36658	どうして！？	36675	村のみんなと一緒に、ずっと君を	147894	We don't know what happened, but you've been missing for three days.	present
+prologue	43032	38381	const	325	36692	36679	探し続けてたんだ	36696	そろそろ、他の街からも応援を呼ばないと	147964	The villagers were almost ready to call in reinforcements in the search, when...	present
+prologue	43032	38381	const	326	36708	36700	いけないかって話になり始めたところで	36712	こいつがいきなり	148046	...my buddy here sensed a strong magical force spreading here.	present
+prologue	43032	38381	const	327	36741	36716	すごい魔力を感知してさ	36745	慌テテ、駆ケツケテミタトコロ	148110	Yes, I was able to triangulate the position of this area with my sensors.	present
+prologue	43032	38381	const	328	36778	36749	貴方ト―――	36782	その隣に、このちっこいのが	148184	And we found you...BOTH of you, actually. You were out cold.	present
+prologue	43032	38381	const	329	36849	36810	ちっこいのって‥‥‥	36853	‥‥‥	148264	. . .	present
+prologue	43032	38381	const	330	37011	36994	夢じゃ‥‥‥なかったんだ‥‥‥	37021	無事でよかった‥‥‥	148394	I just have to say I am relieved we're both in one piece after that nonsense.	present
+prologue	43032	38381	const	331	36879	36853	‥‥‥	36883	‥‥‥へへっ	148270	...heh heh!	present
+prologue	43032	38381	const	332	37043	37025	お互いに‥‥‥ね	37052	何が何だか、さっぱりだけどさ	148472	I don't pretend to understand it, but somehow we're all right!	present
+prologue	43032	38381	const	333	36910	36883	‥‥‥へへっ	36914	ど、どうも‥‥‥	148282	H-Hello there...	present
+prologue	43032	38381	const	334	37074	37056	とにかく助かったみたいだぜ	37083	気がついたら、わたしもここに	148536	Whatever happened to get us here, I'm just glad we're all right.	present
+prologue	43032	38381	const	335	36941	36914	ど、どうも‥‥‥	36945	‥‥‥	148300	. . .	present
+prologue	43032	38381	const	336	37117	37087	ともかく、無事でよかったです	37121	ねぼすけふぉるす	148602	Oh, Folth! When you were a sleepyhead, Pariet was so worried about you!	present
+prologue	43032	38381	const	337	37135	37125	‥‥‥ぺりえ、いっぱい、しんぱいした	37139	ねぼすけあるか	148674	When you were a sleepyhead and wouldn't wake up, Arca, Pariet was so worried about you!	present
+prologue	43032	38381	const	338	37250	37216	でも、よかったぁ‥‥‥	37254	君の口から、説明してくれるかい？	148938	I need you to tell me everything you can remember. Think hard...	present
+prologue	43032	38381	const	339	37334	37309	あとは、本当によくわかんない	37343	どう思う、相棒？	149136	What do you make of it, buddy?	present
+prologue	43032	38381	const	340	37357	37343	どう思う、相棒？	37361	状況ヲミルニ、彼ハ、オソラク	149168	Considering the circumstances, it's most likely that he fell into a Gate.	present
+prologue	43032	38381	const	341	37375	37365	[【門（ゲート）】]ニ落チタノデショウネ	37379	状況ヲミルニ、オソラク	149242	Given the circumstances, I believe she fell into a Gate.	present
+prologue	43032	38381	const	342	37436	37428	げーと？	37445	異世界につながる門のことだよ	149312	A space-time Gate that connects to the Otherworlds. They are usually at fixed locations.	present
+prologue	43032	38381	const	343	37463	37449	たいていは決まった場所にあるんだが	37467	たまに、前触れなく現れたりもする	149402	However, some Gates appear randomly from time to time in unstable areas.	present
+prologue	43032	38381	const	344	37481	37471	フォルス君は、そこに落ちたんだ	37485	たまに、前触れなく現れたりもする	149476	But in unstable areas, they have been known to open and close randomly.	present
+prologue	43032	38381	const	345	37514	37489	アルカちゃんは、そこに落ちたんだ	37518	不安定ナ[【門】]ヲ抜ケル際ハ、	149548	When an unstable Gate is breached, it isn't unusual for time to become unstable as well.	present
+prologue	43032	38381	const	346	37536	37522	時ノ流レモ不安定ニナルコトガ稀ニアリマス	37540	彼ニトッテハ短イ時間ダッタハズナノニ	149638	That best explains why he was gone for three days here, but it seemed much shorter to him.	present
+prologue	43032	38381	const	347	37554	37544	コチラデ三日経ッテイタノハソノセイデショウ	37558	彼女ニトッテハ短イ時間ダッタハズナノニ	149730	That best explains why she was gone for three days here, but it seemed much shorter to her.	present
+prologue	43032	38381	const	348	37570	37562	コチラデ三日経ッテイタノハソノセイデショウ	37574	ヨク無事ニ帰ッテコレタモノデス	149822	I must say that the fact that you made it back in one piece is quite impressive.	present
+prologue	43032	38381	const	349	37582	37574	ヨク無事ニ帰ッテコレタモノデス	37586	場合ニヨッテハ、落チタ時点デ	149978	An unstable Gate breach can mean immediate death more often than not.	present
+prologue	43032	38381	const	350	37616	37590	死亡シテイタ可能性モ‥‥‥	37620	こらバカ！　おどかして	150048	Hey! I know you're a computer, but you might want to cool it with scaring the kid?! Hmm?!	present
+prologue	43032	38381	const	351	37632	37624	どーするんだよっ！？	37636	失敬ナ！　私ハ事実ヲ	150138	I'm sorry if I've been rude. I was simply marveling at the impressive luck...	present
+prologue	43032	38381	const	352	37752	37728	わたし、きっと‥‥‥	37756	‥‥‥‥‥‥	150508	. . .	present
+prologue	43032	38381	const	353	37796	37756	‥‥‥‥‥‥	37800	ツマリ、彼ハ	150514	I believe that would put him into the category of 'lifesaver' then.	present
+prologue	43032	38381	const	355	37862	37822	貴方ニトッテ恩人ナノデスネ	37866	へへっ、まあね‥‥‥	150650	Sounds about right to me...	present
+prologue	43032	38381	const	356	37814	37804	貴方ニトッテ恩人ナノデスネ	37818	ツマリ、彼女ハ	150582	Then I am certain you're grateful she was your lifesaver, correct?	present
+prologue	43032	38381	const	357	37893	37866	へへっ、まあね‥‥‥	37897	そんな‥‥‥照れちゃいます‥‥‥	150678	You're flattering, but...	present
+prologue	43032	38381	const	359	37923	37897	そんな‥‥‥照れちゃいます‥‥‥	37927	んむ！	150704	What's a lifesaver?	present
+prologue	43032	38381	const	360	37962	37931	‥‥‥で、おんじんって、なに？	37966	よくわかってるさ	150724	Lifesaver or not, I can't ignore what's happened here.	present
+prologue	43032	38381	const	361	37978	37970	だが、それはそれだ	37982	[【異世界調停機構（ユクロス）】]の	150780	As a Eucross Summoner, I have a duty to the security of this world.	present
+prologue	43032	38381	const	362	37994	37986	召喚師としては、	37998	素性の知れぬ異界の住人を	150848	I can't just ignore the mysterious arrival of someone or something from the Otherworlds.	present
+prologue	43032	38381	const	363	38037	38002	このまま見過ごすことはできないな	38041	‥‥‥！？	150938	. . .?!	present
+prologue	43032	38381	const	364	38068	38041	‥‥‥！？	38072	な、なんだよっ！？	150946	W-What's that supposed to mean?!	present
+prologue	43032	38381	const	365	38099	38072	な、なんだよっ！？	38103	あう、あわわわ‥‥‥っ	150980	Oh...dear...that sounds a bit ominous.	present
+prologue	43032	38381	const	366	38130	38103	あう、あわわわ‥‥‥っ	38134	むむっ！？	151020	Wha-wha-WHAT?!	present
+prologue	43032	38381	const	371	38425	38394	あ‥‥‥！？	38429	こいつは、まさか‥‥‥	151398	Wait, isn't this a...	present
+prologue	43032	38381	const	372	38447	38429	こいつは、まさか‥‥‥	38451	エエ、間違イアリマセン	151420	There is no mistake. It is the aura of a Life Resonance Stone, and a Pledge.	present
+prologue	43032	38381	const	373	38463	38455	コレハ[【響命石】]、ソシテ[【誓約】]ノ輝キ	38467	先程、私ガ感知ヲシタ	151498	This is most certainly the same magical energy I detected earlier.	present
+prologue	43032	38381	const	374	38491	38471	アノ魔力ト同質ノモノデス	38495	じゃあ、フォルス君とこいつが	151566	So Folth and his buddy have become each other's Cross?!	present
+prologue	43032	38381	const	375	38509	38499	[【響友】]になったっていうのかよ！？	38513	じゃあ、アルカちゃんとこいつが	151622	But that has to mean that Arca and her friend here have become each other's Cross!	present
+prologue	43032	38381	const	376	38587	38558	くろす？	38591	楽シイコトモ、ツライコトモ、ナニモカモ	151722	Yes, it's a special kind of friendship that intertwines the lifeforce of two beings.	present
+prologue	43032	38381	const	377	38603	38595	分カチ合エル、最高ノ[【友達】]ノコトデス	38607	私ト―――えるすとノヨウニ、ネ	151808	Once a Cross is formed, the participants share thought and emotion...just like Erst and myself.	present
+prologue	43032	38381	const	378	38645	38607	私ト―――えるすとノヨウニ、ネ	38649	最高の‥‥‥トモダチ‥‥‥	151904	So that is what you call...Best...friends, right?	present
+prologue	43032	38381	const	379	38675	38649	最高の‥‥‥トモダチ‥‥‥	38679	へっ、そんなの当たり前だっての！	151954	Hey, I won't judge, man...	present
+prologue	43032	38381	const	380	38705	38679	へっ、そんなの当たり前だっての！	38709	どんな時でも、ずっと一緒‥‥‥	151982	We'll always be together...always...forever...	present
+prologue	43032	38381	const	381	38739	38713	永遠に、ずっと‥‥‥	38743	んむ、ずっといっしょ！	152030	Yay! Together...forever!	present
+prologue	43032	38381	const	382	38776	38743	んむ、ずっといっしょ！	38780	ガウディ、お前‥‥‥	152056	But Gaudi...	present
+prologue	43032	38381	const	383	38788	38780	ガウディ、お前‥‥‥	38792	貴方ノ懸念ハ充分ニ理解シテイマス	152070	I fully understand your apprehension, Erst...	present
+prologue	43032	38381	const	384	38815	38796	えるすと‥‥‥	38819	彼ハ、でーたべーすト	152116	This new 'friend' is unknown and completely inconsistent with the database.	present
+prologue	43032	38381	const	385	38833	38823	一致シナカッタ、正体不明ノ存在	38837	彼女ハ、でーたべーすト	152192	Her 'friend' is an unknown and completely inconsistent with the database.	present
+prologue	43032	38381	const	386	38849	38841	一致シナカッタ、正体不明ノ存在	38853	アノ黒イ獣タチト同様ニ	152266	Precisely like the beasts Ghift called Mudmires.	present
+prologue	43032	38381	const	387	38861	38853	アノ黒イ獣タチト同様ニ	38871	だったら！？	152316	. . .	present
+prologue	43032	38381	const	398	39009	38871	だったら！？	39013	えるすと‥‥‥	152322	Erst...	present
+prologue	43032	38381	const	399	39073	39013	えるすと‥‥‥	39077	フォルス君、ダイス	152330	Folth and Dyth, I need you to consider this carefully...	present
+prologue	43032	38381	const	400	39182	39159	君たちは、これからも	39186	アルカちゃん、ダイス	152572	Arca and Dyth, you need to carefully consider this...	present
+prologue	43032	38381	const	401	39099	39081	君たちは、これからも	39103	フォルス君、カゲロウ	152388	Folth and Kagerou, I need you to think about this carefully...	present
+prologue	43032	38381	const	402	39208	39190	君たちは、これからも	39212	アルカちゃん、カゲロウ	152626	Arca and Kagerou, this will have to be thoughtfully considered...	present
+prologue	43032	38381	const	403	39125	39107	君たちは、これからも	39129	フォルス君、スピネル	152452	Folth and Spinel, you need to really think about this...	present
+prologue	43032	38381	const	404	39234	39216	君たちは、これからも	39238	アルカちゃん、スピネル	152692	Arca and Spinel, you need to think about this carefully.	present
+prologue	43032	38381	const	405	39151	39133	君たちは、これからも	39155	フォルス君、ペリエ	152510	Folth and Pariet, I want you to consider this thoughtfully...	present
+prologue	43032	38381	const	406	39260	39242	君たちは、これからも	39264	アルカちゃん、ペリエ	152750	Arca and Pariet, you need to really think about this...	present
+prologue	43032	38381	const	407	39280	39268	君たちは、これからも	39284	ずっと、一緒にいたいかい？	152806	...do you want to stay bound by this Cross that has happened to you?	present
+prologue	43032	38381	const	408	39352	39318	うんっ！	39356	はいっ！	152894	I have no objection.	present
+prologue	43032	38381	const	409	39382	39356	はいっ！	39386	当然だろ！	152916	Yeah, why not?	present
+prologue	43032	38381	const	410	39412	39386	当然だろ！	39416	側にいたいですっ！	152932	I most certainly do!	present
+prologue	43032	38381	const	411	39443	39416	側にいたいですっ！	39447	‥‥‥だめっていっても	152954	Yes, yes, YES! I'm not letting go of my friend! Never...ever!	present
+prologue	43032	38381	const	412	39484	39451	くっついてく！	39488	なら、君たちは今すぐにでも	153016	Then the both of you must go to Savorle at once.	present
+prologue	43032	38381	const	413	39500	39492	セイヴァールに行かなくちゃいけない	39504	そこの学園で勉強して―――	153066	You'll have to study in the school there and formally become Summoners.	present
+prologue	43032	38381	const	414	39516	39508	正式な召喚師になるんだ	39520	そうすれば、きみたちはずっと	153138	If you complete that course of action, the Cross will bind you permanently.	present
+prologue	43032	38381	const	415	39569	39561	わたしが‥‥‥！？	39578	無論、簡単なことじゃない	153348	I don't want you to think this path will be easy...for you OR your Cross, because it won't.	present
+prologue	43032	38381	const	416	39590	39582	君だけじゃなく君の響友も	39594	互いに力を合わせてがんばら	153440	But it's a priceless goal you can attain by working together...as a team.	present
+prologue	43032	38381	const	417	39606	39598	なくちゃいけないことだ	39615	それでも―――いいか？	153514	Are you...fine with that?	present
+prologue	43032	38381	const	418	39688	39679	召喚師に絶対なってみせる！	39698	‥‥‥‥‥‥	153798	Aw, kid! Why'd ya have to go and bust my eyes? They're gonna start leaking now...	present
+prologue	43032	38381	const	419	39836	39819	▲！	39840	うんっ、任せて！	154034	I certainly feel as if I have the ability to succeed. So, yes!	present
+prologue	43032	38381	const	420	39858	39840	うんっ、任せて！	39867	おうっ！	154098	Can't wait! Let's do this!	present
+prologue	43032	38381	const	421	39885	39867	おうっ！	39894	精一杯、お手伝いします！	154126	Yes! I'll help you in whatever way I can!	present
+prologue	43032	38381	const	422	39924	39894	精一杯、お手伝いします！	39928	めんどくさいけど‥‥‥	154168	It sounds like a lot of hard work, but I'll do it for you, Folth.	present
+prologue	43032	38381	const	423	39942	39932	ふぉるすのためなら、がんばる！	39946	めんどくさいけど‥‥‥	154234	It sounds like not so much fun, but I'll do it for you, Arca!	present
+prologue	43032	38381	const	424	39981	39950	あるかのためなら、がんばる！	39985	よし！　そうと決まれば	154296	Good! Now that that's decided, we have to get ready immediately.	present
+prologue	43032	38381	const	425	40007	39989	早速、準備をしなくちゃな	40016	ガウディ、本部へ‥‥‥	154362	Gaudi, I need you to contact HQ. No...contact Commander Zinzelah directly.	present
+prologue	43032	38381	const	426	40028	40020	いや、ジンゼルア総帥に直接連絡を頼む	40032	特別な事情のある子たちだ、	154526	Understood.	present
+prologue	43032	38381	const	427	40044	40036	あまり情報が漏れる形にはしたくない	40048	承知シマシタ	154538	I'll talk to your parents for you.	present
+prologue	43032	38381	const	428	40077	40048	承知シマシタ	40086	お父さんとお母さんには	154574	I have to apologize properly for your three-days absence as well...	present
+prologue	43032	38381	const	429	40098	40090	俺から説明してやるよ	40102	三日の間、留守にしたことについても	154642	Wait! What about Ghift?!	present
+prologue	43032	38381	const	430	40181	40172	ギフトは無事なの！？	40191	ああ‥‥‥そのことならもう	154726	Ah...yes...you don't have to worry about him anymore.	present
+prologue	43032	38381	const	431	40232	40224	え？	40242	ギフトはもう、この村にはいないんだ	154792	Ghift isn't here anymore. After the event happened, well...	present
+prologue	43032	38381	const	432	40254	40246	ほら、今回の件もあったしさ	40258	家族そろって、別の街に引っ越したんだ	154852	...my family decided to move away. I'll be going to check on him once they're settled.	present
+prologue	43032	38381	const	433	40308	40300	わたし、お別れもしてないのに‥‥‥	40317	なに、すぐにまた会えるさ	155110	Don't worry, I'm sure you'll see him again soon enough.	present
+prologue	43032	38381	const	434	40329	40321	あいつも、君のこと心配してたし	40333	落ち着いたら手紙でも書くだろう	155166	Once things settle down, I'm sure he'll probably write you a letter or something.	present
+prologue	43032	38381	const	435	40374	40366	う、うん‥‥‥	40383	さあ、行こう！	155320	Okay, there's no more time to waste. Let's go!	present

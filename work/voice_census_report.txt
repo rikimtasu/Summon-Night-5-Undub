@@ -1,0 +1,33 @@
+== inputs ==
+  psp_ram_jp.bin                     1 new block(s)
+  psp_ram_jp2.bin                    0 new block(s)
+  psp_ram_jp_replay.bin              0 new block(s)
+  psp_ram_usa.bin                    0 new block(s)
+  psp_ram_usa2.bin                   1 new block(s)
+  psp_ram_usa3.bin                   0 new block(s)
+  psp_ram_usa_replay2.bin            0 new block(s)
+
+== blocks found ==
+  jp c10=43032  lines=2404  const=392  f2=15  pair=505   (first from psp_ram_jp.bin)
+  usa c10=38381  lines=1569  const=68   f2=0   pair=505   (first from psp_ram_usa2.bin)
+
+== per-chapter coverage ==
+  deleted = JP multiset - USA multiset (Counter arithmetic)
+  rows needed = deleted const + deleted f2   (pair sites need no row: USA kept them)
+
+  [prologue (shipped: 338 rows)]
+    jp c10=43032  usa c10=38381 
+    JP   const=392 f2=15 pair=505 lines=2404
+    USA  const=68 f2=0 pair=505 lines=1569
+    deleted: const=324 f2=15 pair=0   rows needed=339
+    shipped rows for usa c10=38381: 338
+    ok  intentional drop vid 122 (JP line merged into USA 121 (round-6 drop))
+    verdict: COMPLETE
+
+== summary ==
+  chapter                       need    ship    gaps  badkey delpair jp_c10    usa
+  prologue (shipped: 338 row     339     338       0       0      0  43032  38381
+
+  A row is needed only for JP voice sites the USA script deleted.
+  GAP = line will be silent. badkey = row points at a non-existent line.
+  delpair>0 = USA deleted native pair triggers: silent too, and not fixable by the table alone.

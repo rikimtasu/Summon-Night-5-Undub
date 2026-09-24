@@ -153,6 +153,49 @@ Backlog replay round 5 (CRASH + root cause of silent +0x08): PPSSPP crashed at P
 
 Voice mapping round 6 (prologue recheck, Ghift globs line): screenshot line (key 126890) played vid53 whose clip = ちゃんと、あの紙きれに書かれてた… ("I did exactly what was on the paper…"). Full bilingual line-by-line alignment of ALL entries (JP CALL214-group first text vs USA attached line, full strings, unattached-line sweep) found: (a) vids 53-57 each attached ONE USA line late - correct keys 126792/126890/126984/126992/127062 (126792 sat UNATT = shift signature; "Ghift! You're all right!" 127098 correctly stays unvoiced under v57's clip); (b) 128/129 same one-late shift (UNATT 132350 "Well then, I shall be assisting you…" = v128 ナラバ、私ハ…; 132426 = v129); (c) 416/417 one-late (UNATT 153440 "priceless goal…working together as a team" = v416; 153514 "Are you…fine with that?" = v417 それでもいいか; 153540 is the unvoiced kids' answer); (d) branch A 151/152 content SWAPPED: JP order [apology, who-am-I] vs USA [topic, apology] - localizer reordered that branch only (other 3 aligned) -> keys swapped; (e) 349 sat on an inserted USA joke ("3,720 to 1") - true line is UNATT 149978 "immediate death" = 死亡シテイタ可能性モ; (f) v122 カッコつけた手前 merged into USA121's line -> dropped, its key 131992 reassigned to v123 ヤレヤレ ("Oh, dear. I was afraid you were headed in that direction."), v124 REINSTATED at 132050 ("Ghift and Folth are trusting me" = ギフトも、フォルス君も, exact); (g) round-4 drops of 30/118 were wrong: 30 -> 124914 ("…helping hand from my favorite Cross" = あいつを呼ぶか), 118 -> 131522 ("master of the backhanded compliment" = ド根性ってヤツさ). Kept after full-string review: loose-but-slot-correct localizations (45, 89-91, 103, 379, 387 - no better target line exists). Confirmed USA natively retains all 68 const CALL214 sites (monster roars 82/88/104/106/112, void-voice 130/135/139/143, etc.) - they play via stock path with clamp NOPed, correctly absent from the table. build_v6fix.py validated every target key+unit as a real USA text call BEFORE writing; 13 moves + 1 drop + 3 adds = 338 entries / 11 chunks; extent byte-verified (13 present + 10 absent packed triples); verify_caves.py ALL PASS; EBOOT-only rebuild (v5 opening preserved). ISO mtime 2026-09-23T21:39:37, SHA-256 0b3bee610fd9707683b36a885b4b9f0fc62f11e1119aa6695f87d00c6ae88d3e. Lessons: an UNATTACHED USA line between attached ones whose content matches an adjacent vid's JP group = the shift signature; watch for localizer-INSERTED lines (must stay unvoiced) and cross-version line-order swaps inside a response pair; round-4's "orphan drop" judgment needs the same full-string standard or valid voices get deleted.
 
+## Chapter voice-trigger census tool (2026-09-24)
+
+`chapter_voice_census.py` automates the completeness audit above for ANY chapter,
+so the "is every JP trigger correctly wired after chapter 1" question can be
+answered offline, without a playtest.
+
+**Why the table is partial by design.** The undub does not carry a full JP->USA
+voice map:
+- pair-id sites (`op50 f1=4`, ids 36000..36835) were **not** deleted from the USA
+  script, so they fire natively once the engine clamp at 0x17904 is NOPed - no
+  table row is needed or wanted for them;
+- const / f2-1 sites were deleted with their arg push, and only those need rows.
+
+So a chapter needs exactly `deleted = JP multiset - USA multiset` rows
+(Counter arithmetic, per kind), computed per chapter block pair.
+
+**Pipeline:** scan RAM dumps / `.ppst` states for story blocks (magic
+0x10000201/0x10000002) -> classify every CALL214 site as const/f2-1/pair ->
+pair JP and USA blocks into chapters by voice-id range (chapter-partitioned,
+zero overlap) or `--pair` -> compare the deleted set against the rows the build
+ships (`v3_entries.txt` + `extra_entries.txt`, loaded exactly as
+`build_v4.load_entries` does) -> validate every row's key against that block's
+real CALL195 sites -> emit a bilingual TSV for the human audit.
+
+**Self-test reproduces the documented prologue numbers exactly** (6/6 PASS):
+JP const 392, USA retained 68, JP f2 15, pair 505 = 505, 338 shipped rows, and
+the only gap is the intentional vid 122 drop. Chapter 1 is asserted too
+(exactly one deleted trigger, vid 2287, shipped at key 191506) but SKIPs until
+a RAM dump with that block (jp c10=55506 / usa c10=50098) is available.
+
+Outputs: `voice_census_report.txt` (per-chapter need/ship/gap/badkey/delpair)
+and `voice_bilingual.tsv` (JP line that each vid speaks vs the USA line its key
+is attached to, plus the following JP line - shape-only matching jitters +-1 in
+reflow zones, so this review remains the ground truth). The TSV independently
+reproduces the round-6 corrections, e.g. vid 53 -> key 126792 "I did exactly
+what was on the paper in that old book", vid 54 -> key 126890.
+
+**Known data gap:** no RAM dump exists for chapters 2+, in either version. Each
+needs one dump taken with that chapter loaded (JP and USA) before its coverage
+can be measured. The census reports such blocks as UNPAIRED and names the
+missing c10. `delpair>0` in a report is the serious flag: it would mean the USA
+script deleted native pair triggers, which the table cannot fix.
+
 ## Post-prologue completeness audit (2026-09-23)
 
 ### 1. Captured context (c10=38381 USA / 43032 JP) is provably COMPLETE
