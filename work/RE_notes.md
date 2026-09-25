@@ -148,17 +148,20 @@ section below.
 
 | artifact | SHA-256 |
 |---|---|
-| `Summon Night 5 (USA) Undub.iso` | `7b39f5a6bf9a4828e8928f94cacd9542272dea99a3ba5a09fdd85f97e6ca204a` (voice-table fix rebuild, 2026-09-25; 1369059328 B) |
-| `Summon Night 5 (USA) Undub.xdelta` | `c20c4465dcd84fdcc571f622f7f794b92c697af8d005973dddb3ea72f979c04a` (466098453 B; encodes the ISO above **byte-identically**, decode-proven 2026-09-25) |
-| EBOOT inside the ISO | `08f03e9c9b918c6ae6b04d3c517b562c43a4532f0bb4d79b319f8e7f065a99a5` (= `work/EBOOT_USA_patched.bin`, see below) |
+| `Summon Night 5 (USA) Undub.iso` | `e88acbfb7d76ee1c8a8310c49d4c2be0a1f8896c11f576a022bbef1e3b8309d1` (retreat-exchange fix rebuild, 2026-09-25; 1369059328 B) |
+| `Summon Night 5 (USA) Undub.xdelta` | `271d969776cb885ae4785a58bc1c11a04d96e8b13838ee9ef34d3b0066ef459b` (466098445 B; encodes the ISO above **byte-identically**, decode-proven 2026-09-25) |
+| EBOOT inside the ISO | `fca047db2e86e80b92d4dab60f6a93c56fb2dbbe0d1797a2a2c1d685125adc37` (= `work/EBOOT_USA_patched.bin`, see below) |
+| previous ISO (superseded 2026-09-25, no longer on disk) | `7b39f5a6bf9a4828e8928f94cacd9542272dea99a3ba5a09fdd85f97e6ca204a` |
 | pre-fix ISO (superseded 2026-09-25, no longer on disk) | `e71415a3b6ec2dd0f5975f7c0e8d27f0b4ec885b2574791fb354064a1d1a3348` |
 | JP ISO `04.DAT` (opening) | `97feeed3059f2baf...` (14790656 B) |
 | stock USA `04.DAT` | `b063121c47f10c56...` (14786560 B) |
 
-The current xdelta is 466098453 bytes, encoded with
-`-e -f -B 1073741824 -W 16777216` (the 1 GB source window matters: the
-pycdlib rebuild shifts file sectors, so the default window misses distant
-matches). The pre-fix patch was 466051384 bytes with the same options.
+The current xdelta (466098445 B, `271d9697...`, xdelta3 3.2.0) encodes the
+`e88acbfb...` ISO with `-e -f -B 1073741824 -W 16777216` (the 1 GB source
+window matters: the pycdlib rebuild shifts file sectors, so the default
+window misses distant matches). The previous patch (466098453 B, `c20c4465...`)
+encoded the `7b39f5a6...` ISO with the same options; the pre-fix patch was
+466051384 bytes.
 
 An ISO hash (`292e69eb...a10e`) carried over from a superseded earlier
 revision of these notes is **stale**: it appears nowhere else in this document
@@ -176,14 +179,17 @@ arguments):
     python verify_shipped_patch.py --xdelta "..\Summon Night 5 (USA) Undub.xdelta" --source-iso "..\Summon Night 5 (USA).iso"
     python review_xdelta_patch.py
 
-STATUS 2026-09-25 (after the voice-table fix + playtest + re-encode): the
-`--xdelta` repro is **40/40 GREEN** again - `UNDUB_ISO_SHA256` in
-`verify_shipped_patch.py` was advanced from `e71415a3...` to `7b39f5a6...`
-with the re-encode, the decode-provenance check passes against the playtested
-ISO, and `review_xdelta_patch.py` exits CURRENT with its provenance line true
-again. (During the interim - fixed ISO, not-yet-re-encoded patch - the repro
-was expected-red 38/40, failing exactly the two table checks named after the
-fix; recorded here so that state is never mistaken for a regression.)
+STATUS 2026-09-25 (second rebuild closed out: retreat-exchange fix +
+playtest + re-encode): the `--xdelta` repro is **40/40 GREEN** again -
+`UNDUB_ISO_SHA256` in `verify_shipped_patch.py` was advanced from
+`7b39f5a6...` to `e88acbfb...` with the re-encode, the decode-provenance
+check passes against the playtested ISO, and `review_xdelta_patch.py` exits
+CURRENT with its provenance line true again. (Between install and re-encode
+the repro was expected-red 36/40, failing exactly the four table-growth
+checks - chunking, size 339-vs-340, triple mismatches 131796/131892, missing
+131700; recorded here so that state is never mistaken for a regression.
+Same pattern earlier the same day: 38/40 interim for the first fix, then
+40/40 GREEN at `7b39f5a6...`.)
 
 NOTE: this xdelta3 build needs the `-d` / `-e` FLAG forms. The `d`/`e`
 subcommand form parses `-s` as a filename ("too many filenames: -s"), and for
@@ -230,15 +236,16 @@ Rules:
    before trusting it.
 3. Do not rebuild the ISO from `work/EBOOT_USA_patched.bin` - see below.
 
-### `work/EBOOT_USA_patched.bin` vs the shipped EBOOT (updated 2026-09-25)
+### `work/EBOOT_USA_patched.bin` vs the shipped EBOOT (updated 2026-09-25, second rebuild)
 
 | file | SHA-256 |
 |---|---|
-| EBOOT inside the shipped ISO | `08f03e9c9b918c6ae6b04d3c517b562c43a4532f0bb4d79b319f8e7f065a99a5` |
-| `work/EBOOT_USA_patched.bin` (`make_eboot()` output) | `08f03e9c9b918c6ae6b04d3c517b562c43a4532f0bb4d79b319f8e7f065a99a5` |
+| EBOOT inside the shipped ISO | `fca047db2e86e80b92d4dab60f6a93c56fb2dbbe0d1797a2a2c1d685125adc37` |
+| `work/EBOOT_USA_patched.bin` (`make_eboot()` output) | `fca047db2e86e80b92d4dab60f6a93c56fb2dbbe0d1797a2a2c1d685125adc37` |
 
-These are byte-identical SINCE 2026-09-25: the fix rebuild fed this exact
-file into the staged extent swap (single `make_eboot()` run). Before that
+These are byte-identical SINCE the first 2026-09-25 fix rebuild (this
+retreat-exchange rebuild re-established identity with a fresh single
+`make_eboot()` run: previous identical pair was `08f03e9c...`). Before that
 they had diverged - the shipped EBOOT was `3b9c48ce...` while a stale
 `make_eboot()` output sat at `c403283f...`, and how the divergence arose was
 never recorded; both passed the static verifier because it checks mechanism,
@@ -436,7 +443,7 @@ New xdelta after voice audit fix (25 moves + 3 drops, 336 voices). Same big-wind
 
 **Backlog replay round 5 (CRASH + root cause of silent +0x08):** PPSSPP crashed at PC 0x088E1F80, bad access 0x11bd63c5, ALL recorders read 0. Diagnosis: fault addr 0x11bd63c5 - 0x25 = the `sb $s3,0x25($a0)` right after the log hook with a0 = s4+s1 = 0x11BD63A0 (stale s4), and PC = the branch-target JIT block start. Cause: full-text branch audit found 0xddf4c beqz -> 0xddf80 landing EXACTLY on the old log hook delay slot (first render: 0x14(s1)==0), skipping the j/cave -> displaced ori s4,zero,0 never executed -> a0 overflowed -> sb faulted. Same bypass explains history: the cave (recorder + 0x04->0x08 copy) NEVER ran on first render, so +0x08 stayed 0/-1 and replay stayed silent - the earlier hook-site scan was wrong (never did a whole-text incoming-branch audit). Fix: hook moved to 0xDDF80 (j replaces the ori), delay 0xDDF84 stays NATIVE stock (never zeroed), displaced = ori only, ret 0xDDF88; the 0xddfd8 bnez loop back-edge lands on 0xDDF88 (skips cave - correct, preserves char counter); every other logger path funnels through the cave. Cave rewritten to 25w: empty check now treats +0x08 in {0,-1} as empty (sltiu test; round-4 bnez would have skipped -1 entries), hi16 check dropped (unsigned upper-bound sltu already rejects any vid with hi16 != 0). verify_caves.py now runs a permanent full-text incoming-branch audit for ALL three hooks (log delay branch-free + single known beqz on the j; replay fully branch-free; gate jal-only on entry, delay branch-free) and asserts stock neighbour words. Audit also caught SLTIU encoded as slti (opcode 0x0B not 0x0A). ISO rebuilt EBOOT-only (v5 opening preserved), mtime 2026-09-23T20:52:19, SHA-256 8fa929ded606148ccc216d6eaeddf56b95d313443d45d96bff2cba6121d241e3. Lesson: NEVER trust a hook site until a whole-text incoming-branch audit proves no branch lands on the delay slot (or between hook and ret); prefer keeping the delay slot native stock code when any doubt - a skipped displaced state-mutating instruction corrupts everything downstream.
 
-**Voice mapping round 6 (prologue recheck, Ghift globs line):** screenshot line (key 126890) played vid53 whose clip = ちゃんと、あの紙きれに書かれてた… ("I did exactly what was on the paper…"). Full bilingual line-by-line alignment of ALL entries (JP CALL214-group first text vs USA attached line, full strings, unattached-line sweep) found: (a) vids 53-57 each attached ONE USA line late - correct keys 126792/126890/126984/126992/127062 (126792 sat UNATT = shift signature; "Ghift! You're all right!" 127098 correctly stays unvoiced under v57's clip); (b) 128/129 same one-late shift (UNATT 132350 "Well then, I shall be assisting you…" = v128 ナラバ、私ハ…; 132426 = v129); (c) 416/417 one-late (UNATT 153440 "priceless goal…working together as a team" = v416; 153514 "Are you…fine with that?" = v417 それでもいいか; 153540 is the unvoiced kids' answer); (d) branch A 151/152 content SWAPPED: JP order [apology, who-am-I] vs USA [topic, apology] - localizer reordered that branch only (other 3 aligned) -> keys swapped; (e) 349 sat on an inserted USA joke ("3,720 to 1") - true line is UNATT 149978 "immediate death" = 死亡シテイタ可能性モ; (f) v122 カッコつけた手前 merged into USA121's line -> dropped, its key 131992 reassigned to v123 ヤレヤレ ("Oh, dear. I was afraid you were headed in that direction."), v124 REINSTATED at 132050 ("Ghift and Folth are trusting me" = ギフトも、フォルス君も, exact); (g) round-4 drops of 30/118 were wrong: 30 -> 124914 ("…helping hand from my favorite Cross" = あいつを呼ぶか), 118 -> 131522 ("master of the backhanded compliment" = ド根性ってヤツさ). Kept after full-string review: loose-but-slot-correct localizations (45, 89-91, 103, 379, 387 - no better target line exists). Confirmed USA natively retains all 68 const CALL214 sites (monster roars 82/88/104/106/112, void-voice 130/135/139/143, etc.) - they play via stock path with clamp NOPed, correctly absent from the table. build_v6fix.py validated every target key+unit as a real USA text call BEFORE writing; 13 moves + 1 drop + 3 adds = 338 entries / 11 chunks; extent byte-verified (13 present + 10 absent packed triples); verify_caves.py ALL PASS; EBOOT-only rebuild (v5 opening preserved). ISO mtime 2026-09-23T21:39:37, SHA-256 0b3bee610fd9707683b36a885b4b9f0fc62f11e1119aa6695f87d00c6ae88d3e. Lessons: an UNATTACHED USA line between attached ones whose content matches an adjacent vid's JP group = the shift signature; watch for localizer-INSERTED lines (must stay unvoiced) and cross-version line-order swaps inside a response pair; round-4's "orphan drop" judgment needs the same full-string standard or valid voices get deleted.
+**Voice mapping round 6 (prologue recheck, Ghift globs line):** screenshot line (key 126890) played vid53 whose clip = ちゃんと、あの紙きれに書かれてた… ("I did exactly what was on the paper…"). Full bilingual line-by-line alignment of ALL entries (JP CALL214-group first text vs USA attached line, full strings, unattached-line sweep) found: (a) vids 53-57 each attached ONE USA line late - correct keys 126792/126890/126984/126992/127062 (126792 sat UNATT = shift signature; "Ghift! You're all right!" 127098 correctly stays unvoiced under v57's clip); (b) 128/129 same one-late shift (UNATT 132350 "Well then, I shall be assisting you…" = v128 ナラバ、私ハ…; 132426 = v129); (c) 416/417 one-late (UNATT 153440 "priceless goal…working together as a team" = v416; 153514 "Are you…fine with that?" = v417 それでもいいか; 153540 is the unvoiced kids' answer); (d) branch A 151/152 content SWAPPED: JP order [apology, who-am-I] vs USA [topic, apology] - localizer reordered that branch only (other 3 aligned) -> keys swapped; (e) 349 sat on an inserted USA joke ("3,720 to 1") - true line is UNATT 149978 "immediate death" = 死亡シテイタ可能性モ; (f) v122 カッコつけた手前 merged into USA121's line -> dropped, its key 131992 reassigned to v123 ヤレヤレ ("Oh, dear. I was afraid you were headed in that direction."), v124 REINSTATED at 132050 ("Ghift and Folth are trusting me" = ギフトも、フォルス君も, exact); (g) round-4 drops of 30/118 were wrong: 30 -> 124914 ("…helping hand from my favorite Cross" = あいつを呼ぶか), 118 -> 131522 ("master of the backhanded compliment" = ド根性ってヤツさ). Kept after full-string review: loose-but-slot-correct localizations (45, 89-91, 103, 379, 387 - no better target line exists). Confirmed USA natively retains all 68 const CALL214 sites (monster roars 82/88/104/106/112, void-voice 130/135/139/143, etc.) - they play via stock path with clamp NOPed, correctly absent from the table. build_v6fix.py validated every target key+unit as a real USA text call BEFORE writing; 13 moves + 1 drop + 3 adds = 338 entries / 11 chunks; extent byte-verified (13 present + 10 absent packed triples); verify_caves.py ALL PASS; EBOOT-only rebuild (v5 opening preserved). ISO mtime 2026-09-23T21:39:37, SHA-256 0b3bee610fd9707683b36a885b4b9f0fc62f11e1119aa6695f87d00c6ae88d3e. Lessons: an UNATTACHED USA line between attached ones whose content matches an adjacent vid's JP group = the shift signature; watch for localizer-INSERTED lines (must stay unvoiced) and cross-version line-order swaps inside a response pair; round-4's "orphan drop" judgment needs the same full-string standard or valid voices get deleted. CORRECTION 2026-09-25: item (f)'s v122 drop was wrong - playtesting plus the Gaudi retreat-exchange audit (second BUG section at the end of these notes) proved v122 カッコつけた手前もあるし、さ is its own line, the true voice of USA 131892 ("my stock will go up..."), and that vids 120/121 were each attached one USA line late (120 Gaudi clip sat on Erst's 131796, whose true voice is 121). Fixed: 120->131700, 121->131796, 122->131892 reinstated; table now 339 prologue rows / 340 entries, zero gaps. Lesson extension: a "merged line" judgment is incoherent when it leaves an adjacent voiced JP line homeless under one-vid-per-key - and speaker-script (Gaudi = katakana) catches what content matching misses.
 
 ## Chapter voice-trigger census tool (2026-09-24)
 
@@ -463,8 +470,10 @@ ships (`v3_entries.txt` + `extra_entries.txt`, loaded exactly as
 real CALL195 sites -> emit a bilingual TSV for the human audit.
 
 **Self-test reproduces the documented numbers exactly** (9 checks, 0 skipped,
-re-run 2026-09-24): JP const 392, USA retained 68, JP f2 15, pair 505 = 505,
-338 shipped prologue rows, and the only gap is the intentional vid 122 drop.
+re-run 2026-09-25): JP const 392, USA retained 68, JP f2 15, pair 505 = 505,
+339 shipped prologue rows, zero gaps (vid 122 reinstated - see the second BUG
+section at the end of these notes; the "intentional drop" era ended
+2026-09-25).
 Chapter 1 now asserts against real captures too - exactly one deleted trigger
 (vid 2287, shipped at key 191506), pair 516 = 516 - because the paired RAM
 dumps (jp c10=55506 / usa c10=50098) arrived; see "Chapter-1 coverage via
@@ -488,7 +497,8 @@ script deleted native pair triggers, which the table cannot fix.
 
 ### 1. Captured context (c10=38381 USA / 43032 JP) is provably COMPLETE
 Multiset proof (Counter arithmetic, not set membership, so duplicate ids cannot hide):
-- JP const 392 = USA retained 68 + table 323 + 1 intentional round-6 drop (vid 122)
+- JP const 392 = USA retained 68 + table 324 (vid 122 reinstated 2026-09-25;
+  until then this read "table 323 + 1 intentional round-6 drop")
 - JP f2     15 = USA 0 + table 15
 - JP pair  505 = USA 505 (native, untouched)
 
@@ -1027,3 +1037,76 @@ filename; (c) advanced `UNDUB_ISO_SHA256` in `verify_shipped_patch.py` to
 `7b39f5a6...`, updated the hash table, and re-ran the full suite:
 `--xdelta` 40/40, `review_xdelta_patch.py` VERDICT CURRENT with provenance
 true again. Only commit remains, on request.
+
+## BUG: Gaudi retreat-exchange voices one-late + vid122 wrongly dropped (found+fixed 2026-09-25, user report)
+
+Playtest report (screenshot backlog): on Erst's "Yeah...well, it`s like
+this. I have to meet this head on..." (key 131796) the game plays Gaudi`s
+voice; the clip belongs a line before, on Gaudi`s "Annnd...I`m sensing you
+are not interested..." (key 131700, UNATTACHED - no row). Exact unit
+interleave from both RAM blocks (voice owns the following text):
+
+| voice | JP text(s) after it | speaker | shipped key | correct key |
+|---|---|---|---|---|
+| 119@29367 | 29371 撤退ヲ勧メタイトコロデスガ | Gaudi (katakana) | 131604 retreat | 131604 OK |
+| 120@29379 | 29383 弟君トソノ友達ノタメニモ、ココハ + 29387 引ケナイ---デスヨネ？ | Gaudi (katakana) | 131796 (Erst!) | **131700** |
+| 121@29395 | 29399 ああ、あいつらが安心できるように + 29403 きちっと始末をつけとかなくちゃな | Erst | 131892 | **131796** |
+| 122@29411 | 29415 カッコつけた手前もあるし、さ | Erst | DROPPED | **131892** |
+| 123@29423 | 29427 ヤレヤレ | Gaudi | 131992 OK | 131992 OK |
+| 124@29446 | 29450 ギフトも、フォルス君も + 29454 俺のことを信じてくれている | Erst | 132050 OK | 132050 OK |
+
+Speaker-script proof: Gaudi speaks katakana (撤退ヲ勧メ, 承知シマシタ),
+Erst hiragana/kanji - so the shipped 120->131796 puts Gaudi`s robot voice
+in Erst`s mouth, exactly the report. Content proof: 121`s ああ安心+きちっと
+始末 = "so they can feel safe, settle this" is 131796 ("meet head on so the
+kids feel safe"), and 122`s カッコつけた ("since I`ve shown off") is 131892
+("my stock will go up") - loose-but-slot-correct, round 6`s own category.
+The USA block has zero native voice sites in units 26750-26868, so unrowed
+lines are silent with no fallback. This overturns round-6 (f): "v122 merged
+into USA121`s line" is incoherent under one-vid-per-key - it leaves 131796`s
+own JP voice (vid121`s clip opens with ああ安心 = that line`s content)
+homeless. The coherent mapping is 1:1 with zero merges and zero gaps.
+
+APPLIED 2026-09-25 (approved full fix path, staged per the DANGER rules):
+
+1. Table edit in `v3_entries.txt` exactly as the recipe below (339 rows,
+   keys/vids unique, file stays key-sorted); census expectations updated in
+   the same pass (`KNOWN_DROPS` emptied with the reason recorded,
+   label/checks to 339 rows and zero gaps).
+2. `build_v4.make_eboot()` only (never `main()`): 340 entries DID fit the 11
+   chunk homes, size unchanged (3018032 B); then
+   `verify_shipped_patch.py --eboot work/EBOOT_USA_patched.bin` -> 39/39,
+   new EBOOT `fca047db...25adc37`; census selftest -> 9/9 with the new
+   expectations (339 rows, gaps []).
+3. Staged: copied the live ISO to temp, swapped the extent there via
+   `v2.patch_eboot_extent()` with `v2.OUT_ISO` monkeypatched to the staged
+   path (JP-opening guard ran on the staged file), verified the staged copy:
+   39/39 + `review_xdelta_patch.py --undub <staged>` VERDICT CURRENT.
+4. Installed (moved staged over the live ISO), re-ran everything:
+   `verify_shipped_patch.py` 39/39, `verify_caves.py` ALL PASS, census
+   selftest 9/9, plain census run from the canonical PPSSPP_STATE dir
+   COMPLETE (need 339 / ship 339 / 0 gaps / 0 badkey; report regenerated,
+   drop line gone), `audit_mapping.py` now pairs 119->131604, 120->131700,
+   121->131796, 122->131892, 123->131992 with JP+1 text == USA line for
+   every row.
+5. New ISO `e88acbfb7d76ee1c8a8310c49d4c2be0a1f8896c11f576a022bbef1e3b8309d1`
+   (1369059328 B); hash table, EBOOT-identity section, census arithmetic,
+   and round-6 (f) above updated (correction, not rewrite).
+
+EXPECTED-RED interim (recorded, not a regression): between install and
+re-encode `--xdelta` exited 1 with **36/40** - exactly four failures, all
+table-growth downstream: chunk descriptors (339-vs-340 chunking), packed
+table size (339 vs 340), triple mismatches (131796, 131892), missing row
+(131700). The decoded-ISO check passed throughout, so the previous xdelta
+stayed the intact recovery path until the swap.
+
+CLOSED OUT 2026-09-25: (a) playtest PASSED - the retreat exchange plays
+Gaudi retreat -> Gaudi Annnd -> Erst Yeah -> Erst stock -> Gaudi Oh-dear,
+each with its own voice; (b) re-encoded the xdelta (staged as `.xdelta.new`,
+xdelta3 3.2.0, same `-e -f -B 1073741824 -W 16777216` options): 466098445 B,
+SHA-256 `271d9697...ef459b`, verified **40/40** against the playtested ISO
+BEFORE swapping it in, then again on the shipped filename; (c) advanced
+`UNDUB_ISO_SHA256` in `verify_shipped_patch.py` to `e88acbfb...`, updated
+the hash table, and re-ran the full suite: `--xdelta` 40/40,
+`review_xdelta_patch.py` VERDICT CURRENT with provenance true again. Only
+commit remains, on request.

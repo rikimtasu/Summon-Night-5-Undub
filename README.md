@@ -4,7 +4,7 @@ Restores Japanese story voices (and the JP opening movie) to the USA release,
 keeping English text. Verified in PPSSPP.
 
 > **Scope: prologue + chapter 1.** The voice table is keyed per script
-> context: the prologue (`c10=38381`) is fully audited (338 rows), chapter 1
+> context: the prologue (`c10=38381`) is fully audited (339 rows, zero gaps), chapter 1
 > (`c10=50098`) needed exactly one row, and chapters 2+ have not been captured
 > yet. See "Known limitations".
 
@@ -35,8 +35,8 @@ Details: `work/RE_notes.md`. Mapping table: `work/v3_entries.txt`.
 | | |
 |---|---|
 | Input | `Summon Night 5 (USA).iso` (SHA-256 `64977f15…f98c`, 897,253,376 B) |
-| Output | `Summon Night 5 (USA) Undub.iso` (SHA-256 `7b39f5a6…6ca204a`, 1,369,059,328 B; voice-table fix rebuild 2026-09-25) |
-| Patch | `Summon Night 5 (USA) Undub.xdelta` (SHA-256 `c20c4465…79c04a`, 466,098,453 B, decode-verified 2026-09-25) |
+| Output | `Summon Night 5 (USA) Undub.iso` (SHA-256 `e88acbfb…b8309d1`, 1,369,059,328 B; retreat-exchange fix rebuild 2026-09-25) |
+| Patch | `Summon Night 5 (USA) Undub.xdelta` (SHA-256 `271d9697…ef459b`, 466,098,445 B, decode-verified 2026-09-25) |
 | Tool | the current patch was encoded with xdelta3 3.2.0 (`work/bin/`, gitignored) using `-e -f -B 1073741824 -W 16777216`; any xdelta3 decodes it |
 
 Apply (this xdelta3 build needs the `-d` flag form and `-s` for the source —
@@ -115,8 +115,9 @@ Rules for any future rebuild:
    `python work/review_xdelta_patch.py` (both take no arguments; run from
    the repo root).
 3. `work/EBOOT_USA_patched.bin` and the EBOOT inside the shipped ISO are
-   byte-identical since the 2026-09-25 voice-table fix rebuild
-   (`08f03e9c…`, one `make_eboot()` run fed the staged extent swap). They
+   byte-identical since the 2026-09-25 voice-table fix rebuild (re-established
+   with a fresh single `make_eboot()` run at the retreat-exchange rebuild;
+   current pair `fca047db…`, previous identical pair `08f03e9c…`). They
    HAD diverged before that (`c403283f…` vs `3b9c48ce…`, cause unrecorded)
    even though both passed the static verifier — it checks mechanism, not
    file identity. Take the EBOOT from the shipped ISO, or rebuild from

@@ -45,7 +45,7 @@ import tempfile
 WORK = r'D:\Documents\Default Project\work'
 ROOT = os.path.dirname(WORK)
 # shipped undub ISO, RE_notes.md "CURRENT shipped artifact hashes"
-UNDUB_ISO_SHA256 = ('7b39f5a6bf9a4828e8928f94cacd9542272dea99a3ba5a09fdd85f97e6ca204a')
+UNDUB_ISO_SHA256 = ('e88acbfb7d76ee1c8a8310c49d4c2be0a1f8896c11f576a022bbef1e3b8309d1')
 SEG = 0xC0
 RT = 0x08804000
 

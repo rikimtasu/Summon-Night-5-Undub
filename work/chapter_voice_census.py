@@ -69,13 +69,16 @@ SCRIPT_DAT = {
     'usa': os.path.join(WORK, 'USA', 'PSP_GAME', 'USRDIR', '11.DAT'),
 }
 
-# vid 122 is the one intentional round-6 DROP (its JP line was merged into
-# USA 121's line).  It is expected to be "missing" from the table forever.
-KNOWN_DROPS = {122: 'JP line merged into USA 121 (round-6 drop)'}
+# KNOWN_DROPS was {122: 'JP line merged into USA 121 (round-6 drop)'} until
+# 2026-09-25, when playtesting + the Gaudi retreat-exchange audit proved the
+# round-6 merge theory wrong: vid 122 (カッコつけた手前もあるし、さ) is the
+# true voice of USA 131892 ("my stock will go up..."), reinstated. Empty now;
+# any future drop must be re-justified here, not silently assumed.
+KNOWN_DROPS = {}
 
 # known-good chapters, used by --selftest and for labels
 KNOWN = {
-    (43032, 38381): 'prologue (shipped: 338 rows)',
+    (43032, 38381): 'prologue (shipped: 339 rows)',
     (55506, 50098): 'ch.1 (shipped: 1 row)',
 }
 
@@ -604,14 +607,14 @@ def selftest(ram_jp, ram_usa, states_dir, use_dat=True):
         check('prologue pair 505 = 505 (JP=USA)', jpair == upair == 505,
               'jp %d usa %d' % (jpair, upair))
         rows = load_table().get(38381, {})
-        check('prologue shipped rows = 338', len(rows) == 338,
+        check('prologue shipped rows = 339', len(rows) == 339,
               'got %d' % len(rows))
         deleted = jc - uc
         needed = sorted(v for (kind, v), cnt in deleted.items()
                         if kind in ('const', 'f2') for _ in range(cnt))
         gaps = [v for v in needed if v not in rows]
-        check('prologue only gap is the intentional drop 122',
-              gaps == [122], 'gaps %s' % gaps)
+        check('prologue has no gaps (vid 122 reinstated 2026-09-25)',
+              gaps == [], 'gaps %s' % gaps)
 
     # --- chapter 1: RE_notes.md records exactly one deleted trigger
     pair = known(55506, 50098)
