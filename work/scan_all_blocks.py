@@ -1,15 +1,16 @@
 """Full structural scan: find EVERY resident script block in all SN5 save states.
 
-For each 16-aligned offset o in RAM:
-  c10 = u32@o+16 ; require 512 < c10 < 0x40000 (rare by chance),
-  disasm(ram[o:o+c10*2], 12) must land cleanly, >=5 CALL195 dialogue lines.
-Then census CALL214 sites by form + preview pool strings (UTF-8).
+Magic sweep (0x10000201/0x10000002) + chapter_voice_census.parse_block for
+validation: header invariants, clean disasm landing, and >=5 dialogue lines
+counted with the block's OWN calibrated text call (dialect()), not hardcoded
+CALL195 - so non-prologue dialects (e.g. ch2 textCALL=208) are found too.
+Then census voice sites by form + preview pool strings (UTF-8).
 Dedupes identical (c10, size) blocks across states.
 """
 import struct, sys, os, collections
 import zstandard
 sys.path.insert(0, r'D:\Documents\Default Project\work')
-from disasm_align import disasm
+import chapter_voice_census as C
 
 STATE = r'D:\Video_Game\Emulator\PSP\PPSSPP 1.20\ppsspp\memstick\PSP\PPSSPP_STATE'
 STATES = [
@@ -35,22 +36,9 @@ def extract_ram(path):
     return out[p1 + 12:p1 + 12 + memsize]
 
 
-def census(tokens):
-    c = collections.Counter()
-    n195 = 0
-    for k, t in enumerate(tokens):
-        if t[1] == 52 and t[2] == 1 and t[4]:
-            if t[4][0] == 195:
-                n195 += 1
-            elif t[4][0] == 214:
-                p = tokens[k - 1] if k >= 1 else None
-                if p and p[1] == 50 and p[2] == 10 and p[4]:
-                    c[('const', p[4][0])] += 1
-                elif p and p[1] == 50 and p[2] == 11:
-                    c[('f2', p[3] - 1)] += 1
-                elif p and p[1] == 50 and p[2] == 4 and p[4]:
-                    c[('pair', p[4][0])] += 1
-    return c, n195
+# Voice/text classification lives in chapter_voice_census (dialect-calibrated
+# census_voice + parse_block); the hardcoded CALL195/CALL214 census that used
+# to sit here missed every non-prologue dialect block (ch2 54606, 49220/41244).
 
 
 def preview_strings(blk, c10, n=3):
@@ -76,10 +64,11 @@ def preview_strings(blk, c10, n=3):
 
 
 def scan(ram):
-    """yield (base, c10, tokens) for every structurally valid script block.
+    """yield a census block dict for every structurally valid script block.
     Header invariants (from known JP/USA prologue blocks):
       u32@+0 == 0x10000201, u32@+4 == 0x10000002, u32@+8 == block size (even,
-      >= c10*2), u32@+16 == c10; token stream starts at byte 24 (unit 12)."""
+      >= c10*2), u32@+16 == c10; validation + dialect calibration all inside
+      chapter_voice_census.parse_block."""
     hits = []
     n = len(ram)
     magic = struct.pack('<I', 0x10000201)
@@ -89,27 +78,10 @@ def scan(ram):
         if o < 0:
             break
         start = o + 4
-        if struct.unpack('<I', ram[o + 4:o + 8])[0] != 0x10000002:
+        blk = C.parse_block(ram, o)
+        if blk is None:
             continue
-        size = struct.unpack('<I', ram[o + 8:o + 12])[0]
-        c10 = struct.unpack('<I', ram[o + 16:o + 20])[0]
-        if size & 1 or not (c10 * 2 <= size <= 0xC0000):
-            continue
-        if not (512 < c10 < 0x40000):
-            continue
-        end = o + c10 * 2
-        if end > n:
-            continue
-        try:
-            toks = disasm(ram[o:end], 12)
-        except (IndexError, struct.error):
-            continue
-        if not toks or not (c10 - 4 <= toks[-1][0] + 1 <= c10):
-            continue
-        c, n195 = census(toks)
-        if n195 < 5:
-            continue
-        hits.append((o, c10, n195, c))
+        hits.append(blk)
     return hits
 
 
@@ -122,15 +94,17 @@ for name, tag in STATES:
         continue
     hits = scan(ram)
     print('%-24s: %d script block(s)' % (name, len(hits)), flush=True)
-    for (o, c10, n195, c) in hits:
+    for blk in hits:
+        c = blk['census']
         const = sum(v for (f, _), v in c.items() if f == 'const')
         f2 = sum(v for (f, _), v in c.items() if f == 'f2')
         pair = sum(v for (f, _), v in c.items() if f == 'pair')
-        print('   base=0x%08X c10=%-6d lines=%-5d const=%-4d f2=%-3d pair=%-4d'
-              % (o, c10, n195, const, f2, pair), flush=True)
-        for t in preview_strings(ram[o:o + c10 * 2 + 8192], c10):
+        print('   base=0x%08X c10=%-6d lines=%-5d const=%-4d f2=%-3d pair=%-4d textCALL=%-3d voiceCALL=%-3d'
+              % (blk['off'], blk['c10'], len(blk['lines']), const, f2, pair,
+                 blk['text_call'], blk['voice_call']), flush=True)
+        for t in preview_strings(blk['data'], blk['c10']):
             print('        str: %s' % t, flush=True)
-        seen_global[(tag, c10)].append(name)
+        seen_global[(tag, blk['c10'])].append(name)
     del ram
 
 print()
