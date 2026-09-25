@@ -27,7 +27,7 @@
   NPJH50696_1.01_4.ppst              1 new block(s)
   ULJS00460_1.01_0.ppst              LOAD FAIL: not a PPSSPP memory state
   ULUS10656_1.01_0.ppst              0 new block(s)
-  ULUS10656_1.01_1.ppst              0 new block(s)
+  ULUS10656_1.01_1.ppst              1 new block(s)
   ULUS10656_1.01_2.ppst              0 new block(s)
   ULUS10656_1.01_3.ppst              0 new block(s)
   ULUS10656_1.01_4.ppst              1 new block(s)
@@ -39,6 +39,7 @@
   usa c10=38381  lines=1569  const=68   f2=0   pair=505   textCALL=195  voiceCALL=214   (first from psp_ram_crash.bin)
   usa c10=41244  lines=1763  const=579  f2=0   pair=506   textCALL=208  voiceCALL=227   (first from ULUS10656_1.01_4.ppst)
   usa c10=50098  lines=2198  const=656  f2=0   pair=516   textCALL=234  voiceCALL=253   (first from psp_ram_1014.bin)
+  usa c10=54606  lines=2352  const=918  f2=0   pair=505   textCALL=208  voiceCALL=227   (first from ULUS10656_1.01_1.ppst)
 
 == per-chapter coverage ==
   deleted = JP multiset - USA multiset (Counter arithmetic)
@@ -61,6 +62,8 @@
     verdict: COMPLETE
 
   [UNPAIRED jp] c10=49220 lines=2942 voices=1167 - no partner block found; dump RAM with that chapter loaded
+
+  [UNPAIRED usa] c10=54606 lines=2352 voices=1423 - no partner block found; dump RAM with that chapter loaded
 
   [UNPAIRED usa] c10=41244 lines=1763 voices=1085 - no partner block found; dump RAM with that chapter loaded
 

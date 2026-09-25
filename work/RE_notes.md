@@ -487,11 +487,17 @@ reflow zones, so this review remains the ground truth). The TSV independently
 reproduces the round-6 corrections, e.g. vid 53 -> key 126792 "I did exactly
 what was on the paper in that old book", vid 54 -> key 126890.
 
-**Known data gap:** no RAM dump exists for chapters 2+, in either version. Each
-needs one dump taken with that chapter loaded (JP and USA) before its coverage
-can be measured. The census reports such blocks as UNPAIRED and names the
-missing c10. `delpair>0` in a report is the serious flag: it would mean the USA
-script deleted native pair triggers, which the table cannot fix.
+**Known data gap:** no RAM dump exists for chapters 2+, in either version -
+with one new exception: a USA chapter-2 state was captured 2026-09-25
+(`ULUS10656_1.01_1.ppst`, Yeng-hua "Awake NOW?" scene, reference screenshot
+on file), yielding `usa c10=54606` (2352 lines, const 918, f2 0, pair 505,
+dialect 208/227). It sits UNPAIRED in the report until its JP partner
+arrives: each chapter still needs both dumps taken with that chapter loaded
+(JP and USA) before coverage can be measured. Still missing: a JP chapter-2
+state (`NPJH50696_1.01_?.ppst`) at a comparable scene. The census reports
+such blocks as UNPAIRED and names the missing c10. `delpair>0` in a report
+is the serious flag: it would mean the USA script deleted native pair
+triggers, which the table cannot fix.
 
 ## Post-prologue completeness audit (2026-09-23)
 
