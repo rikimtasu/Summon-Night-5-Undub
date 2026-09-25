@@ -328,10 +328,10 @@ prologue	43032	38381	const	422	39924	39894	精一杯、お手伝いします！	
 prologue	43032	38381	const	423	39942	39932	ふぉるすのためなら、がんばる！	39946	めんどくさいけど‥‥‥	154234	It sounds like not so much fun, but I'll do it for you, Arca!	present
 prologue	43032	38381	const	424	39981	39950	あるかのためなら、がんばる！	39985	よし！　そうと決まれば	154296	Good! Now that that's decided, we have to get ready immediately.	present
 prologue	43032	38381	const	425	40007	39989	早速、準備をしなくちゃな	40016	ガウディ、本部へ‥‥‥	154362	Gaudi, I need you to contact HQ. No...contact Commander Zinzelah directly.	present
-prologue	43032	38381	const	426	40028	40020	いや、ジンゼルア総帥に直接連絡を頼む	40032	特別な事情のある子たちだ、	154526	Understood.	present
-prologue	43032	38381	const	427	40044	40036	あまり情報が漏れる形にはしたくない	40048	承知シマシタ	154538	I'll talk to your parents for you.	present
-prologue	43032	38381	const	428	40077	40048	承知シマシタ	40086	お父さんとお母さんには	154574	I have to apologize properly for your three-days absence as well...	present
-prologue	43032	38381	const	429	40098	40090	俺から説明してやるよ	40102	三日の間、留守にしたことについても	154642	Wait! What about Ghift?!	present
+prologue	43032	38381	const	426	40028	40020	いや、ジンゼルア総帥に直接連絡を頼む	40032	特別な事情のある子たちだ、	154438	These kids have special circumstances, so I don't want too much information to leak...	present
+prologue	43032	38381	const	427	40044	40036	あまり情報が漏れる形にはしたくない	40048	承知シマシタ	154526	Understood.	present
+prologue	43032	38381	const	428	40077	40048	承知シマシタ	40086	お父さんとお母さんには	154538	I'll talk to your parents for you.	present
+prologue	43032	38381	const	429	40098	40090	俺から説明してやるよ	40102	三日の間、留守にしたことについても	154574	I have to apologize properly for your three-days absence as well...	present
 prologue	43032	38381	const	430	40181	40172	ギフトは無事なの！？	40191	ああ‥‥‥そのことならもう	154726	Ah...yes...you don't have to worry about him anymore.	present
 prologue	43032	38381	const	431	40232	40224	え？	40242	ギフトはもう、この村にはいないんだ	154792	Ghift isn't here anymore. After the event happened, well...	present
 prologue	43032	38381	const	432	40254	40246	ほら、今回の件もあったしさ	40258	家族そろって、別の街に引っ越したんだ	154852	...my family decided to move away. I'll be going to check on him once they're settled.	present

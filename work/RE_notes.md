@@ -129,31 +129,36 @@ build_v5.py: full rebuild (SVs + JP 04.DAT) + EBOOT extent overwrite + verify
 
 ## xdelta patch v5 for users
 
-xdelta3 3.0.11 official binary, checksum-verified (historical ENCODE fact -
-the shipped patch stays 3.0.11-encoded; the current local decode tool is
-3.2.0, see the verification section).
+Encode tool history: the original patches were encoded with the official
+xdelta3 3.0.11 binary (checksum-verified), but 3.0.11 Windows binaries are no
+longer officially obtainable, so the CURRENT patch (2026-09-25) was re-encoded
+with the local xdelta3 **3.2.0** (`work/bin/xdelta3.exe`, hashes in the
+verification section) using the SAME options; any xdelta3 decodes it, decode
+compatibility proven by the `--xdelta` repro below.
 Patch USA ISO to Undub v5 ISO. Default encode 736MB; re-encode with
 1GB source window plus max input window gives 466MB, because the pycdlib
 rebuild shifts file sectors and the small default window misses distant
 matches. Verified by decode plus SHA-256 match.
 Historical: the original v5-era encode was 465959276 bytes under an earlier
-file name. The file has since been re-encoded and renamed
+file name, later re-encoded and renamed
 `Summon Night 5 (USA) Undub.xdelta`; the CURRENT size and hash are in the
 section below.
 
-### CURRENT shipped artifact hashes (verified 2026-09-24)
+### CURRENT shipped artifact hashes (all three updated 2026-09-25, playtest-confirmed)
 
 | artifact | SHA-256 |
 |---|---|
-| `Summon Night 5 (USA) Undub.iso` | `e71415a3b6ec2dd0f5975f7c0e8d27f0b4ec885b2574791fb354064a1d1a3348` |
-| `Summon Night 5 (USA) Undub.xdelta` | `0870d3ace4214af08e3cecb1eae42fef8831431e15f243118f3be7c76c6f465d` (466051384 B; decodes to the ISO above **byte-identically**, 1369059328 B) |
-| EBOOT inside the ISO | `3b9c48ce72657de2ea2d5a56ef721b14170a00dcdead75b8b5b75070f1bf96ac` |
+| `Summon Night 5 (USA) Undub.iso` | `7b39f5a6bf9a4828e8928f94cacd9542272dea99a3ba5a09fdd85f97e6ca204a` (voice-table fix rebuild, 2026-09-25; 1369059328 B) |
+| `Summon Night 5 (USA) Undub.xdelta` | `c20c4465dcd84fdcc571f622f7f794b92c697af8d005973dddb3ea72f979c04a` (466098453 B; encodes the ISO above **byte-identically**, decode-proven 2026-09-25) |
+| EBOOT inside the ISO | `08f03e9c9b918c6ae6b04d3c517b562c43a4532f0bb4d79b319f8e7f065a99a5` (= `work/EBOOT_USA_patched.bin`, see below) |
+| pre-fix ISO (superseded 2026-09-25, no longer on disk) | `e71415a3b6ec2dd0f5975f7c0e8d27f0b4ec885b2574791fb354064a1d1a3348` |
 | JP ISO `04.DAT` (opening) | `97feeed3059f2baf...` (14790656 B) |
 | stock USA `04.DAT` | `b063121c47f10c56...` (14786560 B) |
 
-The xdelta is 466051384 bytes, encoded with `-e -f -B 1073741824 -W 16777216`
-(the 1 GB source window matters: the pycdlib rebuild shifts file sectors, so
-the default window misses distant matches).
+The current xdelta is 466098453 bytes, encoded with
+`-e -f -B 1073741824 -W 16777216` (the 1 GB source window matters: the
+pycdlib rebuild shifts file sectors, so the default window misses distant
+matches). The pre-fix patch was 466051384 bytes with the same options.
 
 An ISO hash (`292e69eb...a10e`) carried over from a superseded earlier
 revision of these notes is **stale**: it appears nowhere else in this document
@@ -170,6 +175,15 @@ arguments):
 
     python verify_shipped_patch.py --xdelta "..\Summon Night 5 (USA) Undub.xdelta" --source-iso "..\Summon Night 5 (USA).iso"
     python review_xdelta_patch.py
+
+STATUS 2026-09-25 (after the voice-table fix + playtest + re-encode): the
+`--xdelta` repro is **40/40 GREEN** again - `UNDUB_ISO_SHA256` in
+`verify_shipped_patch.py` was advanced from `e71415a3...` to `7b39f5a6...`
+with the re-encode, the decode-provenance check passes against the playtested
+ISO, and `review_xdelta_patch.py` exits CURRENT with its provenance line true
+again. (During the interim - fixed ISO, not-yet-re-encoded patch - the repro
+was expected-red 38/40, failing exactly the two table checks named after the
+fix; recorded here so that state is never mistaken for a regression.)
 
 NOTE: this xdelta3 build needs the `-d` / `-e` FLAG forms. The `d`/`e`
 subcommand form parses `-s` as a filename ("too many filenames: -s"), and for
@@ -216,19 +230,23 @@ Rules:
    before trusting it.
 3. Do not rebuild the ISO from `work/EBOOT_USA_patched.bin` - see below.
 
-### `work/EBOOT_USA_patched.bin` is NOT the shipped EBOOT (verified 2026-09-24)
+### `work/EBOOT_USA_patched.bin` vs the shipped EBOOT (updated 2026-09-25)
 
 | file | SHA-256 |
 |---|---|
-| EBOOT inside the shipped ISO | `3b9c48ce72657de2ea2d5a56ef721b14170a00dcdead75b8b5b75070f1bf96ac` |
-| `work/EBOOT_USA_patched.bin` (`make_eboot()` output) | `c403283fdb8cc774f9273c923807ec7ae11517d5b13f06b7332f247d4b8bc2e3` |
+| EBOOT inside the shipped ISO | `08f03e9c9b918c6ae6b04d3c517b562c43a4532f0bb4d79b319f8e7f065a99a5` |
+| `work/EBOOT_USA_patched.bin` (`make_eboot()` output) | `08f03e9c9b918c6ae6b04d3c517b562c43a4532f0bb4d79b319f8e7f065a99a5` |
 
-Both pass the static verifier - it checks mechanism, not file identity ("30/30
-PASS on the local EBOOT" in "Shipped-patch static verification" below refers to
-THIS file). Rebuilding the ISO from it
-would therefore not reproduce the shipped artifact, and how the two diverged is
-not recorded. Always take the EBOOT from the shipped ISO itself, or rebuild
-from scratch and re-verify end to end.
+These are byte-identical SINCE 2026-09-25: the fix rebuild fed this exact
+file into the staged extent swap (single `make_eboot()` run). Before that
+they had diverged - the shipped EBOOT was `3b9c48ce...` while a stale
+`make_eboot()` output sat at `c403283f...`, and how the divergence arose was
+never recorded; both passed the static verifier because it checks mechanism,
+not file identity. Both statements remain true as rules: the verifier still
+checks mechanism only, so identity is asserted separately here, and the
+build input is always `EBOOT_USA_decrypted.bin` (stock) - never a patched
+EBOOT used as a source; if identity ever drifts again, rebuild from scratch
+and re-verify end to end.
 
 ## The JP opening was MISSING from the shipped patch (found 2026-09-24)
 
@@ -940,3 +958,72 @@ jal targets), `scan_addr.py` (every access to a given link-time address) —
 plus `check_new_saves.py`, `map_plaintext_save.py`, `header_checksum.py`,
 `analyze_records.py`. Outputs: `diff3.txt`, `chap_consumer.txt`, `fn_desc.txt`,
 `sload.txt`, `new_saves.txt`, `plaintext_map.txt`, `cksum.txt`, `records.txt`.
+
+
+## BUG: prologue Erst/Gaudi voices off by one (found+fixed 2026-09-25, user report)
+
+Playtest report: after the Arca/Spinel pick in the prologue voices desync
+briefly - Gaudi's "Understood." clip plays while Erst's line is shown.
+Bilingual re-audit (`audit_mapping.py` + an interleaved text/voice site dump
+of both RAM blocks) proves a one-late shift of four consecutive rows. Round
+6's full alignment missed this cluster; `build_v6fix.py` never touched any
+of these keys (grep), so the mispair predates it:
+
+| USA key (unit) | USA line | shipped vid | correct vid | correct ju |
+|---|---|---|---|---|
+| 154438 (35577) | These kids have special circumstances... | MISSING (silent) | 426 | 40028 |
+| 154526 (35585) | Understood. | 426 | 427 | 40044 |
+| 154538 (35619) | I'll talk to your parents for you. | 427 | 428 | 40077 |
+| 154574 (35627) | I have to apologize properly for your three-days absence... | 428 | 429 | 40098 |
+| 154642 (35652) | Wait! What about Ghift?! | 429 | DROP - JP unvoiced | - |
+
+`154726 -> 430` unchanged (verified correct). Evidence: in JP every const
+voice call sits immediately before its own line (425@40007 -> 40016/40020 and
+430@40181 -> 40191 bracket the cluster correctly), JP+1 text vs USA line
+mismatches for vids 426-429 one by one, the Ghift exchange (40131-40143 and
+40160-40172 = duplicated branch) has NO voice call before it -> unvoiced in
+JP, and the USA block has zero native voice sites in units 35540-35780 ->
+154642 must stay silent (that is also how the stock USA release plays it).
+The user's audio report pins vid427's clip as the "Understood." audio playing
+on key 154538 exactly as shipped, confirming both the convention and the
+shift empirically. Net effect before the fix: 154526 played the "These kids"
+clip, 154538 Gaudi's "Understood." (the report), 154574 the "parents" clip,
+154642 the "apologize" clip, then it realigned at 154726.
+
+APPLIED 2026-09-25 (approved full fix path, staged per the DANGER rules):
+
+1. Table edit in `v3_entries.txt` exactly as the recipe below; row count
+   stays 338, keys and vids stay unique.
+2. `build_v4.make_eboot()` only (never `main()`), then
+   `verify_shipped_patch.py --eboot work/EBOOT_USA_patched.bin` -> 39/39,
+   new EBOOT `08f03e9c...65a99a5`.
+3. Staged: copied the live ISO to temp, swapped the extent there via
+   `v2.patch_eboot_extent()` with `v2.OUT_ISO` monkeypatched to the staged
+   path (JP-opening guard ran on the staged file), verified the staged copy:
+   39/39 + `review_xdelta_patch.py --undub <staged>` VERDICT CURRENT.
+4. Installed (moved staged over the live ISO), re-ran everything:
+   `verify_shipped_patch.py` 39/39, `verify_caves.py` ALL PASS, census
+   selftest 9/9, plain census run COMPLETE (0 gaps/badkey/delpair, report +
+   TSV regenerated), `audit_mapping.py` now pairs 425->154362, 426->154438,
+   427->154526, 428->154538, 429->154574, 430->154726 with JP+1 text == USA
+   line for every row, and key 154642 gone.
+5. New ISO `7b39f5a6bf9a4828e8928f94cacd9542272dea99a3ba5a09fdd85f97e6ca204a`
+   (1369059328 B); hash table and the EBOOT-identity section above updated.
+
+EXPECTED-RED interim (recorded, not a regression): between install and
+re-encode the xdelta still targeted the pre-fix ISO, so `--xdelta` exited 1
+with **38/40** - exactly two failures, "every packed triple matches the
+reviewed table" (mismatched: 154526, 154538, 154574, 154642) and "no
+reviewed row is missing" (missing: 154438) - the verifier naming the fix
+verbatim, while the decoded-ISO check still passed against `e71415a3...`.
+
+CLOSED OUT 2026-09-25: (a) playtest PASSED - the exchange now plays
+These-kids/Understood/parents/apologize with the Ghift lines silent and
+realignment at "Ah...yes..."; (b) re-encoded the xdelta (staged as
+`.xdelta.new`, xdelta3 3.2.0, same `-e -f -B 1073741824 -W 16777216`
+options): 466098453 B, SHA-256 `c20c4465...79c04a`, verified **40/40**
+against the playtested ISO BEFORE swapping it in, then again on the shipped
+filename; (c) advanced `UNDUB_ISO_SHA256` in `verify_shipped_patch.py` to
+`7b39f5a6...`, updated the hash table, and re-ran the full suite:
+`--xdelta` 40/40, `review_xdelta_patch.py` VERDICT CURRENT with provenance
+true again. Only commit remains, on request.
