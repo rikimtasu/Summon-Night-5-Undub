@@ -1116,3 +1116,222 @@ BEFORE swapping it in, then again on the shipped filename; (c) advanced
 the hash table, and re-ran the full suite: `--xdelta` 40/40,
 `review_xdelta_patch.py` VERDICT CURRENT with provenance true again. Only
 commit remains, on request.
+
+## Script portrait-focus call (ch2 LinguaGacha work, 2026-09-25)
+
+The per-line setup call (ch2 call 235 = prologue call 222 under per-dialect
+numbering; small-enum const arg: 21 values in ch2, ~13 in prologue) is a
+visual-direction argument, modal until changed - it is NOT the speaker, and
+(weaker) its values are not all portraits either. The neutral value 200 is
+compatible with every shown-set (Yeng-hua-solo u23264, two-shot u23559,
+Arca-solo u24643), so 200 = default/no-change; what the other values select
+(portraits? shots? cuts?) is unproven - single-context groups (82 = shop
+lines, 80 = Eucross lines) stay consistent with, but do not prove,
+portraits.
+
+Falsified speaker paths (all evidenced, do not retry): pool name strings
+("Yeng-hua", "Hungry Customer") are referenced by zero tokens AND zero RAM
+pointers (vestigial); EBOOT holds no name table (only equip strings like
+"Only for Yeng-hua"); the 106-entry RAM roster (Torque...Televi) is global
+and far too small for portrait IDs (200/210/301/302); 10.DAT records 26/29
+are zeroed (not a portrait table) though its 69-entry name list (Folth...Gang
+Banger) is a useful name source; op53 args near text are two-valued window
+state; call 1505/const-30 repeats identically across mixed shop contexts
+(scene marker, not speaker).
+
+OPEN: exact speaker path (portrait-ID -> name resolves outside the token
+stream). Candidate threads: 10.DAT load records (56-byte entries look like
+RAM-relocated load records, not portrait structs), modal scene-setup calls
+outside the 24-token text window, multi-snapshot correlation (states one line
+apart across a speaker change would isolate the speaker field by diff).
+
+Face-label anchors (ch2, confidence-marked): 200 = DEFAULT/NEUTRAL direction
+- proven to carry no portrait info 2026-09-25 (third screenshot: Arca-solo
+plate Arca at u24643 under c235=200, vs Yeng-hua-solo at u23264 and the
+two-shot at u23559 all under 200; the earlier "200 = Yeng-hua`s portrait"
+claim in this section is RETRACTED). 82 = shopkeeper shot? (scene-consistent
+but unconfirmed: all 158 lines are shop service), 210 = Lorah shot?
+(unconfirmed guess), 29 = ??? (covers both speakers in the wake scene - not
+Arca`s portrait as once guessed), 80 = Eucross-staff shot? (unconfirmed).
+`work/ch2_lingua.json` ships dir_<id> labels (2352 items, SExtractor Type 2
+shape, unit order) - theory-free tokens naming the call-235 arg, with zero
+speaker claims - names are Ignored by LinguaGacha`s translator, so grouping
+unblocks translation while the mapping awaits gameplay correction.
+
+Anchor 2026-09-25 (screenshot): key 155022 (u23559) "No, no. It`s my
+problem and quite unforgivable, but...wait! You said you`re...next door?!"
+carries plate Arca (red-haired portrait, left) with Yeng-hua (dark-haired,
+right) also on screen, under c235=200. Standing value: speaker=Arca ground
+truth for this line, plus Arca`s visual identity (red hair) for reading all
+future screenshots. (An earlier draft called this a focus!=speaker proof via
+200=Yeng-hua`s portrait - withdrawn with that claim; what it proves about
+200 is only that 200 accompanies a two-shot.) The Arca-solo plate shot has
+since arrived - see next anchor.
+
+Anchor 2026-09-25 (screenshot): key 158146 (u24643) "Today? That seems
+rather sudden." carries plate Arca with ONLY her portrait on screen, under
+c235=200. Combined with u23264 (Yeng-hua-solo, 200) and u23559 (two-shot,
+200): one value, three shown-sets - so 200 carries no portrait information
+and the "200 = Yeng-hua portrait" claim is retracted above. Preamble shape
+at u24643 is the standard one: [200->235] [24452->208 prev line] [200->235]
+[str 24467->208 this line], i.e. no speaker field anywhere in view.
+
+Anchor 2026-09-25 (screenshot): key 109250 (u2338) "Yes, yes, sorry for the
+wait! What can I do for you?" carries plate Owner (horned red-haired woman,
+solo over the bar background), under c235=82. Standing value: speaker=Owner
+ground truth for this line + Owner`s visual identity; 82-group (158 lines,
+all shop service) stays consistent with an Owner/shop direction. Twin: the
+SAME key replays at u53203 under dir_210 with const vids 4896-4900 (voiced
+flashback of the opening; neighbours are mid-string continuation keys
+109322/109358/109416 of the same messages, where the opening run used pair
+voices) - same speaker+words under a different direction value, another
+speaker!=direction datapoint. Only 4 of 2352 keys repeat block-wide. The
+JSON keeps both occurrences in unit order (faithful; LinguaGacha converges
+them to one translation anyway).
+
+Anchor 2026-09-25 (screenshot): key 161282 (u25569) "Why wouldn`t we?
+Besides, it`s a given that MY Cross is looking good every day of the year!"
+carries plate Calis, two-shot with Arca (left), under dir_200. Standing
+value: speaker=Calis ground truth for this line + Calis`s visual identity
+(teal hair, orange headband, right). Third 200 datapoint with a different
+shown-set (two-shot again) - default-value reading holds.
+
+## Script format: layout, VM, natives (2026-09-25, RE rounds 4-15)
+
+Sources: STOCK `EBOOT_USA_decrypted.bin` (file vaddr, SEG=0xC0) + the ch2 USA
+save state.  Tools: `disasm_align.py` (token decode; the op semantics block at
+its top is authoritative, re-derived from the JP opcode tables),
+`chapter_voice_census.parse_block` (layout validation), temp `round4..round15.py`
+under `%TEMP%\opencode` (ephemeral).  STOCK-vs-PATCHED warning at the end of
+this section - read it before trusting a live-RAM/static-EBOOT cross-check.
+
+### Layout (extends "Script block header format" above)
+- units 0..11 = 6-u32 header; code = units 12..c10-1; pool = units c10..,
+  byte offset of pool index `idx` = 2*(c10+idx).  Landing check: last token
+  cursor+1 == c10 (units, not bytes).
+- pool strings = NUL-terminated UTF-8 (shift_jis JP side) directly at the pool
+  byte offset - `read_string`.  No length prefix, no UTF-16.
+
+### Token stream / VM dispatch
+- unit = u16: `op:6 | f1:6 | f2:4` (`decode_at`).  Operand widths: op50 f1=4
+  takes 2 u16 operands; op50 f1 in {0,1,2,3,5,6,10} and op52/53/55/56/57/58
+  take 1; everything else 0.
+- tables (ELF): opcode table `0x234340`, main dispatcher loop `0x12564`,
+  group/native table `0x230EF8`, op50 push-dispatch table `0x1FDF78`
+  (indexed by f1; entry layout not re-verified this round).
+
+### op semantics (disasm_align header; key ones)
+- op50 push: f1=0/1/2 fetchS + vtable call(28/2C/30); f1=3 push
+  stack[count+fetchS] (caller-arg read); f1=4 push (u2<<16)|u1 (pair; every
+  observed voice pair has u2=0, so packed == u1); f1=5 push pool-string
+  ADDRESS = block_base + 2*(c10+(f2<<16|fetchU)); f1=6 push (f2<<16)|fetchU;
+  f1=7/8/9 push c18/c14/c10; f1=10 push fetchS (raw u16); f1=11 push (f2-1)
+  (small const: f2=0 -> -1, f2=1 -> 0, ...).
+  - f1=5 ADDRESS semantics proven live: capture-line pointer cell 0x08DDEEEC
+    (== text-sub +0x34 target) holds 0x08D8D790 = block+153696 = "Awake NOW?"
+    (u23264).  The native gets only this one operand, and the window ends up
+    with the full RAM pointer - so the push must be the computed address, not
+    the halfword contents (a u16 cannot hold pool byte offsets: ch2 pool spans
+    >65535 units).
+- op52 CALL: fetchU target; push frame [f1(site argc), retcursor, count, c18];
+  cursor=(f2<<16)|target.  Site args sit directly under the 4-word frame:
+  arg_i at count-(argc+4)+i, i.e. arg0 at count-argc-4 ... last at count-5.
+  Verified: argc=1 reads [count-5]; argc=4 reads [count-8..count-5].
+- op53 open native frame: fetchU native-id (align-consumed in disasm_align as
+  "dead pad"; frame-opener 0x1AA034 stores it at ctx+0x34 for dispatch - the
+  sub->native mapping in the inventory below comes from it), push [f1=argc,
+  count]; count=sp; ctx flag38=0.  argc therefore lives at stack[count-2].
+- op54 RETURN: pops c18, count, cursor, sp-= (4 pops).  op55/56/57 =
+  jump / jump-if-true / jump-if-false, cursor=(f2<<16)|fetchU.  op58 =
+  stack[count+fetchS]=0.  op48: count=sp(old); sp+=f1 (local alloc).
+  op49: sp-=f1.
+
+### Thunks -> natives
+- every native goes through a block-local sub with the shape
+  `op48; push ops (op50...); op53; op49; op54`; the pushes become native args
+  in push order (arg0 first).
+- `getarg(ctx, idx)` = `0x1A9C80`: leaf (a0-a3/v0 only, does not touch s0);
+  v0 = stack[(count-2) - (argc-idx)] with argc = stack[count-2],
+  count = ctx+0xC, stack base = ctx+0x20.
+
+### Native inventory (ch2 sub ids; prologue = -13, see numbering below)
+| native | handler | role | args at native |
+|--------|---------|------|----------------|
+| 0x4040 | 0x17760 comEvMsgEntStrBase | TEXT/CHOICE | argc3 = (pool-string addr via f1=5, const, const). Struct {u32 string, u8 bool, u8, u32 choice-or--1}; NON-BLOCKING (returns 1 immediately - the text line and the following name call land in the same frame); sink 0x820C -> 0x5594(window+0x2c). |
+| 0x4041 | 0x1787C comEvMsgEntVoiceBase | VOICE | argc2 = (vid, const). See clamp note below. Store: 0x8228(window, vid, x) -> voice-sub (window+0x30): +0x1C pending id, +0x20 pending channel; debug trace 0x16DE84("  voice %d\n", vid) into the logger buffer. |
+| 0x4042 | 0x1A9AC comEvMsgOpenBase | NAME/DIR (4 block-local variants) | argc12 (site pushes + thunk consts; name variant: site argc4 with the name string among them). Sink 0xE7470(G, &struct) -> state2 async. |
+| 0x4018 | 0x1A5A8 | PORTRAIT SHOW | native argc13; site argc3 = (char_id [f1=10], expr [f1=10], slot [f1=11 const, f2-1 in {0,1,2}]) + thunk consts. id -> id%1000 (or -1); args3-10 -> floats (/100.0f) at sp+0x1C..0x3C; args11/12 bools; applies to scene object at G+0x5170 (resolve 0x1af6fc/0x1af758/0x1af798, apply 0x1af85c); sets an event-flag bit via 0x2f668; state machine at ctx+0x38. |
+| 0x4065 | - | SCENE MARKER (subs 1475/1505) | const30 repeats identically across mixed contexts - not a speaker (see section above). |
+| 0x1010 / 0x0210 | - | subs 69 / 1341 | role unknown.  sub 22896 has no op53 (VM-only utility). |
+
+- NAME/DIR 0x4042 name-resolution priority (0xE7470): struct+8 passed name
+  (name calls) > default `？？？` (0x21C0A0, gated by struct+6) >
+  table[id%1000] lookup via 0x2fa80 (skips ids 301/302/303/-1) > 0 (gated by
+  struct+7).  Compares against "Anvil"/"アンヴィル"; writes the record at
+  G-0x60 (mapped id), the name ptr at G-0x50, positions (16.0/20.0f) to
+  *(G+0x6DCC).
+- speaker-name table in RAM: G = *(0x08A27508) (ELF 0x223508 + 0x08804000);
+  count = *(G+0xB0) = 201; base = *(G+0xB4); 32-byte entries {u32 string-id,
+  u32 name ptr}.  Contains `? ? ?`, Folth, Arca(5,6), Dyth, Kagerou,
+  Yeng-hua(29,30), Calis(38), Miss Admin(80), Owner(82) ...; many = "Name
+  undefined"; index 200 = "Name undefined"; 210 = out of range.
+- message window: G+0x6DA0.  +0x0C/+0x2c = text sub (0x08DCEE1C at capture);
+  +0x10/+0x30 = voice sub (0x08DE0CEC).  Voice-sub observed live: +0x14 =
+  0x0FA4 (4004 = active voice), +0x1C = -1 (pending clear), +0x20 = -1
+  (thunk const f2=0 -> -1).  The pending(+0x1C) -> active(+0x14) apply/reset
+  writer was NOT located statically (3 rounds; likely pointer-aliased) - OPEN,
+  but the state pattern is only consistent with apply-then-reset.
+
+### VOICE 0x4041 clamp: stock behaviour (resolved 2026-09-25)
+- stock words: `0x17904 sltu a1,s0,0x9088; 0x17908 bnel a1,zero,+1;
+  0x1790C addiu s0,zero,-1` = "if (arg0 < 0x9088) arg0 = -1" (unsigned).
+  Every script vid (both push forms: f1=4 pair with u2=0, and f1=10 const)
+  is <= 36835 < 37000 = 0x9088, so stock forces -1 for all of them.
+- THE UNDUB NOPs EXACTLY THESE THREE WORDS: `verify_shipped_patch.py`
+  `V2_NOPS = {0x17904: 0x0205282B, 0x17908: 0x54A00001, 0x1790C: 0x2410FFFF}`
+  - the same three encodings decoded here from the stock EBOOT (mutual
+  cross-check).  Verifier check #1: "engine clamp NOPed - without this every
+  story voice id (< 0x9088) is forced to -1 and nothing plays".  Retail's own
+  story-voice routing is the "Story-voice strip mechanism"/"v4" sections; for
+  the undub, remapped ids arrive < 0x9088 and must pass through.
+- live evidence (save state runs the PATCHED EBOOT): logger buffer holds
+  `  voice 4004` (raw id printed - impossible under the stock clamp: the only
+  xref of the format string is 0x17928, fed from s0 after the clamp), and the
+  voice sub holds active=4004/pending=-1.  All four observations reconcile
+  only with the clamp NOPed.
+
+### Block-local call ids (extends "op52 call targets are PER-BLOCK" above)
+Role -> sub id differs per block by a preamble offset; ch2 = prologue +13 for
+every observed role (verified both directions this round):
+| role | pro | ch2 | push shape at site (last push before op52) |
+|------|-----|-----|--------------------------------------------|
+| text | 195 | 208 | f1=5 (pool string addr), 100% |
+| dir/window | 222 | 235 | f1=10 enum 2134, f1=3 forwarded 39, f1=11 const 11, f1=0 1 |
+| voice | 214 | 227 | f1=4 pair 505 (u2=0), f1=10 const (pro 68 / ch2 918) |
+| choice | 204 | 217 | (string push; one of the three string-carrying subs) |
+| name | 283 | 296 | f1=11 (site argc4: pid/name/0/0 order per round 9) |
+| 0x4042 variants | 263/304 | 276/317 | f1=11 |
+| portrait show | 143/169 | 156/182 | f1=11 slot-const last; site argc3 (id, expr, slot) |
+| scene marker | 1462 | 1475/1505 | f1=10 |
+| ch1 (per dialect map) | - | text 234 / voice 253 | (own offset) |
+JP-pro and USA-pro preambles are address-identical.  ch2 census totals for
+regression checks: text 2352, dir 2185, voice 1423, portrait 695+36, name 61,
+choice 5.  Only subs 208/217/296 carry string pushes (no hidden name-writers).
+
+### STOCK vs PATCHED - critical for future RE
+`EBOOT_USA_decrypted.bin` (project root) is the STOCK retail EBOOT.  The
+shipped undub EBOOT differs exactly where `verify_shipped_patch.py` checks:
+clamp NOPed (0x17904/08/0C), story hook at 0x17848 (inside the 0x4040 TEXT
+handler; displaced `sw a2,8(sp)` + `move a0,s2`, RET 0x17858), walker code
+0x224868, backlog replay/log/gate hooks (0xDE430/0xDDF80/0xDE5C0).  Save
+states therefore reflect the PATCHED behaviour; the voice-clamp contradiction
+of 2026-09-25 (static decode said "-1", live RAM said "4004") was resolved
+entirely by this difference.  When static and live disagree, check the
+verifier's patch-point lists first.
+
+### Export status
+`work/ch2_54606_dump.txt` + `work/ch2_lingua.json` (2352 items, dir_* labels,
+SExtractor Type 2) still lack choice-option strings (sub217) and name-call
+strings (sub296) - re-emit once speaker semantics settle.  Speaker
+attribution itself remains OPEN and on hold for screenshots; falsified paths
+and the five plate anchors are in the "Script portrait-focus call" section.
