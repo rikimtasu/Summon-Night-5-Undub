@@ -8,10 +8,14 @@ how the same-length EBOOT.BIN replacement gets caught.
 import hashlib
 import os
 import struct
+import sys
 
-ROOT = r'D:\Documents\Default Project'
-USA = ROOT + r'\Summon Night 5 (USA).iso'
-UND = ROOT + r'\Summon Night 5 (USA) Undub.iso'
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import paths
+
+ROOT = paths.ROOT
+USA = os.path.join(ROOT, 'Summon Night 5 (USA).iso')
+UND = os.path.join(ROOT, 'Summon Night 5 (USA) Undub.iso')
 
 
 def u32(b, o):

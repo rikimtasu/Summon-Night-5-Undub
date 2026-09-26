@@ -10,6 +10,11 @@ JPSV/
 work/savedata_parked/
 work/sweep_backups/
 work/capture_backups/
+# Scratch the sweep/census tools write into work/
+work/sweep_log.txt
+work/audit.txt
+work/ch2_*.txt
+work/ch2_*.json
 # Screenshots / local test artifacts
 *.png
 # Python

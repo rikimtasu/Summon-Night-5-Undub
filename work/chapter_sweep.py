@@ -35,13 +35,14 @@ import subprocess
 import sys
 import time
 
-sys.path.insert(0, r'D:\Documents\Default Project\work')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import paths
 import chapter_capture as C
 import chapter_voice_census as V
 
-PARKED = r'D:\Documents\Default Project\work\savedata_parked'
-SWEEPBK = r'D:\Documents\Default Project\work\sweep_backups'
-LOG = r'D:\Documents\Default Project\work\sweep_log.txt'
+PARKED = os.path.join(paths.WORK, 'savedata_parked')
+SWEEPBK = os.path.join(paths.WORK, 'sweep_backups')
+LOG = os.path.join(paths.WORK, 'sweep_log.txt')
 DEFAULT_KEYS = 'enter,wait:4,enter,wait:4,enter,wait:6,f2'
 
 
@@ -264,6 +265,7 @@ def main(argv):
     ap.add_argument('--keep-open', action='store_true',
                     help='do not close the emulator after each version')
     args = ap.parse_args(argv)
+    paths.require_ppsspp()       # slots, ppsspp.ini and states come from it
 
     if args.restore_slots:
         restore_slots()

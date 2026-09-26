@@ -35,8 +35,10 @@ import struct
 import sys
 import tempfile
 
-ROOT = (r'D:\Video_Game\Emulator\PSP\PPSSPP 1.20\ppsspp\memstick'
-        r'\PSP\SAVEDATA')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import paths
+
+ROOT = paths.savedata()          # <memstick>\PSP\SAVEDATA
 
 CHAPTER_OFF = 0x60
 BAK_NAME = 'DATA.BIN.editbak'
@@ -453,6 +455,10 @@ def run_gui(smoke=False):
 
 
 def main(argv):
+    if not paths.PPSSPP_MEMSTICK:
+        print('note: SN5_PPSSPP_MEMSTICK is not set, so the save-slot list is '
+              'unavailable (use "Browse DATA.BIN..." or set it - see '
+              'work/paths.py)')
     if '--selftest' in argv:
         return selftest()
     if '--smoke' in argv:

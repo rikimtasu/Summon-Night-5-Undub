@@ -608,8 +608,12 @@ triggers (unlike the heavily-stripped prologue block), and they play natively
 once the clamp is NOPed. Only genuinely-deleted triggers need table rows.
 
 Bilingual target for the one deleted site (vids 2286/2288 retained, bracket it):
-  JP  unit 42597 vid 2287  line: 「それは、残念でしたね」
+  JP  voice site unit 42605, vid 2287, its text line starts at unit 42597
+      「それは、残念でしたね」   (voice fires after its line)
   USA unit 38601 sidx 45655 key 191506  "T-That's a shame, I suppose..."
+  (the census TSV records this as jp_unit=42605 / jp_prev_unit=42597; the
+  line quoted above is the *text* at 42597, which is why older notes read
+  "unit 42597")
 Convention confirmed on retained anchor vid 2288: its preceding JP line
 「そろそろ次のところに行きましょ！」 matches USA "Okay, I think we're finished
 here for now. We need to go!" (voice fires after its line).
@@ -622,6 +626,10 @@ code change. build_v4.py load_entries() now merges a new work/extra_entries.txt
 ("c10 key vid" lines, UTF-8) with the audited prologue v3_entries.txt
 (c10=38381). CHUNK_HOMES hold 343 entries across 11 chunks; 339 used after
 this addition, layout still ends at gap+660/664, verify_caves.py ALL PASS.
+**Today the shipped table is 340 rows** (339 prologue + this ch.1 row): vid 122
+was reinstated on 2026-09-25, i.e. after this note was written - "339" above is
+the count as of 2026-09-24. Current totals are asserted by
+`verify_shipped_patch.py` ("packed table size == source tables" -> 340).
 EBOOT extent re-swapped into the existing ISO (no full rebuild needed since
 the JP SV archives + opening were already in place).
 
@@ -1427,3 +1435,80 @@ fact-check pass before this note was written.
 - Cleanup: temp scratch round32-37 + fact-check scripts deleted; all
   of the above regenerates from chapter_voice_census (parse_block/
   scan_ram) + disasm_align + the unit dumps described here.
+
+## Addendum 2026-09-26 - repo review: prune regression repaired, hardening, path portability
+
+A full code review (read + executed every verifier against the shipped
+artifacts) found that commit `f89610b` "work: prune stale RE scratch, keep
+active pipeline" had deleted three files the ACTIVE pipeline still needs.
+
+**Regression (reproduced before the fix):**
+```
+chunk descriptors match the derived chunking      FAIL
+packed table size == source tables                FAIL  packed 340, source 339
+every packed triple matches the reviewed table    FAIL  mismatched: [(50098, 191506)]
+loader fixup check                                SKIP  usa_loader_diff.pkl missing
+3 CHECK(S) FAILED
+```
+Measured from the shipped EBOOT: the table is **340 rows = 339 prologue
+(`c10=38381`) + 1 ch.1 row `(50098, 191506, 2287)`**.  `v3_entries.txt` holds
+the 339 prologue rows, so the ch.1 row lived *only* in `extra_entries.txt`.
+Because both `build_v4.load_entries()` and `verify_shipped_patch.
+read_expected_entries()` treated that file as OPTIONAL, a rebuild would have
+dropped the ch.1 row **and the verifier would still have passed** - the only
+detector of that regression was deleted alongside it.  `build_v4.make_eboot()`
+also died outright on the missing `usa_loader_diff.pkl`.
+
+**Repairs (all four review items):**
+1. `work/extra_entries.txt` + `work/usa_loader_diff.pkl` restored byte-for-byte
+   from history (`git checkout f89610b^ -- work/<file>`; pkl = pickled `set`,
+   75,683 entries, 375,302 B) and copied into the live artifact tree.  New
+   `work/loader_fixups.py` re-derives the set for recovery: word-compare a
+   STOCK-build save state against the decrypted EBOOT (RAM image starts at
+   0x08000000, module linked at 0x08804000 => module RAM off = `0x804000+fva`).
+   Measured: derived 234,102 vs tracked 75,683 (a superset apart from 91
+   tracked-only words in 0x230114..0x2302xx that runtime code had already
+   rewritten in my state).  Both sets collide with **0** of the shipped
+   patch's 1,168 written words; the tracked set stays the one of record, and
+   the tool refuses to overwrite it.
+2. Missing inputs are no longer silent: `extra_entries.txt` and the fixup pkl
+   are REQUIRED in `build_v4`, `verify_shipped_patch` and
+   `chapter_voice_census` (SystemExit naming the file + the restore command);
+   a missing fixup pkl is now a **FAIL** (was a green-printing SKIP); census
+   `--selftest` now FAILS when a KNOWN chapter's block pair is absent instead
+   of printing SKIP (verified: 7 checks, 1 failed = "ch.1 block pair captured",
+   exit 1, because the USA ch.1 state was overwritten by later captures).
+3. Paths: new `work/paths.py` (`SN5_ROOT`, `SN5_JPSV_DIR`,
+   `SN5_PPSSPP_MEMSTICK`, `SN5_PPSSPP_EXE`, `tempfile` scratch).  All 15
+   scripts now resolve from it - no `D:\Documents\...` / `D:\Video_Game\...`
+   literals remain.  `verify_shipped_patch.py` and `review_xdelta_patch.py`
+   also take `--root`.  A clone with no artifacts fails with
+   `missing ISO: ... Set SN5_ROOT ...` instead of a traceback.
+4. Docs: README table/counts corrected (339 prologue rows, **340** shipped,
+   totals row added), rebuild section rewritten for the scripts that exist
+   (`build_v4.py` + `apply_jp_opening.py`, EBOOT-only two-step), repo-contents
+   list and the "audit tooling is ready" claim corrected (those one-off helpers
+   are in history), plus a new "Where the tooling looks for files" section.
+
+**Verification after the changes (2026-09-26, against the live artifacts):**
+- `python work/verify_shipped_patch.py` -> **ALL 39 CHECKS PASSED** (exit 0),
+  including `chunk descriptors ... 11 chunks, 340 entries`,
+  `packed table size == source tables ... packed 340, source 340`, and
+  `no patched word collides with an EBOOT loader fixup ... 1190 words checked`.
+  (40 checks / 40 GREEN remains the `--xdelta` form, which adds the
+  decode-provenance check.)
+- `python work/verify_caves.py` -> ALL PASS, layout `gap+660/664`.
+- `python -m py_compile` -> all 15 scripts.
+- Negative tests: pkl absent -> FAIL + exit 1; `extra_entries.txt` absent ->
+  SystemExit naming the file; census selftest without the ch.1 pair -> exit 1.
+- Artifact claims re-measured and unchanged: undub ISO `e88acbfb…309d1`
+  (1,369,059,328 B), xdelta `271d9697…ef459b` (466,098,445 B), EBOOT
+  `fca047db…` == `work/EBOOT_USA_patched.bin`, undub `04.DAT`/`SV00`/`SV17` ==
+  JP ISO.
+
+**Still open (deliberately not done here):** the paired ch.1 capture (JP 55506
++ USA 50098) must be re-made for the census selftest to go green again; until
+then that gate failing is the intended signal.  `build_v5.py`/`build_v6fix.py`
+were left deleted (history has them) and are documented via the equivalent
+two-step instead.
+

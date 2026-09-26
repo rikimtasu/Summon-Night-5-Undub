@@ -14,7 +14,7 @@ import pickle
 import sys
 import os
 
-sys.path.insert(0, r'D:\Documents\Default Project\work')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_undub_v2 as v2
 
 SRC_EBOOT = v2.SRC_EBOOT
@@ -289,20 +289,31 @@ def load_entries():
     can be added without touching the bilingual-audited prologue table. The
     walker already compares each entry's c10 against the live context
     (lw 0(t5) vs ctx+0x10), so mixed contexts need no code change.
+
+    Both files are TRACKED build inputs: a missing extra_entries.txt once
+    silently produced a table without the chapter-1 row (vid 2287) while the
+    verifier - which read the same optional file - still passed.  So its
+    absence is now fatal.
     """
     out = []
-    with open(r'D:\Documents\Default Project\work\v3_entries.txt') as f:
+    with open(os.path.join(v2.WORK, 'v3_entries.txt')) as f:
         for line in f:
+            if not line.split() or not line.split()[0].isdigit():
+                continue
             key, vid, _ju, _uu = line.split()
             out.append((38381, int(key), int(vid)))
-    extra = r'D:\Documents\Default Project\work\extra_entries.txt'
-    if os.path.exists(extra):
-        with open(extra, encoding='utf-8') as f:
-            for line in f:
-                parts = line.split()
-                if len(parts) < 3 or not parts[0].isdigit():
-                    continue
-                out.append((int(parts[0]), int(parts[1]), int(parts[2])))
+    extra = os.path.join(v2.WORK, 'extra_entries.txt')
+    if not os.path.exists(extra):
+        raise SystemExit('missing tracked build input: %s (one row per later '
+                         'chapter, e.g. "50098 191506 2287"; restore it with '
+                         'git checkout <rev>^ -- work/extra_entries.txt)'
+                         % extra)
+    with open(extra, encoding='utf-8') as f:
+        for line in f:
+            parts = line.split()
+            if len(parts) < 3 or not parts[0].isdigit():
+                continue
+            out.append((int(parts[0]), int(parts[1]), int(parts[2])))
     out.sort()
     return out
 
@@ -393,7 +404,13 @@ def assemble(chunks):
 def make_eboot():
     """Patch a fresh EBOOT (v2 NOPs + hook + split table). Returns nothing;
     writes PATCHED_EBOOT. Safe to call without rebuilding the ISO."""
-    diff = pickle.loads(open(r'D:\Documents\Default Project\work\usa_loader_diff.pkl', 'rb').read())
+    pkl = os.path.join(v2.WORK, 'usa_loader_diff.pkl')
+    if not os.path.isfile(pkl):
+        raise SystemExit('missing tracked build input: %s (loader-fixup '
+                         'address set; restore it with '
+                         'git checkout <rev>^ -- work/usa_loader_diff.pkl, '
+                         'or re-derive with loader_fixups.py)' % pkl)
+    diff = pickle.loads(open(pkl, 'rb').read())
     d = bytearray(open(SRC_EBOOT, 'rb').read())
     for fva, exp in V2_NOPS.items():
         off = SEG + fva

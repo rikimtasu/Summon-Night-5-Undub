@@ -20,12 +20,22 @@ Build steps:
 from pycdlib import PyCdlib
 import os
 import struct
+import sys
 
-USA_ISO = r'D:\Documents\Default Project\Summon Night 5 (USA).iso'
-OUT_ISO = r'D:\Documents\Default Project\Summon Night 5 (USA) Undub.iso'
-SVDIR = r'D:\Documents\Default Project\work\JPSV\PSP_GAME\USRDIR'
-SRC_EBOOT = r'D:\Documents\Default Project\EBOOT_USA_decrypted.bin'
-PATCHED_EBOOT = r'D:\Documents\Default Project\work\EBOOT_USA_patched.bin'
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import paths
+
+USER_ISO_NAME = 'Summon Night 5 (USA).iso'
+OUT_ISO_NAME = 'Summon Night 5 (USA) Undub.iso'
+
+ROOT = paths.ROOT
+WORK = paths.WORK                 # tracked tables + derived artifacts
+
+USA_ISO = os.path.join(paths.ROOT, USER_ISO_NAME)
+OUT_ISO = os.path.join(paths.ROOT, OUT_ISO_NAME)
+SVDIR = paths.JPSV_DIR
+SRC_EBOOT = os.path.join(paths.ROOT, 'EBOOT_USA_decrypted.bin')
+PATCHED_EBOOT = os.path.join(paths.WORK, 'EBOOT_USA_patched.bin')
 
 SEG = 0xC0  # ELF text vaddr base (file offset = fva + SEG)
 PATCH_FVAS = (0x17904, 0x17908, 0x1790C)

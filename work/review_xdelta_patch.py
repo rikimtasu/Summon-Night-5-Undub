@@ -33,8 +33,11 @@ import hashlib
 import os
 import sys
 
-WORK = r'D:\Documents\Default Project\work'
-ROOT = os.path.dirname(WORK)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import paths
+
+WORK = paths.WORK
+ROOT = paths.ROOT
 DEFAULT_UNDUB = os.path.join(ROOT, 'Summon Night 5 (USA) Undub.iso')
 DEFAULT_STOCK = os.path.join(ROOT, 'Summon Night 5 (USA).iso')
 DEFAULT_JP = os.path.join(ROOT, 'Summon Night 5 (JP).iso')
@@ -81,12 +84,30 @@ def walk_files(iso, root='/'):
 
 def main(argv):
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--undub', default=DEFAULT_UNDUB)
-    ap.add_argument('--stock', default=DEFAULT_STOCK)
-    ap.add_argument('--jp', default=DEFAULT_JP)
+    ap.add_argument('--root', help='artifact directory (default: $SN5_ROOT or '
+                                   'this checkout)')
+    ap.add_argument('--undub')
+    ap.add_argument('--stock')
+    ap.add_argument('--jp')
     ap.add_argument('--skip-hash', action='store_true',
                     help='compare file LISTS only (fast, no content check)')
     args = ap.parse_args(argv)
+    if args.root:
+        root = os.path.abspath(args.root)
+        args.undub = args.undub or os.path.join(
+            root, os.path.basename(DEFAULT_UNDUB))
+        args.stock = args.stock or os.path.join(
+            root, os.path.basename(DEFAULT_STOCK))
+        args.jp = args.jp or os.path.join(root, os.path.basename(DEFAULT_JP))
+    else:
+        args.undub = args.undub or DEFAULT_UNDUB
+        args.stock = args.stock or DEFAULT_STOCK
+        args.jp = args.jp or DEFAULT_JP
+    for label, p in (('undub', args.undub), ('stock', args.stock),
+                     ('jp', args.jp)):
+        if not os.path.isfile(p):
+            raise SystemExit('missing %s ISO: %s (pass --root / --%s / set '
+                             'SN5_ROOT)' % (label, p, label))
 
     import pycdlib
     undub = pycdlib.PyCdlib()

@@ -1,4 +1,9 @@
+import os
 import struct
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import paths
 
 # Authoritative semantics from EBOOT JP opcode tables / handler disassembly:
 # op50 push-dispatch (jump table 0x1FDF78, indexed by f1):
@@ -67,7 +72,7 @@ def tokens(dis):
     return [(op, f1, f2, tuple('T' if isinstance(x, int) else x for x in ops)) for (_, op, f1, f2, ops) in dis]
 
 if __name__ == '__main__':
-    ram = open('D:/Documents/Default Project/work/psp_ram_jp.bin','rb').read()
+    ram = open(os.path.join(paths.WORK, 'psp_ram_jp.bin'), 'rb').read()
     o = 0x08D2D000 - 0x08000000
     blk = ram[o:o+180224]
     d = disasm(blk, 12)

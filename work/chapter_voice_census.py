@@ -52,10 +52,11 @@ import os
 import struct
 import sys
 
-sys.path.insert(0, r'D:\Documents\Default Project\work')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import paths
 from disasm_align import disasm
 
-WORK = r'D:\Documents\Default Project\work'
+WORK = paths.WORK
 PROLOGUE_C10_USA = 38381          # build_v4.load_entries stamps this on v3 rows
 V3_ENTRIES = os.path.join(WORK, 'v3_entries.txt')
 EXTRA_ENTRIES = os.path.join(WORK, 'extra_entries.txt')
@@ -280,21 +281,33 @@ def load_blocks(paths, tag, seen, found, log):
 
 # ------------------------------------------------------------ shipped table
 def load_table():
-    """{usa_c10: {vid: key}} exactly as build_v4.load_entries builds it."""
+    """{usa_c10: {vid: key}} exactly as build_v4.load_entries builds it.
+
+    Both tables are tracked build inputs and both are REQUIRED: the census
+    compares the shipped rows against them, so a silently-missing
+    extra_entries.txt would report the chapter-1 row as an "extra" row (or,
+    earlier, hide its absence).
+    """
     table = collections.defaultdict(dict)
+    if not os.path.isfile(V3_ENTRIES):
+        raise SystemExit('missing tracked table: %s' % V3_ENTRIES)
     with open(V3_ENTRIES) as f:
         for line in f:
             parts = line.split()
-            if len(parts) < 2:
+            if len(parts) < 2 or not parts[0].isdigit():
                 continue
             table[PROLOGUE_C10_USA][int(parts[1])] = int(parts[0])
-    if os.path.exists(EXTRA_ENTRIES):
-        with open(EXTRA_ENTRIES, encoding='utf-8') as f:
-            for line in f:
-                parts = line.split()
-                if len(parts) < 3 or not parts[0].isdigit():
-                    continue
-                table[int(parts[0])][int(parts[2])] = int(parts[1])
+    if not os.path.isfile(EXTRA_ENTRIES):
+        raise SystemExit(
+            'missing tracked table: %s (later-chapter rows, e.g. '
+            '"50098 191506 2287"; restore with '
+            'git checkout <rev>^ -- work/extra_entries.txt)' % EXTRA_ENTRIES)
+    with open(EXTRA_ENTRIES, encoding='utf-8') as f:
+        for line in f:
+            parts = line.split()
+            if len(parts) < 3 or not parts[0].isdigit():
+                continue
+            table[int(parts[0])][int(parts[2])] = int(parts[1])
     return table
 
 
@@ -587,11 +600,14 @@ def selftest(ram_jp, ram_usa, states_dir, use_dat=True):
         return by_c10.get((jc, uc))
 
     # --- prologue: documented in RE_notes.md "Post-prologue completeness"
+    # A missing block pair is a FAILURE, not a skip: this selftest is the only
+    # mechanical check over the SHIPPED rows, so losing the capture silently
+    # would retire the check (it already happened to ch.1 - see below).
     pair = known(43032, 38381)
     if not pair:
         skipped += 1
-        print('SKIP prologue: jp c10=43032 / usa c10=38381 blocks not in the '
-              'scanned dumps')
+        check('prologue block pair captured (jp 43032 / usa 38381)', False,
+              'blocks not in the scanned dumps - re-capture, then re-run')
     else:
         jb, ub = pair
         jc, uc = jb['census'], ub['census']
@@ -617,11 +633,14 @@ def selftest(ram_jp, ram_usa, states_dir, use_dat=True):
               gaps == [], 'gaps %s' % gaps)
 
     # --- chapter 1: RE_notes.md records exactly one deleted trigger
+    # The USA ch.1 state was overwritten by later captures, which silently
+    # turned this gate into a SKIP - so a lost pair now fails.
     pair = known(55506, 50098)
     if not pair:
         skipped += 1
-        print('SKIP ch.1: jp c10=55506 / usa c10=50098 blocks not in the '
-              'scanned dumps')
+        check('ch.1 block pair captured (jp 55506 / usa 50098)', False,
+              'blocks not in the scanned dumps - the shipped ch.1 row '
+              '(vid 2287) cannot be verified without them')
     else:
         jb, ub = pair
         deleted = jb['census'] - ub['census']

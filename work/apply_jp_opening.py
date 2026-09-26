@@ -28,8 +28,11 @@ import os
 import shutil
 import sys
 
-WORK = r'D:\Documents\Default Project\work'
-ROOT = os.path.dirname(WORK)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import paths
+
+WORK = paths.WORK
+ROOT = paths.ROOT
 UNDUB = os.path.join(ROOT, 'Summon Night 5 (USA) Undub.iso')
 JPISO = os.path.join(ROOT, 'Summon Night 5 (JP).iso')
 JP04 = os.path.join(WORK, 'JP04.DAT')

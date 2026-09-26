@@ -19,9 +19,11 @@ keeping English text. Verified in PPSSPP.
   gaps); the CALL195 delta is benign text reflow, not missing triggers.
 - Voice line mapping audited bilingually (JP owning line vs USA attached line).
   Round 6 corrected the systematic one-line offset, cross-version line-order
-  swaps, localizer-inserted lines, and wrongly dropped entries
-  (`build_v6fix.py`): **338 prologue triggers** in 11 chunks — 339 table
-  entries shipped, including the one chapter-1 row.
+  swaps, localizer-inserted lines, and wrongly dropped entries: **339 prologue
+  rows** in 11 chunks plus **1 chapter-1 row** = **340 table entries shipped**,
+  checked row-by-row against the shipped EBOOT (`verify_shipped_patch.py`
+  compares the packed table with `work/v3_entries.txt` +
+  `work/extra_entries.txt`, both tracked).
 - Backlog: voice triggers now also fill the backlog replay slot, so restored
   voices replay with X and close with Circle.
 - v5: JP `SV00-17.DAT` (voice archives) + JP `04.DAT` (opening movie) swapped
@@ -62,20 +64,31 @@ chapter. Measured so far:
 
 | context | chapter | JP const | USA const | deleted | table rows |
 |---|---|---|---|---|---|
-| `c10=38381` | prologue | 392 | 68 | 324 (+15 f2) | 338 |
+| `c10=38381` | prologue | 392 | 68 | 324 (+15 f2) | 339 |
 | `c10=50098` | chapter 1 | 657 | 656 | **1** (vid 2287) | 1 |
+| | | | | total shipped | **340** |
 
 - The **prologue is provably complete**: a multiset proof over every JP voice
   site gives 392 const = 68 retained by USA + 323 mapped + 1 deliberate drop
   (vid 122); 15 f2 all mapped; 505 pair-id sites untouched (they play natively).
 - **Chapter 1 needed only one row** — the USA build retained nearly all of its
   const triggers, so they play natively once the clamp is NOPed. The single
-  deleted trigger (vid 2287) is restored via `work/extra_entries.txt`.
+  deleted trigger (vid 2287) is restored via `work/extra_entries.txt` (tracked;
+  its provenance is recorded in the file itself, in `work/RE_notes.md`, and in
+  the `ch.1` line of `work/voice_bilingual.tsv`).
+  **Note:** the paired ch.1 save-states that produced it are no longer in the
+  capture set (the USA slot was overwritten by later captures), so
+  `chapter_voice_census.py --selftest` now FAILS its "ch.1 block pair captured"
+  gate until a ch.1 pair is re-captured — deliberately, so the check cannot
+  vanish quietly again.
 - Chapters after chapter 1 have not been captured yet. `op52` call targets are
-  per-block function ids, so each chapter must be diffed on its own; the audit
-  tooling (`work/pair_report.py`, `work/pair_diff_voices.py`,
-  `work/find_missing_site_target.py`) is ready and needs only paired PPSSPP
-  save-states (USA + JP) at a matching scene.
+  per-block function ids, so each chapter must be diffed on its own. The
+  workflow is `work/chapter_capture.py` / `work/chapter_sweep.py` (capture a
+  paired PPSSPP save state per chapter, USA + JP, at a matching scene) →
+  `work/chapter_voice_census.py` (diff the deleted voice multiset and emit the
+  bilingual TSV). The older one-off `pair_report.py` / `pair_diff_voices.py` /
+  `find_missing_site_target.py` helpers were pruned from the repo; they are
+  recoverable from git history (`git log --diff-filter=D -- work/`) if wanted.
 - Extending is mechanical: rows are `(context, text-offset, voice-id)` and the
   walker already matches the live context, so `work/extra_entries.txt` can hold
   any number of chapters.
@@ -87,20 +100,57 @@ chapter. Measured so far:
 - `work/JPSV/` (JP `SV00-17.DAT`), `work/JP04.DAT` (JP `04.DAT`)
 - Python: `pycdlib`, `capstone`, `zstandard`; xdelta3 binary for patching
 
+## Where the tooling looks for files
+
+Every script resolves paths through `work/paths.py` — nothing is hard-coded to
+a maintainer's disk any more:
+
+| variable | meaning | default |
+|---|---|---|
+| `SN5_ROOT` | directory holding the ISOs, decrypted EBOOTs, `work/JPSV/`, `work/JP04.DAT` | this checkout |
+| `SN5_JPSV_DIR` | JP `SV00-17.DAT` directory | `<root>/work/JPSV/PSP_GAME/USRDIR` |
+| `SN5_PPSSPP_MEMSTICK` | PPSSPP memstick dir (capture/sweep/save-editor only) | *unset → those tools refuse to run* |
+| `SN5_PPSSPP_EXE` | emulator binary | `PPSSPPWindows64.exe` next to the memstick |
+
+The tracked model files (`work/v3_entries.txt`, `work/extra_entries.txt`,
+`work/usa_loader_diff.pkl`) are read from `<root>/work/`, so a full checkout
+that also holds the ISOs needs no configuration at all. To run the tracked
+code from a clean clone against artifacts kept elsewhere:
+
+```
+set SN5_ROOT=D:\Documents\Default Project
+python work\verify_shipped_patch.py
+```
+
+(`--root DIR` on `verify_shipped_patch.py` / `review_xdelta_patch.py` does the
+same thing for a single run.)
+
 ## Rebuild (DANGER: mutates the live ISO)
 
 **Every script below overwrites the live `Summon Night 5 (USA) Undub.iso`
-in place.** `build_v4.py` / `build_v5.py` regenerate the whole ISO from the
-stock USA ISO *before* any guard runs — the JP-opening guard only fires at the
-end of `v2.patch_eboot_extent()` (`build_undub_v2.py`), after both writes.
-Never run them against the live ISO as a test; see the DANGER section in
+in place.** `build_v4.py` regenerates the whole ISO from the stock USA ISO
+*before* any guard runs — the JP-opening guard only fires at the end of
+`v2.patch_eboot_extent()` (`build_undub_v2.py`), after both writes. Never run
+them against the live ISO as a test; see the DANGER section in
 `work/RE_notes.md` for the recorded accident (2026-09-24) and recovery.
 
 ```
-python work/build_v4.py    # DESTRUCTIVE full ISO rebuild: SV swap + EBOOT patch (clamp + hook)
-python work/build_v5.py    # DESTRUCTIVE full ISO rebuild: + JP opening movie
-python work/build_v6fix.py # DESTRUCTIVE EBOOT-extent-only update (after editing v3_entries.txt)
+# full rebuild (SV swap + EBOOT patch): stock USA ISO -> undub ISO, no JP opening
+python work/build_v4.py
+# then restore the JP opening (the one script that stages, verifies, installs)
+python work/apply_jp_opening.py
+
+# EBOOT-only update after editing work/v3_entries.txt / work/extra_entries.txt:
+#   (equivalent of the old build_v6fix.py, which was pruned; it is in history)
+python -c "import sys; sys.path.insert(0,'work'); import build_v4 as b; b.make_eboot()"
+python -c "import sys; sys.path.insert(0,'work'); import build_undub_v2 as v2; v2.patch_eboot_extent()"
 ```
+
+Prerequisites are now *enforced* instead of assumed: a missing
+`work/extra_entries.txt` or `work/usa_loader_diff.pkl` aborts the build with a
+message (both are tracked — `git checkout <rev>^ -- work/<file>` restores them).
+The old `build_v5.py` / `build_v6fix.py` names no longer exist; both are in git
+history if you need the originals.
 
 Rules for any future rebuild:
 
@@ -112,8 +162,8 @@ Rules for any future rebuild:
    (`-e -f -B 1073741824 -W 16777216`, source via `-s`), playtest, then run
    the verifiers:
    `python work/verify_shipped_patch.py` (ISO mode) and
-   `python work/review_xdelta_patch.py` (both take no arguments; run from
-   the repo root).
+   `python work/review_xdelta_patch.py` (both default to `$SN5_ROOT`/the
+   checkout; run from the repo root).
 3. `work/EBOOT_USA_patched.bin` and the EBOOT inside the shipped ISO are
    byte-identical since the 2026-09-25 voice-table fix rebuild (re-established
    with a fresh single `make_eboot()` run at the retreat-exchange rebuild;
@@ -126,7 +176,11 @@ Rules for any future rebuild:
 ## Repo contents
 
 - `work/*.py` — build + analysis + audit tooling
+- `work/paths.py` — one place for every path (`SN5_ROOT`, PPSSPP locations)
 - `work/RE_notes.md` — reverse-engineering findings
-- `work/v3_entries.txt` — audited voice-id -> text-offset table (+ `.pre_round6`)
-- `work/prologue_audit_full.txt`, `work/align_dump.txt` — mapping audit artifacts
-- `work/usa_loader_diff.pkl` — loader-fixup address set (build input)
+- `work/v3_entries.txt` — audited prologue voice table (339 rows; + `.pre_round6`)
+- `work/extra_entries.txt` — later-chapter rows (currently ch.1: 1 row) → 340 total
+- `work/usa_loader_diff.pkl` — loader-fixup address set (build input;
+  `work/loader_fixups.py` re-derives a superset for recovery)
+- `work/voice_bilingual.tsv`, `work/voice_census_report.txt` — census output
+  (regenerate with `python work/chapter_voice_census.py --states <dir>`)

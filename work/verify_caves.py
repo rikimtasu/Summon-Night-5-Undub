@@ -1,7 +1,8 @@
 import struct
 import re
+import os
 import sys
-sys.path.insert(0, r'D:\Documents\Default Project\work')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build_v4 import (replay_cave, log_cave, gate_cave,
                       REPLAY_CAVE_FVA, LOG_CAVE_FVA, GATE_CAVE_FVA,
                       REPLAY_RC_FVA, LOG_RC_FVA, GATE_RC_FVA,

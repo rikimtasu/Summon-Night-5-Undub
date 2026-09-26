@@ -9,10 +9,14 @@ Dedupes identical (c10, size) blocks across states.
 """
 import struct, sys, os, collections
 import zstandard
-sys.path.insert(0, r'D:\Documents\Default Project\work')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import paths
 import chapter_voice_census as C
 
-STATE = r'D:\Video_Game\Emulator\PSP\PPSSPP 1.20\ppsspp\memstick\PSP\PPSSPP_STATE'
+STATE = paths.state_dir()
+if not STATE:
+    raise SystemExit('SN5_PPSSPP_MEMSTICK is not set, so the PPSSPP_STATE '
+                     'directory is unknown; see work/paths.py')
 STATES = [
     ('ULUS10656_1.01_0.ppst', 'usa'),
     ('ULUS10656_1.01_1.ppst', 'usa'),

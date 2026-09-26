@@ -11,13 +11,18 @@ because it verifies the MECHANISM rather than one chapter's script:
   3. walker code intact      (35 words at 0x224868, all immediates re-derived)
   4. chunk descriptors sane  (13 x {runtime addr, count}, inside chunk homes)
   5. table contents EXACTLY equal the reviewed source tables
-     (v3_entries.txt + extra_entries.txt), with unique (c10,key) and (c10,vid)
+     (v3_entries.txt + extra_entries.txt), with unique (c10,key) and (c10,vid).
+     Both are TRACKED inputs and both are now REQUIRED: extra_entries.txt used
+     to be optional, so deleting it silently dropped the chapter-1 row from
+     the expectation set - and the verifier, which read the same optional
+     file, still passed.  It fails loudly instead.
   6. backlog-replay hooks    (0xDE430, 0xDDF80, 0xDE5C0), their delay slots,
      and stock neighbours
   7. no patched word collides with an EBOOT loader fixup
      (usa_loader_diff.pkl) - the failure that bricked v3.  The written set
      covers walker, descriptors, table chunks, hooks + delay slots, the
-     three cave bodies and the three flight recorders
+     three cave bodies and the three flight recorders.  A MISSING pkl is a
+     FAILURE, not a skip: this guard is the one that caught the brick.
   8. shipped cave bodies (replay/log/gate) compared word-for-word against
      a re-derivation, flight recorders zeroed
 
@@ -27,10 +32,15 @@ imported from the builder, so a builder bug cannot hide behind a shared helper.
 Usage
 -----
     python verify_shipped_patch.py                       # default ISO
+    python verify_shipped_patch.py --root D:\\artifacts    # artifact dir
     python verify_shipped_patch.py --eboot work/EBOOT_USA_patched.bin
     python verify_shipped_patch.py --iso "Summon Night 5 (USA) Undub.iso"
     python verify_shipped_patch.py --xdelta "…Undub.xdelta" \\
         --source-iso "Summon Night 5 (USA).iso"
+
+Paths come from work/paths.py: $SN5_ROOT (default: this checkout) supplies the
+ISOs/EBOOTs and its work/ dir supplies the tracked tables, so the tool can be
+run from any clone.
 """
 import argparse
 import hashlib
@@ -42,8 +52,11 @@ import subprocess
 import sys
 import tempfile
 
-WORK = r'D:\Documents\Default Project\work'
-ROOT = os.path.dirname(WORK)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import paths
+
+WORK = paths.WORK
+ROOT = paths.ROOT
 # shipped undub ISO, RE_notes.md "CURRENT shipped artifact hashes"
 UNDUB_ISO_SHA256 = ('e88acbfb7d76ee1c8a8310c49d4c2be0a1f8896c11f576a022bbef1e3b8309d1')
 SEG = 0xC0
@@ -80,7 +93,6 @@ PROLOGUE_C10 = 38381
 KNOWN_C10 = (38381, 50098)
 ISO_EBOOT_OFF = 0x327800          # absolute ISO byte offset of EBOOT.BIN
 EBOOT_SIZE = 3018032
-STOCK_EBOOT = os.path.join(ROOT, 'EBOOT_USA_decrypted.bin')
 
 I_SCAN, I_ADV, I_CHUNK, I_DOCALL = 11, 22, 9, 26
 A = lambda i: (CODE_FVA + RT) + i * 4
@@ -371,20 +383,33 @@ def expected_gate_cave():
 
 # ------------------------------------------------------------------ sources
 def read_expected_entries():
-    """{(c10, key): vid} from the reviewed source tables."""
+    """{(c10, key): vid} from the reviewed source tables.
+
+    Both tables are tracked and both are required: dropping the optional-extra
+    file was how the shipped table's chapter-1 row lost its expectation.
+    """
     out = {}
-    with open(os.path.join(WORK, 'v3_entries.txt')) as f:
+    prologue = os.path.join(WORK, 'v3_entries.txt')
+    if not os.path.isfile(prologue):
+        raise SystemExit('missing tracked table: %s' % prologue)
+    with open(prologue) as f:
         for line in f:
             p = line.split()
-            if len(p) >= 2:
+            if len(p) >= 2 and p[0].isdigit():
                 out[(PROLOGUE_C10, int(p[0]))] = int(p[1])
     extra = os.path.join(WORK, 'extra_entries.txt')
-    if os.path.isfile(extra):
-        with open(extra, encoding='utf-8') as f:
-            for line in f:
-                p = line.split()
-                if len(p) >= 3 and p[0].isdigit():
-                    out[(int(p[0]), int(p[1]))] = int(p[2])
+    if not os.path.isfile(extra):
+        raise SystemExit(
+            'missing tracked table: %s (later-chapter rows, e.g. '
+            '"50098 191506 2287"; restore with '
+            'git checkout <rev>^ -- work/extra_entries.txt).  Without it the '
+            'table checks would silently validate a smaller table than the '
+            'shipped one.' % extra)
+    with open(extra, encoding='utf-8') as f:
+        for line in f:
+            p = line.split()
+            if len(p) >= 3 and p[0].isdigit():
+                out[(int(p[0]), int(p[1]))] = int(p[2])
     return out
 
 
@@ -399,6 +424,11 @@ def _looks_like_eboot(blob):
 
 
 def eboot_from_iso(path):
+    if not os.path.isfile(path):
+        raise SystemExit('missing ISO: %s\n'
+                         'Set SN5_ROOT (or pass --root/--iso) to the directory '
+                         'that holds the game artifacts - see work/paths.py.'
+                         % path)
     size = os.path.getsize(path)
     with open(path, 'rb') as f:
         f.seek(ISO_EBOOT_OFF)
@@ -429,9 +459,6 @@ def eboot_from_iso(path):
                      % (EBOOT_SIZE, path))
 
 
-SCRATCH = r'C:\Users\User\AppData\Local\Temp\opencode'
-
-
 def find_xdelta3():
     """Locate an xdelta3 binary: $XDELTA3, work/bin/, then PATH.
 
@@ -460,10 +487,8 @@ def eboot_from_xdelta(xd, src_iso):
             'xdelta section in work/RE_notes.md'
             % os.path.join(WORK, 'bin', 'xdelta3.exe'))
     print('using xdelta3: %s' % exe, flush=True)
-    os.makedirs(SCRATCH, exist_ok=True)
-    out = os.path.join(SCRATCH, 'verify_undub_decode.iso')
-    if os.path.isfile(out):
-        os.remove(out)
+    scratch = tempfile.mkdtemp(prefix='sn5_verify_')
+    out = os.path.join(scratch, 'verify_undub_decode.iso')
     print('decoding xdelta -> %s (writes ~1.3 GB, please wait)...' % out,
           flush=True)
     # NOTE: xdelta3 requires the "-d" FLAG form here.  The "d" subcommand
@@ -471,7 +496,7 @@ def eboot_from_xdelta(xd, src_iso):
     # "too many filenames: -s".
     subprocess.run([exe, '-d', '-f', '-s', src_iso, xd, out], check=True)
     print('decoded %d bytes' % os.path.getsize(out), flush=True)
-    return out, eboot_from_iso(out), out
+    return out, eboot_from_iso(out), scratch
 
 
 # ------------------------------------------------------------------- checks
@@ -485,24 +510,49 @@ class Report(object):
               flush=True)
         return ok
 
+    def skip(self, name, detail=''):
+        """Record a SKIP: printed and counted, but not a failure.
+
+        Kept separate from check() so a skip can never masquerade as a PASS,
+        and so the summary shows it.  Guards that protect against a shipped
+        brick do NOT use this - a missing input for those is a FAIL.
+        """
+        self.rows.append((name, True, 'SKIP ' + detail))
+        print('%-52s %s  %s' % (name, 'SKIP', detail), flush=True)
+        return True
+
     @property
     def failed(self):
         return [r for r in self.rows if not r[1]]
 
+    @property
+    def skipped(self):
+        return [r for r in self.rows if r[2].startswith('SKIP')]
+
 
 def main(argv):
     ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--root', help='artifact directory (default: $SN5_ROOT or '
+                                   'this checkout); its work/ dir must hold '
+                                   'the tracked tables')
     ap.add_argument('--eboot')
-    ap.add_argument('--iso', default=os.path.join(ROOT,
-                                                  'Summon Night 5 (USA) Undub.iso'))
+    ap.add_argument('--iso')
     ap.add_argument('--xdelta')
-    ap.add_argument('--source-iso', default=os.path.join(ROOT,
-                                                        'Summon Night 5 (USA).iso'))
+    ap.add_argument('--source-iso')
     args = ap.parse_args(argv)
 
-    tmp_iso = None
+    global ROOT, WORK
+    if args.root:
+        ROOT = os.path.abspath(args.root)
+        WORK = os.path.join(ROOT, 'work')
+    args.iso = args.iso or os.path.join(ROOT,
+                                        'Summon Night 5 (USA) Undub.iso')
+    args.source_iso = args.source_iso or os.path.join(
+        ROOT, 'Summon Night 5 (USA).iso')
+
+    tmp_iso = scratch = None
     if args.xdelta:
-        tmp_iso, blob, _ = eboot_from_xdelta(args.xdelta, args.source_iso)
+        tmp_iso, blob, scratch = eboot_from_xdelta(args.xdelta, args.source_iso)
         src = args.xdelta
     elif args.eboot:
         blob = open(args.eboot, 'rb').read()
@@ -549,12 +599,16 @@ def main(argv):
 
     # stock cross-check, when the stock EBOOT is available
     stock = None
-    if os.path.isfile(STOCK_EBOOT):
-        stock = open(STOCK_EBOOT, 'rb').read()
+    stock_eboot = os.path.join(ROOT, 'EBOOT_USA_decrypted.bin')
+    if os.path.isfile(stock_eboot):
+        stock = open(stock_eboot, 'rb').read()
         bad = [hex(f) for f, exp in V2_NOPS.items()
                if struct.unpack_from('<I', stock, SEG + f)[0] != exp]
         rep.check('stock EBOOT has the expected clamp instructions', not bad,
                   'bad: %s' % bad if bad else '3/3 as documented')
+    else:
+        rep.skip('stock EBOOT has the expected clamp instructions',
+                 '%s not found (stock cross-checks need it)' % stock_eboot)
 
     # 1. clamp NOPed
     left = [hex(f) for f in V2_NOPS if u32(f) != 0]
@@ -573,6 +627,9 @@ def main(argv):
         ok = all(struct.unpack_from('<I', stock, SEG + f)[0] == exp
                  for f, exp in HOOK_STOCK.items())
         rep.check('stock EBOOT had the documented pre-hook words', ok)
+    else:
+        rep.skip('stock EBOOT had the documented pre-hook words',
+                 'stock EBOOT not found')
 
     # 3. walker
     expect_entries = read_expected_entries()
@@ -661,6 +718,9 @@ def main(argv):
                    if struct.unpack_from('<I', stock, SEG + f)[0] != exp]
             rep.check('stock EBOOT had the documented %s pre-hook words' % name,
                       not bad, 'bad: %s' % bad if bad else 'as documented')
+        else:
+            rep.skip('stock EBOOT had the documented %s pre-hook words' % name,
+                     'stock EBOOT not found')
     bad = [hex(f) for f, exp in LOG_NATIVE.items() if u32(f) != exp]
     rep.check('stock logger neighbour words still native', not bad,
               'bad: %s' % bad if bad else '3/3 intact')
@@ -709,7 +769,11 @@ def main(argv):
                   not clash, 'clash: %s' % [hex(c) for c in clash[:4]]
                   if clash else '%d words checked' % len(written))
     else:
-        print('%-52s SKIP  usa_loader_diff.pkl missing' % 'loader fixup check')
+        # NOT a skip: this guard is the one that caught the v3 brick, so its
+        # absence must fail the run (it used to print SKIP and stay green).
+        rep.check('no patched word collides with an EBOOT loader fixup', False,
+                  'REQUIRED input missing: %s (restore with git checkout '
+                  '<rev>^ -- work/usa_loader_diff.pkl)' % pkl)
 
     print()
     if rep.failed:
@@ -718,8 +782,10 @@ def main(argv):
     else:
         print('ALL %d CHECKS PASSED - the patch mechanism is intact for '
               'every chapter.' % len(rep.rows))
-    if tmp_iso and os.path.isfile(tmp_iso):
-        os.remove(tmp_iso)
+    if rep.skipped:
+        print('%d SKIPPED (printed above; not failures)' % len(rep.skipped))
+    if scratch:
+        shutil.rmtree(scratch, ignore_errors=True)
     return 1 if rep.failed else 0
 
 

@@ -45,13 +45,13 @@ import sys
 import time
 from ctypes import wintypes
 
-ROOT = (r'D:\Video_Game\Emulator\PSP\PPSSPP 1.20\ppsspp\memstick'
-        r'\PSP\SAVEDATA')
-INI = (r'D:\Video_Game\Emulator\PSP\PPSSPP 1.20\ppsspp\memstick'
-       r'\PSP\SYSTEM\ppsspp.ini')
-STATEDIR = (r'D:\Video_Game\Emulator\PSP\PPSSPP 1.20\ppsspp\memstick'
-            r'\PSP\PPSSPP_STATE')
-PPSSPP = r'D:\Video_Game\Emulator\PSP\PPSSPP 1.20\ppsspp\PPSSPPWindows64.exe'
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import paths
+
+ROOT = paths.savedata()          # <memstick>\PSP\SAVEDATA
+INI = paths.ppsspp_ini()
+STATEDIR = paths.state_dir()
+PPSSPP = paths.PPSSPP_EXE
 ISOS = {
     'usa': r'Summon Night 5 (USA).iso',
     'jp': r'Summon Night 5 (JP).iso',
@@ -184,7 +184,7 @@ def validate(d):
     return None
 
 
-BACKUPS = r'D:\Documents\Default Project\work\capture_backups'
+BACKUPS = os.path.join(paths.WORK, 'capture_backups')
 
 
 def backup_slot(slot, chapter):
@@ -382,6 +382,7 @@ def main(argv):
                     help='do not launch: use the already-running PPSSPP, wait '
                          '--load-delay, then send F2 (save state)')
     args = ap.parse_args(argv)
+    paths.require_ppsspp()       # ROOT/INI/STATEDIR/PPSSPP all come from it
 
     if args.attach:
         # no scratch slot churn: just attach and save a state
