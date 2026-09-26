@@ -1335,3 +1335,95 @@ SExtractor Type 2) still lack choice-option strings (sub217) and name-call
 strings (sub296) - re-emit once speaker semantics settle.  Speaker
 attribution itself remains OPEN and on hold for screenshots; falsified paths
 and the five plate anchors are in the "Script portrait-focus call" section.
+
+### Addendum 2026-09-26 - rounds 32-37: capture ground truth, switch gates, body map (PARKED)
+Investigation parked (active/blocked cleared); temp scratch deleted.  Every
+claim below was re-verified straight from state _1 / block 54606 in a
+fact-check pass before this note was written.
+- GROUND TRUTH scene dump, state _1 (raw words; addr = 0x08000000 + off):
+  scene = 0x08DCD170 (G 0x08DC8000 + 0x5170); count(+0x2C) = 3;
+  aux(+0x50) = 0x08DCD3C0; entry ptrs(+0x54) = 08DCD4E0 / 08DCDD20 /
+  08DCE560.  struct0 @08DCD4E0: flags(+4) = 7, expr(+0x18) = 0,
+  raw id(+0x20) = 0x1D (29), id%1000 = 29, cells(+0x28..+0x34) =
+  29,-1,-1,-1, pos floats(+0x100/+0x104) = (0.0, 0.0); +0x38..+0x44 =
+  0,-1,-1,-1; +0x48 = 1; +0x4C/+0x50 = 1.0f; +0x1C = 0 (NOT the slot -
+  the position floats carry it).  struct1/struct2 = FREE (flags 0,
+  id/cells -1, floats 0).  Position table (scene+0x48 = 0x08AF0170):
+  slot0 (-120,0), slot1 (120,0), slot2 (0,0), +8 word = 5.0/10.0/15.0f.
+  => capture = exactly {struct0: id29, expr0, positioned at slot2} -
+  the "only 29" reading is confirmed from raw words; no cell/offset
+  misread is possible.
+- SHOW-ASSERT TAIL = DROP, verified to the last instruction: after
+  `jal 0x1ad500` (log line 0x612) the path falls into the shared
+  epilogue `move v0,s1` - no alloc, no update, no release.  v0 ends up
+  equal to the success-path value, so callers cannot detect a drop.
+- COMPLETE scene-affecting ledger, reset@u21547 -> capture (show
+  thunks 156 = a12 0, 182 = a12 1; site argc3 = (id, expr, slot)):
+  shows: u21554 (200,40,s0) | switch#1 u21605/21636/21667/21698
+  (210,{0,2,0,0},s1) | u21921 (f215,0,s1) | u21953 (200,5,s0) |
+  u22033 (f215,0,s1) | switch#2 u22129/22161/22192/22224
+  (210,{0,41,0,40},s0) | u22258 (200,0,s0) | u22292 (f215,10,s1) |
+  u23096 (29,0,s2).
+  0x401C fade-ones - ALL of them in (u21547, u23264]: u21945 (f215,1),
+  u22025 (200,1), u22112 (f215,0)+wait, u22250 (210,0)+wait (arg
+  pushes re-read from the block).  0x401D at u21180/u21543/u21913/
+  u23435 each has `push const 1` first = fade-IN-all, never a clear;
+  the clears are the paired 0x4012 resets at u21184 / u21547 (round21
+  printed 0x401D as "0x4013 fade-all" - corrected round25).  No other
+  free-capable native runs before the capture; low native 1 only as
+  native1(30)+marker1505(30) pairs, native1(60)@u21935,
+  native1(10)@u21958/u22038, and absent from u22294..u23264 (op53 ids
+  there: 0x4002/0x4015/0x4020/0x4043/0x4050/0x405C/0x4081/0x4084) -
+  its semantics and dispatch (outside the 0x4000 table) stay unknown.
+  round35: no op55/56/57 anywhere in the block targets (21548,21560)
+  or (22253,22261) - show200@u21554 and show200@u22258 cannot be
+  branch-skipped from inside the block.
+- SWITCH GATES - both switches gate on FIELD 62, idiom:
+  `push f62; op51 f1=7; [push const N; op20 f1=0; op56 -> case body;
+  op55 -> next test] for N=1..4; op55 -> join`.  Case constants
+  {1,2,3,4} verified in both chains (u21592-21719, u22116-22245);
+  selector outside 1..4 => no show210 at all (default).  Each case
+  body = a full id210 line: show210(expr,slot) + 0x4015 wait + voice
+  + text + name(210).  The field-60 text-variant branches use
+  `push f60; push const N; op12; op57 jump-if-false` (e.g. u21566).
+  op12/op20/op51 are NOT covered by the disasm_align authoritative
+  header (only op50/52-58/48/49 are) - semantics OPEN; u21624 /
+  u22148 are unreachable op55 artifacts (nothing targets them).
+- FIELD-STORAGE hunt negative (state _1, landmark-mapped via the
+  scene ptr; filter {f215==29, f62<=6, f20/f60<=16, f210<300, all
+  printed fields <64}): u32 stride = 13 candidates (3 zero-neighbour
+  = coincidence); u8 stride = 12+ noise hits (repetitive byte data
+  near 0x08CB5010-0x08CC7E28); u16 stride = 2 uncorroborated hits
+  (~0x093A95E0).  No identifiable struct - the op50 f1=0 fetchS +
+  vtable call(28) storage layout is still unknown; fields are
+  written by natives/engine only (no script stores, round31).
+- BLOCK BODY MAP (175 op48 bodies in block 54606):
+  u21039-21171 | u21172-21534 (fade-in-all@21180 + reset@21184 +
+  dialogue) | u21535-22895 = big dialogue segment (reset@u21547, all
+  shows/fades above, texts/voices through u22890) | u22896-22918 =
+  name dispatch (called from many earlier sites: u19823, u19836,
+  u19852, ... u20540+) | u22919-23036 = helper dispatcher (sp+=3;
+  calls 54329/2098/12594/18917/19719) | u23037-25354 (sp+=1) =
+  capture segment: show29@u23096, u23264 = push STR 22242 + CALL
+  sub208 (the on-screen text; plate "Yeng-hua solo"), name id29 right
+  behind at u23266-23268 | u25355+ next body.
+  CALL GRAPH: sub21535 and sub22919 have NO call site anywhere in the
+  block; sub23037 has exactly ONE - u54341, inside body u54329.
+  => big bodies look engine-dispatched (label/entry-table), not
+  reached by in-block op52 flow.
+- OPEN (parked): linear execution of body u21535 forces >=1 entry
+  alive at capture (show200@u21554 is never faded out, or the u22292
+  comp alloc survives with no free after it), contradicting the raw
+  dump {only 29}.  Working hypothesis: the engine dispatches big
+  bodies by label and u21535 had NOT run when the capture was taken
+  (its texts would then never have been on screen - consistent with
+  the sparse plate anchors: u2338 -> u23264 straddles the segment).
+  DECISIVE NEXT INPUT (not done): dump the VM ctx from the save -
+  find ctx via its stream word (ctx+0x1C = block base, RAM off
+  0xD68000 -> addr 0x08D68000), read cursor (ctx+4), sp (+8), count
+  (+0xC), then decode stack words at ctx+0x20 as op52 frames
+  [f1, retcursor, count, c18] to recover the live dispatch/return
+  chain.
+- Cleanup: temp scratch round32-37 + fact-check scripts deleted; all
+  of the above regenerates from chapter_voice_census (parse_block/
+  scan_ram) + disasm_align + the unit dumps described here.
