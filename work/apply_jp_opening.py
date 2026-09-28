@@ -23,13 +23,13 @@ Usage:
     python apply_jp_opening.py --dry-run  # checks only
 """
 import argparse
-import hashlib
 import os
 import shutil
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import paths
+from common import HashSink, member_hash, sha_file
 
 WORK = paths.WORK
 ROOT = paths.ROOT
@@ -42,35 +42,9 @@ OPENING = '/PSP_GAME/USRDIR/04.DAT'
 EBOOT = '/PSP_GAME/SYSDIR/EBOOT.BIN'
 
 
-def sha_file(path):
-    h = hashlib.sha256()
-    with open(path, 'rb') as f:
-        for b in iter(lambda: f.read(1 << 22), b''):
-            h.update(b)
-    return h.hexdigest()
-
-
-class Sink(object):
-    def __init__(self):
-        self.h = hashlib.sha256()
-        self.n = 0
-
-    def write(self, b):
-        self.h.update(b)
-        self.n += len(b)
-        return len(b)
-
-    def tell(self):
-        return self.n
-
-    def hexdigest(self):
-        return self.h.hexdigest()
-
-
-def member_hash(iso, path):
-    s = Sink()
-    iso.get_file_from_iso_fp(s, iso_path=path)
-    return s.hexdigest(), s.n
+# sha_file / HashSink / member_hash live in common.py (shared with
+# review_xdelta_patch.py); Sink stays as an alias for back-compat.
+Sink = HashSink
 
 
 def main(argv):

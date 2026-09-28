@@ -24,6 +24,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import paths
+from common import HashSink as _HashSink
 
 USER_ISO_NAME = 'Summon Night 5 (USA).iso'
 OUT_ISO_NAME = 'Summon Night 5 (USA) Undub.iso'
@@ -121,7 +122,6 @@ USA04_SHA = 'b063121c47f10c56'          # stock USA 04.DAT
 
 def assert_jp_opening_present(strict=True):
     """Confirm OUT_ISO carries the JP opening, not the stock USA one."""
-    import hashlib
     try:
         from pycdlib import PyCdlib
     except ImportError:
@@ -156,24 +156,6 @@ def assert_jp_opening_present(strict=True):
             raise AssertionError(msg)
         print(msg)
     return jp
-
-
-class _HashSink(object):
-    def __init__(self):
-        import hashlib
-        self.h = hashlib.sha256()
-        self.n = 0
-
-    def write(self, b):
-        self.h.update(b)
-        self.n += len(b)
-        return len(b)
-
-    def tell(self):
-        return self.n
-
-    def hexdigest(self):
-        return self.h.hexdigest()
 
 
 if __name__ == '__main__':

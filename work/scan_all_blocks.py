@@ -7,16 +7,19 @@ CALL195 - so non-prologue dialects (e.g. ch2 textCALL=208) are found too.
 Then census voice sites by form + preview pool strings (UTF-8).
 Dedupes identical (c10, size) blocks across states.
 """
-import struct, sys, os, collections
-import zstandard
+import struct
+import sys
+import os
+import collections
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import paths
 import chapter_voice_census as C
+from common import extract_ram_from_ppst as extract_ram
+# extract_ram() is the shared common.extract_ram_from_ppst under its historic name.
 
 STATE = paths.state_dir()
-if not STATE:
-    raise SystemExit('SN5_PPSSPP_MEMSTICK is not set, so the PPSSPP_STATE '
-                     'directory is unknown; see work/paths.py')
+
 STATES = [
     ('ULUS10656_1.01_0.ppst', 'usa'),
     ('ULUS10656_1.01_1.ppst', 'usa'),
@@ -27,22 +30,6 @@ STATES = [
     ('NPJH50696_1.01_1.ppst', 'jp'),
     ('NPJH50696_1.01_4.ppst', 'jp'),
 ]
-
-
-def extract_ram(path):
-    d = open(path, 'rb').read()
-    rev, comp, esize, usize = struct.unpack('<4I', d[:16])
-    out = zstandard.ZstdDecompressor().decompress(
-        d[176:176 + esize], max_output_size=usize + 16)
-    assert out[0x28:0x28 + 6] == b'Memory'
-    p1 = 0x28 + 20
-    memsize = struct.unpack('<I', out[p1 + 8:p1 + 12])[0]
-    return out[p1 + 12:p1 + 12 + memsize]
-
-
-# Voice/text classification lives in chapter_voice_census (dialect-calibrated
-# census_voice + parse_block); the hardcoded CALL195/CALL214 census that used
-# to sit here missed every non-prologue dialect block (ch2 54606, 49220/41244).
 
 
 def preview_strings(blk, c10, n=3):
@@ -89,30 +76,38 @@ def scan(ram):
     return hits
 
 
-seen_global = collections.defaultdict(list)   # (tag,c10) -> [state names]
-for name, tag in STATES:
-    try:
-        ram = extract_ram(os.path.join(STATE, name))
-    except Exception as e:
-        print('%-24s EXTRACT FAIL: %s' % (name, e), flush=True)
-        continue
-    hits = scan(ram)
-    print('%-24s: %d script block(s)' % (name, len(hits)), flush=True)
-    for blk in hits:
-        c = blk['census']
-        const = sum(v for (f, _), v in c.items() if f == 'const')
-        f2 = sum(v for (f, _), v in c.items() if f == 'f2')
-        pair = sum(v for (f, _), v in c.items() if f == 'pair')
-        print('   base=0x%08X c10=%-6d lines=%-5d const=%-4d f2=%-3d pair=%-4d textCALL=%-3d voiceCALL=%-3d'
-              % (blk['off'], blk['c10'], len(blk['lines']), const, f2, pair,
-                 blk['text_call'], blk['voice_call']), flush=True)
-        for t in preview_strings(blk['data'], blk['c10']):
-            print('        str: %s' % t, flush=True)
-        seen_global[(tag, blk['c10'])].append(name)
-    del ram
+def main():
+    if not STATE:
+        raise SystemExit('SN5_PPSSPP_MEMSTICK is not set, so the PPSSPP_STATE '
+                         'directory is unknown; see work/paths.py')
+    seen_global = collections.defaultdict(list)   # (tag,c10) -> [state names]
+    for name, tag in STATES:
+        try:
+            ram = extract_ram(os.path.join(STATE, name))
+        except Exception as e:                            # noqa: BLE001
+            print('%-24s EXTRACT FAIL: %s' % (name, e), flush=True)
+            continue
+        hits = scan(ram)
+        print('%-24s: %d script block(s)' % (name, len(hits)), flush=True)
+        for blk in hits:
+            c = blk['census']
+            const = sum(v for (f, _), v in c.items() if f == 'const')
+            f2 = sum(v for (f, _), v in c.items() if f == 'f2')
+            pair = sum(v for (f, _), v in c.items() if f == 'pair')
+            print('   base=0x%08X c10=%-6d lines=%-5d const=%-4d f2=%-3d pair=%-4d textCALL=%-3d voiceCALL=%-3d'
+                  % (blk['off'], blk['c10'], len(blk['lines']), const, f2, pair,
+                     blk['text_call'], blk['voice_call']), flush=True)
+            for t in preview_strings(blk['data'], blk['c10']):
+                print('        str: %s' % t, flush=True)
+            seen_global[(tag, blk['c10'])].append(name)
+        del ram
 
-print()
-print('=== distinct (version, c10) script contexts across all states ===')
-for k, v in sorted(seen_global.items()):
-    print('  %s c10=%-6d in %s' % (k[0], k[1], v))
-print('DONE', flush=True)
+    print()
+    print('=== distinct (version, c10) script contexts across all states ===')
+    for k, v in sorted(seen_global.items()):
+        print('  %s c10=%-6d in %s' % (k[0], k[1], v))
+    print('DONE', flush=True)
+
+
+if __name__ == '__main__':
+    main()

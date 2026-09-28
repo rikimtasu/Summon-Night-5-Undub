@@ -86,18 +86,18 @@ KNOWN = {
 
 # ---------------------------------------------------------------- RAM input
 def extract_ram(path):
-    """Return a 32 MB RAM image from a raw dump or a zstd .ppst save state."""
-    d = open(path, 'rb').read()
-    if len(d) == 32 * 1024 * 1024:
-        return d                                    # already a raw RAM image
-    import zstandard
-    rev, comp, esize, usize = struct.unpack('<4I', d[:16])
-    out = zstandard.ZstdDecompressor().decompress(
-        d[176:176 + esize], max_output_size=usize + 16)
-    assert out[0x28:0x28 + 6] == b'Memory', 'not a PPSSPP memory state'
-    p1 = 0x28 + 20
-    memsize = struct.unpack('<I', out[p1 + 8:p1 + 12])[0]
-    return out[p1 + 12:p1 + 12 + memsize]
+    """Return a 32 MB RAM image from a raw dump or a zstd .ppst save state.
+
+    .ppst decoding is shared with the other tools via common
+    (extract_ram_from_ppst); the raw-dump branch stays here because only
+    the census accepts raw RAM images.
+    """
+    with open(path, 'rb') as f:
+        head = f.read(32 * 1024 * 1024 + 1)
+    if len(head) == 32 * 1024 * 1024:
+        return head                                 # already a raw RAM image
+    from common import extract_ram_from_ppst
+    return extract_ram_from_ppst(path)
 
 
 # ------------------------------------------------------------ block parsing

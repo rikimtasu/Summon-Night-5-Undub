@@ -50,6 +50,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import paths
+from common import extract_ram_from_ppst
 
 SEG = 0xC0
 RT = 0x08804000
@@ -88,10 +89,17 @@ def is_stock(ram, eboot):
 
 
 def build_diff(ram, eboot):
-    """{fva: RAM word} for every word that differs between file and RAM."""
+    """{fva: RAM word} for every word that differs between file and RAM.
+
+    Uses memoryview so the 3 MB loop compares without per-word slicing.
+    """
+    eview = memoryview(eboot)[SEG:]
+    rview = memoryview(ram)[MOD_OFF:]
+    nwords = min(len(eview), len(rview)) // 4
     diff = {}
-    for i in range(0, len(eboot) - SEG, 4):
-        if eboot[SEG + i:SEG + i + 4] != ram[MOD_OFF + i:MOD_OFF + i + 4]:
+    for i in range(nwords):
+        o = i * 4
+        if eview[o:o + 4] != rview[o:o + 4]:
             diff[i] = struct.unpack_from('<I', ram, MOD_OFF + i)[0]
     return diff
 
@@ -106,8 +114,6 @@ def main(argv):
                     help='dump the derived superset (never the tracked file)')
     args = ap.parse_args(argv)
 
-    from chapter_voice_census import extract_ram
-
     if not os.path.isfile(args.eboot):
         raise SystemExit('missing decrypted stock EBOOT: %s' % args.eboot)
     eboot = open(args.eboot, 'rb').read()
@@ -119,7 +125,7 @@ def main(argv):
 
     diff, used = None, None
     for path in candidates:
-        ram = extract_ram(path)
+        ram = extract_ram_from_ppst(path)
         ok, fva, got = is_stock(ram, eboot)
         if not ok:
             print('skip %-30s patched build (fva %#x = 0x%08X)'

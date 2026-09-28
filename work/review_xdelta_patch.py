@@ -35,6 +35,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import paths
+from common import HashSink, member_hash as file_hash
 
 WORK = paths.WORK
 ROOT = paths.ROOT
@@ -48,29 +49,7 @@ EXPECTED_JP = {('/PSP_GAME/USRDIR/SV%02d.DAT' % i): 'jp' for i in range(0, 18)}
 EXPECTED_JP['/PSP_GAME/USRDIR/04.DAT'] = 'jp'
 
 
-class HashSink(object):
-    """Minimal write-only sink so we can hash ISO members without extracting."""
-
-    def __init__(self):
-        self.h = hashlib.sha256()
-        self.n = 0
-
-    def write(self, b):
-        self.h.update(b)
-        self.n += len(b)
-        return len(b)
-
-    def tell(self):
-        return self.n
-
-    def hexdigest(self):
-        return self.h.hexdigest()
-
-
-def file_hash(iso, path):
-    sink = HashSink()
-    iso.get_file_from_iso_fp(sink, iso_path=path)
-    return sink.hexdigest(), sink.n
+# HashSink / file_hash are shared via common.py (same bytes, one home).
 
 
 def walk_files(iso, root='/'):
@@ -148,10 +127,14 @@ def main(argv):
         return 0
 
     print('=== per-file content comparison (undub vs stock USA) ===')
+    # Cache undub hashes: the JP-content loop below re-hashes the same
+    # members, so one pass here saves re-reading ~900 MB of voice archives.
+    uhash = {}
     changed, same = [], 0
     for path in sorted(ufiles & sfiles):
         uh, un = file_hash(undub, path)
         sh, sn = file_hash(stock, path)
+        uhash[path] = (uh, un)
         if uh == sh and un == sn:
             same += 1
             continue
@@ -202,7 +185,7 @@ def main(argv):
         if path not in jfiles:
             print('    %-34s not in JP ISO (skipped)' % path)
             continue
-        uh, un = file_hash(undub, path)
+        uh, un = uhash.get(path) or file_hash(undub, path)
         jh, jn = file_hash(jp, path)
         same_as_jp = (uh == jh and un == jn)
         if not same_as_jp:
