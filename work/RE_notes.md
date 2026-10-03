@@ -1436,6 +1436,53 @@ fact-check pass before this note was written.
   of the above regenerates from chapter_voice_census (parse_block/
   scan_ram) + disasm_align + the unit dumps described here.
 
+### Corrections 2026-09-26 - dated supersessions of claims made earlier in this file
+Appended per the end-of-file-only edit rule; no earlier line is edited, so
+line numbers below stay valid.  Swept by grep over the whole file for the
+wrong tokens (`0x4013`, `16413`, `0x230EF8`, the `+0x20` parenthetical,
+"round 9" name order): the four items below are the complete set of live
+occurrences - no further repeats exist.
+1. NATIVE DISPATCH TABLE - supersedes "group/native table `0x230EF8`" in
+   the "Token stream / VM dispatch" bullet (~line 1228).  0x230EF8 is the
+   FAMILY table (see the family-table line, ~line 41: USA fva 0x230EF8 =
+   family4 base + (key&0xFFF)*8) - a different table entirely.  The native
+   dispatch table is ELF vaddr 0x23143C (file 0x2314FC in
+   EBOOT_USA_decrypted.bin), stride 8, entry {u32 handler, u32 0},
+   index = id - 0x4000.  Re-derived round 18, re-verified round 26 from
+   four confirmed anchors (0x4018->0x1A5A8, 0x4042->0x1A9AC,
+   0x4040->0x17760, 0x4041->0x1787C).  Round 25's readings were a double
+   +0xC0 file-offset bug - only its labels were wrong.
+   Handler map (vaddr; file = vaddr + 0xC0): 0x4002->0x15144,
+   0x4012->0x15C44, 0x4013->0x15CC0 (never seen in any scanned script),
+   0x4015->0x15E38, 0x401C->0x160DC, 0x401D->0x16240, 0x401F->0x1643C,
+   0x4020->0x164D0, 0x4040->0x17760, 0x4041->0x1787C, 0x4042->0x1A9AC,
+   0x4050->0x1ABFC, 0x4051->0x17A38, 0x405C->0x18468, 0x4064->0x18874,
+   0x4065->0x189D0, 0x4066->0x18A5C, 0x4067->0x18B0C, 0x4068->0x18B94,
+   0x4081->0x1C86C, 0x4084->0x18D28, 0x4085->0x18DF8.
+2. "16413" MEANS 0x401D (fade-all), NEVER 0x4013.  Rounds 20/21 labelled
+   it 16413(0x4013); 16413 = 0x401D.  Round 20's disassembly of handler
+   0x16240 is valid - only its label was wrong.  0x4013 is a real id
+   (handler 0x15CC0) that appears in no scanned script.  Any older scratch
+   print or note reading "16413" or "0x4013 fade-all" means 0x401D.
+3. VOICE 0x4041 THUNK CONST - supersedes "(thunk const f2=0 -> -1)" in the
+   message-window bullet (~line 1281).  The ch2 voice thunk sub227 pushes
+   const 0, not -1 (round 17j).  So the live -1 seen at voice-sub +0x1C
+   and +0x20 is the engine's cleared/empty sentinel, not a pushed value,
+   and the "+0x20 pending channel" reading is UNVERIFIED - drop it unless
+   it is re-derived.
+4. NAME-CALL STRING ARGUMENT - supersedes the native-inventory row
+   (~line 1270, "site argc4 with the name string among them") and the
+   block-local table row (~line 1320, "site argc4: pid/name/0/0 order per
+   round 9").  In the name variant of 0x4042 the string arrives as native
+   argument a6 (round 17's "17c rule", confirmed against the name/dir
+   thunks); the round-9 positional reading is superseded.  Site shape
+   (round 22): sub296 = (field215, push STR idx=<n>, 0, 0), with the
+   field20 == 8 gate choosing sub296 vs sub235 (argc1, table lookup).
+5. Not a correction, a pointer: project-scope decisions live in
+   docs/adr/.  ADR 0001 records the shipped coverage promise
+   (prologue + chapter 1; remaining chapters deferred) - read it before
+   reading any coverage number here.
+
 ## Addendum 2026-09-26 - repo review: prune regression repaired, hardening, path portability
 
 A full code review (read + executed every verifier against the shipped
